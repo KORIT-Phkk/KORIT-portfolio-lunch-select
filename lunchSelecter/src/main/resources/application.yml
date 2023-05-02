@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/나중에 수정
+    username: portfolio//workbench에서 아무거나 정하면됨 
+    password: 1q2w3e4r
+    
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml 
+    
+jwt:
+  secret: qJzUmGueQXDTxcXJyWUZa2oVwieBrVF41ozvRaHcW4uJ8Y4sJqHQC8WbvNoTC63k
+
