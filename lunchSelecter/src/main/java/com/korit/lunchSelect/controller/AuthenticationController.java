@@ -1,5 +1,5 @@
 package com.korit.lunchSelect.controller;
 
-public class LunchSelectController {
+public class AuthenticationController {
 
 }
