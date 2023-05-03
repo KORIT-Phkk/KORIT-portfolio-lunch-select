@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: portfolio.cy4ymq3m97fp.ap-northeast-2.rds.amazonaws.com/lunchselect
+    url: jdbc:mysql://portfolio.cy4ymq3m97fp.ap-northeast-2.rds.amazonaws.com/lunchselect
     username: admin
     password: 1q2w3e4r
     
