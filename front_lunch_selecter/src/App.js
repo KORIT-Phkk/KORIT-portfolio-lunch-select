@@ -2,8 +2,8 @@ import { Global } from '@emotion/react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import './App.css';
-import Main from './Page/Main/Main';
 import { Reset } from './style/Reset';
+import KakaoMap from './Kakao/KakaoMap';
 
 
 const mainContainer = css`
@@ -20,7 +20,7 @@ function App() {
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      <Main />
+      <KakaoMap />
     </div>
   );
 }
