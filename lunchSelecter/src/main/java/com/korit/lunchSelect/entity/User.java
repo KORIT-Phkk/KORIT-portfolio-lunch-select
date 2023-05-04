@@ -1,5 +1,7 @@
 package com.korit.lunchSelect.entity;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +17,6 @@ public class User {
 	private String password;
 	private String name;
 	private String phone;
+	
+	private List<Authority> authorities;
 }
