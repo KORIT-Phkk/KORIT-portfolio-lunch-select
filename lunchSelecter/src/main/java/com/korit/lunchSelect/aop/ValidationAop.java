@@ -17,7 +17,7 @@ import com.korit.lunchSelect.exception.CustomException;
 @Component
 public class ValidationAop {
 
-	@Pointcut("@annotation(com.toyproject.bookmanagement.aop.annotation.ValidAspect)")
+	@Pointcut("@annotation(com.korit.lunchSelect.aop.annotation.ValidAspect)")
 	private void pointCut() {}
 	
 	@Around("pointCut()")

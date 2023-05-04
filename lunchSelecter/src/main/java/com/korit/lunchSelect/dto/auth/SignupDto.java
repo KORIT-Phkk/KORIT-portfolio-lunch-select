@@ -25,11 +25,14 @@ public class SignupDto {
 			message = "한글이름만 작성 가능합니다.")
 	private String name;
 	
+	private String phone;
+	
 	public User toEntity() {
 		return User.builder()
 				.email(email)
 				.password(new BCryptPasswordEncoder().encode(password))
 				.name(name)
+				.phone(phone)
 				.build();
 	}
 }
