@@ -28,7 +28,7 @@
 			ut.email,
 			ut.password,
 			ut.name,
-			ut.phone
+			ut.phone,
 			
 			at.authority_id,
 			at.user_id,
@@ -45,7 +45,7 @@
 	</select>
 	
 	<insert id="saveUser"
-	parameterType="com.stamptourproject.stamptour.entity.User"
+	parameterType="com.korit.lunchSelect.entity.User"
 	useGeneratedKeys="true"
 	keyProperty="userId">
 		insert into user_tb
