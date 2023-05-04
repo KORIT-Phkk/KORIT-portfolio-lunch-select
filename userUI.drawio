@@ -1,28 +1,28 @@
-<mxfile host="app.diagrams.net" modified="2023-05-03T07:42:04.996Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="PXrDY_48KG5H-Xse9R1r" version="21.2.6" type="device" pages="8">
+<mxfile host="app.diagrams.net" modified="2023-05-04T00:25:11.789Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="PXFeObmwoh4WbIBQrA6s" version="21.2.6" type="device" pages="8">
   <diagram name="Login" id="t63Qa5n-ZQP9JG6psYQX">
     <mxGraphModel dx="8824" dy="7487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="daW7n09nX22gvS2plyBk-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="daW7n09nX22gvS2plyBk-3" value="email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-3" value="email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1760" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="daW7n09nX22gvS2plyBk-5" value="password_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-5" value="password_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1550" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="daW7n09nX22gvS2plyBk-6" value="로그인버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-6" value="로그인버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1060" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="daW7n09nX22gvS2plyBk-9" value="회원가입" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-9" value="회원가입" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-670" y="-890" width="300" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="daW7n09nX22gvS2plyBk-10" value="아이디 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="daW7n09nX22gvS2plyBk-10" value="아이디 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-880" y="-1410" width="350" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="yn0mizp-Pj8Y5eNB7cld-1" value="비밀번호 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="yn0mizp-Pj8Y5eNB7cld-1" value="비밀번호 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-540" y="-1410" width="430" height="100" as="geometry" />
         </mxCell>
       </root>
@@ -33,28 +33,28 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="aHBR6a4sC-lkLReALXnG-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-2" value="email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-2" value="email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1940" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-3" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-3" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1753" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-4" value="회원가입 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-4" value="회원가입 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-640" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-5" value="로그인" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-5" value="로그인" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-670" y="-470" width="300" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-9" value="name_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-9" value="name_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1380" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="aHBR6a4sC-lkLReALXnG-10" value="phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="aHBR6a4sC-lkLReALXnG-10" value="phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1193" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="MeY8DXDRSfm2wzwQ0CzE-1" value="password_Input_2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="MeY8DXDRSfm2wzwQ0CzE-1" value="password_Input_2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1570" width="940" height="127" as="geometry" />
         </mxCell>
       </root>
@@ -65,129 +65,129 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="v6c-qlq0lIthXYOr6f7d-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="v6c-qlq0lIthXYOr6f7d-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="v6c-qlq0lIthXYOr6f7d-2" value="Phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="v6c-qlq0lIthXYOr6f7d-2" value="Phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1760" width="650" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="v6c-qlq0lIthXYOr6f7d-4" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="v6c-qlq0lIthXYOr6f7d-4" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1010" y="-1310" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="knFQmFQspVNGvQBM744O-1" value="AuthNumber_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="knFQmFQspVNGvQBM744O-1" value="AuthNumber_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1530" width="920" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="knFQmFQspVNGvQBM744O-2" value="전송" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="knFQmFQspVNGvQBM744O-2" value="전송" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-350" y="-1760" width="280" height="127" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="FindEmailResult" id="PkYqfvaeEEtSm1rxH6h2">
-    <mxGraphModel dx="8824" dy="7487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="11214" dy="8814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="xwKbATGLpDn5zWwS0R2L-0" />
         <mxCell id="xwKbATGLpDn5zWwS0R2L-1" parent="xwKbATGLpDn5zWwS0R2L-0" />
-        <mxCell id="xwKbATGLpDn5zWwS0R2L-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="xwKbATGLpDn5zWwS0R2L-1">
+        <mxCell id="xwKbATGLpDn5zWwS0R2L-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="xwKbATGLpDn5zWwS0R2L-1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="xwKbATGLpDn5zWwS0R2L-3" value="FindedEmail" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="xwKbATGLpDn5zWwS0R2L-1">
+        <mxCell id="xwKbATGLpDn5zWwS0R2L-3" value="FindedEmail" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="xwKbATGLpDn5zWwS0R2L-1" vertex="1">
           <mxGeometry x="-1000" y="-1260" width="920" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="N8Eae7yKRn3_Mbiu-9Oh-0" value="비밀번호 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="xwKbATGLpDn5zWwS0R2L-1">
+        <mxCell id="N8Eae7yKRn3_Mbiu-9Oh-0" value="비밀번호 찾기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="xwKbATGLpDn5zWwS0R2L-1" vertex="1">
           <mxGeometry x="-510" y="-1100" width="430" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="1e8pnqEruZPVm42vrzds-0" value="로그인" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="xwKbATGLpDn5zWwS0R2L-1">
+        <mxCell id="1e8pnqEruZPVm42vrzds-0" value="로그인" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="xwKbATGLpDn5zWwS0R2L-1" vertex="1">
           <mxGeometry x="-990" y="-1110" width="300" height="137" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="_o_5REmafxdWhA97eE2S" name="FindPassword">
-    <mxGraphModel dx="11214" dy="8814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="8824" dy="7487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="wejm8W9QfLJVEgo3j8Eb-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="wejm8W9QfLJVEgo3j8Eb-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="wejm8W9QfLJVEgo3j8Eb-2" value="Email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="wejm8W9QfLJVEgo3j8Eb-2" value="Email_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1760" width="650" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="wejm8W9QfLJVEgo3j8Eb-3" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="wejm8W9QfLJVEgo3j8Eb-3" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1010" y="-1310" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="wejm8W9QfLJVEgo3j8Eb-4" value="AuthNumber_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="wejm8W9QfLJVEgo3j8Eb-4" value="AuthNumber_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-1000" y="-1530" width="920" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="wejm8W9QfLJVEgo3j8Eb-5" value="전송" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
+        <mxCell id="wejm8W9QfLJVEgo3j8Eb-5" value="전송" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
           <mxGeometry x="-350" y="-1760" width="280" height="127" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="UpdatePassword" id="BOaW9hF9SpV-vcNNybH6">
-    <mxGraphModel dx="8824" dy="7487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3088" dy="4303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="-AYdVuhYbJCHIjEftfGG-0" />
         <mxCell id="-AYdVuhYbJCHIjEftfGG-1" parent="-AYdVuhYbJCHIjEftfGG-0" />
-        <mxCell id="-AYdVuhYbJCHIjEftfGG-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="-AYdVuhYbJCHIjEftfGG-1">
+        <mxCell id="-AYdVuhYbJCHIjEftfGG-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="-AYdVuhYbJCHIjEftfGG-1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="-AYdVuhYbJCHIjEftfGG-4" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="-AYdVuhYbJCHIjEftfGG-1">
+        <mxCell id="-AYdVuhYbJCHIjEftfGG-4" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="-AYdVuhYbJCHIjEftfGG-1" vertex="1">
           <mxGeometry x="-1000" y="-1520" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="-AYdVuhYbJCHIjEftfGG-5" value="확인 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="-AYdVuhYbJCHIjEftfGG-1">
+        <mxCell id="-AYdVuhYbJCHIjEftfGG-5" value="확인 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="-AYdVuhYbJCHIjEftfGG-1" vertex="1">
           <mxGeometry x="-1010" y="-1013.5" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="-AYdVuhYbJCHIjEftfGG-9" value="password_Input_2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="-AYdVuhYbJCHIjEftfGG-1">
+        <mxCell id="-AYdVuhYbJCHIjEftfGG-9" value="password_Input_2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="-AYdVuhYbJCHIjEftfGG-1" vertex="1">
           <mxGeometry x="-1000" y="-1337" width="940" height="127" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="mOAgP3D_G-EUd-zPUiAZ" name="UpdateUserInfo">
-    <mxGraphModel dx="8824" dy="7487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="DB20Befwp7vsLu_jlzXL" name="CheckPassword">
+    <mxGraphModel dx="5239" dy="5497" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="f1HQFCM3U0KmX3-JTh_e-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ljM528VqG7PvHQZDFL3z-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="f1HQFCM3U0KmX3-JTh_e-3" value="비밀번호 변경" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="240" y="1070" width="940" height="127" as="geometry" />
+        <mxCell id="ljM528VqG7PvHQZDFL3z-2" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
+          <mxGeometry x="-1000" y="-1520" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="CrVyv1TzmEwxlUDIcaWf-1" value="name_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="240" y="1280" width="940" height="127" as="geometry" />
-        </mxCell>
-        <mxCell id="f1HQFCM3U0KmX3-JTh_e-2" value="email" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="240" y="850" width="940" height="127" as="geometry" />
-        </mxCell>
-        <mxCell id="CrVyv1TzmEwxlUDIcaWf-2" value="phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="240" y="1480" width="940" height="127" as="geometry" />
-        </mxCell>
-        <mxCell id="f1HQFCM3U0KmX3-JTh_e-4" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="240" y="1770" width="940" height="127" as="geometry" />
-        </mxCell>
-        <mxCell id="C--QYnafZw_5Qe8l7AP1-1" value="회원탈퇴" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" vertex="1" parent="f1HQFCM3U0KmX3-JTh_e-1">
-          <mxGeometry x="590" y="2740" width="300" height="180" as="geometry" />
+        <mxCell id="ljM528VqG7PvHQZDFL3z-3" value="확인 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="1" vertex="1">
+          <mxGeometry x="-1010" y="-1013.5" width="940" height="127" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="DB20Befwp7vsLu_jlzXL" name="CheckPassword">
-    <mxGraphModel dx="11214" dy="8814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="mOAgP3D_G-EUd-zPUiAZ" name="UpdateUserInfo">
+    <mxGraphModel dx="7390" dy="6691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ljM528VqG7PvHQZDFL3z-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="f1HQFCM3U0KmX3-JTh_e-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1250" y="-2450" width="1440" height="3000" as="geometry" />
         </mxCell>
-        <mxCell id="ljM528VqG7PvHQZDFL3z-2" value="password_Input_1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
-          <mxGeometry x="-1000" y="-1520" width="940" height="127" as="geometry" />
+        <mxCell id="f1HQFCM3U0KmX3-JTh_e-3" value="비밀번호 변경" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="240" y="1070" width="940" height="127" as="geometry" />
         </mxCell>
-        <mxCell id="ljM528VqG7PvHQZDFL3z-3" value="확인 버튼" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" vertex="1" parent="1">
-          <mxGeometry x="-1010" y="-1013.5" width="940" height="127" as="geometry" />
+        <mxCell id="CrVyv1TzmEwxlUDIcaWf-1" value="name_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="240" y="1280" width="940" height="127" as="geometry" />
+        </mxCell>
+        <mxCell id="f1HQFCM3U0KmX3-JTh_e-2" value="email" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="240" y="850" width="940" height="127" as="geometry" />
+        </mxCell>
+        <mxCell id="CrVyv1TzmEwxlUDIcaWf-2" value="phone_Input" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="240" y="1480" width="940" height="127" as="geometry" />
+        </mxCell>
+        <mxCell id="f1HQFCM3U0KmX3-JTh_e-4" value="확인" style="rounded=0;whiteSpace=wrap;html=1;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="240" y="1770" width="940" height="127" as="geometry" />
+        </mxCell>
+        <mxCell id="C--QYnafZw_5Qe8l7AP1-1" value="회원탈퇴" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=60;" parent="f1HQFCM3U0KmX3-JTh_e-1" vertex="1">
+          <mxGeometry x="590" y="2740" width="300" height="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
