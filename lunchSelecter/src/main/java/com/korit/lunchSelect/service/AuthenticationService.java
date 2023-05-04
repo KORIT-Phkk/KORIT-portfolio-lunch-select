@@ -3,6 +3,7 @@ package com.korit.lunchSelect.service;
 import org.springframework.stereotype.Service;
 
 import com.korit.lunchSelect.dto.auth.SignupDto;
+import com.korit.lunchSelect.entity.Authority;
 import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
@@ -24,6 +25,14 @@ public class AuthenticationService {
 	
 	public void signup(SignupDto signupDto) {
 		User userEntity = signupDto.toEntity();
+		
 		userRepository.saveUser(userEntity);
+		
+		System.out.println(userEntity);
+		
+		userRepository.saveAuthority(Authority.builder()
+				.userId(userEntity.getUserId())
+				.roleId(2)
+				.build());
 	}
 }
