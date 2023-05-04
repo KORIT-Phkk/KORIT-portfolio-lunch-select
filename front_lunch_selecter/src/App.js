@@ -3,7 +3,13 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
-import KakaoMap from './Kakao/KakaoMap';
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
+import Main from './pages/main/Main';
+import FindEmail from './pages/findEmail/FindEmail';
+import FindPassword from './pages/findPassword/FindPassword';
+import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 
 
 const mainContainer = css`
@@ -20,7 +26,14 @@ function App() {
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      <KakaoMap />
+      <Routes>
+        <Route path="/" element={Main()} />
+        <Route path="/login" element={Login()} />
+        <Route path="/register" element={Register()} />
+        <Route path="/findemail" element={FindEmail()} />
+        <Route path="/emailauthenticationnumber" element={EmailAuthenticationNumber()} />
+        <Route path="/findpassword" element={FindPassword()} />
+      </Routes>
     </div>
   );
 }
