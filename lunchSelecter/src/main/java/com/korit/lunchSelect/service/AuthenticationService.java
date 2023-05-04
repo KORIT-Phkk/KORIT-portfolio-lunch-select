@@ -17,7 +17,6 @@ public class AuthenticationService {
 	
 	public void checkDuplicatedEmail(String email) {
 		if(userRepository.findUserByEmail(email) != null) {
-			System.out.println("이메일 중복");
 			throw new CustomException("Duplicated Email", 
 					ErrorMap.builder().put("email", "사용중인 이메일입니다").build());
 		}
