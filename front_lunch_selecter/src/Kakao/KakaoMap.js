@@ -17,47 +17,46 @@ const map = css`
 const KakaoMap = () => {
 
     const new_script = src => {
-        return new Promise((resolve, reject) => { 
-            const script = document.createElement('script'); 
-            script.src = src; 
-            script.addEventListener('load', () => { 
-              resolve(); 
-            }); 
-            script.addEventListener('error', e => { 
-              reject(e); 
-            }); 
-            document.head.appendChild(script); 
-          });
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.addEventListener('load', () => {
+          resolve();
+        });
+        script.addEventListener('error', e => {
+          reject(e);
+        });
+        document.head.appendChild(script);
+      });
     };
 
     useEffect(() => {
-        const my_script = new_script('https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=33c4314f8f06ba1c408e47635d2f69b6');
-    
-
-    my_script.then(() => { 
-        console.log('script loaded!!!');  
-        const kakao = window['kakao']; 
+      const my_script = new_script('https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=33c4314f8f06ba1c408e47635d2f69b6');
+      
+      my_script.then(() => {
+        console.log('script loaded!!!');
+        const kakao = window['kakao'];
         kakao.maps.load(() => {
           const mapContainer = document.getElementById('map');
-          const options = { 
+          const options = {
             center: new kakao.maps.LatLng(37.56000302825312, 126.97540593203321), //좌표설정
-            level: 3 
-          }; 
+            level: 3
+          };
           const map = new kakao.maps.Map(mapContainer, options); //맵생성
           //마커설정
-          const markerPosition = new kakao.maps.LatLng(37.56000302825312, 126.97540593203321); 
-          const marker = new kakao.maps.Marker({ 
+          const markerPosition = new kakao.maps.LatLng(37.56000302825312, 126.97540593203321);
+          const marker = new kakao.maps.Marker({
             position: markerPosition
-          }); 
-          marker.setMap(map); 
-        });   
+          });
+          marker.setMap(map);
+        });
       });
     });
 
     return (
-        <div>
-            <div css={map} id="map"/>
-        </div>
+      <div>
+        <div css={map} id="map"/>
+      </div>
     );
 };
 
