@@ -42,9 +42,6 @@ const Register = () => {
                 <AuthInput type="password" onChange={onChangeHandle} name="password">
 
                 </AuthInput>
-                <AuthInput type="password" onChange={onChangeHandle} name="password">
-
-                </AuthInput>
                 <AuthInput type="text" onChange={onChangeHandle} name="name">
 
                 </AuthInput>

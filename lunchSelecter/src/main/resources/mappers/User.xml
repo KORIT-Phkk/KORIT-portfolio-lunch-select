@@ -51,4 +51,9 @@
 		insert into user_tb
 		values (0, #{email}, #{password}, #{name}, #{phone})
 	</insert>
+	
+	<insert id="saveAuthority" parameterType="com.korit.lunchSelect.entity.Authority">
+		insert into authority_tb
+		values (0, #{userId}, #{roleId})
+	</insert>
 </mapper>

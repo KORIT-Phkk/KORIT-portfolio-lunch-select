@@ -1,5 +1,9 @@
 package com.korit.lunchSelect.entity;
 
+import java.util.List;
+
+import com.korit.lunchSelect.security.PrincipalUser;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +19,15 @@ public class User {
 	private String password;
 	private String name;
 	private String phone;
+	
+	private List<Authority> authorities;
+	
+	public PrincipalUser toPrincipal() {
+		return PrincipalUser.builder()
+				.userId(userId)
+				.email(email)
+				.password(password)
+				.authorities(authorities)
+				.build();
+	}
 }

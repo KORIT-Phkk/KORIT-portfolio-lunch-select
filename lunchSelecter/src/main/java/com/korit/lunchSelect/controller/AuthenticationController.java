@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.korit.lunchSelect.aop.annotation.ValidAspect;
+import com.korit.lunchSelect.dto.auth.LoginReqDto;
 import com.korit.lunchSelect.dto.auth.SignupDto;
 import com.korit.lunchSelect.service.AuthenticationService;
 
@@ -18,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthenticationController {
+public class AuthenticationController{
 	private final AuthenticationService authenticationService;
 	
 	@ValidAspect
@@ -29,9 +30,9 @@ public class AuthenticationController {
 		return ResponseEntity.ok().body(true);
 	}
 	
-//	@ValidAspect
-//	@PostMapping("/login")
-//	public ResponseEntity<?> login(@Valid @RequestBody LoginReqDto loginReqDto, BindingResult bindingResult) {
-//		return ResponseEntity.ok(authenticationService.signin(loginReqDto));
-//	}
+	@ValidAspect
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@Valid @RequestBody LoginReqDto loginReqDto, BindingResult bindingResult) {
+		return ResponseEntity.ok(authenticationService.signin(loginReqDto));
+	}
 }
