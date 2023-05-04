@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class User {
+public class Authority {
+	private int authorityId;
 	private int userId;
-	private String email;
-	private String password;
-	private String name;
-	private String phone;
+	private int roleId;
+	
+	private Role role;
 }

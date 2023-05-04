@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.aop.annotation;
+package com.toyproject.bookmanagement.aop.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
