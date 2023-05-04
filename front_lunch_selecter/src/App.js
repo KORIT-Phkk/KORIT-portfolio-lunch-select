@@ -1,9 +1,12 @@
-import { Global } from '@emotion/react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import './App.css';
-import Main from './Page/Main/Main';
+
+import { Global } from '@emotion/react';
 import { Reset } from './style/Reset';
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
+import Main from './pages/main/Main';
 
 
 const mainContainer = css`
@@ -16,11 +19,16 @@ const mainContainer = css`
     height: 100vh;
     overflow: hidden;
 `;
+
 function App() {
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      <Main />
+      <Routes>
+        <Route path="/" element={Main()} />
+        <Route path="/login" element={Login()} />
+        <Route path="/register" element={Register()} />
+      </Routes>
     </div>
   );
 }
