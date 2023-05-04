@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
 import KakaoMap from './Kakao/KakaoMap';
-import MapTest from './Kakao/MapTest';
+import { Route, Routes } from 'react-router-dom';
 
 
 const mainContainer = css`
@@ -21,8 +21,7 @@ function App() {
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      {/* <KakaoMap /> */}
-      <MapTest />
+      <KakaoMap />
     </div>
   );
 }
