@@ -4,10 +4,9 @@ import React from 'react';
 import Input from '../Input/Input';
 
 const authInput = css`
-    width: 800px;
-    height: 100px;
+    width: 850px;
     margin-bottom: 5px;
-    border: 1px solid #dbdbdb;
+    
 `;
 
 const icon = css`

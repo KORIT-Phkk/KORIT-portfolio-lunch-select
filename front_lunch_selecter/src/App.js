@@ -10,6 +10,7 @@ import Main from './pages/main/Main';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindPassword from './pages/findPassword/FindPassword';
 import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
+import UpdatePassword from './pages/findPassword/UpdatePassword';
 
 
 const mainContainer = css`
@@ -18,8 +19,8 @@ const mainContainer = css`
     border: 3px solid #dbdbdb;
     padding: 10px;
     font-size: 1.6rem;
-    width: 100vw;
-    height: 100vh;
+    width: 1440px;
+    height: 3000px;
     overflow: hidden;
 `;
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/findemail" element={FindEmail()} />
         <Route path="/emailauthenticationnumber" element={EmailAuthenticationNumber()} />
         <Route path="/findpassword" element={FindPassword()} />
+        <Route path="/updatepassword" element={UpdatePassword()} />
       </Routes>
     </div>
   );
