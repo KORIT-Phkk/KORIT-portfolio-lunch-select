@@ -9,7 +9,7 @@ import axios from 'axios';
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handlChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +22,10 @@ const Login = () => {
                 "Content-Type": "application/json"
             }
         }
-        await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+        const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+        const accessToken = response.data.grantType + " " + response.data.accessToken;
+
+        localStorage.setItem("accessToken", accessToken);
         
     }
 
