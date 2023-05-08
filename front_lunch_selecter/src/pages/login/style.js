@@ -1,17 +1,59 @@
 import { css } from '@emotion/react'
 
-
 export const container = css`
-
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
 `;
-
-export const headerContainer =css`
-    height: 500px;
-    background-color: rgb(249, 108, 108);
-    margin-bottom: 300px;
-`;
-
-export const mainContainer =css`
+export const header = css`
+    margin: 300px auto;
     display: flex;
     justify-content: center;
 `;
+export const logo = css`
+    font-size: 80px;
+    font-weight: 600;
+`;
+export const mainContainer =css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+`;
+export const input = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 295px;
+`;
+export const inpoutLabel = css`
+    padding-top: 100px;
+    padding-bottom: 10px;
+`;
+export const footerContainer =css`
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+`;
+export const register = css`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 270px;
+`;
+export const logButton = css`
+    width: 850px;
+    height: 80px;
+    margin-left: 295px;
+    margin-top: 500px;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    font-size: 40px;
+    cursor: pointer;
+    &:hover {
+        background-color: #fafafa;
+    }
+    &:active {
+        background-color: #dbdbdb;
+    }
+`;
+

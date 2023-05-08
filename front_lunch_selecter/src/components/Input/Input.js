@@ -7,7 +7,9 @@ const input = css`
     outline: none;
     padding: 5px 10px;
     width: 100%;
-    height: 40px;
+    height: 80px;
+    font-size: 40px;
+    border-bottom: 1px solid #dbdbdb;
 `;
 
 const Input = ({ type, placeholder, onChange, name }) => {

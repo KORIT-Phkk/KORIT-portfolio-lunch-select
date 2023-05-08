@@ -5,11 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import * as s from './style'
 import axios from 'axios';
+import { FaUser } from 'react-icons/fa';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handlChange = (e) => {
         const { name, value } = e.target;
@@ -22,31 +23,37 @@ const Login = () => {
                 "Content-Type": "application/json"
             }
         }
-        await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+        const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+        alert("로그인 성공!");
+        const accessToken = response.data.grantType + " " + response.data.accessToken;
+
+        localStorage.setItem("accessToken", accessToken);
         
     }
 
     return (
-        <div>
-            <header>
-                <h1>LOGIN</h1> 
+        <div css={s.container}>
+            <header css={s.header}>
+                <h1 css={s.logo}>CASINO</h1> 
             </header>
-            <main>
-                <AuthInput type="email" onChange={handlChange} name="email">
+            <main css={s.mainContainer}>
+                <div css={s.input}>
+                    <label css={s.inpoutLabel}>Email</label>
+                    <AuthInput type="email" onChange={handlChange} name="email" >
+                        <FaUser />
+                    </AuthInput>
+                    <div><Link to="/findemail">아이디 찾기</Link></div>
 
-                </AuthInput>
-                
-                <AuthInput type="password" onChange={handlChange} name="password">
-
-                </AuthInput>
-                <div>
-                    <Link to="/FindEmail">아이디 찾기</Link>
-                    <Link>비밀번호 찾기</Link>
+                    <label css={s.inpoutLabel}>password</label>
+                    <AuthInput type="password" onChange={handlChange} name="password" >
+                    </AuthInput>
+                    <div><Link to="/findpassword">비밀번호 찾기</Link></div>
+                    
                 </div>
             </main>
-            <footer>
-                <button onClick={loginHandleSubmit}>로그인</button>
-                <div><Link to="/register">회원가입</Link></div>
+            <footer css={s.footerContainer}>
+                <div css={s.register}><Link to="/register">회원가입</Link></div>
+                <button onClick={loginHandleSubmit} css={s.logButton}>로그인</button>
             </footer>
         </div>
     );
