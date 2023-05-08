@@ -6,8 +6,9 @@ import { Reset } from './style/Reset';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { exampleFunction } from './Kakao/Example';
-import KakaoMapReact from './Kakao/KakaoMapReact';
+import { useGetMarkers } from './Kakao/useGetMarkers';
 import KakaoMap from './Kakao/KakaoMap';
+import KakaoMapReact from './Kakao/KakaoMapReact';
 
 
 
@@ -22,18 +23,25 @@ const mainContainer = css`
     overflow: hidden;
 `;
 function App() {
+  
+  const [ markers ] = useGetMarkers();
+
+
+  console.log(markers)
+
   useEffect(() => {
     exampleFunction();
+    
   }, []);
 
+  
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       {/* <KakaoMap /> */}
       {/* <Test /> */}
       {/* <MapTest/> */}
-      <KakaoMapReact />
-
+      {/* <KakaoMapReact></KakaoMapReact> */}
     </div>
   );
 }

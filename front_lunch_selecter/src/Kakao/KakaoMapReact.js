@@ -19,74 +19,73 @@ const KakaoMapReact = () => {
 
     const { kakao } = window;
 
+    // 현재위치 불러오기(geolocation)
     function getLocation() {
-        
         let lat, long;
-        if (navigator.geolocation) {
-          // 위치 권한을 허용하면
+        if (navigator.geolocation) {        // 위치 권한을 허용하면
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              lat = position.coords.latitude;
-              long = position.coords.longitude;
-              setGeolocation((geolocation) => {
-                return {
-                  ...geolocation,
-                  lat,
-                  long,
-                };
-              });
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                setGeolocation((geolocation) => {
+                    return {
+                        ...geolocation,
+                        lat,
+                        long,
+                    };
+                });
             },
             function (error) {
-              console.error(error);
+                console.error(error);
             },
             {
-              enableHighAccuracy: false,
-              maximumAge: 0,
-              timeout: Infinity,
-            },
-          );
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity,
+            },);
         } else {
-          alert('위치 설정을 허용해주세요!');
-          return;
+            alert('위치 설정을 허용해주세요!');
+            return;
         }
-      }
+    }
 
     useEffect(() => {
         getLocation();
         if (!map) return
         const ps = new kakao.maps.services.Places()
-
-        ps.categorySearch("FD6", (data, status, _pagination) => {
-        if (status === kakao.maps.services.Status.OK) {
-            // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-            // LatLngBounds 객체에 좌표를 추가합니다
-            const bounds = new kakao.maps.LatLngBounds()
-            let markers = []
-
-            for (var i = 0; i < data.length; i++) {
-            // @ts-ignore
-            markers.push({
-                position: {
-                lat: data[i].y,
-                lng: data[i].x,
-                },
-                content: data[i].place_name,
-            })
-            // @ts-ignore
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
+        for(let i = 0; i < 3; i++) {
+            ps.categorySearch("FD6", (data, status, _pagination) => {
+            if (status === kakao.maps.services.Status.OK) {
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                // LatLngBounds 객체에 좌표를 추가합니다
+                const bounds = new kakao.maps.LatLngBounds()
+                let newMarkers = []
+    
+                for (var i = 0; i < data.length; i++) {
+                // @ts-ignore
+                newMarkers.push({
+                    position: {
+                    lat: data[i].y,
+                    lng: data[i].x,
+                    },
+                    content: data[i].place_name,
+                })
+                // @ts-ignore
+                bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
+                }
+                setMarkers([...markers, ...newMarkers]);
+    
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                map.setBounds(bounds)
             }
-            console.log(markers)
-            setMarkers(markers)
-
-            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-            map.setBounds(bounds)
+            }, {
+                page: i + 1,
+                radius: 400,
+                location: new kakao.maps.LatLng(geolocation.lat, geolocation.long),
+                // useMapBounds:true,
+                // bounds: new kakao.maps.LatLngBounds(new kakao.maps.LatLng(30, 127), new kakao.maps.LatLng(50, 128))
+            });
         }
-        }, {
-            radius: 400,
-            location: new kakao.maps.LatLng(geolocation.lat, geolocation.long),
-            // useMapBounds:true,
-            // bounds: new kakao.maps.LatLngBounds(new kakao.maps.LatLng(30, 127), new kakao.maps.LatLng(50, 128))
-        });
     }, [map])
 
     if(geolocation.lat === null) {
