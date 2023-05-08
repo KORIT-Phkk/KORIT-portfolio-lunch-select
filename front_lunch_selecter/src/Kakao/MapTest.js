@@ -1,78 +1,50 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-const mapStyle = css`
-    width: 500px;
-    height: 500px;
-`;
+function MapTest() {
+  const [markers, setMarkers] = useState([])
 
-const {kakao} = window;
+  useEffect(() => {
+    const map = new window.kakao.maps.Map(document.getElementById('map'), {
+      center: new window.kakao.maps.LatLng(35.1536, 129.0595),
+      level: 3,
+    })
 
-const MapTest = () => {
+    const ps = new window.kakao.maps.services.Places()
 
-    useEffect(() => {
-        const container = document.getElementById('map');
-        const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
-            level: 3
-        };
-        const map = new kakao.maps.Map(container, options);
+    ps.categorySearch(
+      'FD6', // 카테고리 코드 'FD6'은 음식점입니다
+      (data, status, _pagination) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const bounds = new window.kakao.maps.LatLngBounds();
 
-        const ps = new kakao.maps.services.Places(map);
-
-        ps.categorySearch('FD6', placesSearchCB, {useMapBounds: true});
-
-        const placesSearchCB = (data, status, pagination) => {
-            if(status === kakao.maps.services.Status.OK){
-                for(let i = 0; i < data.length; i++){
-                    displayMarker(data[i]);
-                }
-            }
-        }
-
-        const infowindow = new kakao.maps.infoWindow({zIndex:1});
-
-        const displayMarker = (place) => {
-            const marker = new kakao.maps.Marker({
+          // 기존 마커 객체를 가져와서 위치만 업데이트합니다
+          data.forEach((place) => {
+            const marker = markers.find(
+              (m) => m.content === place.place_name
+            )
+            if (marker) {
+              marker.setPosition(new window.kakao.maps.LatLng(35.1536, 129.0595))
+            } else {
+              const newMarker = new window.kakao.maps.Marker({
                 map: map,
-                position: new kakao.maps.LatLng(place.y, place.x)
-            });
+                position: new window.kakao.maps.LatLng(35.1536, 129.0595),
+              })
+              // 새로운 마커 객체를 추가합니다
+              setMarkers((markers) => [
+                ...markers,
+                { marker: newMarker, content: place.place_name },
+              ])
+            }
+            bounds.extend(new window.kakao.maps.LatLng(35.1536, 129.0595))
+          })
 
-            kakao.maps.event.addListener(marker, 'click', function(){
-                infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                infowindow.open(map, marker);
-            })
+          map.setBounds(bounds)
         }
-    }, [])
-    
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.async = true;
-    //     script.type = 'text/javascript';
-    //     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=33c4314f8f06ba1c408e47635d2f69b6`
-    //     document.body.appendChild(script);
+      }
+    )
+  }, []) // 마운트시에만 실행
 
-    //     script.onload = () => {
-    //         const container = document.getElementById('map');
-    //         console.log(document.getElementById('map'))
-    //         const options = {
-    //             center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-    //             level: 3
-    //             };
-                
-    //             const map = new window.kakao.maps.Map(container, options);
-    //         };
-
-    // }, []);
-
-
-
-    return (
-        <div>
-            <div id='map' css={mapStyle}></div>
-        </div>
-    );
-};
+  return <div id="map" style={{ width: '500px', height: '500px' }}></div>
+}
 
 export default MapTest;

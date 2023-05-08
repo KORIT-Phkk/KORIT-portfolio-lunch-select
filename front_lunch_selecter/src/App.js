@@ -3,8 +3,12 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
-import KakaoMap from './Kakao/KakaoMap';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { exampleFunction } from './Kakao/Example';
+import KakaoMapReact from './Kakao/KakaoMapReact';
+import KakaoMap from './Kakao/KakaoMap';
+
 
 
 const mainContainer = css`
@@ -18,10 +22,18 @@ const mainContainer = css`
     overflow: hidden;
 `;
 function App() {
+  useEffect(() => {
+    exampleFunction();
+  }, []);
+
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      <KakaoMap />
+      {/* <KakaoMap /> */}
+      {/* <Test /> */}
+      {/* <MapTest/> */}
+      <KakaoMapReact />
+
     </div>
   );
 }
