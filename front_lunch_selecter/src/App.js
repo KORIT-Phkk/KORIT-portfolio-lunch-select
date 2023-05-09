@@ -28,13 +28,13 @@ function App() {
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       <Routes>
-        <Route path="/" element={Main()} />
-        <Route path="/login" element={Login()} />
-        <Route path="/register" element={Register()} />
-        <Route path="/findemail" element={FindEmail()} />
-        <Route path="/emailauthenticationnumber" element={EmailAuthenticationNumber()} />
-        <Route path="/findpassword" element={FindPassword()} />
-        <Route path="/updatepassword" element={UpdatePassword()} />
+        <Route path="/" element={<Main/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/findemail" element={<FindEmail/>} />
+        <Route path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>} />
+        <Route path="/findpassword" element={<FindPassword/>} />
+        <Route path="/updatepassword" element={<UpdatePassword/>} />
       </Routes>
     </div>
   );
