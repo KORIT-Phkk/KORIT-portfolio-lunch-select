@@ -3,12 +3,11 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
-import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
-import { exampleFunction } from './Kakao/Example';
 import { useGetMarkers } from './Kakao/useGetMarkers';
-import KakaoMap from './Kakao/KakaoMap';
+import KakaoMapData from './Kakao/KakaoMapData';
 import KakaoMapReact from './Kakao/KakaoMapReact';
+import { useGetMarkers2 } from './Kakao/useGetMarkers copy';
 
 
 
@@ -24,15 +23,11 @@ const mainContainer = css`
 `;
 function App() {
   
-  const [ markers ] = useGetMarkers();
+  const [ markers ] = useGetMarkers2
+  ();
 
 
   console.log(markers)
-
-  useEffect(() => {
-    exampleFunction();
-    
-  }, []);
 
   
   return (
@@ -42,6 +37,7 @@ function App() {
       {/* <Test /> */}
       {/* <MapTest/> */}
       {/* <KakaoMapReact></KakaoMapReact> */}
+      {/* <KakaoMapData /> */}
     </div>
   );
 }

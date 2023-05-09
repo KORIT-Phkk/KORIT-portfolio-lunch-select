@@ -44,8 +44,11 @@ export const useGetMarkers = () => {
                         lng: data[i].x,
                         },
                         content: data[i].place_name,
+                        data:data
                     })
                 }
+
+
             }
             }, {
                 page: i + 1,
@@ -55,6 +58,7 @@ export const useGetMarkers = () => {
                 // bounds: new kakao.maps.LatLngBounds(new kakao.maps.LatLng(30, 127), new kakao.maps.LatLng(50, 128))
             });
         }
+        console.log(newMarkers)
     }
 
     return [ markers ];
