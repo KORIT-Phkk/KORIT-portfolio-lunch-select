@@ -39,7 +39,6 @@ public class AuthenticationController{
 	
 	@GetMapping("/authenticate")
 	public ResponseEntity<?> authenticate(String accessToken) {
-		System.out.println(accessToken);
 		return ResponseEntity.ok().body(authenticationService.authenticate(accessToken));
 	}
 }

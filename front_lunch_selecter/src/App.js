@@ -12,6 +12,7 @@ import FindPassword from './pages/findPassword/FindPassword';
 import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
+import LunchSelect from './pages/LunchSelect/LunchSelect';
 
 
 const mainContainer = css`
@@ -36,6 +37,7 @@ function App() {
         <Route path="/emailauthenticationnumber" element={<AuthRouteReactQuery path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
         <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
+        <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
       </Routes>
     </div>
   );
