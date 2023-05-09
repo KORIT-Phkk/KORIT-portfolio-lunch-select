@@ -10,7 +10,6 @@ const AuthRouteReactQuery = ({ path, element }) => {
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
     const permitAll = ["/login", "/register"]
 
-
     const authenticate = useQuery(["authenticate"], async async => {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.get("http://localhost:8080/auth/authenticate", {params: {accessToken}});
@@ -19,12 +18,18 @@ const AuthRouteReactQuery = ({ path, element }) => {
         enabled: refresh
     })
 
+    useEffect(() => {
+        if(!refresh) {
+            setRefresh(true);
+        }
+    }, [refresh]);
+
     if(authenticate.isLoading) {
         return <div>로딩중...</div>
     }
 
-    if(!authenticate.isLoading) {
-        if(!authenticate.data) {
+    if(authenticate.data) {
+        if(!authenticate.data.data) {
             if(permitAll.includes(path)) {
                 return element;
             }

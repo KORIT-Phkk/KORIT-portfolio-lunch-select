@@ -13,9 +13,6 @@ const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
 
-    // const navigate = useNavigate();
-    const navigate = useNavigate();
-
     const handlChange = (e) => {
         const { name, value } = e.target;
         setLoginUser({ ...loginUser, [name]: value });
@@ -33,7 +30,6 @@ const Login = () => {
 
         localStorage.setItem("accessToken", accessToken);
         setRefresh(true);
-        
     }
 
     return (
