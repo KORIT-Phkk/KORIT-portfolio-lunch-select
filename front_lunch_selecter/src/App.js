@@ -3,13 +3,7 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
-import { useEffect } from 'react';
-import { useGetMarkers } from './Kakao/useGetMarkers';
-import KakaoMapData from './Kakao/KakaoMapData';
-import KakaoMapReact from './Kakao/KakaoMapReact';
-import { useGetMarkers2 } from './Kakao/useGetMarkers copy';
-
-
+import Simple from './Kakao/Simple';
 
 const mainContainer = css`
     position: relative;
@@ -22,14 +16,9 @@ const mainContainer = css`
     overflow: hidden;
 `;
 function App() {
-  
-  const [ markers ] = useGetMarkers2
-  ();
+  // const [ markers ] = useGetMarkers2();
+  // console.log(markers)
 
-
-  console.log(markers)
-
-  
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
@@ -37,7 +26,7 @@ function App() {
       {/* <Test /> */}
       {/* <MapTest/> */}
       {/* <KakaoMapReact></KakaoMapReact> */}
-      {/* <KakaoMapData /> */}
+      <Simple />
     </div>
   );
 }
