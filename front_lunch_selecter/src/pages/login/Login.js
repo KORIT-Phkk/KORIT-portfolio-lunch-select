@@ -40,7 +40,7 @@ const Login = () => {
         <div css={s.container}>
             <header css={s.header}>
                 {/* <h1 css={s.logo}>ddd</h1>  */}
-                <img css={s.logo} src="003.png" alt=""></img>
+                <img css={s.logo} src="main/003.png" alt=""></img>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
