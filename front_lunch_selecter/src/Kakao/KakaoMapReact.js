@@ -117,6 +117,7 @@ const KakaoMapReact = () => {
                 </MapMarker>
             ))}
             </Map>
+            
     )
 };
 
