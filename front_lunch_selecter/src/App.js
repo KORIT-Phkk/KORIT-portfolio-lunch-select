@@ -17,10 +17,10 @@ import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQue
 const mainContainer = css`
     position: relative;
     margin: 10px auto;
-    border: 3px solid #dbdbdb;
+    border: 3px solid BLACK;
     padding: 10px;
     font-size: 1.6rem;
-    width: 1440px;
+    width: 1400px;
     height: 3000px;
     overflow: hidden;
 `;

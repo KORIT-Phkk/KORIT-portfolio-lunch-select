@@ -1,24 +1,28 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
+import * as s from './FindEmailcss'
+import FindAuthInput from '../../components/auth/FindAuthInput';
 import AuthInput from '../../components/auth/AuthInput';
 
 const FindEmail = () => {
     return (
-        <div>
-            <header>
-                <h1>Find Email</h1> 
+        <div css={s.container}>
+            <header css={s.header}>
+                <h1 css={s.logo}>Find Email</h1> 
             </header>
-            <main>
-                <AuthInput type="number" name="phone">
-                </AuthInput>
-                    <button>전송</button>
-                
-                <AuthInput type="number" name="">
+            <main css={s.mainContainer}>
+                <div css={s.input}>
+                    <FindAuthInput type="email" name="phone">
+                    </FindAuthInput>
+                    <div css={s.blank}></div>
+                    <AuthInput type="number" name="">
 
-                </AuthInput>
-            
+                    </AuthInput>
+                </div>
             </main>
-            <footer>
-                <button>확인</button>
+
+            <footer css={s.footerContainer}>
+                <button css={s.checkButton}>확인</button>
             </footer>
         </div>
     );

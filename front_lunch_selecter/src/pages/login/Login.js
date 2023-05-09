@@ -14,6 +14,7 @@ const Login = () => {
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
 
     // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handlChange = (e) => {
         const { name, value } = e.target;
@@ -38,13 +39,14 @@ const Login = () => {
     return (
         <div css={s.container}>
             <header css={s.header}>
-                <h1 css={s.logo}>CASINO</h1> 
+                {/* <h1 css={s.logo}>ddd</h1>  */}
+                <img css={s.logo} src="003.png" alt=""></img>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inpoutLabel}>Email</label>
                     <AuthInput type="email" onChange={handlChange} name="email" >
-                        <FaUser />
+                       
                     </AuthInput>
                     <div><Link to="/findemail">아이디 찾기</Link></div>
 
