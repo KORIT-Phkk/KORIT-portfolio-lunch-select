@@ -6,9 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as s from './style'
 import axios from 'axios';
 import { FaUser } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
+import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
+    const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
 
     // const navigate = useNavigate();
 
@@ -28,6 +31,7 @@ const Login = () => {
         const accessToken = response.data.grantType + " " + response.data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
+        setRefresh(true);
         
     }
 

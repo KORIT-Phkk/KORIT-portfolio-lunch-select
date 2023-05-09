@@ -19,6 +19,10 @@ const AuthRouteReactQuery = ({ path, element }) => {
         enabled: refresh
     })
 
+    if(authenticate.isLoading) {
+        return <div>로딩중...</div>
+    }
+
     if(!authenticate.isLoading) {
         if(!authenticate.data) {
             if(permitAll.includes(path)) {

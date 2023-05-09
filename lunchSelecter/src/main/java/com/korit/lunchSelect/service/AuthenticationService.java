@@ -62,4 +62,8 @@ public class AuthenticationService implements UserDetailsService {
 		
 		return userEntity.toPrincipal();
 	}
+	
+	public boolean authenticate(String accessToken) {
+		return jwtTokenProvider.validateToken(accessToken);
+	}
 }

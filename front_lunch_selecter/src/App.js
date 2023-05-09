@@ -11,6 +11,7 @@ import FindEmail from './pages/findEmail/FindEmail';
 import FindPassword from './pages/findPassword/FindPassword';
 import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 import UpdatePassword from './pages/findPassword/UpdatePassword';
+import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 
 
 const mainContainer = css`
@@ -28,13 +29,13 @@ function App() {
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       <Routes>
-        <Route path="/" element={<Main/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/findemail" element={<FindEmail/>} />
-        <Route path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>} />
-        <Route path="/findpassword" element={<FindPassword/>} />
-        <Route path="/updatepassword" element={<UpdatePassword/>} />
+        <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
+        <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
+        <Route path="/register" element={<AuthRouteReactQuery path="/register" element={<Register/>}/>}/>
+        <Route path="/findemail" element={<AuthRouteReactQuery path="/findemail" element={<FindEmail/>}/>}/>
+        <Route path="/emailauthenticationnumber" element={<AuthRouteReactQuery path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
+        <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
       </Routes>
     </div>
   );
