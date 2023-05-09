@@ -1,27 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React from 'react';
-import Input from '../Input/Input';
+import FindInput from '../Input/FindInput';
 
-const authInput = css`
+const input = css`
     width: 850px;
     margin-bottom: 5px;
     
 `;
 
-
-
-const AuthInput = ({ type, placeholder, onChange, name, children }) => {
+const FindAuthInput = ({ type, onChange, name, }) => {
     return (
-        <div css={authInput}>
-            
-            <Input
+        <div css={input}>
+             <FindInput
             type={type}
-            placeholder={placeholder}
             onChange={onChange}
             name={name}/>
         </div>
     );
 };
 
-export default AuthInput;
+export default FindAuthInput;

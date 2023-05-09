@@ -9,12 +9,15 @@ const input = css`
     width: 100%;
     height: 80px;
     font-size: 40px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid BLACK;
 `;
+// const icon = css`
 
-const Input = ({ type, placeholder, onChange, name }) => {
+// `;
+const Input = ({ type, placeholder, onChange, name, children }) => {
     return (
         <div>
+            {/* <div css={icon}>{children}</div> */}
              <input css={input} 
             type={type} 
             placeholder={placeholder} 

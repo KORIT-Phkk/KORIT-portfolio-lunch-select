@@ -1,31 +1,47 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
-
-
-// const lunchSelect = css`
-//     width: 500px;
-//     height: 60px;
-//     padding: 14px;
-//     text-align: center;
-//     font-size: 30px;
-//     font-weight: 600;
-//     color: white;
-//     background-color: rgb(249, 108, 108);
-//     cursor: pointer;
-// `;
+import React, { useState } from 'react';
+import * as s from './style'
+import { Link } from 'react-router-dom';
+import { IoMdContact } from 'react-icons/io';
 
 const Main = () => {
-    return (
-        <div>
-            <header>
-                <div>ㅁ</div>
-            </header>
-            <main>
-                <div>오늘의 점심 메뉴</div>
-                <div>지도설정</div>
-            </main>
-            <footer>
 
+    const [visible, setVisible] = useState(false);
+
+    return (
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <div css={s.setting}>
+                    <Link to='/login' css={s.logoutButton}>Logout</Link>
+                    <IoMdContact onClick={() => setVisible(!visible)} css={s.settingButton}>{visible ? 'Hide' : 'Show'}</IoMdContact>
+                </div>
+                    <div css={s.logo}><img src="main/003.png" alt=""/></div>
+            </header>
+            <main css={s.mainContainer}>
+                <div css={s.lunchSelect}>
+                    <button css={s.lunchButton}>점심</button>
+                </div>
+            </main>
+            <footer css={s.footerContainer}>
+                <div css={s.rangeSetting}>
+                    <div css={s.info}> 
+                        {visible && 
+                            <div css={s.myInfo}>
+                                <header>
+                                    <div>
+                                        name
+                                        email
+                                    </div>
+                                </header>
+                                <main>
+                                    수정
+                                </main>
+                                <footer>
+                                    <button css={s.logout}>Logout</button>
+                                </footer>
+                            </div>}
+                    </div>
+                </div>
             </footer>
         </div>
     );
