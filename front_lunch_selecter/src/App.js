@@ -3,7 +3,6 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react'
 import './App.css';
 import { Reset } from './style/Reset';
-import Simple from './Kakao/Simple';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
@@ -14,6 +13,7 @@ import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumb
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 
 const mainContainer = css`
     position: relative;
@@ -36,7 +36,6 @@ function App() {
       {/* <Test /> */}
       {/* <MapTest/> */}
       {/* <KakaoMapReact></KakaoMapReact> */}
-      <Simple />
       <Routes>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
@@ -46,6 +45,7 @@ function App() {
         <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+        <Route path="/choosemenu" element={<AuthRouteReactQuery path="/lunchselect" element={<ChooseMenu/>}/>}/>
       </Routes>
     </div>
   );
