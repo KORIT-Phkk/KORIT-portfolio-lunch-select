@@ -58,3 +58,26 @@ export const logButton = css`
     }
 `;
 
+export const oauth2 = (provider) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    border: 3px solid ${provider === "google" ? "#0075ff" : provider === "naver" ? "#19ce60" : "#ffdc00"};
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: ${provider === "kakao" ? "30px" : "20px"};
+    cursor: pointer;
+    &:hover {
+        background-color: ${provider === "google" ? "#0075ff" : provider === "naver" ? "#19ce60" : "#ffdc00"};
+    }
+`;
+
+export const oauth2Container = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    width: 100%;
+`;

@@ -8,6 +8,9 @@ import axios from 'axios';
 import { FaUser } from 'react-icons/fa';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
+import { BsGoogle } from 'react-icons/bs';
+import { SiNaver } from 'react-icons/si';
+import { SiKakao } from 'react-icons/si';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
@@ -42,8 +45,7 @@ const Login = () => {
     return (
         <div css={s.container} onKeyUp={loginEnterKeyup}>
             <header css={s.header}>
-                {/* <h1 css={s.logo}>ddd</h1>  */}
-                <img css={s.logo} src="003.png" alt=""></img>
+                <img css={s.logo} src="main/003.png" alt=""></img>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
@@ -64,6 +66,12 @@ const Login = () => {
                 <div css={s.register}><Link to="/register">회원가입</Link></div>
                 <button onClick={loginHandleSubmit} css={s.logButton}>로그인</button>
             </footer>
+
+            <div css={s.oauth2Container}>
+                <div css={s.oauth2("google")}><BsGoogle /></div>
+                <div css={s.oauth2("naver")}><SiNaver /></div>
+                <div css={s.oauth2("kakao")}><SiKakao /></div>
+            </div>
         </div>
     );
 };
