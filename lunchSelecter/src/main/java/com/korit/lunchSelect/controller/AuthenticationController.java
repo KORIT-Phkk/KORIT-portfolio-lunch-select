@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.korit.lunchSelect.aop.annotation.ValidAspect;
@@ -39,6 +40,12 @@ public class AuthenticationController{
 	
 	@GetMapping("/authenticate")
 	public ResponseEntity<?> authenticate(String accessToken) {
+		
 		return ResponseEntity.ok().body(authenticationService.authenticate(accessToken));
+	}
+	
+	@GetMapping("/userInfo")
+	public ResponseEntity<?> getUserInfo(String accessToken) {
+		return ResponseEntity.ok().body(authenticationService.getUserInfo(accessToken));
 	}
 }

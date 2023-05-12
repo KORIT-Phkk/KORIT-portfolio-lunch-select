@@ -27,7 +27,10 @@ public class User {
 				.userId(userId)
 				.email(email)
 				.password(password)
+				.name(name)
+				.phone(phone)
 				.authorities(authorities)
 				.build();
 	}
+	
 }
