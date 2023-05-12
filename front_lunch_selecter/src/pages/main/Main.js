@@ -5,6 +5,7 @@ import { IoMdContact } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -26,7 +27,7 @@ const Main = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
-                    <button css={s.lunchButton}>점심</button>
+                    <Link css={s.lunchButton} to='/lunchselect'>점심</Link>
                 </div>
             </main>
             <footer css={s.footerContainer}>

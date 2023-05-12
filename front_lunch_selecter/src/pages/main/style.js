@@ -53,7 +53,9 @@ export const lunchButton =css`
     justify-content: center;
     width: 850px;
     height: 80px;
-    font-size: 40px;
+    padding-top: 15px;
+    font-size: 45px;
+    text-decoration: none;
     border: 1px solid #dbdbdb;
     background-color: white;
     cursor: pointer;
