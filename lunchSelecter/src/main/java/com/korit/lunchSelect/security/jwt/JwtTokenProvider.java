@@ -17,7 +17,6 @@ import org.springframework.util.StringUtils;
 
 import com.korit.lunchSelect.dto.auth.JwtRespDto;
 import com.korit.lunchSelect.exception.CustomException;
-import com.study.oauth2.security.PrincipalUser;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -76,6 +75,20 @@ public class JwtTokenProvider {
 				.compact();
 		
 		return JwtRespDto.builder().grantType("Bearer").accessToken(accessToken).build();
+	}
+	
+	public String generateOAuth2RegisterToken(Authentication authentication) {
+		
+		Date tokenExpireDate = new Date(new Date().getTime() + (1000 * 60 * 10));
+		OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+		String email = oAuth2User.getAttribute("email");
+				
+		return Jwts.builder()
+				.setSubject("OAuth2Register")
+				.claim("email", email)
+				.setExpiration(tokenExpireDate)
+				.signWith(key, SignatureAlgorithm.HS256)
+				.compact();
 	}
 	
 	public boolean validateToken(String token) {

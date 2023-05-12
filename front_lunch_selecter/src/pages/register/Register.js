@@ -9,8 +9,8 @@ import axios from 'axios';
 const Register = () => {
     const navigate = useNavigate();
 
-    const [registerUser, setRegisterUser] = useState({email:"", password:"", name:"", phone:""})
-    const [errorMessages, setErrorMessages] = useState({email: "", password: "", name: "", phone:""});
+    const [ registerUser, setRegisterUser ] = useState({email:"", password:"", name:"", phone:""})
+    const [ errorMessages, setErrorMessages ] = useState({email: "", password: "", name: "", phone:""});
 
     const onChangeHandle = (e) => {
         const { name, value } = e.target;

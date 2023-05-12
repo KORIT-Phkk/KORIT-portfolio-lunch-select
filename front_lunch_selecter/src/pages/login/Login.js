@@ -46,6 +46,18 @@ const Login = () => {
         }
     }
 
+    const googleAuthHandleClick = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/google"
+    }
+
+    const naverAuthHandleClick = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/naver"
+    }
+
+    const kakaoAuthHandleClick = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/kakao"
+    }
+
 
     return (
         <div css={s.container} onKeyUp={loginEnterKeyup}>
@@ -73,9 +85,9 @@ const Login = () => {
             </footer>
 
             <div css={s.oauth2Container}>
-                <div css={s.oauth2("google")}><BsGoogle /></div>
-                <div css={s.oauth2("naver")}><SiNaver /></div>
-                <div css={s.oauth2("kakao")}><SiKakao /></div>
+                <div css={s.oauth2("google")} onClick={googleAuthHandleClick}><BsGoogle /></div>
+                <div css={s.oauth2("naver")} onClick={naverAuthHandleClick}><SiNaver /></div>
+                <div css={s.oauth2("kakao")} onClick={kakaoAuthHandleClick}><SiKakao /></div>
             </div>
         </div>
     );

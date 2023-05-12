@@ -19,6 +19,7 @@ public class User {
 	private String password;
 	private String name;
 	private String phone;
+	private String provider;
 	
 	private List<Authority> authorities;
 	
