@@ -51,13 +51,13 @@ const ChooseMenu = () => {
     return (
         <div css={ab}>
             <div css={dd}>{todayLunch}</div>
-                <Map
+            <Map
                     center={{
                         lat: 37.777,
                         lng: 126.666,
                     }}
                     style={{
-                        width: "500px",
+                        width: "80%",
                         height: "500px",
                     }}
                     level={5}

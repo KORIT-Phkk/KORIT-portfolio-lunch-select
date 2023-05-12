@@ -23,7 +23,7 @@ const Main = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
-                    <button css={s.lunchButton}>점심</button>
+                    <Link to='/lunchselect'><button css={s.lunchButton}>점심</button></Link>
                 </div>
             </main>
             <footer css={s.footerContainer}>

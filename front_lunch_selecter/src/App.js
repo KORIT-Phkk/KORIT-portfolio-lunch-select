@@ -14,6 +14,7 @@ import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
 import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
+import Simple from './Kakao/Simple';
 
 const mainContainer = css`
     position: relative;
@@ -32,11 +33,8 @@ function App() {
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      {/* <KakaoMap /> */}
-      {/* <Test /> */}
-      {/* <MapTest/> */}
-      {/* <KakaoMapReact></KakaoMapReact> */}
-      <Routes>
+      <Simple />
+      {/* <Routes>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
         <Route path="/register" element={<AuthRouteReactQuery path="/register" element={<Register/>}/>}/>
@@ -46,7 +44,7 @@ function App() {
         <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
         <Route path="/choosemenu" element={<AuthRouteReactQuery path="/lunchselect" element={<ChooseMenu/>}/>}/>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

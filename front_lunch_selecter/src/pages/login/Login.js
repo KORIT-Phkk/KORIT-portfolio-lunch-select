@@ -12,6 +12,7 @@ import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
+    const navigete = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,7 +30,8 @@ const Login = () => {
         const accessToken = response.data.grantType + " " + response.data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
-        setRefresh(true);
+        window.location.href = "http://www.naver.com"
+        // setRefresh(true);
     }
     
     const loginEnterKeyup = (e) => {
