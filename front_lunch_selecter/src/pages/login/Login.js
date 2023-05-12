@@ -6,13 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as s from './style'
 import axios from 'axios';
 import { FaUser } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
+import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
+    const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
 
-    // const navigate = useNavigate();
-
-    const handlChange = (e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setLoginUser({ ...loginUser, [name]: value });
     }
@@ -28,24 +29,32 @@ const Login = () => {
         const accessToken = response.data.grantType + " " + response.data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
-        
+        setRefresh(true);
+    }
+    
+    const loginEnterKeyup = (e) => {
+        if(e.keyCode === 13) {
+            loginHandleSubmit();
+        }
     }
 
+
     return (
-        <div css={s.container}>
+        <div css={s.container} onKeyUp={loginEnterKeyup}>
             <header css={s.header}>
-                <h1 css={s.logo}>CASINO</h1> 
+                {/* <h1 css={s.logo}>ddd</h1>  */}
+                <img css={s.logo} src="main/003.png" alt=""></img>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inpoutLabel}>Email</label>
-                    <AuthInput type="email" onChange={handlChange} name="email" >
-                        <FaUser />
+                    <AuthInput type="email" onChange={handleChange} name="email" >
+                       
                     </AuthInput>
                     <div><Link to="/findemail">아이디 찾기</Link></div>
 
                     <label css={s.inpoutLabel}>password</label>
-                    <AuthInput type="password" onChange={handlChange} name="password" >
+                    <AuthInput type="password" onChange={handleChange} name="password" >
                     </AuthInput>
                     <div><Link to="/findpassword">비밀번호 찾기</Link></div>
                     

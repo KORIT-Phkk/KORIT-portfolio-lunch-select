@@ -1,31 +1,39 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
-
-
-// const lunchSelect = css`
-//     width: 500px;
-//     height: 60px;
-//     padding: 14px;
-//     text-align: center;
-//     font-size: 30px;
-//     font-weight: 600;
-//     color: white;
-//     background-color: rgb(249, 108, 108);
-//     cursor: pointer;
-// `;
+import React, { useRef, useState } from 'react';
+import * as s from './style'
+import { IoMdContact } from 'react-icons/io';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import UserInfo from '../../components/userInfoGroup/UserInfo';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
-    return (
-        <div>
-            <header>
-                <div>ㅁ</div>
-            </header>
-            <main>
-                <div>오늘의 점심 메뉴</div>
-                <div>지도설정</div>
-            </main>
-            <footer>
+    const [ isOpen, setIsOpen ] = useState(false);
+    
+    const userInfoHandle = () => {
+        setIsOpen(!isOpen)
+    }
+    
 
+    return (
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <div css={s.setting}>
+                    <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
+                    <UserInfo css={s.userInfo} isOpen={isOpen}/>
+                    
+                </div>
+                    <div css={s.logo}><img src="main/003.png" alt=""/></div>
+            </header>
+            <main css={s.mainContainer}>
+                <div css={s.lunchSelect}>
+                    <Link css={s.lunchButton} to='/lunchselect'>점심</Link>
+                </div>
+            </main>
+            <footer css={s.footerContainer}>
+                <div css={s.rangeSetting}>
+                    
+                </div>
             </footer>
         </div>
     );

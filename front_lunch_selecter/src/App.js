@@ -13,15 +13,17 @@ import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumb
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
 import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
+import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
+import LunchSelect from './pages/LunchSelect/LunchSelect';
 
 
 const mainContainer = css`
     position: relative;
     margin: 10px auto;
-    border: 3px solid #dbdbdb;
+    border: 3px solid BLACK;
     padding: 10px;
     font-size: 1.6rem;
-    width: 1440px;
+    width: 1400px;
     height: 3000px;
     overflow: hidden;
 `;
@@ -30,6 +32,7 @@ function App() {
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={Main()} />
         <Route path="/login" element={Login()} />
         <Route path="/register" element={Register()} />
@@ -40,6 +43,16 @@ function App() {
         <Route path="/lunchselect" element={LunchSelect()} />
         <Route path="/choosemenu" element={ChooseMenu()} />
 
+=======
+        <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
+        <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
+        <Route path="/register" element={<AuthRouteReactQuery path="/register" element={<Register/>}/>}/>
+        <Route path="/findemail" element={<AuthRouteReactQuery path="/findemail" element={<FindEmail/>}/>}/>
+        <Route path="/emailauthenticationnumber" element={<AuthRouteReactQuery path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
+        <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
+        <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+>>>>>>> main
       </Routes>
     </div>
   );

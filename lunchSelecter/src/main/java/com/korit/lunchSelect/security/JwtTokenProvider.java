@@ -61,7 +61,7 @@ public class JwtTokenProvider {
 		return JwtRespDto.builder().grantType("Bearer").accessToken(accessToken).build();
 	}
 	
-	public boolean validateToken(String token) {		
+	public boolean validateToken(String token) {
 		try {
 			Jwts.parserBuilder()
 				.setSigningKey(key)
@@ -116,6 +116,7 @@ public class JwtTokenProvider {
 		for(String role : auth.split(",")) {
 			authorities.add(new SimpleGrantedAuthority(role));
 		}
+		
 		
 		UserDetails userDetails = new User(claims.getSubject(), "", authorities);
 		

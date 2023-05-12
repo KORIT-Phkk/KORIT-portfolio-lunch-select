@@ -1,16 +1,20 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import AuthInput from '../../components/auth/AuthInput';
+import * as s from './UpdatePasswordCss'
 
 const UpdatePassword = () => {
     return (
-        <div>
-            <header>
-                <h1>Updata Password</h1> 
+        <div css={s.container}>
+            <header css={s.header}>
+                <h1 css={s.logo}>Updata Password</h1> 
             </header>
-            <main>
-                <AuthInput type="password" name="password">
-                </AuthInput>
-                <button>확인</button>
+            <main css={s.mainContainer}>
+                <div css={s.input}>
+                    <AuthInput type="password" name="password">
+                    </AuthInput>
+                </div>
+                    <button css={s.checkButton}>확인</button>
             </main>
             
         </div>
