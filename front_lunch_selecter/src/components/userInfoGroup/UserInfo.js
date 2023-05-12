@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { QueryClient, useQuery, useQueryClient } from 'react-query';
 
 const userInfoGroup = (isOpen) => css`
-
     position: absolute;
     top: 100px;
     right: 30px;
@@ -23,6 +22,7 @@ const headerContainer = css`
     height: 200px;
     border-bottom: 1px solid #dbdbdb;
 `;
+
 const userName = css`
     display: flex;
     justify-content: center;

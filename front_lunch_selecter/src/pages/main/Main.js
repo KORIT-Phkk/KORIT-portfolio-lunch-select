@@ -2,8 +2,6 @@
 import React, { useRef, useState } from 'react';
 import * as s from './style'
 import { IoMdContact } from 'react-icons/io';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +12,7 @@ const Main = () => {
         setIsOpen(!isOpen)
     }
     
-
+    
     return (
         <div css={s.container}>
             <header css={s.headerContainer}>
