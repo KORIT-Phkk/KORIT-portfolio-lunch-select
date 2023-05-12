@@ -11,6 +11,8 @@ import FindEmail from './pages/findEmail/FindEmail';
 import FindPassword from './pages/findPassword/FindPassword';
 import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 import UpdatePassword from './pages/findPassword/UpdatePassword';
+import LunchSelect from './pages/LunchSelect/LunchSelect';
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 
 
 const mainContainer = css`
@@ -35,6 +37,9 @@ function App() {
         <Route path="/emailauthenticationnumber" element={EmailAuthenticationNumber()} />
         <Route path="/findpassword" element={FindPassword()} />
         <Route path="/updatepassword" element={UpdatePassword()} />
+        <Route path="/lunchselect" element={LunchSelect()} />
+        <Route path="/choosemenu" element={ChooseMenu()} />
+
       </Routes>
     </div>
   );
