@@ -2,7 +2,7 @@ package com.korit.lunchSelect.entity;
 
 import java.util.List;
 
-import com.korit.lunchSelect.security.PrincipalUser;
+import com.korit.lunchSelect.security.jwt.PrincipalUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

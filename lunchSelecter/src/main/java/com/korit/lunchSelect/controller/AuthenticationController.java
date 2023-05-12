@@ -41,4 +41,6 @@ public class AuthenticationController{
 	public ResponseEntity<?> authenticate(String accessToken) {
 		return ResponseEntity.ok().body(authenticationService.authenticate(accessToken));
 	}
+	
+	
 }

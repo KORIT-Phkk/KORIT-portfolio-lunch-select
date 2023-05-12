@@ -9,9 +9,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.korit.lunchSelect.security.JwtAuthenticationEntryPoint;
-import com.korit.lunchSelect.security.JwtAuthenticationFilter;
-import com.korit.lunchSelect.security.JwtTokenProvider;
+import com.korit.lunchSelect.security.jwt.JwtAuthenticationEntryPoint;
+import com.korit.lunchSelect.security.jwt.JwtAuthenticationFilter;
+import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.security;
+package com.korit.lunchSelect.security.jwt;
 
 import java.util.ArrayList;
 import java.util.Collection;

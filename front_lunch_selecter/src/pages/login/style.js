@@ -81,3 +81,10 @@ export const oauth2Container = css`
     margin: 20px;
     width: 100%;
 `;
+
+export const errorMsg = css`
+margin-left: 5px;
+margin-bottom: 20px;
+font-size: 12px;
+color: red;
+`;

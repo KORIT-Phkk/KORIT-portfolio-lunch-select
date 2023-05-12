@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
 import AuthInput from '../../components/auth/AuthInput';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as s from './style'
 import axios from 'axios';
-import { FaUser } from 'react-icons/fa';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 import { BsGoogle } from 'react-icons/bs';
@@ -14,6 +13,7 @@ import { SiKakao } from 'react-icons/si';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
+    const [ errorMessages, setErrorMessages ] = useState({email: "", password: ""});
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
 
     const handleChange = (e) => {
@@ -27,12 +27,17 @@ const Login = () => {
                 "Content-Type": "application/json"
             }
         }
-        const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
-        alert("로그인 성공!");
-        const accessToken = response.data.grantType + " " + response.data.accessToken;
 
-        localStorage.setItem("accessToken", accessToken);
-        setRefresh(true);
+        try {
+            const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+            alert("로그인 성공!");
+            const accessToken = response.data.grantType + " " + response.data.accessToken;
+    
+            localStorage.setItem("accessToken", accessToken);
+            setRefresh(true);
+        } catch(error) {
+            setErrorMessages({email: "", password: "", ...error.response.data.errorData});
+        }
     }
     
     const loginEnterKeyup = (e) => {
@@ -51,8 +56,8 @@ const Login = () => {
                 <div css={s.input}>
                     <label css={s.inpoutLabel}>Email</label>
                     <AuthInput type="email" onChange={handleChange} name="email" >
-                       
                     </AuthInput>
+                    <div css={s.errorMsg}>{errorMessages.email}</div>
                     <div><Link to="/findemail">아이디 찾기</Link></div>
 
                     <label css={s.inpoutLabel}>password</label>
