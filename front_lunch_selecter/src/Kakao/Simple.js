@@ -78,15 +78,16 @@ const Simple = () => {
                 }}
                 level={2}
                 >
-                    {getRestaurantData.data.data.documents.map(store => {
-                        <MapMarker 
+                    {getRestaurantData.data.data.documents.map(store => (
+                        <MapMarker
+                            key={store.id}
                             position={{
                                 lat: store.y,
                                 lng: store.x,
                             }}
                         />
             
-                    })}
+                    ))}
             </Map>
             <Link to={`https://place.map.kakao.com/${restaurantId}`} ><button>버튼</button></Link>
         </>
