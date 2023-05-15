@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LunchSelect {
 
+	private String id;
 	private String name;
 	private String address;
 	private String category;
-	private String x;
-	private String y;
+	private String lat;
+	private String lng;
 }

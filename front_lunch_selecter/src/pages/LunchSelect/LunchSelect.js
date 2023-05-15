@@ -1,30 +1,52 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useRef, useState } from 'react';
+import { css } from '@emotion/react';
+import axios from 'axios';
+import React, { useRef, useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import * as s from './style';
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import LocalCategory from './LocalCategory/LocalCategory';
+
+
+const selectLocation = (isOpen) => css`
+    /* position: absolute;
+    top: 5%;
+    right: 50%; */
+    display: ${isOpen ? "flex" : "none"};
+    /* width: 180px;
+    height: 200px;
+    max-height: 100px;
+    background-color: white;
+    overflow-y: scroll; */
+
+`;
+
 
 
 const LunchSelect = () => {
-    const slotValue = ['짱깨', '맥도날드', '된장', '유부초밥', '우동(돈가스)', '김밥천국','삼정타워','닭가슴살','0004','9','88','7','6','2','3','5','dd','we','as','sdf','asdf','asdf','wer','werw','tyu','dfg','ert','q2we','dfg','fsgjl'];
+
+    const [ position, setPosition ] = useState();
+    const [ isOpen, setIsOpen ] = useState(false);
 
     const [ startButtonClickState, setStartButtonClickState ] = useState(false);
     const [ locationIsLoading, setLocationIsLoading ] = useState(true);
-    const [geolocation, setGeolocation] = useState({
+    const [geolocation, setGeolocation] = useState({//하드코딩 해놓은상태임 수정해야함
         lat: null,
         lng: null
     });
 
+    const [ slotValue, setSlotValue ] = useState([]) 
+    const [todayLunch, setTodayLunch] = useState("");
+
     const getLocation = () => {
         let lat, lng;
-
 
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function(position) {
-                    lat = position.coords.latitude;
-                    lng = position.coords.longitude;
+                    lat = 35.152418;
+                    lng = 129.060043;
                     setGeolocation((geolocation) => {
                         return {
                             ...geolocation,
@@ -51,75 +73,78 @@ const LunchSelect = () => {
             return;
         }
     }
-
-    // const locationHandleClick = () => {
-    //     getLocation();
-    //     if((geolocation.lat || geolocation.lng) === null) {
-    //         alert('위치를 가져올 수 없습니다. 다시 눌러주세요.');
-    //         console.log(navigator.geolocation)
-    //     }else {
-    //         alert('위치 설정 됨!')
-    //     }
-    //     console.log(geolocation.lat, geolocation.lng)
-    // }
     
     const getMenu = useQuery(["getMenu"], async () => {
         const option = {
-            params: {
-                lat: geolocation.lat,
-                lng: geolocation.lng
-            },
-            headers: {
-                Authorization: localStorage.getItem("accessToken")
-            }
-        }
-        const response = await axios.get("http://localhost:8080/lunch/select", option)
-        return response
-    }, {
+          params: {
+            lat: geolocation.lat,
+            lng: geolocation.lng
+          },
+          headers: {
+            Authorization: localStorage.getItem("accessToken")
+          }
+        };
+        const response = await axios.get("http://localhost:8080/lunch/select", option);
+        const names = response.data.map(store => store.name);
+        setSlotValue(names);
+        console.log(geolocation)
+        return response;
+      }, {
         enabled: startButtonClickState && !locationIsLoading,
         onSuccess: () => {
             setStartButtonClickState(false);
             setLocationIsLoading(true);
+            setIsSpinning(true);
         }
-    });
+      });
+      
+    
   
 
     const navigate = useNavigate();
-    const [todayLunch, setTodayLunch] = useState("돌려돌려 돌림판~~");
+  
     const [isSpinning, setIsSpinning] = useState(false);
     const intervalRef = useRef(null);
 
     const handleStart = () => {
         getLocation();
         setStartButtonClickState(true);
-        
-        setIsSpinning(true);
-        intervalRef.current = setInterval(() => {
-            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
-        }, 50);
-        
     };
 
     const handleStop = () => {
         setIsSpinning(false);
         clearInterval(intervalRef.current);
         navigate("/choosemenu", {state:{value : todayLunch}})
+        console.log(slotValue)
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
     };
 
-    // if(getMenu.isLoading){
-    //     return <div>불러오는 중....</div>
-    // }
+    const selectLocationHendleClick =() => {
+        setIsOpen(true);
+        console.log('시발')
+    }
+
+    if(getMenu.isLoading){
+        return <div>불러오는 중....</div>
+    }
+
+    if(isSpinning) {
+        intervalRef.current = setInterval(() => {
+            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
+        }, 300);
+    }
 
 
     return (
         <div css={s.container}>
-            {/* onClick={locationHandleClick} */}
-            <button css={s.selectButton}  >내 위치 가져오기</button>
-            {/* <button> onClick={getMenu}메뉴 가져오기</button> */}
+            <button css={s.selectButton} onClick={selectLocationHendleClick}>위치 선택하기</button>
+            <div css={selectLocation(isOpen)}>
+                <LocalCategory 
+                />
+            </div>
             <header css={s.header}>
             </header>
             <main css={s.mainContainer}>

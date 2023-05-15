@@ -12,8 +12,8 @@ public class LunchSelectReqDto {
 	
 	public LunchSelect toEntity() {
 		return LunchSelect.builder()
-				.x(lat)
-				.y(lng)
+				.lat(lat)
+				.lng(lng)
 				.build();
 	}
 }

@@ -1,6 +1,7 @@
 package com.korit.lunchSelect.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -16,12 +17,14 @@ public class LunchSelectService {
 
 	private final LunchSelectRepository lunchSelectRepository;
 
-	public LunchSelectReqDto lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
+	public List<String> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("lat", lunchSelectReqDto.getLat());
+		map.put("lng", lunchSelectReqDto.getLng());
 
-		
-		
-		return null;
+		System.out.println("DTO: " + lunchSelectReqDto);
+		System.out.println("DB: " + lunchSelectRepository.findByLocation(map));
+		return lunchSelectRepository.findByLocation(map);
 	}
 }
 
