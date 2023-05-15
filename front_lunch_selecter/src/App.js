@@ -34,13 +34,13 @@ function App() {
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       <Routes>
-        <Route path="/auth/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
-        <Route path="/auth/register" element={<AuthRouteReactQuery path="/register" element={<Register/>}/>}/>
-        <Route path="/auth/findemail" element={<AuthRouteReactQuery path="/findemail" element={<FindEmail/>}/>}/>
-        <Route path="/auth/emailauthenticationnumber" element={<AuthRouteReactQuery path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
-        <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
-        <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
-        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
+        <Route path="/auth/login" element={<AuthRouteReactQuery path="/auth/login" element={<Login/>}/>}/>
+        <Route path="/auth/register" element={<AuthRouteReactQuery path="/auth/register" element={<Register/>}/>}/>
+        <Route path="/auth/findemail" element={<AuthRouteReactQuery path="/auth/findemail" element={<FindEmail/>}/>}/>
+        <Route path="/auth/emailauthenticationnumber" element={<AuthRouteReactQuery path="/auth/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
+        <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/auth/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
+        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
