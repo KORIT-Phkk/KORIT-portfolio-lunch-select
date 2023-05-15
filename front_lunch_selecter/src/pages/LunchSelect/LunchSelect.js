@@ -2,13 +2,12 @@
 import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import * as s from './style';
 
-import Category from './category/Category';
 import LocalCategory from './LocalCategory/LocalCategory';
+import Category from './category/Category';
 
 
 const selectLocation = (isOpen) => css`
@@ -29,25 +28,21 @@ const selectLocation = (isOpen) => css`
 
 
 const LunchSelect = () => {
+    const navigate = useNavigate();
 
     const [isInvited, setIsInvited] = useState(false);
     const [inviteCode, setInviteCode] = useState('');
-    
-    const navigate = useNavigate();
-
-
     const [ position, setPosition ] = useState();
     const [ isOpen, setIsOpen ] = useState(false);
-
     const [ startButtonClickState, setStartButtonClickState ] = useState(false);
     const [ locationIsLoading, setLocationIsLoading ] = useState(true);
-    const [geolocation, setGeolocation] = useState({//하드코딩 해놓은상태임 수정해야함
+    const [geolocation, setGeolocation] = useState({
         lat: null,
         lng: null
     });
-
     const [ slotValue, setSlotValue ] = useState([]) 
     const [todayLunch, setTodayLunch] = useState("");
+    const [ address, setAddress ] = useState("");
 
     const getLocation = () => {
         let lat, lng;
@@ -95,9 +90,9 @@ const LunchSelect = () => {
           }
         };
         const response = await axios.get("http://localhost:8080/lunch/select", option);
+        console.log(response.data)
         const names = response.data.map(store => store.name);
         setSlotValue(names);
-        console.log(geolocation)
         return response;
       }, {
         enabled: startButtonClickState && !locationIsLoading,
@@ -121,8 +116,14 @@ const LunchSelect = () => {
     const handleStop = () => {
         setIsSpinning(false);
         clearInterval(intervalRef.current);
-        navigate("/choosemenu", {state:{value : todayLunch}})
-        console.log(slotValue)
+        // navigate("/choosemenu", {})
+        console.log("dd:", getMenu.data.data);
+        for(let i = 0; i < getMenu.data.data.length; i++) {
+            if(todayLunch === getMenu.data.data[i].name){
+                console.log("제발좀나와라:",getMenu.data.data[i].address);
+                navigate(`/choosemenu?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
+            }
+        }
     };
 
     const handleSubmit = (event) => {
