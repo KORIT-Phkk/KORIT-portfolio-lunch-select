@@ -2,7 +2,7 @@ package com.korit.lunchSelect.entity;
 
 import java.util.List;
 
-import com.korit.lunchSelect.security.PrincipalUser;
+import com.korit.lunchSelect.security.jwt.PrincipalUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +19,7 @@ public class User {
 	private String password;
 	private String name;
 	private String phone;
+	private String provider;
 	
 	private List<Authority> authorities;
 	

@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.security;
+package com.korit.lunchSelect.security.jwt;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -38,7 +39,22 @@ public class JwtTokenProvider {
 	}
 	
 	public JwtRespDto generateToken(Authentication authentication) {
+		String email = null;
 		
+		if(authentication.getPrincipal().getClass() == UserDetails.class) {
+			// PrincipalUser
+			PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+			email = principalUser.getEmail();
+			
+		}else {
+			// OAuth2User
+			OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+			email = oAuth2User.getAttribute("email");
+		}
+		
+		if(authentication.getAuthorities() == null) {
+			throw new RuntimeException("등록된 권한이 없습니다.");
+		}
 		
 		StringBuilder builder = new StringBuilder();
 		
@@ -59,6 +75,20 @@ public class JwtTokenProvider {
 				.compact();
 		
 		return JwtRespDto.builder().grantType("Bearer").accessToken(accessToken).build();
+	}
+	
+	public String generateOAuth2RegisterToken(Authentication authentication) {
+		
+		Date tokenExpireDate = new Date(new Date().getTime() + (1000 * 60 * 10));
+		OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+		String email = oAuth2User.getAttribute("email");
+				
+		return Jwts.builder()
+				.setSubject("OAuth2Register")
+				.claim("email", email)
+				.setExpiration(tokenExpireDate)
+				.signWith(key, SignatureAlgorithm.HS256)
+				.compact();
 	}
 	
 	public boolean validateToken(String token) {

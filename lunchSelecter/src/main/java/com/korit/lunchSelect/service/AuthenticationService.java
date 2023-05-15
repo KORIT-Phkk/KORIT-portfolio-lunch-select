@@ -16,10 +16,9 @@ import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.UserRepository;
-import com.korit.lunchSelect.security.JwtTokenProvider;
-import com.korit.lunchSelect.security.PrincipalUser;
+import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
+import com.korit.lunchSelect.security.jwt.PrincipalUser;
 
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 @Service
