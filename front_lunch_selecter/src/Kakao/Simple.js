@@ -11,7 +11,7 @@ const Simple = () => {
     const [ restaurantId, setRestaurantId ] = useState();
     const [ restaurantLocation_x, setRestaurantLocation_x ] = useState();
     const [ restaurantLocation_y, setRestaurantLocation_y ] = useState();
-    const [ isOpen, setIsOpen ] = useState(false);
+    const [ isVisible, setIsVisible ] = useState(false);
 
     // 최초 도로명 주소를 넣을 곳
     const restaurantRoadAddress = "부산광역시 부산진구 가야공원로 62-1, 1층 (가야동)";
@@ -94,14 +94,18 @@ const Simple = () => {
                                 lng: store.x,
                             }}
                             clickable={true}
-                            onClick={() => setIsOpen(true)}
+                            onMouseOver={() => setIsVisible(true)}
+                            onMouseOut={() => setIsVisible(false)}
+                            onClick={() => {
+                                window.location.href = `http://place.map.kakao.com/${store.id}`
+                            }}
                         >
-                            {isOpen && (
+                            {isVisible && (
                                 <div style={{ minWidth: "150px" }}>
                                     <img
                                         alt="close"
                                         width="14"
-                                        height="13"
+                                        height="15"
                                         src="https://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
                                         style={{
                                             position: "absolute",
@@ -109,7 +113,10 @@ const Simple = () => {
                                             top: "5px",
                                             cursor: "pointer",
                                         }}
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            window.location.href = `https://place.map.kakao.com/${store.id}`;
+                                        }}
                                     />
                                     <div style={{ padding: "5px", color: "#000", fontSize: "15px" }}>{store.place_name}</div>
                                 </div>
@@ -117,7 +124,6 @@ const Simple = () => {
                         </MapMarker>
                     ))}
             </Map>
-            <Link to={`https://place.map.kakao.com/${restaurantId}`} ><button>버튼</button></Link>
         </>
     );
 };
