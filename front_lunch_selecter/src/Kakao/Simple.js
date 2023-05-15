@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Map, MapMarker, useMap } from 'react-kakao-maps-sdk';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 
 const Simple = () => {
     const [ returnData, setReturnData ] = useState();
@@ -74,6 +73,7 @@ const Simple = () => {
     if(getRestaurantData.data)
     return (
         <>
+        <div>총 {getRestaurantData.data.data.documents.length}개가 검색되었습니다</div>
             <Map
                 center={{
                     lat: restaurantLocation_y,
@@ -94,8 +94,10 @@ const Simple = () => {
                                 lng: store.x,
                             }}
                             clickable={true}
+                            // 마우스 하버 시 정보 띄우기
                             onMouseOver={() => setIsVisible(true)}
                             onMouseOut={() => setIsVisible(false)}
+                            // 클릭 이벤트 시 링크 이동
                             onClick={() => {
                                 window.location.href = `http://place.map.kakao.com/${store.id}`
                             }}
@@ -114,6 +116,7 @@ const Simple = () => {
                                             cursor: "pointer",
                                         }}
                                         onClick={(e) => {
+                                            // 이벤트 버블링 방지
                                             e.stopPropagation();
                                             window.location.href = `https://place.map.kakao.com/${store.id}`;
                                         }}
