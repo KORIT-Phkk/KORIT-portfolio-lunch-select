@@ -6,6 +6,8 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import * as s from './style';
+
+import Category from './category/Category';
 import LocalCategory from './LocalCategory/LocalCategory';
 
 
@@ -24,7 +26,15 @@ const selectLocation = (isOpen) => css`
 
 
 
+
+
 const LunchSelect = () => {
+
+    const [isInvited, setIsInvited] = useState(false);
+    const [inviteCode, setInviteCode] = useState('');
+    
+    const navigate = useNavigate();
+
 
     const [ position, setPosition ] = useState();
     const [ isOpen, setIsOpen ] = useState(false);
@@ -98,10 +108,7 @@ const LunchSelect = () => {
         }
       });
       
-    
-  
 
-    const navigate = useNavigate();
   
     const [isSpinning, setIsSpinning] = useState(false);
     const intervalRef = useRef(null);
@@ -122,9 +129,9 @@ const LunchSelect = () => {
         event.preventDefault();
     };
 
+
     const selectLocationHendleClick =() => {
         setIsOpen(true);
-        console.log('시발')
     }
 
     if(getMenu.isLoading){
@@ -138,6 +145,7 @@ const LunchSelect = () => {
     }
 
 
+
     return (
         <div css={s.container}>
             <button css={s.selectButton} onClick={selectLocationHendleClick}>위치 선택하기</button>
@@ -146,6 +154,10 @@ const LunchSelect = () => {
                 />
             </div>
             <header css={s.header}>
+                <div css={s.categoryBox}>
+                    <h1 css={s.category}>카테고리를 선택하시오</h1>
+                </div>
+                <Category />
             </header>
             <main css={s.mainContainer}>
                 <div css={s.selectMenu}>{todayLunch}</div>

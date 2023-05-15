@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Map } from 'react-kakao-maps-sdk';
 
 
 const ab = css`
@@ -50,6 +51,19 @@ const ChooseMenu = () => {
     return (
         <div css={ab}>
             <div css={dd}>{todayLunch}</div>
+            <Map
+                    center={{
+                        lat: 37.777,
+                        lng: 126.666,
+                    }}
+                    style={{
+                        width: "80%",
+                        height: "500px",
+                    }}
+                    level={5}
+                >
+
+                </Map>
             <div css={aaa}>
                 <Link to="/lunchselect"><button css={cc} onClick={returnButtonHandle}>다시돌려~</button></Link>
                 <Link><button css={cc} >음식점 자세히 보기</button></Link>
