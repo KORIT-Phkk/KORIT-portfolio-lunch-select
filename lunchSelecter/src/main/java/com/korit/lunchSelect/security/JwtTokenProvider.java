@@ -117,6 +117,7 @@ public class JwtTokenProvider {
 			authorities.add(new SimpleGrantedAuthority(role));
 		}
 		
+		
 		UserDetails userDetails = new User(claims.getSubject(), "", authorities);
 		
 		authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);

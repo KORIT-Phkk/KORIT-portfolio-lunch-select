@@ -10,6 +10,15 @@ export const header = css`
     margin: 20% auto;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+`;
+export const categoryBox = css`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+`;
+export const category = css`
+    font-size: 70px;
 `;
 
 export const mainContainer =css`
