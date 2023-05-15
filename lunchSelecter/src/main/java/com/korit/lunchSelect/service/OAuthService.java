@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
+public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
 
 	private final UserRepository userRepository;
 	
@@ -64,6 +64,8 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
 	
 	public int oAuth2ProviderMerge(OAuth2ProviderMergeReqDto oAuth2ProviderMergeReqDto) {
 		User userEntity = userRepository.findUserByEmail(oAuth2ProviderMergeReqDto.getEmail());
+		
+		System.out.println(userEntity);
 		
 		String provider = oAuth2ProviderMergeReqDto.getProvider();
 		

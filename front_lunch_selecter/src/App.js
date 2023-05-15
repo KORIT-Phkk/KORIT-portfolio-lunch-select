@@ -13,6 +13,10 @@ import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumb
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+import NotFound from './pages/NotFound/NotFound';
+import OAuth2Login from './pages/login/OAuth2Login';
+import OAuth2Register from './pages/register/OAuth2Register';
+import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 
 
 const mainContainer = css`
@@ -38,6 +42,11 @@ function App() {
         <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
+        <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
+        <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
+        {/* <Route path="/auth/oauth2/merge" element={<OAuth2Merge/>}/> */}
+        <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>
   );

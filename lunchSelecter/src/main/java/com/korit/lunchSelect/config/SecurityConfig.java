@@ -13,7 +13,7 @@ import com.korit.lunchSelect.security.jwt.JwtAuthenticationEntryPoint;
 import com.korit.lunchSelect.security.jwt.JwtAuthenticationFilter;
 import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
 import com.korit.lunchSelect.security.oauth2.OAuth2SuccessHandler;
-import com.korit.lunchSelect.service.AuthService;
+import com.korit.lunchSelect.service.OAuthService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private final JwtTokenProvider jwtTokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-	private final AuthService authService;
-	private final OAuth2SuccessHandler auth2SuccessHandler;
+	private final OAuthService oAuthService;
+	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -52,9 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
             .oauth2Login()
             .loginPage("http://localhost:3000/auth/login")
-            .successHandler(auth2SuccessHandler)
+            .successHandler(oAuth2SuccessHandler)
             .userInfoEndpoint()
-            .userService(authService);
+            .userService(oAuthService);
 		
 	}
 }
