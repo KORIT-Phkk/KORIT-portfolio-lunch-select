@@ -12,8 +12,8 @@ export const header = css`
     justify-content: center;
 `;
 export const logo = css`
-    /* font-size: 80px;
-    font-weight: 600; */
+    font-size: 80px;
+    font-weight: 600;
 `;
 export const mainContainer =css`
     display: flex;

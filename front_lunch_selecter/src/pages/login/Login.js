@@ -31,9 +31,8 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
             alert("로그인 성공!");
-            const accessToken = response.data.grantType + " " + response.data.accessToken;
-    
-            localStorage.setItem("accessToken", accessToken);
+
+            localStorage.setItem("accessToken", response.data);
             setRefresh(true);
         } catch(error) {
             setErrorMessages({email: "", password: "", ...error.response.data.errorData});

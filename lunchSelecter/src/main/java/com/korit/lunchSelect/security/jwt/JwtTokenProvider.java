@@ -38,10 +38,10 @@ public class JwtTokenProvider {
 		key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
 	}
 	
-	public JwtRespDto generateToken(Authentication authentication) {
+	public String generateToken(Authentication authentication) {
 		String email = null;
 		
-		if(authentication.getPrincipal().getClass() == UserDetails.class) {
+		if(authentication.getPrincipal().getClass() == PrincipalUser.class) {
 			// PrincipalUser
 			PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
 			email = principalUser.getEmail();
@@ -67,14 +67,12 @@ public class JwtTokenProvider {
 		
 		Date tokenExpiresDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));	// 현재시간 + 하루
 		
-		String accessToken = Jwts.builder()
+		return Jwts.builder()
 				.setSubject(authentication.getName())		// 토큰의 제목(email)
 				.claim("auth", authorities)					// auth
 				.setExpiration(tokenExpiresDate)			// 토큰 만료 시간
 				.signWith(key, SignatureAlgorithm.HS256)	// 토큰 암호화
 				.compact();
-		
-		return JwtRespDto.builder().grantType("Bearer").accessToken(accessToken).build();
 	}
 	
 	public String generateOAuth2RegisterToken(Authentication authentication) {

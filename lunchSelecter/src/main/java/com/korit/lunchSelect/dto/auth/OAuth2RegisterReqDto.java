@@ -13,6 +13,7 @@ public class OAuth2RegisterReqDto {
 	private String name;
 	private String password;
 	private String checkPassword;
+	private String phone;
 	private String provider;
 	
 	public User toEntity() {
@@ -20,6 +21,7 @@ public class OAuth2RegisterReqDto {
 				.email(email)
 				.name(name)
 				.password(new BCryptPasswordEncoder().encode(password))
+				.phone(phone)
 				.provider(provider)
 				.build();
 	}

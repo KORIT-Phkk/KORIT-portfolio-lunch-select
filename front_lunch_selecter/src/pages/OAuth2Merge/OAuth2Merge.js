@@ -4,21 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import axios from 'axios';
 import { useMutation } from 'react-query';
-const container = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 50px auto;
-
-    width: 600px;
-    height: 800px;
-`;
-
-const loginButton = css`
-    width: 80px;
-    height: 35px;
-`;
 
 const OAuth2Merge = () => {
     const providerMerge = useMutation(async (mergeData) => {

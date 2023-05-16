@@ -8,33 +8,40 @@ import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
 
 const AuthRouteReactQuery = ({ path, element }) => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
-    const authPath = ["/login", "/register", "/auth"]
+    const authPaths = ["/auth"]
 
     const authenticate = useQuery(["authenticate"], async async => {
-        const accessToken = localStorage.getItem("accessToken");
+        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/authenticate", {params: {accessToken}});
         return response;
+    }, {
+        onSuccess: (response) => {
+            if(response.status === 200) {
+                if(response.data) {
+                    setAuthState(true);
+                }
+            }
+        }
     })
 
-    useEffect(() => {
-        if(authenticate.isSuccess && authenticate.data.status === 200 && authenticate.data.data) {
-            setAuthState(true);
-        }
-    }, [authenticate.isSuccess, authenticate.data, setAuthState])
-
     if(authenticate.isLoading) {
-        return <div>로딩중...</div>
+        return <div>로딩중...</div>;
     }
 
-    if(!authState && path.startsWith(authPath)) {
-        return element;
+    if(authPaths.filter(authPath => path.startsWith(authPath)).length > 0) {
+        if(authState) {
+            return <Navigate to="/" />;
+        } else {
+            return element;
+        }
     }
 
-    if(authState && path.startsWith(authPath)) {
-        return <Navigate to="/" />;
+    if(!authState) {
+        return <Navigate to="/auth/login" />;
     }
 
     return element;
+
 };
 
 export default AuthRouteReactQuery;

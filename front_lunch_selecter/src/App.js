@@ -40,7 +40,7 @@ function App() {
         <Route path="/auth/emailauthenticationnumber" element={<AuthRouteReactQuery path="/auth/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/auth/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
-        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
+        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>

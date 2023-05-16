@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.korit.lunchSelect.dto.common.ErrorResponseDto;
-import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 
 @Component

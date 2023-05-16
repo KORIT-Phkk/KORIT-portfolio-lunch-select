@@ -4,7 +4,16 @@ import { useMutation } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 
 const OAuth2Register = () => {
-    const [ passwords, setPasswords] = useState({password: "", checkPassword: ""});
+    const [ phone, setPhone ] = useState({phone: ""})
+    
+    const [ searchParams, setSearchParams ] = useSearchParams();
+    
+    const registerToken = searchParams.get("registerToken");
+    const email = searchParams.get("email");
+    const name = searchParams.get("name");
+    const provider = searchParams.get("provider");
+    const [ registerUser, setRegisterUser ] = useState({email:email, password:"", checkPassword: "", name:name, phone:"", provider:provider})
+    
     
     const oauth2Register = useMutation(async (registerData) => {
         const option = {
@@ -28,36 +37,25 @@ const OAuth2Register = () => {
             }
         }
     });
-    
-    const [ searchParams, setSearchParams ] = useSearchParams();
+ 
 
-    const registerToken = searchParams.get("registerToken");
-    const email = searchParams.get("email");
-    const name = searchParams.get("name");
-    const provider = searchParams.get("provider");
-    
-
-    const passwordInputChangeHandle = (e) => {
+    const InputChangeHandle = (e) => {
         const { name, value } = e.target;
-        setPasswords({...passwords, [name]: value});
+        setRegisterUser({...registerUser, [name]: value});
     }
 
 
     const oauth2RegisterSubmitHandle = () => {
-        oauth2Register.mutate({
-            email,
-            name,
-            provider,
-            ...passwords
-        });
+        oauth2Register.mutate(registerUser);
     }
 
     return (
         <div>
             <input type="text" value={email} disabled={true}/>
             <input type="text" value={name} disabled={true}/>
-            <input type="password" name='password' placeholder='비밀번호' onChange={passwordInputChangeHandle} />
-            <input type="password" name='checkPassword' placeholder='비밀번호확인' onChange={passwordInputChangeHandle} />
+            <input type="password" name='password' placeholder='비밀번호' onChange={InputChangeHandle} />
+            <input type="password" name='checkPassword' placeholder='비밀번호확인' onChange={InputChangeHandle} />
+            <input type="text" name='phone' placeholder='연락처' onChange={InputChangeHandle}/>
             <button onClick={oauth2RegisterSubmitHandle}>가입하기</button>
         </div>
     );
