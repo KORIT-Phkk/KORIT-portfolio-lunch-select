@@ -30,8 +30,7 @@ const Login = () => {
         const accessToken = response.data.grantType + " " + response.data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
-        window.location.href = "http://www.naver.com"
-        // setRefresh(true);
+        setRefresh(true);
     }
     
     const loginEnterKeyup = (e) => {

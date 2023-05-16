@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as s from './style';
 import Category from './category/Category';
 import axios from 'axios';
+import { Button } from '@mui/base';
 
 const slotValue = ['짱깨', '맥도날드', '된장', '유부초밥', '우동(돈가스)', '김밥천국','삼정타워','닭가슴살','0004','9','88','7','6','2','3','5','dd','we','as','sdf','asdf','asdf','wer','werw','tyu','dfg','ert','q2we','dfg','fsgjl'];
 
@@ -35,11 +36,11 @@ const LunchSelect = () => {
     };
 
     const onClickInviteButton = () => {
-        const roomId = '123';
-        axios.get((API.INVITE as string) + roomId).then((res) => {
-          setIsInvited(true);
-          setInviteCode(`${process.env.REACT_APP_LAMBDA_INVITE}/${res.data}`);
-        });
+        // const roomId = '123';
+        // axios.get((API.INVITE as string) + roomId).then((res) => {
+        //   setIsInvited(true);
+        //   setInviteCode(`${process.env.REACT_APP_LAMBDA_INVITE}/${res.data}`);
+        // });
       };
 
     return (
