@@ -1,21 +1,20 @@
 import { Global } from '@emotion/react';
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import './App.css';
-import { Reset } from './style/Reset';
+import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import Main from './pages/main/Main';
+import './App.css';
+import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
+import LunchSelect from './pages/LunchSelect/LunchSelect';
+import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindPassword from './pages/findPassword/FindPassword';
-import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumber';
 import UpdatePassword from './pages/findPassword/UpdatePassword';
-import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
-import LunchSelect from './pages/LunchSelect/LunchSelect';
-import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
-import Simple from './Kakao/Simple';
-import MapTest from './Kakao/MapTest';
+import Login from './pages/login/Login';
+import Main from './pages/main/Main';
+import Register from './pages/register/Register';
+import { Reset } from './style/Reset';
+
 
 const mainContainer = css`
     position: relative;
@@ -25,16 +24,12 @@ const mainContainer = css`
     font-size: 1.6rem;
     width: 1400px;
     height: 3000px;
-    overflow: hidden;
 `;
 function App() {
-  // const [ markers ] = useGetMarkers2();
-  // console.log(markers)
 
   return (
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
-      {/* <MapTest/> */}
       <Routes>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
@@ -44,7 +39,7 @@ function App() {
         <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
-        <Route path="/choosemenu" element={<AuthRouteReactQuery path="/lunchselect" element={<ChooseMenu/>}/>}/>
+        <Route path="/choosemenu" element={<AuthRouteReactQuery path="/choosemenu" element={<ChooseMenu/>}/>}/>
       </Routes>
     </div>
   );
