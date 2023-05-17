@@ -58,3 +58,10 @@ export const login = css`
     justify-content: center;
     margin-top: 100px ;
 `;
+
+export const errorMsg = css`
+margin-left: 5px;
+margin-bottom: 20px;
+font-size: 12px;
+color: red;
+`;

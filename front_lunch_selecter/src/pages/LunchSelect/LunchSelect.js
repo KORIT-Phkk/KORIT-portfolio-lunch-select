@@ -70,7 +70,7 @@ const LunchSelect = () => {
             lng: geolocation.lng
           },
           headers: {
-            Authorization: localStorage.getItem("accessToken")
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
           }
         };
         const response = await axios.get("http://localhost:8080/lunch/select", option);
@@ -97,26 +97,27 @@ const LunchSelect = () => {
 
     const handleStop = () => {
         setIsSpinning(false);
-        // clearInterval(intervalRef.current);
-        // for(let i = 0; i < getMenu.data.data.length; i++) {
-        //     if(todayLunch === getMenu.data.data[i].name){
-        //         navigate(`/choosemenu?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
-        //     }
-        // }
-    };
-
-    const changeTest = () => {
-         for(let i = 0; i < getMenu.data.data.length; i++) {
+        clearInterval(intervalRef.current);
+        for(let i = 0; i < getMenu.data.data.length; i++) {
             if(todayLunch === getMenu.data.data[i].name){
-                navigate(`/choosemenu?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
+                navigate(`/lunchselect/result?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
             }
         }
-    }
+    };
+
+    // const changeTest = () => {
+    //      for(let i = 0; i < getMenu.data.data.length; i++) {
+    //         if(todayLunch === getMenu.data.data[i].name){
+    //             navigate(`/choosemenu?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
+    //         }
+    //     }
+    // }
     
     const handleSubmit = (event) => {
         event.preventDefault();
         
     };
+
 
 
     if(getMenu.isLoading){
@@ -126,12 +127,12 @@ const LunchSelect = () => {
 
 
     if(isSpinning) {
-        // intervalRef.current = setInterval(() => {
-        //     setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
-        // }, 500);
-        const randomIndex = Math.floor(Math.random() * slotValue.length);
-        setTodayLunch(slotValue[randomIndex]);
-        setIsSpinning(false)
+        intervalRef.current = setInterval(() => {
+            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
+        }, 500);
+        // const randomIndex = Math.floor(Math.random() * slotValue.length);
+        // setTodayLunch(slotValue[randomIndex]);
+        // setIsSpinning(false)
 
     }
   
@@ -158,7 +159,6 @@ const LunchSelect = () => {
                     ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
                     : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)}
 
-                    <button onClick={changeTest}>가게 제세히 보기</button>
                 </form>
             </main>
         </div>

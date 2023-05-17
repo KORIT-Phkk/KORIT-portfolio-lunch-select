@@ -9,12 +9,12 @@
 <!-- 		<result property="category" column="restaurant_category"/> -->
 <!-- 		<result property="lat" column="restaurant_latitude"/> -->
 <!-- 		<result property="lng" column="restaurant_longtitude"/> -->
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="address" column="address"/>
-		<result property="category" column="category"/>
-		<result property="lat" column="latitude"/>
-		<result property="lng" column="ongtitude"/>
+		<id property="id" column="restaurant_id"/>
+		<result property="name" column="restaurant_name"/>
+		<result property="address" column="restaurant_address"/>
+		<result property="category" column="restaurant_category"/>
+		<result property="lat" column="restaurant_lat"/>
+		<result property="lng" column="restaurant_lng"/>
 	</resultMap>
 	
 	<select id="findByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
@@ -27,9 +27,9 @@
 <!-- 		 	0.5 > distance  -->
 		SELECT 
 			*,
-			(6371*acos(cos(radians(#{lat}))*cos(radians(latitude))*cos(radians(longtitude)-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(latitude)))) AS distance
+			(6371*acos(cos(radians(#{lat}))*cos(radians(restaurant_lat))*cos(radians(restaurant_lng)-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(restaurant_lat)))) AS distance
 		FROM 
-			test_tb
+			restaurant_tb
 		HAVING 
 		 	0.5 > distance 
 	</select>

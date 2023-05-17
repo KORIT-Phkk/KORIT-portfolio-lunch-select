@@ -9,7 +9,8 @@ import axios from 'axios';
 const Register = () => {
     const navigate = useNavigate();
 
-    const [registerUser, setRegisterUser] = useState({email:"", password:"",name:"", phon:""})
+    const [ registerUser, setRegisterUser ] = useState({email:"", password:"", name:"", phone:""})
+    const [ errorMessages, setErrorMessages ] = useState({email: "", password: "", name: "", phone:""});
 
     const onChangeHandle = (e) => {
         const { name, value } = e.target;
@@ -25,10 +26,18 @@ const Register = () => {
                 "Content-Type": "application/json"
             }
         }
-        await axios.post("http://localhost:8080/auth/signup", JSON.stringify(data), option);
-            alert("회원가입 성공!");
-            navigate("/login");
+        try {
+            await axios.post("http://localhost:8080/auth/signup", JSON.stringify(data), option);
+                alert("회원가입 성공!");
+                navigate("/login");
+        } catch(error) {
+            setErrorMessages({email: "", password: "", name: "", phone:"", ...error.response.data.errorData});
+
+            console.log(errorMessages)
+        }
     }
+
+
 
     return (
         <div css={s.container}>
@@ -39,22 +48,25 @@ const Register = () => {
                 <div css={s.input}>
                     <label css={s.inpoutLabel}>email</label>
                     <AuthInput type="email" onChange={onChangeHandle} name="email">
-
                     </AuthInput>
+                    <div css={s.errorMsg}>{errorMessages.email}</div>
+
                     <label css={s.inpoutLabel}>password</label>
                     <AuthInput type="password" onChange={onChangeHandle} name="password">
-
                     </AuthInput>
+                    <div css={s.errorMsg}>{errorMessages.password}</div>
 
                     <label css={s.inpoutLabel}>name</label>
                     <AuthInput type="text" onChange={onChangeHandle} name="name">
 
                     </AuthInput>
+                    <div css={s.errorMsg}>{errorMessages.name}</div>
 
                     <label css={s.inpoutLabel}>phone</label>
                     <AuthInput type="tel" onChange={onChangeHandle} name="phone">
 
                     </AuthInput>
+                    <div css={s.errorMsg}>{errorMessages.phone}</div>
                     
 
                 </div>
