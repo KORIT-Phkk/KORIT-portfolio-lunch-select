@@ -3,6 +3,9 @@ import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { QueryClient, useQuery, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const userInfoGroup = (isOpen) => css`
     position: absolute;
@@ -59,11 +62,13 @@ const logout = css`
 `;
 
 const UserInfo = ({ isOpen }) => {
+    const [ authState, setAuthState ] = useRecoilState(authenticatedState);
+    const navigate = useNavigate();
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
 
     const info = useQuery(["accessToken"], async () => {
-        const accessToken = localStorage.getItem("accessToken")
+        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {params: {accessToken}})
        
         setName(response.data.name)
@@ -75,6 +80,8 @@ const UserInfo = ({ isOpen }) => {
     const logoutClickHandle = () => {
         if(window.confirm("로그아웃할꺼?")){
             localStorage.removeItem("accessToken");
+            setAuthState(false);
+            navigate("/auth/login");
         }
     }
 

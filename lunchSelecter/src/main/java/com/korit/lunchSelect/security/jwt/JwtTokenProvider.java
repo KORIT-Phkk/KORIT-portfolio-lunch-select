@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.security;
+package com.korit.lunchSelect.security.jwt;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -37,8 +38,23 @@ public class JwtTokenProvider {
 		key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
 	}
 	
-	public JwtRespDto generateToken(Authentication authentication) {
+	public String generateToken(Authentication authentication) {
+		String email = null;
 		
+		if(authentication.getPrincipal().getClass() == PrincipalUser.class) {
+			// PrincipalUser
+			PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+			email = principalUser.getEmail();
+			
+		}else {
+			// OAuth2User
+			OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+			email = oAuth2User.getAttribute("email");
+		}
+		
+		if(authentication.getAuthorities() == null) {
+			throw new RuntimeException("등록된 권한이 없습니다.");
+		}
 		
 		StringBuilder builder = new StringBuilder();
 		
@@ -51,14 +67,26 @@ public class JwtTokenProvider {
 		
 		Date tokenExpiresDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));	// 현재시간 + 하루
 		
-		String accessToken = Jwts.builder()
+		return Jwts.builder()
 				.setSubject(authentication.getName())		// 토큰의 제목(email)
 				.claim("auth", authorities)					// auth
 				.setExpiration(tokenExpiresDate)			// 토큰 만료 시간
 				.signWith(key, SignatureAlgorithm.HS256)	// 토큰 암호화
 				.compact();
+	}
+	
+	public String generateOAuth2RegisterToken(Authentication authentication) {
 		
-		return JwtRespDto.builder().grantType("Bearer").accessToken(accessToken).build();
+		Date tokenExpireDate = new Date(new Date().getTime() + (1000 * 60 * 10));
+		OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+		String email = oAuth2User.getAttribute("email");
+				
+		return Jwts.builder()
+				.setSubject("OAuth2Register")
+				.claim("email", email)
+				.setExpiration(tokenExpireDate)
+				.signWith(key, SignatureAlgorithm.HS256)
+				.compact();
 	}
 	
 	public boolean validateToken(String token) {

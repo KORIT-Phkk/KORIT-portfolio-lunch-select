@@ -9,9 +9,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.korit.lunchSelect.security.JwtAuthenticationEntryPoint;
-import com.korit.lunchSelect.security.JwtAuthenticationFilter;
-import com.korit.lunchSelect.security.JwtTokenProvider;
+import com.korit.lunchSelect.security.jwt.JwtAuthenticationEntryPoint;
+import com.korit.lunchSelect.security.jwt.JwtAuthenticationFilter;
+import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
+import com.korit.lunchSelect.security.oauth2.OAuth2SuccessHandler;
+import com.korit.lunchSelect.service.OAuthService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private final JwtTokenProvider jwtTokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	private final OAuthService oAuthService;
+	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -34,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.httpBasic().disable();
 		http.formLogin().disable();
-		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.authorizeRequests()
@@ -45,7 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
 			.exceptionHandling()
-			.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+			.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+			.and()
+            .oauth2Login()
+            .loginPage("http://localhost:3000/auth/login")
+            .successHandler(oAuth2SuccessHandler)
+            .userInfoEndpoint()
+            .userService(oAuthService);
 		
 	}
 }
