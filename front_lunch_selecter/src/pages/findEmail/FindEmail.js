@@ -11,6 +11,7 @@ const FindEmail = () => {
     const [ refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
 
+    console.log(refresh)
 
     const onChangeHandle = (e) => {
         const { name, value } = e.target
@@ -18,26 +19,26 @@ const FindEmail = () => {
     }
 
     const getEmail = useQuery(["getEmail"], async () => {
+        setRefresh(false); 
         const option = {
             params: {
                 name: findUser.name,
                 phone: findUser.phone
             }
         }
-
-        const response = await axios.get("http://localhost:8080/auth/findEmail", option)
-        return response
-
-        
+        try {
+            const response = await axios.get("http://localhost:8080/auth/findEmail", option);
+            return response;
+        } catch (error) {
+            alert("사용자 정보가 존재하지 않습니다.")
+            return error;
+        }
     }, {
         enabled: refresh,
-        onSuccess: () => {
-            setRefresh(false);
-            navigate("/auth/findemail/result")
-        },
-        onError: (error) => {
-            setRefresh(false);
-            alert("사용자 정보가 존재하지 않습니다.")
+        onSuccess: (response) => {
+            if(response.status === 200){
+                navigate("/auth/findemail/result")
+            }
         }
     })
 
