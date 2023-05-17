@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import * as s from './style';
 import LocalCategory from './LocalCategory/LocalCategory';
 import Category from './category/Category';
+import { Map } from 'react-kakao-maps-sdk';
+import { MapMarker } from 'react-kakao-maps-sdk';
 
 
 const selectLocation = (isOpen) => css`
@@ -42,6 +44,8 @@ const LunchSelect = () => {
     const [ slotValue, setSlotValue ] = useState([]) 
     const [todayLunch, setTodayLunch] = useState("");
     const [ address, setAddress ] = useState("");
+
+    const [ coord, setCoord ] = useState({lat: "", lng: ""})
 
     const getLocation = () => {
         let lat, lng;
@@ -81,8 +85,8 @@ const LunchSelect = () => {
     const getMenu = useQuery(["getMenu"], async () => {
         const option = {
           params: {
-            lat: geolocation.lat,
-            lng: geolocation.lng
+            lat: position.lat,
+            lng: position.lng
           },
           headers: {
             Authorization: localStorage.getItem("accessToken")
@@ -134,6 +138,11 @@ const LunchSelect = () => {
         setIsOpen(true);
     }
 
+    const asdf = () => {
+
+        
+    }
+
     if(getMenu.isLoading){
         return <div>불러오는 중....</div>
     }
@@ -144,29 +153,59 @@ const LunchSelect = () => {
         }, 300);
     }
 
+    const onClickMapHandle = (_t, mouseEvent) => {
+        setPosition({
+            lat: mouseEvent.latLng.getLat(),
+            lng: mouseEvent.latLng.getLng(),
+        })
+
+        setCoord({
+            lat: mouseEvent.latLng.getLat(),
+            lng: mouseEvent.latLng.getLng(),
+        })
+
+        console.log(coord)
+    }
+
 
 
     return (
         <div css={s.container}>
-            <button css={s.selectButton} onClick={selectLocationHendleClick}>위치 선택하기</button>
-            <div css={selectLocation(isOpen)}>
-                <LocalCategory 
-                />
-            </div>
-            <header css={s.header}>
+            <header>
+            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+            <Map
+                center={{
+                    lat: 37.404576,
+                    lng: 129.11474,
+                }}
+                style={{
+                    top: "10px",
+                    margin: "0px 30px 0px 30px",
+                    height: "1000px",
+                }}
+                level={2}
+                onClick={onClickMapHandle}
+                >
+                {position && <MapMarker position={position}/>}
+            </Map>
+            {position && <div>클릭한 위치의 좌표는 {position.lat}, {position.lng} 입니다.</div>}
+            </header>
+
+            <main>
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오</h1>
                 </div>
                 <Category />
-            </header>
-            <main css={s.mainContainer}>
+            </main>
+            
+            <footer css={s.mainContainer}>
                 <div css={s.selectMenu}>{todayLunch}</div>
                 <form onSubmit={handleSubmit}>
                     {isSpinning 
                     ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
                     : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)}
                 </form>
-            </main>
+            </footer>
         </div>
     );
 };

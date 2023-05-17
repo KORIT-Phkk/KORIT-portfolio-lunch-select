@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 export const categoryBox = css`
+    display: flex;
     width: 1000px;
     height: 200px;
     border: 1px solid #dbdbdb;
@@ -14,4 +15,7 @@ export const category = css`
 export const checkbox =css`
     width: 50px;
     height: 50px;
+`;
+export const imgStyle = css`
+    display: flex;
 `;
