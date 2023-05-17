@@ -2,7 +2,7 @@
 import React from 'react';
 import AuthInput from '../../components/auth/AuthInput';
 import * as s from './FindPasswordCss'
-import FindAuthInput from '../../components/auth/FindAuthInput';
+import SendInput from '../../components/Input/SendInput';
 
 const FindPassword = () => {
     return (
@@ -12,15 +12,11 @@ const FindPassword = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <FindAuthInput type="email" name="Email">
-
-                    </FindAuthInput>
+                    <SendInput type="email" name="Email" />
 
                     <div css={s.blank}></div>
 
-                    <AuthInput type="number" name="">
-
-                    </AuthInput>
+                    <AuthInput type="number" name="" />
                 </div>
             
             </main>

@@ -26,16 +26,19 @@ export const input = css`
     flex-direction: column;
     margin-left: 295px;
 `;
-export const link =css`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
-`;
-export const login =css`
+export const checkButton = css`
+    width: 850px;
+    height: 80px;
     margin-left: 295px;
-    font-size: 50px;
-`;
-export const findPassword =css`
-    margin-right: 227px;
-    font-size: 50px;
+    margin-top: 500px;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    font-size: 40px;
+    cursor: pointer;
+    &:hover {
+        background-color: #fafafa;
+    }
+    &:active {
+        background-color: #dbdbdb;
+    }
 `;
