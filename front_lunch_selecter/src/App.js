@@ -46,6 +46,7 @@ function App() {
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+        <Route path="/choosemenu" element={<AuthRouteReactQuery path="/choosemenu" element={<ChooseMenu/>}/>}/>
         {/* <Route path="/auth/oauth2/merge" element={<OAuth2Merge/>}/> */}
         <Route path="/*" element={<NotFound />}/>
       </Routes>

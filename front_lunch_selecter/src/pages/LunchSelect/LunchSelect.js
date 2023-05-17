@@ -85,15 +85,14 @@ const LunchSelect = () => {
     const getMenu = useQuery(["getMenu"], async () => {
         const option = {
           params: {
-            lat: position.lat,
-            lng: position.lng
+            lat: geolocation.lat,
+            lng: geolocation.lng
           },
           headers: {
-            Authorization: localStorage.getItem("accessToken")
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
           }
         };
         const response = await axios.get("http://localhost:8080/lunch/select", option);
-        console.log(response.data)
         const names = response.data.map(store => store.name);
         setSlotValue(names);
         return response;

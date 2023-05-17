@@ -80,7 +80,7 @@ const Login = () => {
                 </div>
             </main>
             <footer css={s.footerContainer}>
-                <div css={s.register}><Link to="/register">회원가입</Link></div>
+                <div css={s.register}><Link to="/auth/register">회원가입</Link></div>
                 <button onClick={loginHandleSubmit} css={s.logButton}>로그인</button>
             </footer>
 
