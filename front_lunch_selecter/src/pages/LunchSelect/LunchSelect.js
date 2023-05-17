@@ -7,11 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import * as s from './style';
 
 import Category from './category/Category';
+import Invite from './GroupLunchSelect/Invite';
 
 
 const selectLocation = (isOpen) => css`
     display: ${isOpen ? "flex" : "none"};
 `;
+
 
 const LunchSelect = () => {
     const navigate = useNavigate();
@@ -141,7 +143,9 @@ const LunchSelect = () => {
             </div>
             <header css={s.header}>
                 <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오</h1>
+                    <h1 css={s.category}>카테고리를 선택하시오
+                        <Invite />
+                    </h1>
                 </div>
                 <Category />
             </header>

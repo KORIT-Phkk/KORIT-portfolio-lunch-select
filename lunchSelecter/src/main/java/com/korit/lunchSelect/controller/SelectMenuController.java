@@ -23,4 +23,9 @@ public class SelectMenuController {
 		
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}
+	
+	public ResponseEntity<?> groupLunchSelect(){
+		
+		return ResponseEntity.ok(null);
+	}
 }
