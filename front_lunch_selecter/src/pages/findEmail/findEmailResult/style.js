@@ -24,36 +24,17 @@ export const input = css`
     justify-content: center;
     flex-direction: column;
     margin-left: 295px;
+    margin-bottom: 70px;
 `;
-
-export const blank = css`
-    margin-top: 70px;
-
-`;
-// export const inpoutLabel = css`
-//     padding-top: 100px;
-//     padding-bottom: 10px;
-// `;
-
 
 export const footerContainer =css`
    display: flex;
    justify-content: center;
    flex-direction: column;
 `;
-export const checkButton = css`
-    width: 850px;
-    height: 80px;
-    margin-left: 295px;
-    margin-top: 500px;
-    border: 1px solid #dbdbdb;
-    background-color: white;
-    font-size: 40px;
-    cursor: pointer;
-    &:hover {
-        background-color: #fafafa;
-    }
-    &:active {
-        background-color: #dbdbdb;
-    }
+
+export const login = css`
+    display: flex;
+    justify-content: center;
+    margin-top: 100px ;
 `;

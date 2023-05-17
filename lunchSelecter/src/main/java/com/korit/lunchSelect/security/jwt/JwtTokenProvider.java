@@ -99,7 +99,7 @@ public class JwtTokenProvider {
 			return true;
 			
 		} catch (SecurityException | MalformedJwtException e) {
-			log.info("Invaild JWT Token", e);
+//			log.info("Invaild JWT Token", e);
 		} catch (ExpiredJwtException e) {
 			log.info("Expired JWT Token", e);
 		} catch (UnsupportedJwtException e) {

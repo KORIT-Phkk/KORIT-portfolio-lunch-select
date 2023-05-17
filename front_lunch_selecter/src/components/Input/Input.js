@@ -11,13 +11,10 @@ const input = css`
     font-size: 40px;
     border-bottom: 1px solid BLACK;
 `;
-// const icon = css`
 
-// `;
-const Input = ({ type, placeholder, onChange, name, children }) => {
+const Input = ({ type, placeholder, onChange, name}) => {
     return (
         <div>
-            {/* <div css={icon}>{children}</div> */}
              <input css={input} 
             type={type} 
             placeholder={placeholder} 
