@@ -18,6 +18,7 @@ import { Reset } from './style/Reset';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Main from './pages/main/Main';
+import Location from './Kakao/Location';
 
 
 const mainContainer = css`
@@ -33,7 +34,8 @@ function App() {
 
   return (
     <div css={mainContainer}>
-      <Global styles={Reset}></Global>
+      <Location/>
+      {/* <Global styles={Reset}></Global>
       <Routes>
         <Route path="/auth/login" element={<AuthRouteReactQuery path="/auth/login" element={<Login/>}/>}/>
         <Route path="/auth/register" element={<AuthRouteReactQuery path="/auth/register" element={<Register/>}/>}/>
@@ -47,9 +49,8 @@ function App() {
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
         <Route path="/choosemenu" element={<AuthRouteReactQuery path="/choosemenu" element={<ChooseMenu/>}/>}/>
-        {/* <Route path="/auth/oauth2/merge" element={<OAuth2Merge/>}/> */}
         <Route path="/*" element={<NotFound />}/>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

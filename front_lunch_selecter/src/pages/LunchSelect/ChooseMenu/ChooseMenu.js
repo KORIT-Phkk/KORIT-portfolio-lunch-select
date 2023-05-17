@@ -4,8 +4,30 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { QueryClient, useQuery } from 'react-query';
+import { css } from '@emotion/react';
 
+const headerStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    margin-top: 100px;
+    margin-bottom: 30px;
+`;
 
+const mainStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+`;
+
+const footerStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 const ChooseMenu = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -90,6 +112,11 @@ const ChooseMenu = () => {
     if(getRestaurantData.data)
     return (
         <>
+        <header css={headerStyle}>
+            <h1>{restaurantName}</h1>
+        </header>
+
+        <main css={mainStyle}>
             <Map
                 center={{
                     lat: restaurantLocation_y,
@@ -142,12 +169,13 @@ const ChooseMenu = () => {
                             )}
                         </MapMarker>
                     ))}
-             <div>{restaurantName}</div>
             </Map>
-             <div >
-                <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
-                 <Link><button >음식점 자세히 보기</button></Link>
-             </div>
+        </main>
+
+        <footer css={footerStyle}>
+            <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
+            <Link><button >음식점 자세히 보기</button></Link>
+        </footer>
         </>
     );
 };
