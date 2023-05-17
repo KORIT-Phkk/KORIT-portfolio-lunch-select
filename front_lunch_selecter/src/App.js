@@ -13,6 +13,10 @@ import EmailAuthenticationNumber from './pages/findEmail/EmailAuthenticationNumb
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+import NotFound from './pages/NotFound/NotFound';
+import OAuth2Login from './pages/login/OAuth2Login';
+import OAuth2Register from './pages/register/OAuth2Register';
+import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 
 
 const mainContainer = css`
@@ -30,14 +34,19 @@ function App() {
     <div css={mainContainer}>
       <Global styles={Reset}></Global>
       <Routes>
+        <Route path="/auth/login" element={<AuthRouteReactQuery path="/auth/login" element={<Login/>}/>}/>
+        <Route path="/auth/register" element={<AuthRouteReactQuery path="/auth/register" element={<Register/>}/>}/>
+        <Route path="/auth/findemail" element={<AuthRouteReactQuery path="/auth/findemail" element={<FindEmail/>}/>}/>
+        <Route path="/auth/emailauthenticationnumber" element={<AuthRouteReactQuery path="/auth/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
+        <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/auth/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
+        <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
+        <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
+        <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
-        <Route path="/login" element={<AuthRouteReactQuery path="/login" element={<Login/>}/>}/>
-        <Route path="/register" element={<AuthRouteReactQuery path="/register" element={<Register/>}/>}/>
-        <Route path="/findemail" element={<AuthRouteReactQuery path="/findemail" element={<FindEmail/>}/>}/>
-        <Route path="/emailauthenticationnumber" element={<AuthRouteReactQuery path="/emailauthenticationnumber" element={<EmailAuthenticationNumber/>}/>}/>
-        <Route path="/findpassword" element={<AuthRouteReactQuery path="/findpassword" element={<FindPassword/>}/>}/>
-        <Route path="/updatepassword" element={<AuthRouteReactQuery path="/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+        {/* <Route path="/auth/oauth2/merge" element={<OAuth2Merge/>}/> */}
+        <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>
   );

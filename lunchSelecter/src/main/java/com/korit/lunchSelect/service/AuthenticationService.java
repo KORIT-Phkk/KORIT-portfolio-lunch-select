@@ -16,10 +16,9 @@ import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.UserRepository;
-import com.korit.lunchSelect.security.JwtTokenProvider;
-import com.korit.lunchSelect.security.PrincipalUser;
+import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
+import com.korit.lunchSelect.security.jwt.PrincipalUser;
 
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -41,15 +40,13 @@ public class AuthenticationService implements UserDetailsService {
 		
 		userRepository.saveUser(userEntity);
 		
-		System.out.println(userEntity);
-		
 		userRepository.saveAuthority(Authority.builder()
 				.userId(userEntity.getUserId())
 				.roleId(2)
 				.build());
 	}
 	
-	public JwtRespDto signin(LoginReqDto loginReqDto) {
+	public String signin(LoginReqDto loginReqDto) {
 		UsernamePasswordAuthenticationToken authenticationToken =
 				new UsernamePasswordAuthenticationToken(loginReqDto.getEmail(), loginReqDto.getPassword());
 		
@@ -59,11 +56,8 @@ public class AuthenticationService implements UserDetailsService {
 	}
 	
 	public PrincipalUser getUserInfo(String accessToken) {
-		String email = jwtTokenProvider.getClaims(jwtTokenProvider.getToken(accessToken)).getSubject(); //이메일 가져오는거
+		String email = jwtTokenProvider.getClaims(jwtTokenProvider.getToken(accessToken)).getSubject();
 		User userEntity = userRepository.findUserByEmail(email); 
-		System.out.println(userEntity.toPrincipal().getName());
-//		String name = userEntity.getName(); //이름가져오는거
-//		System.out.println(name);
 		return userEntity.toPrincipal();
 				
 	}

@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.security;
+package com.korit.lunchSelect.security.jwt;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.korit.lunchSelect.dto.common.ErrorResponseDto;
-import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 
 @Component
