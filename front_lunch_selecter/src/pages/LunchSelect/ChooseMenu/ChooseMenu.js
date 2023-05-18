@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { css } from '@emotion/react';
 
 const headerStyle = css`

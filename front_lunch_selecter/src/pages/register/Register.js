@@ -44,23 +44,23 @@ const Register = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.inpoutLabel}>email</label>
+                    <label css={s.inputLabel}>email</label>
                     <AuthInput type="email" onChange={onChangeHandle} name="email">
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.email}</div>
 
-                    <label css={s.inpoutLabel}>password</label>
+                    <label css={s.inputLabel}>password</label>
                     <AuthInput type="password" onChange={onChangeHandle} name="password">
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.password}</div>
 
-                    <label css={s.inpoutLabel}>name</label>
+                    <label css={s.inputLabel}>name</label>
                     <AuthInput type="text" onChange={onChangeHandle} name="name">
 
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.name}</div>
 
-                    <label css={s.inpoutLabel}>phone</label>
+                    <label css={s.inputLabel}>phone</label>
                     <AuthInput type="tel" onChange={onChangeHandle} name="phone">
 
                     </AuthInput>
@@ -69,7 +69,7 @@ const Register = () => {
 
                 </div>
             </main>
-                <div css={s.login}><Link to="/login">로그인</Link></div>
+                <div css={s.login}><Link to="/auth/login">로그인</Link></div>
             <footer css={s.footerContainer}>
                 <button css={s.registerButton} onClick={registeSubmit}>회원가입</button>
             </footer>

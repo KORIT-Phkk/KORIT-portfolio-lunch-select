@@ -26,16 +26,16 @@ export const sendButton = css`
         background-color: #dbdbdb;
     }
 `;
-const Input = ({ type, onChange, name }) => {
+const SendInput = ({ type, onChange, name, onClick}) => {
     return (
         <div>
              <input css={input} 
             type={type} 
             onChange={onChange}
             name={name}/>
-            <Button css={sendButton}>전송</Button>
+            <Button css={sendButton} onClick={onClick}>전송</Button>
         </div>
     );
 };
 
-export default Input;
+export default SendInput;

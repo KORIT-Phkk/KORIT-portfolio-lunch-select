@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import AuthInput from '../../components/auth/AuthInput';
 import { Link, useNavigate } from 'react-router-dom';
-
 import * as s from './style'
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
@@ -70,12 +69,12 @@ const Login = () => {
                     <AuthInput type="email" onChange={handleChange} name="email" >
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.email}</div>
-                    <div><Link to="/findemail">아이디 찾기</Link></div>
+                    <div><Link to="/auth/findemail">아이디 찾기</Link></div>
 
                     <label css={s.inpoutLabel}>password</label>
                     <AuthInput type="password" onChange={handleChange} name="password" >
                     </AuthInput>
-                    <div><Link to="/findpassword">비밀번호 찾기</Link></div>
+                    <div><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
                     
                 </div>
             </main>
