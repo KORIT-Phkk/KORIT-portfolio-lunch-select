@@ -2,18 +2,41 @@
 import React, { useRef, useState } from 'react';
 import * as s from './style'
 import { IoMdContact } from 'react-icons/io';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Main = () => {
     const [ isOpen, setIsOpen ] = useState(false);
-    
+
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
-    
+
+    const lunchSelectRoom = useMutation(async () => {
+        try {
+            const option = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                }
+            };
+            const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
+            window.location.href = response.data;
+            return response;
+        } catch(error) {
+            alert("관리자에게 문의하세요.");
+            return error;
+        }
+    });
+
+    if(lunchSelectRoom.isLoading){
+        return <div>불러오는중</div>
+    }
+  
+    const lunchSelectClickHandle = () => {
+        lunchSelectRoom.mutate();
+    }
 
     return (
         <div css={s.container}>
@@ -27,7 +50,7 @@ const Main = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
-                    <Link css={s.lunchButton} to='/lunchselect'>점심</Link>
+                    <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>

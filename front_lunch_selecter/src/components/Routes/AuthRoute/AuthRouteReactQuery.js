@@ -12,7 +12,8 @@ const AuthRouteReactQuery = ({ path, element }) => {
 
     const authenticate = useQuery(["authenticate"], async ()=> {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/authenticate", {params: {accessToken}});
+        const response = await axios.get("http://localhost:8080/auth/authenticate", 
+        {headers: {Authorization: accessToken}});
         return response;
     }, {
         onSuccess: (response) => {

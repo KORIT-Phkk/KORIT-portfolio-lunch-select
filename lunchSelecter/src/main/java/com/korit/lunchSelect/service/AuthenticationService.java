@@ -16,8 +16,8 @@ import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.UserRepository;
+import com.korit.lunchSelect.security.PrincipalUser;
 import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
-import com.korit.lunchSelect.security.jwt.PrincipalUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -56,7 +56,7 @@ public class AuthenticationService implements UserDetailsService {
 	}
 	
 	public PrincipalUser getUserInfo(String accessToken) {
-		String email = jwtTokenProvider.getClaims(jwtTokenProvider.getToken(accessToken)).getSubject();
+		String email = jwtTokenProvider.getClaims(jwtTokenProvider.getToken(accessToken)).get("email").toString();
 		User userEntity = userRepository.findUserByEmail(email); 
 		return userEntity.toPrincipal();
 				

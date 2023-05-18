@@ -8,7 +8,6 @@ import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const userInfoGroup = (isOpen) => css`
-
     position: absolute;
     top: 100px;
     right: 30px;
@@ -26,6 +25,7 @@ const headerContainer = css`
     height: 200px;
     border-bottom: 1px solid #dbdbdb;
 `;
+
 const userName = css`
     display: flex;
     justify-content: center;
@@ -69,10 +69,15 @@ const UserInfo = ({ isOpen }) => {
 
     const info = useQuery(["accessToken"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {params: {accessToken}})
-       
+        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+            headers: {
+                Authorization: accessToken
+            }
+        });
+        
         setName(response.data.name)
         setEmail(response.data.email)
+        console.log(response)
         return response;
     });
 
