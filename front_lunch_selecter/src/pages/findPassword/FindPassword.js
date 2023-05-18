@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import AuthInput from '../../components/auth/AuthInput';
-import * as s from './FindPasswordCss'
-import SendInput from '../../components/Input/SendInput';
+import * as s from './style'
+import { useState } from 'react';
 
 const FindPassword = () => {
+    const [ email, setEmail ] = useState("");
+
+    const onChangeHandle = (e) => {
+        setEmail(e.target.value);
+    }
     return (
         <div css={s.container}>
             <header css={s.header}>
@@ -12,11 +16,8 @@ const FindPassword = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <SendInput type="email" name="Email" />
-
-                    <div css={s.blank}></div>
-
-                    <AuthInput type="number" name="" />
+                    <label css={s.inputLabel}>email</label>
+                    <AuthInput type="email" onChange={onChangeHandle} name="email" />
                 </div>
             
             </main>

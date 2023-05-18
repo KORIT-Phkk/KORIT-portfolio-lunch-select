@@ -26,9 +26,10 @@ export const input = css`
     margin-left: 295px;
 `;
 
-export const blank = css`
-    margin-top: 70px;
-
+export const inputLabel = css`
+    padding-top: 100px;
+    padding-bottom: 10px;
+    color: rgb(221,164,79);
 `;
 
 
