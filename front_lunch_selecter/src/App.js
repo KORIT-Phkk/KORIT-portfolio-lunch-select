@@ -19,7 +19,6 @@ import Main from './pages/main/Main';
 import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
-import SelectLunch from './pages/LunchSelect/SelectLunch';
 
 
 const mainContainer = css`
@@ -47,9 +46,10 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
-        <Route path="/lunchselect/select" element={<AuthRouteReactQuery path="/lunchselect/select" element={<SelectLunch/>}/>}/>
         <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu/>}/>}/>
+
+        <Route path="/lunchselect/room/:roomURL" element={<AuthRouteReactQuery path="/lunchselect/room" element={<LunchSelect/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>

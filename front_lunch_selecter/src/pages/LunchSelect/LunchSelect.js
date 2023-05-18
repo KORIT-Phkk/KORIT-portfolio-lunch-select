@@ -1,14 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as s from './style';
+import Location from '../../components/SelectPage/Location/Location'
+import Category from '../../components/SelectPage/Category/Category';
 
 
 
 const LunchSelect = () => {
+    const { roomURL } = useParams();
+    console.log(roomURL);
     const navigate = useNavigate();
 
     const [ position, setPosition ] = useState({
@@ -61,45 +64,45 @@ const LunchSelect = () => {
         }
     }
     
-    const getMenu = useQuery(["getMenu"], async () => {
-        const option = {
-          params: {
-            lat: position.lat,
-            lng: position.lng
-          },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-          }
-        };
-        const response = await axios.get("http://localhost:8080/lunch/select", option);
-        const names = response.data.map(store => store.name);
-        console.log("현재위치: " + geolocation.lat, geolocation.lng)
-        setSlotValue(names);
-        console.log("names: " + names)
-        return response;
-      }, {
-        enabled: startButtonClickState && !locationIsLoading,
-        onSuccess: () => {
-            setStartButtonClickState(false);
-            setLocationIsLoading(true);
-            setIsSpinning(true);
-        }
-      });
+    // const getMenu = useQuery(["getMenu"], async () => {
+    //     const option = {
+    //       params: {
+    //         lat: position.lat,
+    //         lng: position.lng
+    //       },
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    //       }
+    //     };
+    //     const response = await axios.get("http://localhost:8080/lunch/select", option);
+    //     const names = response.data.map(store => store.name);
+    //     console.log("현재위치: " + geolocation.lat, geolocation.lng)
+    //     setSlotValue(names);
+    //     console.log("names: " + names)
+    //     return response;
+    //   }, {
+    //     enabled: startButtonClickState && !locationIsLoading,
+    //     onSuccess: () => {
+    //         setStartButtonClickState(false);
+    //         setLocationIsLoading(true);
+    //         setIsSpinning(true);
+    //     }
+    //   });
       
 
     const handleStart = () => {
         setStartButtonClickState(true);
     };
 
-    const handleStop = () => {
-        setIsSpinning(false);
-        clearInterval(intervalRef.current);
-        for(let i = 0; i < getMenu.data.data.length; i++) {
-            if(todayLunch === getMenu.data.data[i].name){
-                navigate(`/lunchselect/result?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
-            }
-        }
-    };
+    // const handleStop = () => {
+    //     setIsSpinning(false);
+    //     clearInterval(intervalRef.current);
+    //     for(let i = 0; i < getMenu.data.data.length; i++) {
+    //         if(todayLunch === getMenu.data.data[i].name){
+    //             navigate(`/lunchselect/result?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
+    //         }
+    //     }
+    // };
 
     
     const handleSubmit = (event) => {
@@ -108,9 +111,9 @@ const LunchSelect = () => {
     };
 
 
-    if(getMenu.isLoading){
-        return <div>불러오는 중....</div>
-    }
+    // if(getMenu.isLoading){
+    //     return <div>불러오는 중....</div>
+    // }
 
 
     if(isSpinning) {
@@ -130,39 +133,25 @@ const LunchSelect = () => {
         <div css={s.container}>
             <header>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
-            <Map
-                center={{
-                    lat: geolocation.lat,
-                    lng: geolocation.lng
-                }}
-                style={{
-                    top: "10px",
-                    margin: "0px 30px 0px 30px",
-                    height: "1000px",
-                }}
-                level={2}
-                onClick={onClickMapHandle}
-                >
-                {position && <MapMarker position={position}/>}
-            </Map>
+           <Location />
             {position && <div>클릭한 위치의 좌표는 {position.lat}, {position.lng} 입니다.</div>}
             </header>
 
             <main>
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오
-             
+                        <Category />
                     </h1>
                 </div>
-
             </main>
             
             <footer css={s.mainContainer}>
-                <div css={s.selectMenu}>{todayLunch}</div>
+                <div css={s.selectMenu}></div>
                 <form onSubmit={handleSubmit}>
-                    {isSpinning 
+                    <button>룰렛 돌리러 가기</button>
+                    {/* {isSpinning 
                     ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
-                    : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)}
+                    : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)} */}
 
                 </form>
             </footer>

@@ -15,7 +15,7 @@ spring:
               - email
               - profile
           kakao:
-            client-id:  907038
+            client-id:  498caf520d8165a09116280aca1afc08
             client-secret: 215726fb5b81e6f4b5a0082c10f26b13
             redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code

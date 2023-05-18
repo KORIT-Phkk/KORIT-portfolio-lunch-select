@@ -6,7 +6,7 @@ const Category = () => {
 
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
-    const getCategory =useQuery(["getCategory"], async () => {
+    const getCategory = useQuery(["getCategory"], async () => {
         const option = {
             headers : {
                 Authorization : `Bearer ${localStorage.getItem("accessToken")}`
@@ -27,7 +27,8 @@ const Category = () => {
 
     return (
         <div>
-            <div>  {getCategory.data !== undefined ? getCategory.data.data.map(category => (<div key={category.categoryId}>
+            <div>  
+                {getCategory.data !== undefined ? getCategory.data.data.map(category => (<div key={category.categoryId}>
                                         <input type="checkbox"  id={"ct-" + category.categoryId} value={category.categoryId}/>
                                         <label htmlFor={"ct-" + category.categoryId}>{category.categoryName}</label>
                                     </div>))

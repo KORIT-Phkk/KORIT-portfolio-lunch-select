@@ -1,20 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
-import AuthInput from '../../components/auth/AuthInput';
-import { Link, useNavigate } from 'react-router-dom';
-import * as s from './style'
 import axios from 'axios';
+import React, { useState } from 'react';
+import { BsGoogle } from 'react-icons/bs';
+import { SiKakao, SiNaver } from 'react-icons/si';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
-import { BsGoogle } from 'react-icons/bs';
-import { SiNaver } from 'react-icons/si';
-import { SiKakao } from 'react-icons/si';
+import AuthInput from '../../components/auth/AuthInput';
+import * as s from './style';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
     const [ errorMessages, setErrorMessages ] = useState({email: "", password: ""});
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
-    const navigete = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
