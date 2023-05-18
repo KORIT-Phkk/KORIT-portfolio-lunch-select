@@ -36,7 +36,7 @@ const Location = () => {
         }
     }, [])
 
-    const getMenu = useQuery(async () => {
+    const getMenu = useQuery(["getMenu"],async () => {
         const option = {
             params: {
                 lat: markerPosition.lat,
@@ -48,6 +48,9 @@ const Location = () => {
         };
         const response = await axios.get("http://localhost:8080/lunch/select", option);
         const names = response.data.map(store => store.name);
+
+        console.log(response)
+        return response;
 
     })
 

@@ -31,7 +31,8 @@ const Category = () => {
                                         <input type="checkbox"  id={"ct-" + category.categoryId} value={category.categoryId}/>
                                         <label htmlFor={"ct-" + category.categoryId}>{category.categoryName}</label>
                                     </div>))
-                                : ""}</div>
+                                : ""}
+            </div>
         </div>
     );
 };
