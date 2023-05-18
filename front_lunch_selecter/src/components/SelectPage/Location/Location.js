@@ -36,20 +36,20 @@ const Location = () => {
         }
     }, [])
 
-    const getMenu = useQuery(async () => {
-        const option = {
-            params: {
-                lat: markerPosition.lat,
-                lng: markerPosition.lng
-            },
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-            }
-        };
-        const response = await axios.get("http://localhost:8080/lunch/select", option);
-        const names = response.data.map(store => store.name);
+    // const getMenu = useQuery(async () => {
+    //     const option = {
+    //         params: {
+    //             lat: markerPosition.lat,
+    //             lng: markerPosition.lng
+    //         },
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    //         }
+    //     };
+    //     const response = await axios.get("http://localhost:8080/lunch/select", option);
+    //     const names = response.data.map(store => store.name);
 
-    })
+    // })
 
     const markerHandle = (_t, e) => {
         const clickedPosition = {
@@ -71,7 +71,10 @@ const Location = () => {
                 }}
                 onClick={markerHandle}
             >
-                {<MapMarker position={markerPosition}/>}
+                {<MapMarker
+                    position={markerPosition}
+                />}
+                <div>클릭한 위치 좌표: {markerPosition.lat}, {markerPosition.lng}</div>
             </Map>
         </>
     );

@@ -6,15 +6,15 @@ import * as s from './style'
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
-import { BsGoogle } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { SiNaver } from 'react-icons/si';
-import { SiKakao } from 'react-icons/si';
+import { RiKakaoTalkFill } from 'react-icons/ri';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
     const [ errorMessages, setErrorMessages ] = useState({email: "", password: ""});
     const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
-    const navigete = useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,11 +57,15 @@ const Login = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/kakao"
     }
 
+    const registerHandleClick = () => {
+        navigate("/auth/register");
+    }
+
 
     return (
         <div css={s.container} onKeyUp={loginEnterKeyup}>
-            <header css={s.header}>
-                <img css={s.logo} src="main/003.png" alt=""></img>
+            <header css={s.headerContainer}>
+                <img src="../main/logo1.png"/>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>
@@ -74,20 +78,38 @@ const Login = () => {
                     <label css={s.inpoutLabel}>password</label>
                     <AuthInput type="password" onChange={handleChange} name="password" >
                     </AuthInput>
-                    <div><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
+                    <div css={s.passwordBox}><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
                     
                 </div>
             </main>
             <footer css={s.footerContainer}>
-                <div css={s.register}><Link to="/auth/register">회원가입</Link></div>
-                <button onClick={loginHandleSubmit} css={s.logButton}>로그인</button>
+                <button onClick={loginHandleSubmit} css={s.loginButton}>로그인</button>
+                <button css={s.googleLoginButton} onClick={googleAuthHandleClick}>
+                    <div css={s.iconStyle}>
+                        <FcGoogle/>
+                    </div>
+                    <div css={s.buttonLabel}>
+                        Google 로그인
+                    </div>
+                </button>
+                <button css={s.naverLoginButton} onClick={naverAuthHandleClick}>
+                    <div css={s.iconStyle}>
+                        <SiNaver/>
+                    </div>
+                    <div css={s.buttonLabel}>
+                        Naver 로그인
+                    </div>
+                </button>
+                <button css={s.kakaoLoginButton} onClick={kakaoAuthHandleClick}>
+                    <div css={s.iconStyle}>
+                        <RiKakaoTalkFill/>
+                    </div>
+                    <div css={s.buttonLabel}>
+                        Kakao 로그인
+                    </div>
+                </button>
+                <button css={s.registerButton} onClick={registerHandleClick}>회원가입</button>
             </footer>
-
-            <div css={s.oauth2Container}>
-                <div css={s.oauth2("google")} onClick={googleAuthHandleClick}><BsGoogle /></div>
-                <div css={s.oauth2("naver")} onClick={naverAuthHandleClick}><SiNaver /></div>
-                <div css={s.oauth2("kakao")} onClick={kakaoAuthHandleClick}><SiKakao /></div>
-            </div>
         </div>
     );
 };

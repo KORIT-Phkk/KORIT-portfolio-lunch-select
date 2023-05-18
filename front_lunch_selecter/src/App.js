@@ -25,11 +25,12 @@ import SelectLunch from './pages/LunchSelect/SelectLunch';
 const mainContainer = css`
     position: relative;
     margin: 10px auto;
-    border: 3px solid BLACK;
+    border: 3px solid #dbdbdb;
+    border-radius: 20px;
     padding: 10px;
     font-size: 1.6rem;
     width: 1400px;
-    height: 3000px;
+    height: 2700px;
 `;
 function App() {
 
