@@ -2,8 +2,11 @@ import { Global } from '@emotion/react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
+import './App.css';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 import FindEmail from './pages/findEmail/FindEmail';
@@ -15,8 +18,8 @@ import OAuth2Login from './pages/login/OAuth2Login';
 import Main from './pages/main/Main';
 import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
-import { Reset } from './style/Reset'
-import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
+import { Reset } from './style/Reset';
+
 
 const mainContainer = css`
     position: relative;
@@ -43,7 +46,9 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
-        <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/>
+        {/* <Route path="/lunchselect" element={<AuthRouteReactQuery path="/lunchselect" element={<LunchSelect/>}/>}/> */}
+        <Route path="/lunchselect/select" element={<AuthRouteReactQuery path="/lunchselect/select" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>

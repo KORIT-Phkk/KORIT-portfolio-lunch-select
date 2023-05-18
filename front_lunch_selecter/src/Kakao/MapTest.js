@@ -1,50 +1,71 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-function MapTest() {
+const MapTest = () => {
+
+  const [ info, setInfo ] = useState();
   const [markers, setMarkers] = useState([])
+  const [map, setMap] = useState()
+  const {kakao} = window;
 
   useEffect(() => {
-    const map = new window.kakao.maps.Map(document.getElementById('map'), {
-      center: new window.kakao.maps.LatLng(35.1536, 129.0595),
-      level: 3,
-    })
+    if (!map) return
+    const ps = new kakao.maps.services.Places()
 
-    const ps = new window.kakao.maps.services.Places()
+    ps.categorySearch("FD6", (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        const bounds = new kakao.maps.LatLngBounds()
+        let markers = []
 
-    ps.categorySearch(
-      'FD6', // 카테고리 코드 'FD6'은 음식점입니다
-      (data, status, _pagination) => {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const bounds = new window.kakao.maps.LatLngBounds();
-
-          // 기존 마커 객체를 가져와서 위치만 업데이트합니다
-          data.forEach((place) => {
-            const marker = markers.find(
-              (m) => m.content === place.place_name
-            )
-            if (marker) {
-              marker.setPosition(new window.kakao.maps.LatLng(35.1536, 129.0595))
-            } else {
-              const newMarker = new window.kakao.maps.Marker({
-                map: map,
-                position: new window.kakao.maps.LatLng(35.1536, 129.0595),
-              })
-              // 새로운 마커 객체를 추가합니다
-              setMarkers((markers) => [
-                ...markers,
-                { marker: newMarker, content: place.place_name },
-              ])
-            }
-            bounds.extend(new window.kakao.maps.LatLng(35.1536, 129.0595))
+        for (var i = 0; i < data.length; i++) {
+          // @ts-ignore
+          markers.push({
+            position: {
+              lat: data[i].y,
+              lng: data[i].x,
+            },
+            content: data[i].place_name,
           })
-
-          map.setBounds(bounds)
+          // @ts-ignore
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
         }
-      }
-    )
-  }, []) // 마운트시에만 실행
+        setMarkers(markers)
 
-  return <div id="map" style={{ width: '500px', height: '500px' }}></div>
-}
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds)
+      }
+    })
+  }, [map])
+
+
+  return (
+    <Map // 로드뷰를 표시할 Container
+      center={{
+        lat: 37.566826,
+        lng: 126.9786567,
+      }}
+      style={{
+        width: "1000px",
+        height: "1000px",
+      }}
+      level={3}
+      onCreate={setMap}
+    >
+      {markers.map((marker) => (
+        <MapMarker
+          key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+          position={marker.position}
+          onClick={() => setInfo(marker)}
+        >
+          {info &&info.content === marker.content && (
+            <div style={{color:"#000"}}>{marker.content}</div>
+          )}
+        </MapMarker>
+      ))}
+    </Map>
+  );
+};
 
 export default MapTest;

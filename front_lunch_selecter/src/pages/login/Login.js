@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import AuthInput from '../../components/auth/AuthInput';
 import { Link, useNavigate } from 'react-router-dom';
-
 import * as s from './style'
 import axios from 'axios';
 import { useRecoilState } from 'recoil';

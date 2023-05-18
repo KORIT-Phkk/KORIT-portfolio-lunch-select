@@ -1,25 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import * as s from './style';
 
-import Category from './category/Category';
-import Invite from './GroupLunchSelect/Invite';
-
-
-const selectLocation = (isOpen) => css`
-    display: ${isOpen ? "flex" : "none"};
-`;
 
 
 const LunchSelect = () => {
     const navigate = useNavigate();
 
-    const [ position, setPosition ] = useState();
-    const [ isOpen, setIsOpen ] = useState(false);
+    const [ position, setPosition ] = useState({
+        lat: null,
+        lng: null
+    });
     const [ startButtonClickState, setStartButtonClickState ] = useState(false);
     const [ locationIsLoading, setLocationIsLoading ] = useState(true);
     const [geolocation, setGeolocation] = useState({
@@ -28,10 +23,13 @@ const LunchSelect = () => {
     });
     const [ slotValue, setSlotValue ] = useState([]) 
     const [todayLunch, setTodayLunch] = useState("오늘의 점심은?");
-    const [ address, setAddress ] = useState("");
     const [isSpinning, setIsSpinning] = useState(false);
     const intervalRef = useRef(null);
-   
+
+    useEffect(() => {
+        getLocation();
+      }, []);
+
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -66,16 +64,16 @@ const LunchSelect = () => {
     const getMenu = useQuery(["getMenu"], async () => {
         const option = {
           params: {
-            lat: geolocation.lat,
-            lng: geolocation.lng
+            lat: position.lat,
+            lng: position.lng
           },
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`
           }
         };
         const response = await axios.get("http://localhost:8080/lunch/select", option);
+        const names = response.data.map(store => store.name);
         console.log("현재위치: " + geolocation.lat, geolocation.lng)
-        const names = await response.data.map(store => store.name);
         setSlotValue(names);
         console.log("names: " + names)
         return response;
@@ -90,9 +88,7 @@ const LunchSelect = () => {
       
 
     const handleStart = () => {
-        getLocation();
         setStartButtonClickState(true);
-        
     };
 
     const handleStop = () => {
@@ -105,13 +101,6 @@ const LunchSelect = () => {
         }
     };
 
-    // const changeTest = () => {
-    //      for(let i = 0; i < getMenu.data.data.length; i++) {
-    //         if(todayLunch === getMenu.data.data[i].name){
-    //             navigate(`/choosemenu?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
-    //         }
-    //     }
-    // }
     
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -119,10 +108,8 @@ const LunchSelect = () => {
     };
 
 
-
     if(getMenu.isLoading){
         return <div>불러오는 중....</div>
-        
     }
 
 
@@ -130,39 +117,58 @@ const LunchSelect = () => {
         intervalRef.current = setInterval(() => {
             setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
         }, 500);
-        // const randomIndex = Math.floor(Math.random() * slotValue.length);
-        // setTodayLunch(slotValue[randomIndex]);
-        // setIsSpinning(false)
-
     }
-  
 
+    const onClickMapHandle = (_t, mouseEvent) => {
+        setPosition({
+            lat: mouseEvent.latLng.getLat(),
+            lng: mouseEvent.latLng.getLng(),
+        })
+    }
 
     return (
         <div css={s.container}>
-            <div css={selectLocation(isOpen)}>
-            </div>
-            <header css={s.header}>
+            <header>
+            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+            <Map
+                center={{
+                    lat: geolocation.lat,
+                    lng: geolocation.lng
+                }}
+                style={{
+                    top: "10px",
+                    margin: "0px 30px 0px 30px",
+                    height: "1000px",
+                }}
+                level={2}
+                onClick={onClickMapHandle}
+                >
+                {position && <MapMarker position={position}/>}
+            </Map>
+            {position && <div>클릭한 위치의 좌표는 {position.lat}, {position.lng} 입니다.</div>}
+            </header>
+
+            <main>
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오
-                        <Invite />
+             
                     </h1>
                 </div>
-                <Category />
-            </header>
-            <main css={s.mainContainer}>
-                <div css={s.selectMenu}>
-                    {todayLunch}
-                </div>
+
+            </main>
+            
+            <footer css={s.mainContainer}>
+                <div css={s.selectMenu}>{todayLunch}</div>
                 <form onSubmit={handleSubmit}>
                     {isSpinning 
                     ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
                     : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)}
 
                 </form>
-            </main>
+            </footer>
         </div>
     );
-};
+}
+
 
 export default LunchSelect;

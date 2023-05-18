@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 public class SelectMenuController {
 
 	private final LunchSelectService lunchSelectService;
-	
-	@GetMapping("/lunch/select")
+
+	@GetMapping("/lunchselect/roulette")
 	public ResponseEntity<?> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
 		
 //		System.out.println(lunchSelectReqDto);
