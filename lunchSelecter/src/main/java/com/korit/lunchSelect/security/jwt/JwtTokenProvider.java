@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.korit.lunchSelect.dto.auth.JwtRespDto;
+import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.exception.CustomException;
+import com.korit.lunchSelect.repository.UserRepository;
+import com.korit.lunchSelect.security.PrincipalUser;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -32,6 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class JwtTokenProvider {
 	
+	@Autowired
+	private UserRepository userRepository;
 	private final Key key;
 	
 	public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
@@ -68,7 +73,8 @@ public class JwtTokenProvider {
 		Date tokenExpiresDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));	// 현재시간 + 하루
 		
 		return Jwts.builder()
-				.setSubject(authentication.getName())		// 토큰의 제목(email)
+				.setSubject("AuthRegister")
+				.claim("email", email)// 토큰의 제목(email)
 				.claim("auth", authorities)					// auth
 				.setExpiration(tokenExpiresDate)			// 토큰 만료 시간
 				.signWith(key, SignatureAlgorithm.HS256)	// 토큰 암호화
@@ -133,22 +139,23 @@ public class JwtTokenProvider {
 	
 	public Authentication getAuthentication(String accessToken) {
 		Authentication authentication = null;
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		
 		Claims claims = getClaims(accessToken);
-		if(claims.get("auth") == null) {
-			throw new CustomException("AccessToken에 권한 정보가 없습니다.");
-		}
 		
-		String auth = claims.get("auth").toString();
-		for(String role : auth.split(",")) {
-			authorities.add(new SimpleGrantedAuthority(role));
-		}
+		String email = claims.get("email").toString();
+		User userEntity =  userRepository.findUserByEmail(email);
+//		if(claims.get("auth") == null) {
+//			throw new CustomException("AccessToken에 권한 정보가 없습니다.");
+//		}
+//		
+//		String auth = claims.get("auth").toString();
+//		for(String role : auth.split(",")) {
+//			authorities.add(new SimpleGrantedAuthority(role));
+//		}
+//		
 		
+		PrincipalUser principalUser = userEntity.toPrincipal();
 		
-		UserDetails userDetails = new User(claims.getSubject(), "", authorities);
-		
-		authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+		authentication = new UsernamePasswordAuthenticationToken(principalUser, null, principalUser.getAuthorities());
 		
 		return authentication;
 	}

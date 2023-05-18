@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as s from './style';
 import Category from './category/Category';
 import axios from 'axios';
@@ -8,9 +8,8 @@ import axios from 'axios';
 const slotValue = ['짱깨', '맥도날드', '된장', '유부초밥', '우동(돈가스)', '김밥천국','삼정타워','닭가슴살','0004','9','88','7','6','2','3','5','dd','we','as','sdf','asdf','asdf','wer','werw','tyu','dfg','ert','q2we','dfg','fsgjl'];
 
 const LunchSelect = () => {
-    const [isInvited, setIsInvited] = useState(false);
-    const [inviteCode, setInviteCode] = useState('');
-    
+    const { roomURL } = useParams();
+    console.log(roomURL);
     const navigate = useNavigate();
 
     const [todayLunch, setTodayLunch] = useState("돌려돌려 돌림판~~");
@@ -34,20 +33,11 @@ const LunchSelect = () => {
         event.preventDefault();
     };
 
-    const onClickInviteButton = () => {
-        const roomId = '123';
-        axios.get((API.INVITE as string) + roomId).then((res) => {
-          setIsInvited(true);
-          setInviteCode(`${process.env.REACT_APP_LAMBDA_INVITE}/${res.data}`);
-        });
-      };
-
+ 
     return (
         <div css={s.container}>
             <header css={s.header}>
-                <Button type="button" onClick={onClickInviteButton}>
-                    초대하기
-                </Button>
+
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오</h1>
                 </div>

@@ -47,13 +47,12 @@ export const lunchSelect =css`
     justify-content: center;
 `;
 export const lunchButton =css`
-    padding-top: 5px;
     margin-top: 100px;
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 850px;
     height: 80px;
-    padding-top: 15px;
     font-size: 45px;
     text-decoration: none;
     border: 1px solid #dbdbdb;
