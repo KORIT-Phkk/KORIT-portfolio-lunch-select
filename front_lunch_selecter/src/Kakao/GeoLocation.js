@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { css } from '@emotion/react';
 
-const mapStyle = css`
-    width: 500px;
-    height: 500px;
-`;
-
-
-const KakaoMapReact = () => {
+const GeoLocation = () => {
     const [geolocation, setGeolocation] = useState({
         lat: null,
         long: null,
@@ -121,4 +114,4 @@ const KakaoMapReact = () => {
     )
 };
 
-export default KakaoMapReact;
+export default GeoLocation;

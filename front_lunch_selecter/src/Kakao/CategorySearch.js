@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const KakaoMap = () => {
-  const [info, setInfo] = useState()
+const CategorySearch = () => {
+
+  const [ info, setInfo ] = useState();
   const [markers, setMarkers] = useState([])
   const [map, setMap] = useState()
-
-  const { kakao } = window;
-  console.log(kakao.maps.services)
+  const {kakao} = window;
 
   useEffect(() => {
     if (!map) return
-    console.log("test" + map);
     const ps = new kakao.maps.services.Places()
 
-    ps.keywordSearch("서면 맛집", (data, status, _pagination) => {
+    ps.categorySearch("FD6", (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
@@ -41,6 +39,7 @@ const KakaoMap = () => {
     })
   }, [map])
 
+
   return (
     <Map // 로드뷰를 표시할 Container
       center={{
@@ -48,8 +47,8 @@ const KakaoMap = () => {
         lng: 126.9786567,
       }}
       style={{
-        width: "100%",
-        height: "350px",
+        width: "1000px",
+        height: "1000px",
       }}
       level={3}
       onCreate={setMap}
@@ -66,7 +65,7 @@ const KakaoMap = () => {
         </MapMarker>
       ))}
     </Map>
-  )
-}
+  );
+};
 
-export default KakaoMap;
+export default CategorySearch;
