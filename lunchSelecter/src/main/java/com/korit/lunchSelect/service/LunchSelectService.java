@@ -2,6 +2,7 @@ package com.korit.lunchSelect.service;
 
 import java.util.UUID;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class LunchSelectService {
 	
 	private final LunchSelectRepository lunchSelectRepository;
+	private final JavaMailSender javaMailSender;
 	
 	public String createLunchSelectRoom() {
 		

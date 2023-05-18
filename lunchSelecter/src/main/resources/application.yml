@@ -15,14 +15,12 @@ spring:
               - email
               - profile
           kakao:
-            client-id:  498caf520d8165a09116280aca1afc08
-            client-secret: 215726fb5b81e6f4b5a0082c10f26b13
+            client-id: ced820a00b48fea6cb611fc038aaa4ba
             redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             client-name: Kakao
             scope:
-              - profile
               - account_email
           naver:
             client-id: ufgOMy9EVF1_jX5zkSYB
