@@ -22,6 +22,11 @@ const ResetPassword = () => {
             const response = await axios.put("http://localhost:8080/auth/resetPassword", data, option)
             return response;
         } catch (error) {
+            const errorMessage = error.response.data.message;
+            if(errorMessage.includes("Token")) {
+                alert("요청이 만료되었습니다.");
+                navigate("/auth/login");
+            }
             return error
         }
     }, {

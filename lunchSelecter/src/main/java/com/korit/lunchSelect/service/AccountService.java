@@ -55,14 +55,14 @@ public class AccountService {
 		User userEntity = cacheTokenProvider.findUserByToken(resetPasswordReqDto.getToken());
 		userEntity.setPassword(new BCryptPasswordEncoder().encode(resetPasswordReqDto.getPassword()));
 		
+		cacheTokenProvider.removeToken("passwordResetToken", resetPasswordReqDto.getToken());
+		
 		return userRepository.updatePassword(userEntity);
 	}
 	
 	public boolean misMatchResetPassword(ResetPasswordReqDto resetPasswordReqDto) {
 		return !resetPasswordReqDto.getPassword().equals(resetPasswordReqDto.getCheckPassword());
 	}
-	
-	
 	
 	public void sendUpdatePasswordEmail(String email) {
 		String token = cacheTokenProvider.generateResetPasswordToken(email);

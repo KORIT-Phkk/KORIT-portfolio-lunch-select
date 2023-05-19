@@ -15,6 +15,7 @@ import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.UserRepository;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -35,6 +36,7 @@ public class CacheTokenProvider {
 					ErrorMap.builder().put("error", "요청시간이 만료되었습니다.").build());
         }
     }
+    
 	
     public boolean isTokenExpired(LocalDateTime expirationTime) {
     	LocalDateTime currentTime = LocalDateTime.now();
@@ -47,10 +49,18 @@ public class CacheTokenProvider {
 		return userRepository.findUserByEmail(email);
 	}
 	
+    public void removeToken(String key, String token) {
+        Cache cache = cacheManager.getCache(key);
+        cache.evict(token);
+    }
 	
 	public Map<String, Object> getTokenMap(String key, String token) {
         Cache cache = cacheManager.getCache(key);
         Cache.ValueWrapper valueWrapper = cache.get(token);
+        if(valueWrapper == null) {
+			throw new CustomException("Invalid Token", 
+					ErrorMap.builder().put("error", "유효하지 않은 토큰입니다.").build());
+        }
         Map<String, Object> tokenMap = (Map<String, Object>) valueWrapper.get();
         validateToken(tokenMap);
 		return tokenMap;
@@ -72,8 +82,7 @@ public class CacheTokenProvider {
 	public void saveTokenToCache(String email, String token) {
 		Cache cache = cacheManager.getCache("passwordResetToken");
 		Map<String, Object> tokenMap = new HashMap<>();
-		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(30));
-		System.out.println(expirationTime);
+		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(10));
 		
 		tokenMap.put("email", email);
 		tokenMap.put("expirationTime", expirationTime);
