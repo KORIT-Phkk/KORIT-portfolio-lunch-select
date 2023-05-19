@@ -1,16 +1,17 @@
 /** @jsxImportSource @emotion/react */
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
+import Invite from './Invite';
 import * as s from './style';
-import axios from 'axios';
 
 
 const LunchSelectMaster = () => {
     const [ name, setName ] = useState("");
     const [ userId, setUserId ] = useState(""); 
     const [ userInsert, setUserInsert ] = useState(false);
-
+   
     
     useEffect(() => {
         const userInfoInsert = async() => {
@@ -24,15 +25,15 @@ const LunchSelectMaster = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const response = await axios.post("http://localhost:8080/lunchselect/roomuserinfosave", option);
+            const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", option);
             console.log(response);
+
         };
         if (userInsert) {
             userInfoInsert();
         }
     });
-
-
+ 
 
     const userInfoInsertButton = () => {
         setUserInsert(true);
@@ -45,12 +46,12 @@ const LunchSelectMaster = () => {
     };
 
 
+    
+
     return (
         <div css={s.container}>
             <header>
-                {userId}
-                {name}
-                <h1>들어오자마자 누르시오</h1>
+                <Invite />
                 <button onClick={userInfoInsertButton}>userInfoInsert</button>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
            <Location />
@@ -76,7 +77,6 @@ const LunchSelectMaster = () => {
                 </form>
                 <div>
                     <h2>유저</h2>
-                    홍길동
                 </div>
             </footer>
         </div>

@@ -17,7 +17,7 @@ const Roulette = () => {
     const [isSpinning, setIsSpinning] = useState(false);
     const intervalRef = useRef(null);
 
-
+    
     
 
     const handleStart = () => {

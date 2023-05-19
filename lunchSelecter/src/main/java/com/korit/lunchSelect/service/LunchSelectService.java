@@ -37,9 +37,9 @@ public class LunchSelectService {
 	}
 
 	public String createLunchSelectRoom() {
-		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+		 
 		
 		Room room = Room.builder()
 				.roomMasterCode(UUID.randomUUID().toString().replaceAll("-", ""))
@@ -49,16 +49,13 @@ public class LunchSelectService {
 		
 		lunchSelectRepository.createLunchSelectRoom(room);
 		
+		System.out.println("roomId : " + lunchSelectRepository.findMasterCode(principalUser.getUserId())); 
 		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
 	
-//	public String roomUserInsert(String accessToken) {
-//		
-//		lunchSelectRepository.roomUserInsert(RoomJoin.builder()
-//							.roomId()
-//							.userId()
-//							.build());
-//		return null;
-//	}
+	public String roomUserInsert(String accessToken) {
+	
+		return null;
+	}
 	
 }

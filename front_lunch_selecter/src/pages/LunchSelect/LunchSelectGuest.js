@@ -4,15 +4,22 @@ import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
 import axios from 'axios';
+import { useQuery, useQueryClient } from 'react-query';
+import { css } from '@emotion/react';
+
+
+const test = css`
+    font-size: 50px;
+`;
 
 
 const LunchSelectGuest = () => {
     const [ name, setName ] = useState("");
     const [ userId, setUserId ] = useState(""); 
     const [ userInsert, setUserInsert ] = useState(false);
+    const queryClient = useQueryClient();
+    const [ insert, setInsert ] = useState(false);
 
-
-    
     
     useEffect(() => {
         const userInfoInsert = async() => {
@@ -34,16 +41,35 @@ const LunchSelectGuest = () => {
         }
     });
 
+    const userInfoInsert = useQuery(["userInfoInsert"], async() => {
+        const option = {
+            params:{
+                userId: queryClient.getQueryData("getUserInfo").data.userId
+            },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                "Content-Type": "application/json"
+            }
+        }
+        const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", JSON.stringify({
+            userId: queryClient.getQueryData("getUserInfo").data.userId
+        }), option);
+    },{
+        enabled: !insert
+    });
 
+
+ 
+   
 
     const userInfoInsertButton = () => {
         setUserInsert(true);
     }
-    
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        
-    };
+
+    const readyHandleOnClick = () => {
+        console.log("참여하기 누름?")
+        setInsert(true);
+    }
 
 
     return (
@@ -68,17 +94,7 @@ const LunchSelectGuest = () => {
             
             <footer css={s.mainContainer}>
                 <div css={s.selectMenu}></div>
-                <form onSubmit={handleSubmit}>
-                    <button>룰렛 돌리러 가기</button>
-                    {/* {isSpinning 
-                    ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
-                    : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)} */}
-
-                </form>
-                <div>
-                    <h2>유저</h2>
-                    홍길동
-                </div>
+                <button css={test} onClick={readyHandleOnClick}>준비완료!</button>
             </footer>
         </div>
     );
