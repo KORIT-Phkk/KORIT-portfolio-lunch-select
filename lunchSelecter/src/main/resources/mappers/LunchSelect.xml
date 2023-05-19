@@ -4,6 +4,6 @@
 
 	<insert id="createLunchSelectRoom" parameterType="com.korit.lunchSelect.entity.Room"> 
 		insert into room_tb
-		values(0, #{roomURL}, #{roomMasterId}, 1)
+		values(0, #{roomURL}, #{roomMasterId},0, 1)
 	</insert>
 </mapper>

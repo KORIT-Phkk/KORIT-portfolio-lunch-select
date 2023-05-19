@@ -1,159 +1,90 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import QueryString from 'qs';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import * as s from './style';
-import Location from '../../components/SelectPage/Location/Location'
 import Category from '../../components/SelectPage/Category/Category';
+import Location from '../../components/SelectPage/Location/Location';
+import * as s from './style';
+
 
 
 
 const LunchSelect = () => {
-    const { roomURL } = useParams();
-    console.log(roomURL);
+    const [ selectedCategories, setSelectedCategories ] = useState([]);
+    const [ markerPosition, setMarkerPosition ] = useState({
+        lat: null,
+        lng: null
+    });
+    const [ menuRefresh, setMenuRefresh ] = useState(false);
+    const [ todayLunch, setTodayLunch ] = useState([]);
     const navigate = useNavigate();
 
-    const [ position, setPosition ] = useState({
-        lat: null,
-        lng: null
-    });
-    const [ startButtonClickState, setStartButtonClickState ] = useState(false);
-    const [ locationIsLoading, setLocationIsLoading ] = useState(true);
-    const [geolocation, setGeolocation] = useState({
-        lat: null,
-        lng: null
-    });
-    const [ slotValue, setSlotValue ] = useState([]) 
-    const [todayLunch, setTodayLunch] = useState("오늘의 점심은?");
-    const [isSpinning, setIsSpinning] = useState(false);
-    const intervalRef = useRef(null);
+    const { roomURL } = useParams();
+    const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
 
-    useEffect(() => {
-        getLocation();
-      }, []);
 
-    const getLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              function(position) {
-                const { latitude, longitude } = position.coords;
-                setGeolocation((geolocation) => {
-                  return {
-                    ...geolocation,
-                    lat: latitude,
-                    lng: longitude,
-                  };
-                });
-                setLocationIsLoading(false);
-              },
-              function(error) {
-                console.error(error);
-              },
-              {
-                enableHighAccuracy: false,
-                maximumAge: 0,
-                timeout: Infinity,
-              }
-            );
-          }
-          
-        if(console.error === null) {
-            alert('위치 설정을 허용해주세요');
-            return;
+    console.log(roomURL);
+
+
+    const getMenu = useQuery(["getMenu"], async() => {
+        const option = {
+            params: {
+                categoryId: [...selectedCategories],
+                ...markerPosition
+            },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
+            },
+            paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
+        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
+        // console.log(response.data)
+        const names = await response.data.map(store => store.name);
+        setTodayLunch(names);
+        console.log("names: " + names)
+        return response;
+    },{
+        enabled: menuRefresh,
+        onSuccess:  () => {
+            setMenuRefresh(false);
+            setTodayLunchLoading(true);
+        }
+    })
+
+    const getMenuButtonHandle = () => {
+        setMenuRefresh(true);
     }
     
-    // const getMenu = useQuery(["getMenu"], async () => {
-    //     const option = {
-    //       params: {
-    //         lat: position.lat,
-    //         lng: position.lng
-    //       },
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-    //       }
-    //     };
-    //     const response = await axios.get("http://localhost:8080/lunch/select", option);
-    //     const names = response.data.map(store => store.name);
-    //     console.log("현재위치: " + geolocation.lat, geolocation.lng)
-    //     setSlotValue(names);
-    //     console.log("names: " + names)
-    //     return response;
-    //   }, {
-    //     enabled: startButtonClickState && !locationIsLoading,
-    //     onSuccess: () => {
-    //         setStartButtonClickState(false);
-    //         setLocationIsLoading(true);
-    //         setIsSpinning(true);
-    //     }
-    //   });
-      
-
-    const handleStart = () => {
-        setStartButtonClickState(true);
-    };
-
-    // const handleStop = () => {
-    //     setIsSpinning(false);
-    //     clearInterval(intervalRef.current);
-    //     for(let i = 0; i < getMenu.data.data.length; i++) {
-    //         if(todayLunch === getMenu.data.data[i].name){
-    //             navigate(`/lunchselect/result?address=${getMenu.data.data[i].address}&todayLunch=${todayLunch}`);
-    //         }
-    //     }
-    // };
-
-    
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        
-    };
-
-
-    // if(getMenu.isLoading){
-    //     return <div>불러오는 중....</div>
-    // }
-
-
-    if(isSpinning) {
-        intervalRef.current = setInterval(() => {
-            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
-        }, 500);
+    if(todayLunchLoading) {
+        navigate(`/lunchselect/roulette?todayLunch=${todayLunch}`);
+        setTodayLunchLoading(false);
     }
 
-    const onClickMapHandle = (_t, mouseEvent) => {
-        setPosition({
-            lat: mouseEvent.latLng.getLat(),
-            lng: mouseEvent.latLng.getLng(),
-        })
+    
+    
+    if(getMenu.isLoading){
+        return <div>불러오는 중....</div>
     }
 
     return (
         <div css={s.container}>
             <header>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
-           <Location />
-            {position && <div>클릭한 위치의 좌표는 {position.lat}, {position.lng} 입니다.</div>}
+            <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
             <main>
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오
-                        <Category />
+                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
                     </h1>
                 </div>
             </main>
             
             <footer css={s.mainContainer}>
-                <div css={s.selectMenu}></div>
-                <form onSubmit={handleSubmit}>
-                    <button>룰렛 돌리러 가기</button>
-                    {/* {isSpinning 
-                    ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
-                    : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)} */}
-
-                </form>
+                    <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
             </footer>
         </div>
     );

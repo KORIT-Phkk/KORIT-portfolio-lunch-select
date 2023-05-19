@@ -18,8 +18,8 @@ public class SelectMenuController {
 	@GetMapping("/lunchselect/roulette")
 	public ResponseEntity<?> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
 		
-//		System.out.println(lunchSelectReqDto);
-		System.out.println("controller: " + lunchSelectService.lunchSelect(lunchSelectReqDto));
+		System.out.println("controller: " +lunchSelectReqDto);
+//		System.out.println("controller: " + lunchSelectService.lunchSelect(lunchSelectReqDto));
 		
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}

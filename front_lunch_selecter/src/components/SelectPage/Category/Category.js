@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
-const Category = () => {
+const Category = ({ selectedCategories, setSelectedCategories }) => {
 
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
@@ -13,7 +13,6 @@ const Category = () => {
             }
         }
         const response = await axios.get("http://localhost:8080/lunchselect/category", option)
-        console.log(response.data[0].categoryName)
         
         return response;
     }, {
@@ -25,12 +24,22 @@ const Category = () => {
         }
     })
 
+    const checkedHandleOnClick = (e) => {
+        if(e.target.checked){
+            setSelectedCategories([...selectedCategories, e.target.value]);
+        }else {
+            setSelectedCategories([...selectedCategories.filter(id => id !== e.target.value)]);
+        }
+    }
+
     return (
         <div>
             <div>  
-                {getCategory.data !== undefined ? getCategory.data.data.map(category => (<div key={category.categoryId}>
-                                        <input type="checkbox"  id={"ct-" + category.categoryId} value={category.categoryId}/>
-                                        <label htmlFor={"ct-" + category.categoryId}>{category.categoryName}</label>
+                
+                {getCategory.data !== undefined ? getCategory.data.data.map(category => (
+                                    <div key={category.categoryId}>
+                                        <input onChange={checkedHandleOnClick} type="checkbox"  id={category.categoryId} value={category.categoryId}/>
+                                        <label htmlFor={category.categoryId}>{category.categoryName}</label>
                                     </div>))
                                 : ""}
             </div>
