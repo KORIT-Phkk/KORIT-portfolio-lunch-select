@@ -45,9 +45,10 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: jmclunchselect@gmail.com
-    password: kroivbjethganyol
+    password: gmvzvpjprkbuhncp
     properties:
       mail.smtp.auth: true
+      mail.smtp.timeout: 5000
       mail.smtp.starttls.enable: true
               
 mybatis:

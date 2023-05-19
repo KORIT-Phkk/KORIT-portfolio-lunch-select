@@ -1,6 +1,7 @@
 package com.korit.lunchSelect.service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,8 +10,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -48,32 +47,65 @@ public class AccountService {
 		return userEntity.getEmail();
 	}
 	
+	public void resetPassword(User userEntity) {
+		
+	}
 	
-    public String getEmailFromToken(String token) {
-    	
-    	return null;
+	public User findUserByToken(String token) {
+		Map<String, Object> tokenMap = validateToken(token);
+		return userRepository.findUserByEmail((String) tokenMap.get("email"));
+	}
+	
+	public boolean isTokenExpired(LocalDateTime expirationTime) {
+		LocalDateTime currentTime = LocalDateTime.now();
+		return currentTime.isBefore(expirationTime);
+	}
+	
+    public Map<String, Object> validateToken(String token) {
+        Cache cache = cacheManager.getCache("passwordResetToken");
+        Cache.ValueWrapper valueWrapper = cache.get(token);
+        
+        Map<String, Object> tokenMap = (Map<String, Object>) valueWrapper.get();
+        
+        if(tokenMap == null) {
+			throw new CustomException("Invalid Token", 
+					ErrorMap.builder().put("error", "유효하지 않은 토큰입니다.").build());
+        }
+        
+        if(isTokenExpired((LocalDateTime) tokenMap.get("expirationTime"))) {
+			throw new CustomException("Expired Token", 
+					ErrorMap.builder().put("error", "토큰이 만료되었습니다.").build());      	
+        }
+        
+        return tokenMap;
     }
 	
-	public String generateResetEmailToken(String email) {
+	public String generateResetPasswordToken(String email) {
 		User userEntity = userRepository.findUserByEmail(email);
 		String token = UUID.randomUUID().toString().replaceAll("-", "");
-		Cache cache = cacheManager.getCache("passwordResetToken");
-		
+
 		if(userEntity == null) {
 			throw new CustomException("Undefind User", 
 					ErrorMap.builder().put("error", "사용자를 찾을 수 없습니다.").build());
 		}
 		
-        if (cache != null) {
-            cache.put(token, email);
-            cache.evict(token, Duration.ofMinutes(30));
-        }
-		
+		saveTokenToCache(email, token);
 		return token;
 	}
 	
+	public void saveTokenToCache(String email, String token) {
+		Map<String, Object> tokenMap = new HashMap<>();
+		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(30));
+		
+		tokenMap.put("email", email);
+		tokenMap.put("expirationTime", expirationTime);
+		
+		Cache cache = cacheManager.getCache("passwordResetToken");
+		cache.put(token, tokenMap);
+	}
+	
 	public void sendUpdatePasswordEmail(String email) {
-		String token = generateResetEmailToken(email);
+		String token = generateResetPasswordToken(email);
 		String url = "httpL//localhost:8080/auth/resetpassword?token=" + token;
 		String subject = "비밀번호 재설정 안내";
 		
