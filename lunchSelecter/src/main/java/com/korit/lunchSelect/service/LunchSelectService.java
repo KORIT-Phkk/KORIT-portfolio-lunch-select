@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class LunchSelectService {
 	
 	private final LunchSelectRepository lunchSelectRepository;
-	private final JavaMailSender javaMailSender;
 	
 	public String createLunchSelectRoom() {
 		

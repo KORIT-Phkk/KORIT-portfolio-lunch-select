@@ -9,7 +9,6 @@ import Register from './pages/register/Register';
 import Main from './pages/main/Main';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindPassword from './pages/findPassword/FindPassword';
-import UpdatePassword from './pages/findPassword/UpdatePassword';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
 import NotFound from './pages/NotFound/NotFound';
@@ -17,6 +16,8 @@ import OAuth2Login from './pages/login/OAuth2Login';
 import OAuth2Register from './pages/register/OAuth2Register';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 
 
 const mainContainer = css`
@@ -39,6 +40,7 @@ function App() {
         <Route path="/auth/findemail" element={<AuthRouteReactQuery path="/auth/findemail" element={<FindEmail/>}/>}/>
         <Route path="/auth/findemail/result" element={<AuthRouteReactQuery path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/auth/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/auth/resetpassword" element={<AuthRouteReactQuery path="/auth/resetpassword" element={<ResetPassword/>}/>}/>
         <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/auth/oauth2/login" element={<AuthRouteReactQuery path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>

@@ -90,4 +90,12 @@
 		WHERE
 			user_id = #{userId}
 	</update>
+	
+	<update id="updatePassword" parameterType="com.korit.lunchSelect.entity.User">
+		UPDATE user_tb
+		SET
+			password = #{password}
+		WHERE
+			user_id = #{userId}
+	</update>
 </mapper>

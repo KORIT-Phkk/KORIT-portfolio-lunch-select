@@ -16,7 +16,7 @@ const FindPassword = () => {
 
     const findPassword = useMutation(async (email) => {
         try {
-            const response = await axios.put("http://localhost:8080/auth/findPassword", email);
+            const response = await axios.post("http://localhost:8080/auth/findpassword", email);
             return response;
         } catch(error) {
             alert(error.response.data.errorData.error)

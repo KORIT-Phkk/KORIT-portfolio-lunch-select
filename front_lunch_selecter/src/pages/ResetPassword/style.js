@@ -42,3 +42,9 @@ export const checkButton = css`
         background-color: #dbdbdb;
     }
 `;
+
+export const inputLabel = css`
+    padding-top: 100px;
+    padding-bottom: 10px;
+    color: rgb(221,164,79);
+`;
