@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.korit.lunchSelect.repository.LunchSelectRepository">
 
-	<insert id="createLunchSelectRoom" parameterType="com.korit.lunchSelect.entity.Room"> 
+	<insert id="createLunchSelectRoom" parameterType="com.korit.lunchSelect.entity.Room"
+	useGeneratedKeys="true"
+	keyProperty="roomId"> 
 		insert into room_tb
-		values(0, #{roomURL}, #{roomMasterId},0, 1)
+		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1)
+
 	</insert>
+	
+	<insert id="roomUserInsert" 
+	parameterType="com.korit.lunchSelect.entity.RoomJoin">
+		insert into room_join_tb
+		values(0, #{roomId}, #{userId}, 0)
+	</insert>
+
 </mapper>

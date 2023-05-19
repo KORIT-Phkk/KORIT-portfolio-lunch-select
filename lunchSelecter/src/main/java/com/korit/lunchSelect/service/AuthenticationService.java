@@ -58,6 +58,7 @@ public class AuthenticationService implements UserDetailsService {
 	public PrincipalUser getUserInfo(String accessToken) {
 		String email = jwtTokenProvider.getClaims(jwtTokenProvider.getToken(accessToken)).get("email").toString();
 		User userEntity = userRepository.findUserByEmail(email); 
+		
 		return userEntity.toPrincipal();
 				
 	}

@@ -77,7 +77,6 @@ const UserInfo = ({ isOpen }) => {
         
         setName(response.data.name)
         setEmail(response.data.email)
-        console.log(response)
         return response;
     });
 
