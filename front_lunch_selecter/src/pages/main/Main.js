@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useState } from 'react';
-import * as s from './style'
-import { IoMdContact } from 'react-icons/io';
-import UserInfo from '../../components/userInfoGroup/UserInfo';
-import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import React, { useState } from 'react';
+import { IoMdContact } from 'react-icons/io';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import UserInfo from '../../components/userInfoGroup/UserInfo';
+import * as s from './style';
 
 const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
-    const [ insert, setInsert ] = useState(false);
     const [ userId, setUserId ] = useState(""); 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
@@ -35,23 +34,7 @@ const Main = () => {
         }
     });
 
-    const userInfoInsert = useQuery(["userInfoInsert"], async() => {
-        const option = {
-            params:{
-                userId: queryClient.getQueryData("getUserInfo").data.userId
-            },
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                "Content-Type": "application/json"
-            }
-        }
-        const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", JSON.stringify({
-            userId: queryClient.getQueryData("getUserInfo").data.userId
-        }), option);
-    },{
-        enabled: !insert
-    });
-
+    
 
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
@@ -62,8 +45,6 @@ const Main = () => {
     }
 
     const lunchSelectJoinClickHandle = () => {
-        console.log("참여하기 누름?")
-        setInsert(true);
         window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
     }
 

@@ -88,3 +88,7 @@ export const lunchMenu = css`
 
     font-size: 100px;
 `;
+
+export const locationAndCetegorySubmitButton = css`
+     font-size: 100px;
+`

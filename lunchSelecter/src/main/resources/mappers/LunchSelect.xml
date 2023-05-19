@@ -15,6 +15,7 @@
 	keyProperty="roomId"> 
 		insert into room_tb
 		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1)
+
 	</insert>
 	
 	<select id="findMasterCode" parameterType="Integer" resultType="Integer">
@@ -29,7 +30,6 @@
 	
 	<insert id="roomUserInsert" 
 	parameterType="com.korit.lunchSelect.entity.RoomJoin">
-	
 		insert into room_join_tb
 		values(0, #{roomId}, #{userId}, 0)
 	</insert>
