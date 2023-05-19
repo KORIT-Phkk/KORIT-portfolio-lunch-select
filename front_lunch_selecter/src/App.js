@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
-import LunchSelect from './pages/LunchSelect/LunchSelect';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
@@ -15,10 +14,12 @@ import FindPassword from './pages/findPassword/FindPassword';
 import UpdatePassword from './pages/findPassword/UpdatePassword';
 import Login from './pages/login/Login';
 import OAuth2Login from './pages/login/OAuth2Login';
-import Main from './pages/main/Main';
 import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
+import Main from './pages/main/Main';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectGuest';
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
 
 
 const mainContainer = css`
@@ -49,7 +50,8 @@ function App() {
         <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu/>}/>}/>
 
-        <Route path="/lunchselect/room/:roomURL" element={<AuthRouteReactQuery path="/lunchselect/room" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/room/master/:roomMasterURL" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
+        <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRouteReactQuery path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>

@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Room {
+public class RoomJoin {
+	private int roomJoinId;
 	private int roomId;
-	private String roomMasterCode;
-	private String roomGuestCode;
-	private int roomMasterId;
-	private int flag;
+	private int userId;
+	private int categoryId;
 }

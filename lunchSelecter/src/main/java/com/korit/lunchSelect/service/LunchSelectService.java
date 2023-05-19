@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.korit.lunchSelect.dto.LunchSelectReqDto;
 import com.korit.lunchSelect.entity.Room;
+import com.korit.lunchSelect.entity.RoomJoin;
 import com.korit.lunchSelect.repository.LunchSelectRepository;
 import com.korit.lunchSelect.security.PrincipalUser;
 
@@ -29,9 +30,9 @@ public class LunchSelectService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("lat", lunchSelectReqDto.getLat());
 		map.put("lng", lunchSelectReqDto.getLng());
-	
-		System.out.println("DTO: " + lunchSelectReqDto);
-		System.out.println("DB: " + lunchSelectRepository.findByLocation(map));
+//	
+//		System.out.println("DTO: " + lunchSelectReqDto);
+//		System.out.println("DB: " + lunchSelectRepository.findByLocation(map));
 		return lunchSelectRepository.findByLocation(map);
 	}
 
@@ -41,13 +42,23 @@ public class LunchSelectService {
 		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
 		
 		Room room = Room.builder()
-				.roomURL(UUID.randomUUID().toString().replaceAll("-", ""))
+				.roomMasterCode(UUID.randomUUID().toString().replaceAll("-", ""))
+				.roomGuestCode(UUID.randomUUID().toString().replaceAll("-", ""))
 				.roomMasterId(principalUser.getUserId())
 				.build();
 		
 		lunchSelectRepository.createLunchSelectRoom(room);
 		
-		return "http://localhost:3000/lunchselect/room/" + room.getRoomURL();
+		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
+	
+//	public String roomUserInsert(String accessToken) {
+//		
+//		lunchSelectRepository.roomUserInsert(RoomJoin.builder()
+//							.roomId()
+//							.userId()
+//							.build());
+//		return null;
+//	}
 	
 }

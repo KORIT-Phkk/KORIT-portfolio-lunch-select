@@ -19,7 +19,7 @@ public class SelectMenuController {
 	public ResponseEntity<?> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
 		
 //		System.out.println(lunchSelectReqDto);
-		System.out.println("controller: " + lunchSelectService.lunchSelect(lunchSelectReqDto));
+//		System.out.println("controller: " + lunchSelectService.lunchSelect(lunchSelectReqDto));
 		
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}

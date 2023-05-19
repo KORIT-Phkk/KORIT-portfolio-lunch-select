@@ -46,7 +46,7 @@ const Location = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         };
-        const response = await axios.get("http://localhost:8080/lunch/select", option);
+        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option);
         const names = response.data.map(store => store.name);
 
         console.log(response)

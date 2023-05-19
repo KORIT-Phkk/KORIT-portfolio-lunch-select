@@ -3,12 +3,14 @@ import React, { useRef, useState } from 'react';
 import * as s from './style'
 import { IoMdContact } from 'react-icons/io';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
 const Main = () => {
+    const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
+    const [ joinCode, setJoinCode ] = useState("");
 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
@@ -38,6 +40,14 @@ const Main = () => {
         lunchSelectRoom.mutate();
     }
 
+    const lunchSelectJoinClickHandle = () => {
+        window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
+    }
+
+    const joinCodeInputHandle = (e) => {
+        setJoinCode(e.target.value);
+    }
+
     return (
         <div css={s.container}>
             <header css={s.headerContainer}>
@@ -51,6 +61,10 @@ const Main = () => {
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
                     <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                </div>
+                <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
+                <div css={s.lunchSelect}>
+                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle} >참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>
