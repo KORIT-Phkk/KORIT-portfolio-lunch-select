@@ -16,8 +16,6 @@ const LunchSelectGuest = () => {
     });
 
 
-    
-    
     useEffect(() => {
         const userInfoInsert = async() => {
             const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -30,14 +28,14 @@ const LunchSelectGuest = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const response = await axios.post("http://localhost:8080/lunchselect/roomuserinfosave", option);
-            console.log(response);
+            await axios.post("http://localhost:8080/lunchselect/roomuserinfosave", option);
         };
         if (userInsert) {
             userInfoInsert();
         }
     });
 
+    
 
 
     const userInfoInsertButton = () => {

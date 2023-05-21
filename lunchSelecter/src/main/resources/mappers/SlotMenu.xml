@@ -68,7 +68,7 @@
 								room_tb rt
 								left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
 							WHERE
-								rt.room_master_url = #{roomUrl}
+								rt.room_master_code = #{roomUrl}
 							GROUP BY
 								rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
 		WHERE
