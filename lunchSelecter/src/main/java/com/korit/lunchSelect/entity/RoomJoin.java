@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class RoomJoin {
+	private int roomId;
 	private int userId;
 	private List<Integer> categoryId;
 }

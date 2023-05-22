@@ -28,10 +28,16 @@
 		and flag = 1
 	</select>
 	
-	<insert id="roomUserInsert" 
-	parameterType="com.korit.lunchSelect.entity.RoomJoin">
+	<insert id="roomUserInsert" parameterType="HashMap">
+		<foreach collection="map" item="categoryId" separator=",">
 		insert into room_join_tb
-		values(0, #{roomId}, #{userId}, 0)
+		values(
+			0,
+		    (select room_id from room_tb where room_master_id = #{roomId}),
+		    #{userId},
+		    #{categoryId}
+		    )
+		</foreach>
 	</insert>
 
 </mapper>

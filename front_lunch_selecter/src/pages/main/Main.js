@@ -11,7 +11,7 @@ const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
-    const [ userId, setUserId ] = useState(""); 
+
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }

@@ -3,10 +3,8 @@ package com.korit.lunchSelect.controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,9 +29,10 @@ public class LunchSelect {
 	}
 	
 	@PostMapping("/roomuserinsert")
-	public ResponseEntity<?> roomUserInfo(@RequestBody Map<String, Object> map){
+	public ResponseEntity<?> roomUserInfo(@RequestBody RoomJoin roomJoin){
 
-		System.out.println(map);
+		lunchSelectService.roomUserInsert(roomJoin);
+//		System.out.println(map);
 		//room_id, user_id, category_id  add
 		return ResponseEntity.ok().body(null);
 	}
