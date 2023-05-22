@@ -2,7 +2,7 @@
 import axios from 'axios';
 import QueryString from 'qs';
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
@@ -24,8 +24,7 @@ const LunchSelect = () => {
     const { roomURL } = useParams();
     const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
 
-
-    console.log(roomURL);
+    const queryClient = useQueryClient();
 
 
     const getMenu = useQuery(["getMenu"], async() => {
@@ -40,7 +39,6 @@ const LunchSelect = () => {
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
         const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-        // console.log(response.data)
         const names = await response.data.map(store => store.name);
         setTodayLunch(names);
         console.log("names: " + names)
@@ -78,7 +76,7 @@ const LunchSelect = () => {
             <main>
                 <div css={s.categoryBox}>
                     <h1 css={s.category}>카테고리를 선택하시오
-                        {/* <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/> */}
+                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
                     </h1>
                 </div>
             </main>

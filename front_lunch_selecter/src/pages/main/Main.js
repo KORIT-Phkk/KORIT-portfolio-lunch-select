@@ -2,11 +2,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { IoMdContact } from 'react-icons/io';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import * as s from './style';
-import LunchSelectMaster from '../LunchSelect/LunchSelectMaster';
 
 const Main = () => {
     const navigate = useNavigate();
@@ -16,6 +15,8 @@ const Main = () => {
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
+
+    const queryClient = useQueryClient();
 
     const lunchSelectRoom = useMutation(async () => {
         try {
@@ -32,6 +33,8 @@ const Main = () => {
             return error;
         }
     });
+
+    
 
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
@@ -62,6 +65,7 @@ const Main = () => {
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
                     <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                    
                 </div>
                 <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
                 <div css={s.lunchSelect}>

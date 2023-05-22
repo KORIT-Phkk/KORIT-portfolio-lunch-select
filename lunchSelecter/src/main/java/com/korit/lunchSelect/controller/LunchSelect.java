@@ -1,5 +1,7 @@
 package com.korit.lunchSelect.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,12 +28,16 @@ public class LunchSelect {
 		return ResponseEntity.ok().body(lunchSelectService.createLunchSelectRoom());
 	}
 	
-	@PostMapping("/roomuserinfosave")
+	@PostMapping("/roomuserinsert")
 	public ResponseEntity<?> roomUserInfo(@RequestBody RoomJoin roomJoin){
-		System.out.println("roomJoin"+roomJoin);
+
+		lunchSelectService.roomUserInsert(roomJoin);
+//		System.out.println(map);
 		//room_id, user_id, category_id  add
 		return ResponseEntity.ok().body(null);
 	}
+	
+	
 	
 	
 }

@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import Invite from './Invite';
 import React, { useEffect, useState } from 'react';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
@@ -13,6 +14,7 @@ const LunchSelectMaster = () => {
     const [ name, setName ] = useState("");
     const [ userId, setUserId ] = useState(""); 
     const [ userInsert, setUserInsert ] = useState(false);
+
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ markerPosition, setMarkerPosition ] = useState({
         lat: null,
