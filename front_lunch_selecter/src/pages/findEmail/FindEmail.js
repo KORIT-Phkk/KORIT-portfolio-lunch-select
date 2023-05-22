@@ -16,7 +16,7 @@ const FindEmail = ({ param }) => {
     }
 
     const onClickSubmitHandle = () => {
-        if(findUser.name === "" || findUser.phone) {
+        if(findUser.name === "" || findUser.phone === "") {
             alert("공백은 입력할 수 없습니다.")
             return
         }
