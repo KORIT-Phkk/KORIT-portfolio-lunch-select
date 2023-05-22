@@ -39,7 +39,7 @@ public class LunchSelectService {
 		
 //		System.out.println("roomURL" + createLunchSelectRoom());
 		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map));
-		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map).get(1));
+		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map).getClass());
 		Random random = new Random();
 
 		int randomIndex = random.nextInt(lunchSelectRepository.findByLocation(map).size());
@@ -52,9 +52,9 @@ public class LunchSelectService {
 	
 
 	public String createLunchSelectRoom() {
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-		 
 		
 		Room room = Room.builder()
 				.roomMasterCode(UUID.randomUUID().toString().replaceAll("-", ""))
@@ -64,48 +64,18 @@ public class LunchSelectService {
 
 		lunchSelectRepository.createLunchSelectRoom(room);
 		
-		 
 		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
 
-	
-	public RoomJoin roomUserInsert(RoomJoin roomJoin) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-		
-		lunchSelectRepository.findMasterCode(principalUser.getUserId());
-//		System.out.println(principalUser.getUserId());
-//		System.out.println("inService: " +  lunchSelectRepository.findMasterCode(principalUser.getUserId()));
-//		lunchSelectRepository.roomUserInsert(roomJoin);
-//		roomJoin.setRoomId(lunchSelectRepository.findMasterCode(principalUser.getUserId()));
-		
-		
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("roomId", roomJoin.getRoomId());
-//		map.put("userId", roomJoin.getUserId());
-//		map.put("categoryId", roomJoin.getCategoryId());
-		//		lunchSelectRepository.roomUserInsert(roomJoin);
 
-//		System.out.println(map);
+	public List<String> rouletteResult(LunchSelectReqDto lunchSelectReqDto) {
 		
 		return null;
 	}
-
-//	public List<String> rouletteResult(LunchSelectReqDto lunchSelectReqDto) {
-//			
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("lat", lunchSelectReqDto.getLat());
-//		map.put("lng", lunchSelectReqDto.getLng());
-//
-//		map.put("categoryIds", lunchSelectReqDto.getCategoryId());
-//		map.put("roomUrl", createLunchSelectRoom());
-//		
-//		System.out.println("roomURL" + createLunchSelectRoom());
-//		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map));
-//		
-//	
-//		
-//		return lunchSelectRepository.findByLocation(map);
-//	}
 	
+	public void insertGest(RoomJoin roomJoin) {
+		
+		lunchSelectRepository.findByMasterRoomId(roomJoin.getGuestUrl());
+		System.out.println("sercvice: " + lunchSelectRepository.findByMasterRoomId(roomJoin.getGuestUrl()));
+	}
 }

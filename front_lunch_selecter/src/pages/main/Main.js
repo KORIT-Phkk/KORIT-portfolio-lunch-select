@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { IoMdContact } from 'react-icons/io';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import * as s from './style';
@@ -12,11 +12,23 @@ const Main = () => {
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
 
+    const [ userId, setUserId ] = useState(""); 
+    
+
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
 
-    const queryClient = useQueryClient();
+    const getUserInfo = useQuery(["getUserInfo"], async () => {
+        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
+        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+            headers: {
+                Authorization: accessToken
+            }
+        });
+        setUserId(response.data.userId)
+        return response;
+    });
 
     const lunchSelectRoom = useMutation(async () => {
         try {
@@ -34,7 +46,23 @@ const Main = () => {
         }
     });
 
-    
+    const userInfoInsert = useMutation(async() => {
+        
+        const option = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        }
+        const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
+            guestUrl: joinCode,
+            userId: userId
+        }, option);
+        return response
+    });
+
+    if(getUserInfo.isLoading) {
+        return <></>;
+    }
 
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
@@ -45,11 +73,13 @@ const Main = () => {
     }
 
     const lunchSelectJoinClickHandle = () => {
+        userInfoInsert.mutate();
         window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
     }
 
     const joinCodeInputHandle = (e) => {
         setJoinCode(e.target.value);
+        console.log(joinCode)
     }
 
     return (

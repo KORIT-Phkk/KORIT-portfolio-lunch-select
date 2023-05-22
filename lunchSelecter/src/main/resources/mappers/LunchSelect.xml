@@ -15,29 +15,23 @@
 	keyProperty="roomId"> 
 		insert into room_tb
 		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1)
-
 	</insert>
 	
-	<select id="findMasterCode" parameterType="Integer" resultType="Integer">
+	<select id="findByMasterRoomId" parameterType="String" resultType="Integer">
 		SELECT
 			room_id
 		FROM
 			room_tb
 		WHERE
-			room_master_id = #{userId}
+			room_master_code = #{guestUrl}
 		and flag = 1
 	</select>
 	
-	<insert id="roomUserInsert" parameterType="HashMap">
-		<foreach collection="map" item="categoryId" separator=",">
-		insert into room_join_tb
-		values(
-			0,
-		    (select room_id from room_tb where room_master_id = #{roomId}),
-		    #{userId},
-		    #{categoryId}
-		    )
-		</foreach>
-	</insert>
+	<select id="findMasterUserIdByRoomId" parameterType="Integer" resultType="Integer">
+		SELECT
+			
+	</select>
+	
+
 
 </mapper>

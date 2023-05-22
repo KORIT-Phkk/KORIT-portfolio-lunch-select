@@ -4,19 +4,17 @@ import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
-<<<<<<< HEAD
 import LunchSelect from './pages/LunchSelect/LunchSelect';
-=======
 
->>>>>>> kimjonghwan
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster';
-import Result from './pages/LunchSelect/Result/Result';
 
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
 import FindPassword from './pages/findPassword/FindPassword';
@@ -26,8 +24,6 @@ import Main from './pages/main/Main';
 import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
-import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
-import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 
 
 

@@ -12,6 +12,6 @@ public interface LunchSelectRepository {
 	
 	public List<String> findByLocation(Map<String, Object> map);
 	public int createLunchSelectRoom(Room room);
-	public int findMasterCode(int userId);
-	public int roomUserInsert(Map<String, Object> map);
+	public int findByMasterRoomId(String guestUrl);
+	public int findMasterUserIdByRoomId(Map<String, Object> map);
 }

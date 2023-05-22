@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Category from '../../components/SelectPage/Category/Category';
 import * as s from './style';
+import Invite from './Invite';
 
 
 const test = css`
@@ -32,7 +33,7 @@ const LunchSelectGuest = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
     }
-    
+
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {
@@ -53,6 +54,7 @@ const LunchSelectGuest = () => {
             }
         }
         const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
+            // gestUrl: joinCode,
             userId: userId,
             categoryId: [...selectedCategories]
         }, option);
@@ -67,7 +69,7 @@ const LunchSelectGuest = () => {
         console.log("참여하기 누름?")
         console.log(selectedCategories)
         console.log(userId)
-        userInfoInsert.mutate();
+        // userInfoInsert.mutate();
         setInsert(true);
     }
 
@@ -75,7 +77,7 @@ const LunchSelectGuest = () => {
     return (
         <div css={s.container}>
             <header>
-             
+            <Invite />
 
             </header>
 

@@ -31,9 +31,8 @@ public class LunchSelect {
 	@PostMapping("/roomuserinsert")
 	public ResponseEntity<?> roomUserInfo(@RequestBody RoomJoin roomJoin){
 
-		lunchSelectService.roomUserInsert(roomJoin);
-//		System.out.println(map);
-		//room_id, user_id, category_id  add
+//		System.out.println("controller: " + roomJoin);
+		lunchSelectService.insertGest(roomJoin);
 		return ResponseEntity.ok().body(null);
 	}
 	

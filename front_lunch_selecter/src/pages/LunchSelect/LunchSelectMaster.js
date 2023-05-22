@@ -42,7 +42,6 @@ const LunchSelectMaster = () => {
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
         const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-        // console.log(response.data)
         const names = await response.data.map(store => store.name);
         setTodayLunch(names);
         console.log("names: " + names)
@@ -72,7 +71,7 @@ const LunchSelectMaster = () => {
     return (
         <div css={s.container}>
             <header>
-               
+            <Invite />
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
