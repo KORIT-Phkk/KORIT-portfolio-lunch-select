@@ -11,7 +11,7 @@ const OAuth2Merge = () => {
             const response = await axios.put("http://localhost:8080/auth/oauth2/merge", mergeData);
             setErrorMessage("");
             return response;
-        } catch(error){//비번 틀렸을때, 토큰 만료됐을때
+        } catch(error){
             setErrorMessage(error.response.data);
             return error;
         }

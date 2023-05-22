@@ -32,7 +32,6 @@ export const input = css`
     justify-content: center;
     flex-direction: column;
 `;
-<<<<<<< HEAD:front_lunch_selecter/src/pages/findPassword/FindPasswordCss.js
 export const emailLabel = css`
     padding-top: 50px;
     padding-bottom: 10px;
@@ -51,14 +50,11 @@ export const codeLabel = css`
 `;
 export const blank = css`
     margin-top: 70px;
-
-=======
-
+`;
 export const inputLabel = css`
     padding-top: 100px;
     padding-bottom: 10px;
     color: rgb(221,164,79);
->>>>>>> main:front_lunch_selecter/src/pages/findPassword/style.js
 `;
 export const footerContainer =css`
     margin: auto;

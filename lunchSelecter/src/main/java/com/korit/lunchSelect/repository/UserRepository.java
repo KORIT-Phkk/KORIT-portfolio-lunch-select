@@ -14,4 +14,5 @@ public interface UserRepository {
 	public int saveUser(User user);
 	public int saveAuthority(Authority authority);
 	public int updateProvider(User user);
+	public int updatePassword(User user);
 }

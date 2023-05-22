@@ -7,43 +7,21 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md'
 
-const FindEmail = () => {
+const FindEmail = ({ param }) => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
-    const [ refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
-
 
     const onChangeHandle = (e) => {
         const { name, value } = e.target
         setFindUser({...findUser, [name]: value})
     }
 
-    const getEmail = useQuery(["getEmail"], async () => {
-        const option = {
-            params: {
-                name: findUser.name,
-                phone: findUser.phone
-            }
-        }
-
-        const response = await axios.get("http://localhost:8080/auth/findEmail", option)
-        return response
-
-        
-    }, {
-        enabled: refresh,
-        onSuccess: () => {
-            setRefresh(false);
-            navigate("/auth/findemail/result")
-        },
-        onError: (error) => {
-            setRefresh(false);
-            alert("사용자 정보가 존재하지 않습니다.")
-        }
-    })
-
     const onClickSubmitHandle = () => {
-        setRefresh(true);
+        if(findUser.name === "" || findUser.phone === "") {
+            alert("공백은 입력할 수 없습니다.")
+            return
+        }
+        navigate(`/auth/findemail/result/${findUser.name}/${findUser.phone}`)
     }
 
     const loginHandleClick = () => {

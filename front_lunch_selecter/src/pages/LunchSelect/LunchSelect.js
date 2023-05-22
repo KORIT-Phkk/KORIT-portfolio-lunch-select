@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as s from './style';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import Category from '../../components/SelectPage/Category/Category';
 
 
 
 const LunchSelect = () => {
+    const { roomURL } = useParams();
+    console.log(roomURL);
     const navigate = useNavigate();
 
     const [ position, setPosition ] = useState({
@@ -107,45 +109,15 @@ const LunchSelect = () => {
         
     };
 
-
-    if(getMenu.isLoading){
-        return <div>불러오는 중....</div>
-    }
-
-
-    if(isSpinning) {
-        intervalRef.current = setInterval(() => {
-            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
-        }, 500);
-    }
-
-    const onClickMapHandle = (_t, mouseEvent) => {
-        setPosition({
-            lat: mouseEvent.latLng.getLat(),
-            lng: mouseEvent.latLng.getLng(),
-        })
-    }
-
+ 
     return (
         <div css={s.container}>
-            <header>
-            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
-            <Map
-                center={{
-                    lat: geolocation.lat,
-                    lng: geolocation.lng
-                }}
-                style={{
-                    top: "10px",
-                    margin: "0px 30px 0px 30px",
-                    height: "1000px",
-                }}
-                level={2}
-                onClick={onClickMapHandle}
-                >
-                {position && <MapMarker position={position}/>}
-            </Map>
-            {position && <div>클릭한 위치의 좌표는 {position.lat}, {position.lng} 입니다.</div>}
+            <header css={s.header}>
+
+                <div css={s.categoryBox}>
+                    <h1 css={s.category}>카테고리를 선택하시오</h1>
+                </div>
+                <Category />
             </header>
 
             <main>

@@ -46,13 +46,12 @@ public class AuthenticationController{
 	}
 	
 	@GetMapping("/authenticate")
-	public ResponseEntity<?> authenticate(String accessToken) {
-		
+	public ResponseEntity<?> authenticate(@RequestHeader(value="Authorization") String accessToken) {
 		return ResponseEntity.ok().body(authenticationService.authenticate(accessToken));
 	}
 	
 	@GetMapping("/userInfo")
-	public ResponseEntity<?> getUserInfo(String accessToken) {
+	public ResponseEntity<?> getUserInfo(@RequestHeader(value="Authorization") String accessToken) {
 		return ResponseEntity.ok().body(authenticationService.getUserInfo(accessToken));
 	}
 	
