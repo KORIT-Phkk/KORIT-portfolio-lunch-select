@@ -12,7 +12,6 @@ import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
 import FindPassword from './pages/findPassword/FindPassword';
-import UpdatePassword from './pages/findPassword/UpdatePassword';
 import Login from './pages/login/Login';
 import OAuth2Login from './pages/login/OAuth2Login';
 import Main from './pages/main/Main';
@@ -21,6 +20,7 @@ import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
 import SelectLunch from './pages/LunchSelect/SelectLunch';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 
 
 const mainContainer = css`
