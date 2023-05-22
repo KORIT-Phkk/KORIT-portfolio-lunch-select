@@ -49,10 +49,6 @@ public class CacheTokenProvider {
 		return userRepository.findUserByEmail(email);
 	}
 	
-    public void removeToken(String key, String token) {
-        Cache cache = cacheManager.getCache(key);
-        cache.evict(token);
-    }
 	
 	public Map<String, Object> getTokenMap(String key, String token) {
         Cache cache = cacheManager.getCache(key);
@@ -64,6 +60,11 @@ public class CacheTokenProvider {
         Map<String, Object> tokenMap = (Map<String, Object>) valueWrapper.get();
         validateToken(tokenMap);
 		return tokenMap;
+	}
+	
+	public void removeToken(String key, String token) {
+		Cache cache = cacheManager.getCache(key);
+		cache.evict(token);
 	}
 	
 	public String generateResetPasswordToken(String email) {
@@ -82,7 +83,7 @@ public class CacheTokenProvider {
 	public void saveTokenToCache(String email, String token) {
 		Cache cache = cacheManager.getCache("passwordResetToken");
 		Map<String, Object> tokenMap = new HashMap<>();
-		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(10));
+		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(30));
 		
 		tokenMap.put("email", email);
 		tokenMap.put("expirationTime", expirationTime);

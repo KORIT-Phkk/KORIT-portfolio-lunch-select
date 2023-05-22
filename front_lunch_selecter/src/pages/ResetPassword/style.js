@@ -48,3 +48,10 @@ export const inputLabel = css`
     padding-bottom: 10px;
     color: rgb(221,164,79);
 `;
+
+export const errorMsg = css`
+    margin-left: 5px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: red;
+`;
