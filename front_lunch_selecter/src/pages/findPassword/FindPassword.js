@@ -17,6 +17,8 @@ const FindPassword = () => {
     const findPassword = useMutation(async (email) => {
         try {
             const response = await axios.post("http://localhost:8080/auth/findpassword", email);
+            alert("비밀번호 재설정 이메일이 발송되었습니다.")
+            navigate("/auth/login")
             return response;
         } catch(error) {
             alert(error.response.data.errorData.error)
@@ -25,8 +27,6 @@ const FindPassword = () => {
     });
 
     const submitClickHandle = () => {
-        alert("비밀번호 재설정 이메일이 발송되었습니다.")
-        navigate("/auth/login")
         findPassword.mutate({
             email: email
         })
