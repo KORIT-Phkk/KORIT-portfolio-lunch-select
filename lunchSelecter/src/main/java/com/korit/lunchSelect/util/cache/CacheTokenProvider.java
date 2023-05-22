@@ -83,7 +83,7 @@ public class CacheTokenProvider {
 	public void saveTokenToCache(String email, String token) {
 		Cache cache = cacheManager.getCache("passwordResetToken");
 		Map<String, Object> tokenMap = new HashMap<>();
-		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(30));
+		LocalDateTime expirationTime  = LocalDateTime.now().plus(Duration.ofMinutes(5));
 		
 		tokenMap.put("email", email);
 		tokenMap.put("expirationTime", expirationTime);
