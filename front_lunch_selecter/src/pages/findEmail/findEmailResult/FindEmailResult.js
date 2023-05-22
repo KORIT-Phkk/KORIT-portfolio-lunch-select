@@ -1,22 +1,42 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as s from './style'
-import { Link } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 const FindEmailResult = () => {
-    const queryClient = useQueryClient();
+    const { name, phone } = useParams();
+    const [ refresh, setRefresh] = useState(true);
+    const [ email, setEmail ] = useState("");
+    const navigate = useNavigate();
 
+    const getEmail = useQuery(["getEmail"], async () => {
+        setRefresh(false); 
+        const option = {
+            params: {
+                name: name,
+                phone: phone
+            }
+        }
+        try {
+            const response = await axios.get("http://localhost:8080/auth/findemail", option);
+            return response;
+        } catch (error) {
+            alert("사용자 정보가 존재하지 않습니다.")
+            navigate("/auth/findemail/")
+            return error;
+        }
+    }, {
+        enabled: refresh,
+        onSuccess: (response) => {
+            if(response.status === 200){
+                setEmail(response.data);
+            }
+        }
+    })
 
-
-    if(queryClient.getQueryState("getEmail").status === "loading") {
-        return (<div>로딩중...</div>);
-    }
-
-    const email = queryClient.getQueryData("getEmail").data;
-
-    console.log(email);
-
+    if(!getEmail.isLoading)
     return (
         <div css={s.container}>
             <header css={s.header}>

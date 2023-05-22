@@ -22,16 +22,11 @@ const FindPassword = () => {
             alert(error.response.data.errorData.error)
             return error;
         }
-    }, {
-        onSuccess: (response) => {
-            if(response.status === 200) {
-                alert("비밀번호 재설정 이메일이 발송되었습니다.")
-                navigate("/auth/login")
-            }
-        }
-    })
+    });
 
     const submitClickHandle = () => {
+        alert("비밀번호 재설정 이메일이 발송되었습니다.")
+        navigate("/auth/login")
         findPassword.mutate({
             email: email
         })

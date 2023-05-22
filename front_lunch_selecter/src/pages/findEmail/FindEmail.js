@@ -6,44 +6,21 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-const FindEmail = () => {
+const FindEmail = ({ param }) => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
-    const [ refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
-
-    console.log(refresh)
 
     const onChangeHandle = (e) => {
         const { name, value } = e.target
         setFindUser({...findUser, [name]: value})
     }
 
-    const getEmail = useQuery(["getEmail"], async () => {
-        setRefresh(false); 
-        const option = {
-            params: {
-                name: findUser.name,
-                phone: findUser.phone
-            }
-        }
-        try {
-            const response = await axios.get("http://localhost:8080/auth/findemail", option);
-            return response;
-        } catch (error) {
-            alert("사용자 정보가 존재하지 않습니다.")
-            return error;
-        }
-    }, {
-        enabled: refresh,
-        onSuccess: (response) => {
-            if(response.status === 200){
-                navigate("/auth/findemail/result")
-            }
-        }
-    })
-
     const onClickSubmitHandle = () => {
-        setRefresh(true);
+        if(findUser.name === "" || findUser.phone) {
+            alert("공백은 입력할 수 없습니다.")
+            return
+        }
+        navigate(`/auth/findemail/result/${findUser.name}/${findUser.phone}`)
     }
 
     return (
