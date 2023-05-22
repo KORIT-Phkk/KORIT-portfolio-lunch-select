@@ -38,7 +38,7 @@ function App() {
         <Route path="/auth/login" element={<AuthRouteReactQuery path="/auth/login" element={<Login/>}/>}/>
         <Route path="/auth/register" element={<AuthRouteReactQuery path="/auth/register" element={<Register/>}/>}/>
         <Route path="/auth/findemail" element={<AuthRouteReactQuery path="/auth/findemail" element={<FindEmail/>}/>}/>
-        <Route path="/auth/findemail/result" element={<AuthRouteReactQuery path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
+        <Route path="/auth/findemail/result/:name/:phone" element={<AuthRouteReactQuery path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRouteReactQuery path="/auth/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/auth/resetpassword" element={<AuthRouteReactQuery path="/auth/resetpassword" element={<ResetPassword/>}/>}/>
         <Route path="/auth/updatepassword" element={<AuthRouteReactQuery path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
