@@ -67,21 +67,22 @@ const Login = () => {
             <header css={s.headerContainer}>
                 <img src="../main/logo1.png"/>
             </header>
+
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.inpoutLabel}>Email</label>
+                    <label css={s.inputLabel}>Email</label>
                     <AuthInput type="email" onChange={handleChange} name="email" >
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.email}</div>
-                    <div><Link to="/auth/findemail">아이디 찾기</Link></div>
+                    <div><Link to="/auth/findemail">이메일 찾기</Link></div>
 
-                    <label css={s.inpoutLabel}>password</label>
+                    <label css={s.inputLabel}>Password</label>
                     <AuthInput type="password" onChange={handleChange} name="password" >
                     </AuthInput>
                     <div css={s.passwordBox}><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
-                    
                 </div>
             </main>
+            
             <footer css={s.footerContainer}>
                 <button onClick={loginHandleSubmit} css={s.loginButton}>로그인</button>
                 <button css={s.googleLoginButton} onClick={googleAuthHandleClick}>

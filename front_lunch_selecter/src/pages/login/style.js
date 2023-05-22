@@ -11,17 +11,8 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
 `;
-export const logo1 = css`
-    margin-bottom: 50px;
-`;
-export const logo2 = css`
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    width: 900px;
-    height: 270px;
-`;
 export const mainContainer =css`
+    padding-top: 50px;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -32,7 +23,7 @@ export const input = css`
     justify-content: center;
     flex-direction: column;
 `;
-export const inpoutLabel = css`
+export const inputLabel = css`
     padding-top: 100px;
     padding-bottom: 10px;
     color: black;
@@ -65,11 +56,13 @@ export const loginButton = css`
     font-size: 40px;
     cursor: pointer;
     &:hover {
+        color: black;
         border-radius: 20px;
         border-bottom: 1px solid #fafafa;
         background-color: #fafafa;
     }
     &:active {
+        color: black;
         border-radius: 20px;
         border-bottom: 1px solid #dbdbdb;
         background-color: #dbdbdb;

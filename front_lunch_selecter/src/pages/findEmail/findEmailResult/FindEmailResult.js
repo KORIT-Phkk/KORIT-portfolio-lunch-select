@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import * as s from './style'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
+import { MdSearch } from 'react-icons/md'
 
 const FindEmailResult = () => {
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
-
+    const loginHandleClick = () => {
+        navigate("/auth/login");
+    }
 
     if(queryClient.getQueryState("getEmail").status === "loading") {
         return (<div>로딩중...</div>);
@@ -15,19 +19,22 @@ const FindEmailResult = () => {
 
     const email = queryClient.getQueryData("getEmail").data;
 
-    console.log(email);
-
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Find Email</h1> 
+            <header css={s.headerContainer}>
+                <img src="../../main/logo1.png"/>
             </header>
+
+            <div css={s.comment}><MdSearch/>Your Email<MdSearch/></div>
+            
             <main css={s.mainContainer}>
+                <div css={s.resultBox}>
                 <div>{email}</div>
+                </div>
             </main>
 
             <footer css={s.footerContainer}>
-                <div css={s.login}><Link to="/auth/login">로그인</Link></div>
+                <button onClick={loginHandleClick} css={s.loginButton}>로그인</button>
             </footer>
         </div>
     );

@@ -10,12 +10,13 @@ const input = css`
     width: 700px;
     height: 80px;
     font-size: 40px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid black;
 `;
 export const sendButton = css`
     width: 150px;
     height: 72px;
-    border: 1px solid #dbdbdb;
+    border: none;
+    border-bottom: 1px solid black;
     font-size: 20px;
     background-color: white;
     cursor: pointer;

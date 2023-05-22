@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import AuthInput from '../../components/auth/AuthInput';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MdAlternateEmail } from 'react-icons/md'
 
 const FindEmail = () => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
@@ -45,26 +46,30 @@ const FindEmail = () => {
         setRefresh(true);
     }
 
+    const loginHandleClick = () => {
+        navigate("/auth/login");
+    }
+
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Find Email</h1> 
+            <header css={s.headerContainer}>
+                <img src="../main/logo1.png"/>
             </header>
+
+            <div css={s.comment}><MdAlternateEmail/> Find Email <MdAlternateEmail/></div>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-
-                <label css={s.inputLabel}>name</label>
+                    <label css={s.nameLabel}>Name</label>
                     <AuthInput type="text" onChange={onChangeHandle} name="name" />
-
-                    <label css={s.inputLabel}>phone</label>
+                    <label css={s.PhoneLabel}>Phone</label>
                     <AuthInput type="tel" onChange={onChangeHandle} name="phone" />
                 </div>
             </main>
 
             <footer css={s.footerContainer}>
                 <button css={s.checkButton} onClick={onClickSubmitHandle}>확인</button>
+                <button onClick={loginHandleClick} css={s.loginButton}>로그인</button>
             </footer>
-            <div css={s.login}><Link to="/auth/login">로그인</Link></div>
         </div>
     );
 };
