@@ -10,7 +10,7 @@ const AuthRouteReactQuery = ({ path, element }) => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
     const authPaths = ["/auth"]
 
-    const authenticate = useQuery(["authenticate"], async async => {
+    const authenticate = useQuery(["authenticate"], async ()=> {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/authenticate", 
         {headers: {Authorization: accessToken}});

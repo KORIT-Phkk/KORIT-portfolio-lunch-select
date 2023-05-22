@@ -1,11 +1,14 @@
 package com.korit.lunchSelect.service;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -33,9 +36,15 @@ public class LunchSelectService {
 		map.put("categoryIds", lunchSelectReqDto.getCategoryId());
 		map.put("roomUrl", createLunchSelectRoom());
 		
-		System.out.println("roomURL" + createLunchSelectRoom());
+//		System.out.println("roomURL" + createLunchSelectRoom());
 		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map));
+		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map).get(1));
+		Random random = new Random();
 
+		int randomIndex = random.nextInt(lunchSelectRepository.findByLocation(map).size());
+		
+//		System.out.println(lunchSelectRepository.findByLocation(map).get(randomIndex)); 
+//		System.out.println(randomIndex);
 		return lunchSelectRepository.findByLocation(map);
 	}
 	
@@ -58,5 +67,21 @@ public class LunchSelectService {
 	}
 
 
+//	public List<String> rouletteResult(LunchSelectReqDto lunchSelectReqDto) {
+//			
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("lat", lunchSelectReqDto.getLat());
+//		map.put("lng", lunchSelectReqDto.getLng());
+//
+//		map.put("categoryIds", lunchSelectReqDto.getCategoryId());
+//		map.put("roomUrl", createLunchSelectRoom());
+//		
+//		System.out.println("roomURL" + createLunchSelectRoom());
+//		System.out.println("DB in service: " + lunchSelectRepository.findByLocation(map));
+//		
+//	
+//		
+//		return lunchSelectRepository.findByLocation(map);
+//	}
 	
 }

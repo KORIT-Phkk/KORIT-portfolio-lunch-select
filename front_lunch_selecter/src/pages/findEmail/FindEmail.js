@@ -27,7 +27,7 @@ const FindEmail = () => {
             }
         }
         try {
-            const response = await axios.get("http://localhost:8080/auth/findEmail", option);
+            const response = await axios.get("http://localhost:8080/auth/findemail", option);
             return response;
         } catch (error) {
             alert("사용자 정보가 존재하지 않습니다.")

@@ -19,32 +19,6 @@
 		<result property="categoryName" column="category_name"/>
 	</resultMap>
 	
-<!-- 	<select id="findByLocation" parameterType="hashmap" resultMap="LunchSelectMap"> -->
-<!-- 		SELECT  -->
-<!-- 			rt.restaurant_id, -->
-<!-- 			rt.restaurant_name, -->
-<!-- 			rt.restaurant_address, -->
-<!-- 			rt.restaurant_lat, -->
-<!-- 			rt.restaurant_lng, -->
-<!-- 			rt.restaurant_category, -->
-<!-- 			ct.category_id, -->
-<!-- 			ct.category_name, -->
-<!-- 			(6371 * acos(cos(radians(#{lat})) * cos(radians(restaurant_lat)) * cos(radians(restaurant_lng) - radians(#{lng})) + sin(radians(#{lat})) * sin(radians(restaurant_lat)))) AS distance -->
-<!-- 		FROM  -->
-<!-- 				restaurant_tb rt -->
-<!--     			LEFT OUTER JOIN category_tb ct ON (ct.category_id = rt.restaurant_category) -->
-<!-- 		WHERE -->
-<!-- 		1=1 -->
-<!-- 		<if test="categoryIds != null"> -->
-<!-- 		and restaurant_category IN ( -->
-<!-- 			<foreach item="categoryId" collection="categoryIds" separator=","> -->
-<!-- 				#{categoryId} -->
-<!-- 			</foreach> -->
-<!-- 		) -->
-<!-- 		</if> -->
-<!-- 		HAVING  -->
-<!-- 			0.5 > distance; -->
-<!-- 	</select> -->
 	
 	<select id="findByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
 		SELECT 
@@ -79,10 +53,11 @@
 					#{categoryId}
 				</foreach>
 			)
-		</if>
+			</if>
 		HAVING 
 			0.5 > distance;
-		
 	</select>
+	
+	<select id=""></select>
 
 </mapper>

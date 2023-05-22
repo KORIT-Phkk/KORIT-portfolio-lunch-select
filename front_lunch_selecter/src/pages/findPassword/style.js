@@ -18,13 +18,25 @@ export const mainContainer =css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 400px;
 `;
 export const input = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-left: 295px;
+`;
+
+export const inputLabel = css`
+    padding-top: 100px;
+    padding-bottom: 10px;
+    color: rgb(221,164,79);
+`;
+
+
+export const footerContainer =css`
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
 `;
 export const checkButton = css`
     width: 850px;
