@@ -67,7 +67,7 @@ const UserInfo = ({ isOpen }) => {
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
 
-    const info = useQuery(["accessToken"], async () => {
+    const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {
             headers: {
@@ -77,7 +77,6 @@ const UserInfo = ({ isOpen }) => {
         
         setName(response.data.name)
         setEmail(response.data.email)
-        console.log(response)
         return response;
     });
 

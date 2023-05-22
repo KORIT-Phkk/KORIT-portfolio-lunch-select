@@ -52,9 +52,12 @@ export const blank = css`
     margin-top: 70px;
 `;
 export const inputLabel = css`
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 10px;
-    color: rgb(221,164,79);
+    color: black;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
 `;
 export const footerContainer =css`
     margin: auto;

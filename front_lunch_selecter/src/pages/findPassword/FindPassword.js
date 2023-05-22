@@ -41,7 +41,7 @@ const FindPassword = () => {
             <div css={s.comment}><RiLockPasswordFill/> Find Password <RiLockPasswordFill/></div>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.inputLabel}>email</label>
+                    <label css={s.inputLabel}>Email</label>
                     <AuthInput type="email" onChange={onChangeHandle} name="email" />
                 </div>
             

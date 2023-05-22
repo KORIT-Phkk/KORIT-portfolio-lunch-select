@@ -4,11 +4,17 @@ import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
-import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster';
+
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import FindEmail from './pages/findEmail/FindEmail';
 import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
 import FindPassword from './pages/findPassword/FindPassword';
@@ -19,8 +25,6 @@ import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
 import SelectLunch from './pages/LunchSelect/SelectLunch';
-import ResetPassword from './pages/ResetPassword/ResetPassword';
-import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 
 
 const mainContainer = css`
@@ -54,6 +58,11 @@ function App() {
         <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu/>}/>}/>
         <Route path="/lunchselect/room/:roomURL" element={<AuthRouteReactQuery path="/lunchselect/room" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/location" element={<AuthRouteReactQuery path="/lunchselect/location" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/room/master/:roomMasterURL" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
+        <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRouteReactQuery path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
+        <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
+        <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu />}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>

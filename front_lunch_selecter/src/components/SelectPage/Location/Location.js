@@ -1,15 +1,8 @@
-import axios from 'axios';
-import { async } from 'q';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useQuery } from 'react-query';
 
-const Location = () => {
-    const [ markerPosition, setMarkerPosition ] = useState({
-        lat: null,
-        lng: null
-    });
-
+const Location = ({ markerPosition, setMarkerPosition }) => {
+    
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -17,14 +10,14 @@ const Location = () => {
                 ...prev,
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
-                isLoading: false,
+                isLoading: false
                 }))
             },
             (err) => {
                 setMarkerPosition((prev) => ({
                 ...prev,
                 errMsg: err.message,
-                isLoading: false,
+                isLoading: false
                 }))
             })
         } else {
@@ -36,27 +29,13 @@ const Location = () => {
         }
     }, [])
 
-    // const getMenu = useQuery(async () => {
-    //     const option = {
-    //         params: {
-    //             lat: markerPosition.lat,
-    //             lng: markerPosition.lng
-    //         },
-    //         headers: {
-    //             Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-    //         }
-    //     };
-    //     const response = await axios.get("http://localhost:8080/lunch/select", option);
-    //     const names = response.data.map(store => store.name);
-
-    // })
-
     const markerHandle = (_t, e) => {
         const clickedPosition = {
             lat: e.latLng.getLat(),
             lng: e.latLng.getLng(),
         };
         setMarkerPosition(clickedPosition);
+        console.log(markerPosition)
 
     };
 
@@ -67,7 +46,7 @@ const Location = () => {
                 center={markerPosition}
                 style={{
                     width: "100%",
-                    height: "500px"
+                    height: "1000px"
                 }}
                 onClick={markerHandle}
             >

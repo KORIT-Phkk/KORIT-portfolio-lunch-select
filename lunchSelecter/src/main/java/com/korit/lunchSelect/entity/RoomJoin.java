@@ -1,15 +1,18 @@
 package com.korit.lunchSelect.entity;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
-	private String categoryId;
-	private String categoryName;
+@Data
+public class RoomJoin {
+	private int userId;
+	private String guestUrl;
+//	private List<Integer> categoryId;
 }

@@ -40,14 +40,15 @@ export const logo =css`
 `;
 export const mainContainer =css`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 export const lunchSelect =css`
     display: flex;
     justify-content: center;
 `;
 export const lunchButton =css`
-    margin-top: 100px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,6 +66,15 @@ export const lunchButton =css`
         background-color: #dbdbdb;
     }
 `;
+
+export const joinUrlInput = css`
+    margin-bottom: 15px;
+    width: 850px;
+    height: 80px;
+    font-size: 40px;
+    text-align: center;
+`;
+
 export const footerContainer =css`
     display: flex;
     justify-content: center;

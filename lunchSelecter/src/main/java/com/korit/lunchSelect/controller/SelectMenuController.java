@@ -17,18 +17,19 @@ public class SelectMenuController {
 
 	@GetMapping("/lunchselect/roulette")
 	public ResponseEntity<?> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
-		
-//		System.out.println(lunchSelectReqDto);
-		System.out.println("controller: " + lunchSelectService.lunchSelect(lunchSelectReqDto));
-		
+		System.out.println("controller: " +lunchSelectReqDto);
+
+
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}
 	
-	public ResponseEntity<?> groupLunchSelect(){
-		
-		
-		return ResponseEntity.ok(null);
-	}
-	
+//	@GetMapping("/lunchselect/result")
+//	public ResponseEntity<?> groupLunchSelect(LunchSelectReqDto lunchSelectReqDto){
+//		lunchSelectService.lunchSelect(lunchSelectReqDto);
+//		
+//		
+//		return ResponseEntity.ok(null);
+//	}
+//	
 
 }

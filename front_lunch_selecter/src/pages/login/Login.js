@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
-import AuthInput from '../../components/auth/AuthInput';
-import { Link, useNavigate } from 'react-router-dom';
-import * as s from './style'
 import axios from 'axios';
+import React, { useState } from 'react';
+import { SiNaver } from 'react-icons/si';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 import { FcGoogle } from 'react-icons/fc';
-import { SiNaver } from 'react-icons/si';
 import { RiKakaoTalkFill } from 'react-icons/ri';
+import AuthInput from '../../components/auth/AuthInput';
+import * as s from './style';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
