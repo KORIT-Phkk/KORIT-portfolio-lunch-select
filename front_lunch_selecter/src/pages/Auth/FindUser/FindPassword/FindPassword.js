@@ -9,9 +9,10 @@ import AuthInput from '../../../../components/auth/AuthInput';
 
 const FindPassword = () => {
     const [ email, setEmail ] = useState("");
+    const [ errorMessage, setErrorMessage] = useState({email: ""});
     const navigate = useNavigate();
 
-    const onChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         setEmail(e.target.value);
     }
 
@@ -22,16 +23,12 @@ const FindPassword = () => {
             navigate("/auth/login")
             return response;
         } catch(error) {
-            alert(error.response.data.errorData.error)
+            setErrorMessage({email: error.response.data.errorData.error})
             return error;
         }
     });
 
-    const submitClickHandle = () => {
-        if(email === "") {
-            alert("공백은 입력할 수 없습니다.")
-            return
-        }
+    const submitFindPasswordHanle = () => {
         findPassword.mutate({
             email: email
         })
@@ -39,7 +36,7 @@ const FindPassword = () => {
 
     const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
-            submitClickHandle();
+            submitFindPasswordHanle();
         }
     }
 
@@ -52,12 +49,13 @@ const FindPassword = () => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={onChangeHandle} name="email" />
+                    <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
+                    <div css={s.errorMsg}>{errorMessage.email}</div>
                 </div>
             
             </main>
             <footer css={s.footerContainer}>
-                <button css={s.checkButton} onClick={submitClickHandle}>확인</button>
+                <button css={s.checkButton} onClick={submitFindPasswordHanle}>확인</button>
             </footer>
         </div>
     );

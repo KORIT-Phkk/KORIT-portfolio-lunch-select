@@ -24,7 +24,7 @@ const OAuth2Merge = () => {
         }
     });
 
-    const [ password, setPassword ] = useState();
+    const [ password, setPassword ] = useState("");
     const [ errorMessage, setErrorMessage] = useState("");
     const [ searchParams, setSearchParams ] = useSearchParams();
     const email = searchParams.get("email");
@@ -35,6 +35,10 @@ const OAuth2Merge = () => {
     }
 
     const providerMergeSubmitHandle = () => {
+        if(password === "") {
+            alert("공백은 입력할 수 없습니다.")
+            return
+        }
         providerMerge.mutate({
             email,
             password,

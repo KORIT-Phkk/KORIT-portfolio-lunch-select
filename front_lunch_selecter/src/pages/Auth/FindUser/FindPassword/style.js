@@ -92,3 +92,14 @@ export const checkButton = css`
         background-color: #dbdbdb;
     }
 `;
+
+export const errorMsg = css`
+    margin-left: 5px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: red;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;

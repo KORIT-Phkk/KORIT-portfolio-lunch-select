@@ -4,27 +4,35 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md'
 import AuthInput from './../../../../components/auth/AuthInput';
+import axios from 'axios';
 
-const FindEmail = ({ param }) => {
+const FindEmail = () => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
     const navigate = useNavigate();
 
-    const onChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         const { name, value } = e.target
         setFindUser({...findUser, [name]: value})
     }
 
-    const onClickSubmitHandle = () => {
-        if(findUser.name === "" || findUser.phone === "") {
-            alert("공백은 입력할 수 없습니다.")
-            return
+    const submitFindEmailHandle = async () => {
+        const option = {
+            params: {
+                name: findUser.name,
+                phone: findUser.phone
+            }
         }
-        navigate(`/auth/findemail/result/${findUser.name}/${findUser.phone}`)
+        try {
+            const response = await axios.get("http://localhost:8080/auth/findemail", option);
+            navigate(`/auth/findemail/result/${response.data}`)
+        } catch (error) {
+            alert("사용자 정보가 존재하지 않습니다.")
+        }
     }
 
     const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
-            onClickSubmitHandle();
+            submitFindEmailHandle();
         }
     }
 
@@ -39,14 +47,14 @@ const FindEmail = ({ param }) => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.nameLabel}>Name</label>
-                    <AuthInput type="text" onChange={onChangeHandle} name="name" />
+                    <AuthInput type="text" onChange={onChangeInputHandle} name="name" />
                     <label css={s.PhoneLabel}>Phone</label>
-                    <AuthInput type="tel" onChange={onChangeHandle} name="phone" />
+                    <AuthInput type="tel" onChange={onChangeInputHandle} name="phone" />
                 </div>
             </main>
 
             <footer css={s.footerContainer}>
-                <button css={s.checkButton} onClick={onClickSubmitHandle}>확인</button>
+                <button css={s.checkButton} onClick={submitFindEmailHandle}>확인</button>
             </footer>
         </div>
     );

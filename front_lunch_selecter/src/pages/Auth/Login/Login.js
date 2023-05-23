@@ -12,58 +12,55 @@ import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
-    const [ errorMessages, setErrorMessages ] = useState({email: "", password: ""});
-    const [ refresh, setRefresh ] = useRecoilState(authenticatedState);
+    const [ errorMessages, setErrorMessages ] = useState({email: ""});
+    const [ authState, setAuthState ] = useRecoilState(authenticatedState);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const onChangeInputHandle = (e) => {
         const { name, value } = e.target;
         setLoginUser({ ...loginUser, [name]: value });
     }
 
-    const loginHandleSubmit = async () => {
+    const submitLoginHandle = async () => {
         const option = {
             headers: {
                 "Content-Type": "application/json"
             }
         }
-
         try {
             const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
-            alert("로그인 성공!");
-
             localStorage.setItem("accessToken", response.data);
-            setRefresh(true);
+            setAuthState(true);
         } catch(error) {
-            setErrorMessages({email: "", password: "", ...error.response.data.errorData});
+            setErrorMessages({email: "", ...error.response.data.errorData});
         }
     }
     
-    const loginEnterKeyup = (e) => {
+    const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
-            loginHandleSubmit();
+            submitLoginHandle();
         }
     }
 
-    const googleAuthHandleClick = () => {
+    const onClickGoogleAuthButton = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/google"
     }
 
-    const naverAuthHandleClick = () => {
+    const onClickNaverAuthButton = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/naver"
     }
 
-    const kakaoAuthHandleClick = () => {
+    const onClickKakaoAuthButton = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/kakao"
     }
 
-    const registerHandleClick = () => {
+    const onClickRegisterButton = () => {
         navigate("/auth/register");
     }
 
 
     return (
-        <div css={s.container} onKeyUp={loginEnterKeyup}>
+        <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
                 <img src="../main/logo1.png"/>
             </header>
@@ -71,19 +68,19 @@ const Login = () => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={handleChange} name="email" />
+                    <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
                     <div css={s.errorMsg}>{errorMessages.email}</div>
                     <div><Link to="/auth/findemail">이메일 찾기</Link></div>
 
                     <label css={s.inputLabel}>Password</label>
-                    <AuthInput type="password" onChange={handleChange} name="password" />
+                    <AuthInput type="password" onChange={onChangeInputHandle} name="password" />
                     <div css={s.passwordBox}><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
                 </div>
             </main>
             
             <footer css={s.footerContainer}>
-                <button onClick={loginHandleSubmit} css={s.loginButton}>로그인</button>
-                <button css={s.googleLoginButton} onClick={googleAuthHandleClick}>
+                <button onClick={submitLoginHandle} css={s.loginButton}>로그인</button>
+                <button css={s.googleLoginButton} onClick={onClickGoogleAuthButton}>
                     <div css={s.iconStyle}>
                         <FcGoogle/>
                     </div>
@@ -91,7 +88,7 @@ const Login = () => {
                         Google 로그인
                     </div>
                 </button>
-                <button css={s.naverLoginButton} onClick={naverAuthHandleClick}>
+                <button css={s.naverLoginButton} onClick={onClickNaverAuthButton}>
                     <div css={s.iconStyle}>
                         <SiNaver/>
                     </div>
@@ -99,7 +96,7 @@ const Login = () => {
                         Naver 로그인
                     </div>
                 </button>
-                <button css={s.kakaoLoginButton} onClick={kakaoAuthHandleClick}>
+                <button css={s.kakaoLoginButton} onClick={onClickKakaoAuthButton}>
                     <div css={s.iconStyle}>
                         <RiKakaoTalkFill/>
                     </div>
@@ -107,7 +104,7 @@ const Login = () => {
                         Kakao 로그인
                     </div>
                 </button>
-                <button css={s.registerButton} onClick={registerHandleClick}>회원가입</button>
+                <button css={s.registerButton} onClick={onClickRegisterButton}>회원가입</button>
             </footer>
         </div>
     );

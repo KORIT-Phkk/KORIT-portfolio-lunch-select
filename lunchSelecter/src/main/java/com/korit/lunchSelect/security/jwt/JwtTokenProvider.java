@@ -47,12 +47,10 @@ public class JwtTokenProvider {
 		String email = null;
 		
 		if(authentication.getPrincipal().getClass() == PrincipalUser.class) {
-			// PrincipalUser
 			PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
 			email = principalUser.getEmail();
 			
-		}else {
-			// OAuth2User
+		} else {
 			OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 			email = oAuth2User.getAttribute("email");
 		}
@@ -70,14 +68,14 @@ public class JwtTokenProvider {
 		
 		String authorities = builder.toString();
 		
-		Date tokenExpiresDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));	// 현재시간 + 하루
+		Date tokenExpiresDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
 		
 		return Jwts.builder()
 				.setSubject("AuthRegister")
-				.claim("email", email)// 토큰의 제목(email)
-				.claim("auth", authorities)					// auth
-				.setExpiration(tokenExpiresDate)			// 토큰 만료 시간
-				.signWith(key, SignatureAlgorithm.HS256)	// 토큰 암호화
+				.claim("email", email)
+				.claim("auth", authorities)
+				.setExpiration(tokenExpiresDate)
+				.signWith(key, SignatureAlgorithm.HS256)
 				.compact();
 	}
 	
@@ -142,16 +140,7 @@ public class JwtTokenProvider {
 		Claims claims = getClaims(accessToken);
 		
 		String email = claims.get("email").toString();
-		User userEntity =  userRepository.findUserByEmail(email);
-//		if(claims.get("auth") == null) {
-//			throw new CustomException("AccessToken에 권한 정보가 없습니다.");
-//		}
-//		
-//		String auth = claims.get("auth").toString();
-//		for(String role : auth.split(",")) {
-//			authorities.add(new SimpleGrantedAuthority(role));
-//		}
-//		
+		User userEntity =  userRepository.findUserByEmail(email);		
 		
 		PrincipalUser principalUser = userEntity.toPrincipal();
 		

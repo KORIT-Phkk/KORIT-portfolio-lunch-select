@@ -17,15 +17,16 @@ import { Reset } from './style/Reset';
 import SelectLunch from './pages/LunchSelect/SelectLunch';
 
 import Login from './pages/Auth/Login/Login';
-import FindEmail from './pages/Auth/Find/FindEmail/FindEmail';
 import Register from './pages/Auth/Register/Register';
-import FindEmailResult from './pages/Auth/Find/FindEmail/FindEmailResult/FindEmailResult';
-import FindPassword from './pages/Auth/Find/FindPassword/FindPassword';
-import ResetPassword from './pages/Auth/Find/FindPassword/ResetPassword/ResetPassword';
 import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
 import OAuth2Login from './pages/Auth/OAuth/OAuth2Login/OAuth2Login';
 import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
 import OAuth2Merge from './pages/Auth/OAuth/OAuth2Merge/OAuth2Merge';
+import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
+import FindEmail from './pages/Auth/FindUser/FindEmail/FindEmail';
+import FindEmailResult from './pages/Auth/FindUser/FindEmail/FindEmailResult/FindEmailResult';
+import FindPassword from './pages/Auth/FindUser/FindPassword/FindPassword';
+import ResetPassword from './pages/Auth/FindUser/FindPassword/ResetPassword/ResetPassword';
 
 
 
@@ -49,8 +50,9 @@ function App() {
         {/* Auth */}
         <Route path="/auth/login" element={<AuthRoute path="/auth/login" element={<Login/>}/>}/>
         <Route path="/auth/register" element={<AuthRoute path="/auth/register" element={<Register/>}/>}/>
+        <Route path="/auth/register/result" element={<AuthRoute path="/auth/register/result" element={<RegisterResult/>}/>}/>
         <Route path="/auth/findemail" element={<AuthRoute path="/auth/findemail" element={<FindEmail/>}/>}/>
-        <Route path="/auth/findemail/result/:name/:phone" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
+        <Route path="/auth/findemail/result/:name" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRoute path="/auth/findpassword" element={<FindPassword/>}/>}/>
         <Route path="/auth/resetpassword" element={<AuthRoute path="/auth/resetpassword" element={<ResetPassword/>}/>}/>
         <Route path="/auth/updatepassword" element={<AuthRoute path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
