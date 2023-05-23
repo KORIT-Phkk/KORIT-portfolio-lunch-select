@@ -50,7 +50,7 @@ export const footerContainer =css`
     justify-content: center;
     flex-direction: column;
 `;
-export const loginButton = css`
+export const findPassword = css`
     width: 850px;
     height: 80px;
     margin-top: 190px;
@@ -72,6 +72,29 @@ export const loginButton = css`
     }
     &:active {
         color: black;
+        border-radius: 20px;
+        border-bottom: 1px solid #dbdbdb;
+        background-color: #dbdbdb;
+    }
+`;
+export const loginButton = css`
+    width: 850px;
+    height: 80px;
+    margin-top: 30px;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    background-color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+
+    cursor: pointer;
+    &:hover {
+        border-radius: 20px;
+        border-bottom: 1px solid #fafafa;
+        background-color: #fafafa;
+    }
+    &:active {
         border-radius: 20px;
         border-bottom: 1px solid #dbdbdb;
         background-color: #dbdbdb;

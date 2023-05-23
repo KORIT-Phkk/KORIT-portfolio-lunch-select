@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import AuthInput from '../../components/auth/AuthInput';
 import { useMutation } from 'react-query';
 import axios from 'axios';
+import { MdLockReset } from 'react-icons/md'
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -60,9 +61,12 @@ const ResetPassword = () => {
 
     return (
         <div css={s.container} onKeyDown={onEnterKeyup}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Update Password</h1> 
+            <header css={s.headerContainer}>
+                <img src="../main/logo1.png" />
             </header>
+
+            <div css={s.comment}><MdLockReset/>Reset Password<MdLockReset/></div>
+
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Password</label>
@@ -73,8 +77,10 @@ const ResetPassword = () => {
                     <label css={s.inputLabel}>checkPassword</label>
                     <AuthInput type="password" name="checkPassword" onChange={onChangeHandle} />
                 </div>
-                <button css={s.checkButton} onClick={submitOnclickHandle}>확인</button>
             </main>
+            <footer css={s.footerContainer}>
+                <button css={s.checkButton} onClick={submitOnclickHandle}>확인</button>
+            </footer>
             
         </div>
     );

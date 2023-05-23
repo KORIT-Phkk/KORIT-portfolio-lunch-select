@@ -1,18 +1,15 @@
 import { css } from '@emotion/react'
 
 export const container = css`
+    margin-top: 150px;
     display: flex;
     justify-content: center;
     flex-direction: column;
 `;
-export const header = css`
-    margin: 300px auto;
+export const headerContainer = css`
+    margin: auto;
     display: flex;
     justify-content: center;
-`;
-export const logo = css`
-    font-size: 80px;
-    font-weight: 600;
 `;
 export const mainContainer =css`
     display: flex;

@@ -35,6 +35,7 @@ const FindEmail = ({ param }) => {
             </header>
 
             <div css={s.comment}><MdAlternateEmail/> Find Email <MdAlternateEmail/></div>
+            
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.nameLabel}>Name</label>

@@ -41,6 +41,10 @@ const FindEmailResult = () => {
         navigate("/auth/login");
     }
 
+    const findPasswordHandleClick = () => {
+        navigate("/auth/findpassword");
+    }
+
     if(!getEmail.isLoading)
     return (
         <div css={s.container}>
@@ -52,11 +56,13 @@ const FindEmailResult = () => {
             
             <main css={s.mainContainer}>
                 <div css={s.resultBox}>
+                    공사중. 건들지마라
                 <div>{email}</div>
                 </div>
             </main>
 
             <footer css={s.footerContainer}>
+                <button onClick={findPasswordHandleClick} css={s.findPassword}>비밀번호 찾기</button>
                 <button onClick={loginHandleClick} css={s.loginButton}>로그인</button>
             </footer>
         </div>
