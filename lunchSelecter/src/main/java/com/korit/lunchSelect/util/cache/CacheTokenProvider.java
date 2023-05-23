@@ -15,7 +15,6 @@ import com.korit.lunchSelect.exception.CustomException;
 import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.UserRepository;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -58,7 +57,6 @@ public class CacheTokenProvider {
 					ErrorMap.builder().put("error", "유효하지 않은 토큰입니다.").build());
         }
         Map<String, Object> tokenMap = (Map<String, Object>) valueWrapper.get();
-        validateToken(tokenMap);
 		return tokenMap;
 	}
 	

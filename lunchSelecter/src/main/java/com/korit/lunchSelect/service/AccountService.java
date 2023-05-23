@@ -52,6 +52,9 @@ public class AccountService {
 					ErrorMap.builder().put("error", "비밀번호가 일치하지 않습니다.").build());
 		}
 		
+		Map<String, Object> tokenMap = cacheTokenProvider.getTokenMap("passwordResetToken", resetPasswordReqDto.getToken());
+		cacheTokenProvider.validateToken(tokenMap);
+		
 		User userEntity = cacheTokenProvider.findUserByToken(resetPasswordReqDto.getToken());
 		userEntity.setPassword(new BCryptPasswordEncoder().encode(resetPasswordReqDto.getPassword()));
 		
