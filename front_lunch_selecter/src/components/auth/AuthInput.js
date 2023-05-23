@@ -6,7 +6,6 @@ import Input from '../Input/Input';
 const authInput = css`
     width: 850px;
     margin-bottom: 5px;
-    
 `;
 
 
@@ -14,7 +13,6 @@ const authInput = css`
 const AuthInput = ({ type, placeholder, onChange, name, children }) => {
     return (
         <div css={authInput}>
-            
             <Input
             type={type}
             placeholder={placeholder}

@@ -2,10 +2,10 @@
 import * as s from './style'
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import AuthInput from '../../components/auth/AuthInput';
 import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
 import { MdLockReset } from 'react-icons/md'
+import AuthInput from '../../../../../components/auth/AuthInput';
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ const ResetPassword = () => {
     }
 
     return (
-        <div css={s.container} onKeyDown={onEnterKeyup}>
+        <div css={s.container} onKeyUp={onEnterKeyup}>
             <header css={s.headerContainer}>
                 <img src="../main/logo1.png" />
             </header>

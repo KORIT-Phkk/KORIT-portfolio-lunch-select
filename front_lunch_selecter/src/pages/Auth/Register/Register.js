@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
-import AuthInput from '../../components/auth/AuthInput';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineContacts } from 'react-icons/ai'
 import * as s from './style'
 import axios from 'axios';
+import AuthInput from '../../../components/auth/AuthInput';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -50,25 +50,19 @@ const Register = () => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={onChangeHandle} name="email">
-                    </AuthInput>
+                    <AuthInput type="email" onChange={onChangeHandle} name="email" />
                     <div css={s.errorMsg}>{errorMessages.email}</div>
 
                     <label css={s.elseLabel}>Password</label>
-                    <AuthInput type="password" onChange={onChangeHandle} name="password">
-                    </AuthInput>
+                    <AuthInput type="password" onChange={onChangeHandle} name="password" />
                     <div css={s.errorMsg}>{errorMessages.password}</div>
 
                     <label css={s.elseLabel}>Name</label>
-                    <AuthInput type="text" onChange={onChangeHandle} name="name">
-
-                    </AuthInput>
+                    <AuthInput type="text" onChange={onChangeHandle} name="name" />
                     <div css={s.errorMsg}>{errorMessages.name}</div>
 
                     <label css={s.elseLabel}>Phone</label>
-                    <AuthInput type="tel" onChange={onChangeHandle} name="phone">
-
-                    </AuthInput>
+                    <AuthInput type="tel" onChange={onChangeHandle} name="phone" />
                     <div css={s.errorMsg}>{errorMessages.phone}</div>
                 </div>
             </main>

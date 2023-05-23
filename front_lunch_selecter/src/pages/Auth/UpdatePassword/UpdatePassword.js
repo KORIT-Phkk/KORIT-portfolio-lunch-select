@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import AuthInput from '../../components/auth/AuthInput';
+import AuthInput from '../../../components/auth/AuthInput';
 import * as s from './style'
 
 const UpdatePassword = () => {

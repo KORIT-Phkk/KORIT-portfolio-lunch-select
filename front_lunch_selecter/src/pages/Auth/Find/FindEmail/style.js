@@ -65,29 +65,7 @@ export const checkButton = css`
         background-color: #dbdbdb;
     }
 `;
-export const loginButton = css`
-    width: 850px;
-    height: 80px;
-    margin-top: 30px;
-    border: none;
-    border-bottom: 1px solid #dbdbdb;
-    background-color: white;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 40px;
 
-    cursor: pointer;
-    &:hover {
-        border-radius: 20px;
-        border-bottom: 1px solid #fafafa;
-        background-color: #fafafa;
-    }
-    &:active {
-        border-radius: 20px;
-        border-bottom: 1px solid #dbdbdb;
-        background-color: #dbdbdb;
-    }
-`;
 export const nameLabel = css`
     padding-top: 50px;
     padding-bottom: 10px;

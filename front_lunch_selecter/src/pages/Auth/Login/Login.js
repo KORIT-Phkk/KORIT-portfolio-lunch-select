@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { SiNaver } from 'react-icons/si';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import AuthInput from '../../components/auth/AuthInput';
 import * as s from './style';
+import AuthInput from './../../../components/auth/AuthInput';
+import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
@@ -71,14 +71,12 @@ const Login = () => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={handleChange} name="email" >
-                    </AuthInput>
+                    <AuthInput type="email" onChange={handleChange} name="email" />
                     <div css={s.errorMsg}>{errorMessages.email}</div>
                     <div><Link to="/auth/findemail">이메일 찾기</Link></div>
 
                     <label css={s.inputLabel}>Password</label>
-                    <AuthInput type="password" onChange={handleChange} name="password" >
-                    </AuthInput>
+                    <AuthInput type="password" onChange={handleChange} name="password" />
                     <div css={s.passwordBox}><Link to="/auth/findpassword">비밀번호 찾기</Link></div>
                 </div>
             </main>

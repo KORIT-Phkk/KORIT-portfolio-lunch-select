@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
+import { authenticatedState } from '../../../atoms/Auth/AuthAtom';
 
 
-const AuthRouteReactQuery = ({ path, element }) => {
+const AuthRoute = ({ path, element }) => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
     const authPaths = ["/auth"]
 
@@ -45,4 +44,4 @@ const AuthRouteReactQuery = ({ path, element }) => {
 
 };
 
-export default AuthRouteReactQuery;
+export default AuthRoute;

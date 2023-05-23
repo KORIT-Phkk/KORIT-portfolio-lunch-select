@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import * as s from './style'
 import React, { useState } from 'react';
-import AuthInput from '../../components/auth/AuthInput';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md'
+import AuthInput from './../../../../components/auth/AuthInput';
 
 const FindEmail = ({ param }) => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
@@ -24,12 +22,14 @@ const FindEmail = ({ param }) => {
         navigate(`/auth/findemail/result/${findUser.name}/${findUser.phone}`)
     }
 
-    const loginHandleClick = () => {
-        navigate("/auth/login");
+    const onEnterKeyUp = (e) => {
+        if(e.keyCode === 13) {
+            onClickSubmitHandle();
+        }
     }
 
     return (
-        <div css={s.container}>
+        <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
                 <img src="../main/logo1.png"/>
             </header>
@@ -47,7 +47,6 @@ const FindEmail = ({ param }) => {
 
             <footer css={s.footerContainer}>
                 <button css={s.checkButton} onClick={onClickSubmitHandle}>확인</button>
-                <button onClick={loginHandleClick} css={s.loginButton}>로그인</button>
             </footer>
         </div>
     );

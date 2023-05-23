@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { useMutation } from 'react-query';
-import AuthInput from '../../components/auth/AuthInput';
 import * as s from './style'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { RiLockPasswordFill } from 'react-icons/ri';
+import AuthInput from '../../../../components/auth/AuthInput';
 
 const FindPassword = () => {
     const [ email, setEmail ] = useState("");
@@ -28,13 +28,23 @@ const FindPassword = () => {
     });
 
     const submitClickHandle = () => {
+        if(email === "") {
+            alert("공백은 입력할 수 없습니다.")
+            return
+        }
         findPassword.mutate({
             email: email
         })
     }
 
+    const onEnterKeyUp = (e) => {
+        if(e.keyCode === 13) {
+            submitClickHandle();
+        }
+    }
+
     return (
-        <div css={s.container}>
+        <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
                 <img src="../../main/logo1.png"/>
             </header>
