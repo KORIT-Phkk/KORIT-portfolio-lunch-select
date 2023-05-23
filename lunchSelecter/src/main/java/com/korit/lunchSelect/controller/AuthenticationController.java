@@ -55,6 +55,7 @@ public class AuthenticationController{
 		return ResponseEntity.ok().body(authenticationService.getUserInfo(accessToken));
 	}
 	
+	
 	@PostMapping("/oauth2/register")
 	public ResponseEntity<?> oauth2Register(@RequestHeader(value="registerToken") String registerToken, @RequestBody OAuth2RegisterReqDto oAuth2RegisterReqDto){
 		

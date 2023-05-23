@@ -26,7 +26,9 @@ import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult'
 import FindEmail from './pages/Auth/FindUser/FindEmail/FindEmail';
 import FindEmailResult from './pages/Auth/FindUser/FindEmail/FindEmailResult/FindEmailResult';
 import FindPassword from './pages/Auth/FindUser/FindPassword/FindPassword';
-import ResetPassword from './pages/Auth/FindUser/FindPassword/ResetPassword/ResetPassword';
+import ResetPassword from './pages/Auth/FindUser/ResetPassword/ResetPassword';
+import ResetPasswordResult from './pages/Auth/FindUser/ResetPassword/ResetPasswordResult/ResetPasswordResult';
+import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordResult/FindPasswordResult';
 
 
 
@@ -52,9 +54,11 @@ function App() {
         <Route path="/auth/register" element={<AuthRoute path="/auth/register" element={<Register/>}/>}/>
         <Route path="/auth/register/result" element={<AuthRoute path="/auth/register/result" element={<RegisterResult/>}/>}/>
         <Route path="/auth/findemail" element={<AuthRoute path="/auth/findemail" element={<FindEmail/>}/>}/>
-        <Route path="/auth/findemail/result/:name" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
+        <Route path="/auth/findemail/result/:email" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRoute path="/auth/findpassword" element={<FindPassword/>}/>}/>
+        <Route path="/auth/findpassword/result" element={<AuthRoute path="/auth/findpassword/result" element={<FindPasswordResult/>}/>}/>
         <Route path="/auth/resetpassword" element={<AuthRoute path="/auth/resetpassword" element={<ResetPassword/>}/>}/>
+        <Route path="/auth/resetpassword/result" element={<AuthRoute path="/auth/resetpassword/result" element={<ResetPasswordResult/>}/>}/>
         <Route path="/auth/updatepassword" element={<AuthRoute path="/auth/updatepassword" element={<UpdatePassword/>}/>}/>
         <Route path="/auth/oauth2/login" element={<AuthRoute path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>

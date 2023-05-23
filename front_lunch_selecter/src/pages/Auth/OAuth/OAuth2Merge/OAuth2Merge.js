@@ -34,11 +34,7 @@ const OAuth2Merge = () => {
         setPassword(e.target.value);
     }
 
-    const providerMergeSubmitHandle = () => {
-        if(password === "") {
-            alert("공백은 입력할 수 없습니다.")
-            return
-        }
+    const submitProviderMergeHandle = () => {
         providerMerge.mutate({
             email,
             password,
@@ -46,12 +42,18 @@ const OAuth2Merge = () => {
         })
     }
 
+    const onEnterKeyUp = (e) => {
+        if(e.keyCode === 13) {
+            submitProviderMergeHandle();
+        }
+    }
+
     return (
-        <div>
+        <div onKeyUp={onEnterKeyUp}>
             <h1>"{email}" 계정을 "{provider}"와 통합하는 것에 동의 하십니까?</h1>
             <input type="password" onChange={passwordChangeHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
             <p>{errorMessage}</p>
-            <button onClick={providerMergeSubmitHandle}>동의</button>
+            <button onClick={submitProviderMergeHandle}>동의</button>
             <button >취소</button>
         </div>
     );

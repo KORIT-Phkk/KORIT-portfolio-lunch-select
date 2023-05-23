@@ -93,6 +93,21 @@ export const checkButton = css`
     }
 `;
 
+export const disabledCheckButton = css`
+    width: 850px;
+    height: 80px;
+    margin-top: 190px;
+    margin-bottom: 300px;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    background-color: fafafa;
+    color: black;
+    border-radius: 20px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+`
+
 export const errorMsg = css`
     margin-left: 5px;
   margin-top: 3px;

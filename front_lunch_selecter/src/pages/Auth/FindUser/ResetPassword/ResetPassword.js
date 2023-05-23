@@ -5,33 +5,30 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
 import { MdLockReset } from 'react-icons/md'
-import AuthInput from '../../../../../components/auth/AuthInput';
+import AuthInput from './../../../../components/auth/AuthInput';
 
 const ResetPassword = () => {
     const navigate = useNavigate();
     const [ searchParams ] = useSearchParams();
     const [ updateUser, setUpdateUser ] = useState({token: searchParams.get("token"), password: "", checkPassword: ""})
     const [ errorMessage, setErrorMessage ] = useState({message: "", data: ""});
+
     const [ flag, setFlag ] = useState(false);
 
-    const validateResetPasswordToken = useQuery(["valiadateResetPasswordToken"], async () => {
-        setFlag(false);
+    const validateResetPasswordToken =  async () => {
         const option = {
             params: {
                 token: updateUser.token
             }
         }
-
         try {
-            const response = await axios.get("http://localhost:8080/auth/resetpassword/validatetoken", option);
-            return response;
+            await axios.get("http://localhost:8080/auth/resetpassword/validatetoken", option);
+            setFlag(true);
         } catch(error) {
             alert("유효하지 않은 요청입니다.")
             navigate("/");
         }
-    }, {
-        enabled: flag
-    })
+    }
 
     const resetPassword = useMutation(async (data) => {
         const option = {
@@ -58,36 +55,35 @@ const ResetPassword = () => {
     }, {
         onSuccess: (response) => {
             if(response.status === 200) {
-                alert("비밀번호 재설정 성공");
-                navigate("/auth/login");
+                navigate("/auth/resetpassword/result");
             }
         }
     });
 
     useEffect(() => {
-        setFlag(true);
+        validateResetPasswordToken();
     }, [])
     
-    const onChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         const { name, value } = e.target;
         setUpdateUser({...updateUser, [name]: value});
     }
 
-    const submitOnclickHandle = () => {
+    const submitResetPasswordHandle = () => {
         resetPassword.mutate(updateUser)
     }
 
     const onEnterKeyup = (e) => {
         if(e.keyCode === 13) {
-            submitOnclickHandle();
+            submitResetPasswordHandle();
         }
     }
 
-    
-    if(validateResetPasswordToken.isLoading) {
-        return <>로딩중 ...</>
+    if(!flag) {
+        return <></>
     }
 
+    if(flag)
     return (
         <div css={s.container} onKeyUp={onEnterKeyup}>
             <header css={s.headerContainer}>
@@ -99,16 +95,16 @@ const ResetPassword = () => {
             <main css={s.mainContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>Password</label>
-                    <AuthInput type="password" name="password" onChange={onChangeHandle} />
+                    <AuthInput type="password" name="password" onChange={onChangeInputHandle} />
                     <div css={s.errorMsg}>{errorMessage.data.password}</div>
                 </div>
                 <div css={s.input}>
                     <label css={s.inputLabel}>checkPassword</label>
-                    <AuthInput type="password" name="checkPassword" onChange={onChangeHandle} />
+                    <AuthInput type="password" name="checkPassword" onChange={onChangeInputHandle} />
                 </div>
             </main>
             <footer css={s.footerContainer}>
-                <button css={s.checkButton} onClick={submitOnclickHandle}>확인</button>
+                <button css={s.checkButton} onClick={submitResetPasswordHandle}>확인</button>
             </footer>
             
         </div>

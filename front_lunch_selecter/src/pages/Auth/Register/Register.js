@@ -40,7 +40,7 @@ const Register = () => {
 
     const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
-            onClickLoginButton();
+            submitRegisterHandle();
         }
     }
 
