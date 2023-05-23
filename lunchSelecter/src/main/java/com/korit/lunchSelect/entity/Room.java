@@ -14,5 +14,5 @@ public class Room {
 	private String roomMasterCode;
 	private String roomGuestCode;
 	private int roomMasterId;
-	private int flag;
+//	private Map<String, Object> flag;
 }

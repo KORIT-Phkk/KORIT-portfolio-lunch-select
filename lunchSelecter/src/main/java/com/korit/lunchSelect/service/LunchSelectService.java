@@ -12,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.korit.lunchSelect.dto.LunchSelectReqDto;
+import com.korit.lunchSelect.dto.lunch.RoomReqDto;
 import com.korit.lunchSelect.entity.Room;
+import com.korit.lunchSelect.entity.RoomFlag;
 import com.korit.lunchSelect.entity.RoomJoin;
 import com.korit.lunchSelect.repository.LunchSelectRepository;
 import com.korit.lunchSelect.security.PrincipalUser;
@@ -55,7 +57,6 @@ public class LunchSelectService {
 				.build();
 
 		lunchSelectRepository.createLunchSelectRoom(room);
-		
 		 
 		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
@@ -81,6 +82,9 @@ public class LunchSelectService {
 //		System.out.println(map);
 		
 		return null;
+	}
+	public int roomUpdateFlag(String roomMasterCode) {
+		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
 	}
 
 	

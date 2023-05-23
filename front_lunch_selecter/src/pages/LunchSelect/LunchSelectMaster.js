@@ -6,15 +6,14 @@ import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import QueryString from 'qs';
-
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const LunchSelectMaster = () => {
     const [ name, setName ] = useState("");
-    const [ userId, setUserId ] = useState(""); 
-    const [ userInsert, setUserInsert ] = useState(false);
-
+    const [ userId, setUserId ] = useState("");
+    const [ roomUrl, setRoomUrl ] = useState("");
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ markerPosition, setMarkerPosition ] = useState({
         lat: null,
@@ -23,12 +22,9 @@ const LunchSelectMaster = () => {
     const [ menuRefresh, setMenuRefresh ] = useState(false);
     const [ todayLunch, setTodayLunch ] = useState([]);
     const navigate = useNavigate();
-
-    const { roomURL } = useParams();
+    const { roomMasterCode } = useParams();
     const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
     const location = useLocation();
-
-
 
     const getMenu = useQuery(["getMenu"], async() => {
         const option = {
@@ -41,8 +37,8 @@ const LunchSelectMaster = () => {
             },
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-        // console.log(response.data)
+        const response = await axios.get("http://localhost:8080/lunchselect/roulette",  option)
+
         const names = await response.data.map(store => store.name);
         setTodayLunch(names);
         console.log("names: " + names)
@@ -53,7 +49,16 @@ const LunchSelectMaster = () => {
             setMenuRefresh(false);
             setTodayLunchLoading(true);
         }
-    })
+    });
+
+    const backButton = useMutation(async() => {
+        const option = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        }
+        const response = await axios.put("http://localhost:8080/lunchselect/updateflag", {roomMasterCode}, option)
+    });
 
     const getMenuButtonHandle = () => {
         setMenuRefresh(true);
@@ -67,12 +72,18 @@ const LunchSelectMaster = () => {
     if(getMenu.isLoading){
         return <div>불러오는 중....</div>
     }
+    
+    const backButtonHandle = () => {
+        backButton.mutate();
+    }
 
     
     return (
         <div css={s.container}>
             <header>
-               
+                <button css={s.backButtonClick} onClick={backButtonHandle}>
+                    <IoMdArrowRoundBack css={s.backButton} />
+                </button>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>

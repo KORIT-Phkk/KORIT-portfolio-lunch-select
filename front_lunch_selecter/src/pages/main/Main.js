@@ -11,7 +11,7 @@ const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
-
+    const [ masterRoomCode, setMasterRoomCode ] = useState("");
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
@@ -22,11 +22,13 @@ const Main = () => {
         try {
             const option = {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 }
             };
             const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
+            setMasterRoomCode(response.data);
             window.location.href = response.data;
+            console.log(masterRoomCode);
             return response;
         } catch(error) {
             alert("관리자에게 문의하세요.");
@@ -44,10 +46,7 @@ const Main = () => {
         lunchSelectRoom.mutate();
     }
 
-    const lunchSelectJoinClickHandle = () => {
-        window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
-    }
-
+    
     const joinCodeInputHandle = (e) => {
         setJoinCode(e.target.value);
     }
@@ -69,7 +68,7 @@ const Main = () => {
                 </div>
                 <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
                 <div css={s.lunchSelect}>
-                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle} >참여하기</button>
+                    <button css={s.lunchButton} >참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>
