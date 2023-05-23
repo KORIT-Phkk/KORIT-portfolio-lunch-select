@@ -6,8 +6,8 @@ import * as s from './style'
 const UpdatePassword = () => {
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Update Password</h1> 
+            <header css={s.headerContainer}>
+                <img src="../main/logo1.png"/>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.input}>

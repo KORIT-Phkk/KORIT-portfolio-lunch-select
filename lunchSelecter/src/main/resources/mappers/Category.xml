@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.lunchSelect.repository.CategoryRepository">
+	
+	<resultMap type="com.korit.lunchSelect.entity.Category" id="CategoryMap">
+		<id property="categoryId" column="category_id" />
+		<result property="categoryName" column="category_name"/>
+	</resultMap>
+
+	<select id="getCategory" resultMap="CategoryMap" >
+		SELECT
+			category_id,
+			category_name
+		FROM
+			category_tb
+	</select>
+
+</mapper>

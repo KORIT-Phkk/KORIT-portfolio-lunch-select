@@ -1,58 +1,92 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import * as s from './style';
-import Category from './category/Category';
 import axios from 'axios';
+import QueryString from 'qs';
+import React, { useState } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import Category from '../../components/SelectPage/Category/Category';
+import Location from '../../components/SelectPage/Location/Location';
+import * as s from './style';
 
-const slotValue = ['짱깨', '맥도날드', '된장', '유부초밥', '우동(돈가스)', '김밥천국','삼정타워','닭가슴살','0004','9','88','7','6','2','3','5','dd','we','as','sdf','asdf','asdf','wer','werw','tyu','dfg','ert','q2we','dfg','fsgjl'];
+
+
 
 const LunchSelect = () => {
-    const { roomURL } = useParams();
-    console.log(roomURL);
+    const [ selectedCategories, setSelectedCategories ] = useState([]);
+    const [ markerPosition, setMarkerPosition ] = useState({
+        lat: null,
+        lng: null
+    });
+    const [ menuRefresh, setMenuRefresh ] = useState(false);
+    const [ todayLunch, setTodayLunch ] = useState([]);
     const navigate = useNavigate();
 
-    const [todayLunch, setTodayLunch] = useState("돌려돌려 돌림판~~");
-    const [isSpinning, setIsSpinning] = useState(false);
-    const intervalRef = useRef(null);
+    const { roomURL } = useParams();
+    const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
 
-    const handleStart = () => {
-        setIsSpinning(true);
-        intervalRef.current = setInterval(() => {
-            setTodayLunch(slotValue[Math.floor(Math.random() * slotValue.length)]);
-        }, 50);
-    };
+    const queryClient = useQueryClient();
 
-    const handleStop = () => {
-        setIsSpinning(false);
-        clearInterval(intervalRef.current);
-        navigate("/choosemenu", {state:{value : todayLunch}})
-    };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    };
+    const getMenu = useQuery(["getMenu"], async() => {
+        const option = {
+            params: {
+                categoryId: [...selectedCategories],
+                ...markerPosition
+            },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
+            },
+            paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
+        }
+        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
+        const names = await response.data.map(store => store.name);
+        setTodayLunch(names);
+        console.log("names: " + names)
+        return response;
+    },{
+        enabled: menuRefresh,
+        onSuccess:  () => {
+            setMenuRefresh(false);
+            setTodayLunchLoading(true);
+        }
+    })
 
- 
+    const getMenuButtonHandle = () => {
+        setMenuRefresh(true);
+    }
+    
+    if(todayLunchLoading) {
+        navigate(`/lunchselect/roulette?todayLunch=${todayLunch}`);
+        setTodayLunchLoading(false);
+    }
+
+    
+    
+    if(getMenu.isLoading){
+        return <div>불러오는 중....</div>
+    }
+
     return (
         <div css={s.container}>
-            <header css={s.header}>
-
-                <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오</h1>
-                </div>
-                <Category />
+            <header>
+            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+            <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
-            <main css={s.mainContainer}>
-                <div css={s.selectMenu}>{todayLunch}</div>
-                <form onSubmit={handleSubmit}>
-                    {isSpinning 
-                    ? (<button css={s.selectButton} type="button" onClick={handleStop}>니 손에 오늘 점심이 달렸다..</button>)
-                    : (<button css={s.selectButton} type="button" onClick={handleStart}>점심 무러 갑시다!</button>)}
-                </form>
+
+            <main>
+                <div css={s.categoryBox}>
+                    <h1 css={s.category}>카테고리를 선택하시오
+                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
+                    </h1>
+                </div>
             </main>
+            
+            <footer css={s.mainContainer}>
+                    <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
+            </footer>
         </div>
     );
-};
+}
+
 
 export default LunchSelect;

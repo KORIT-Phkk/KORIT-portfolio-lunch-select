@@ -1,18 +1,34 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useState } from 'react';
-import * as s from './style'
-import { IoMdContact } from 'react-icons/io';
-import UserInfo from '../../components/userInfoGroup/UserInfo';
-import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { useState } from 'react';
+import { IoMdContact } from 'react-icons/io';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import UserInfo from '../../components/userInfoGroup/UserInfo';
+import * as s from './style';
 
 const Main = () => {
+    const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
+    const [ joinCode, setJoinCode ] = useState("");
+
+    const [ userId, setUserId ] = useState(""); 
+    
 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
+
+    const getUserInfo = useQuery(["getUserInfo"], async () => {
+        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
+        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+            headers: {
+                Authorization: accessToken
+            }
+        });
+        setUserId(response.data.userId)
+        return response;
+    });
 
     const lunchSelectRoom = useMutation(async () => {
         try {
@@ -30,12 +46,40 @@ const Main = () => {
         }
     });
 
+    const userInfoInsert = useMutation(async() => {
+        
+        const option = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        }
+        const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
+            guestUrl: joinCode,
+            userId: userId
+        }, option);
+        return response
+    });
+
+    if(getUserInfo.isLoading) {
+        return <></>;
+    }
+
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
     }
   
     const lunchSelectClickHandle = () => {
         lunchSelectRoom.mutate();
+    }
+
+    const lunchSelectJoinClickHandle = () => {
+        userInfoInsert.mutate();
+        window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
+    }
+
+    const joinCodeInputHandle = (e) => {
+        setJoinCode(e.target.value);
+        console.log(joinCode)
     }
 
     return (
@@ -51,6 +95,11 @@ const Main = () => {
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
                     <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                    
+                </div>
+                <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
+                <div css={s.lunchSelect}>
+                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle} >참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>

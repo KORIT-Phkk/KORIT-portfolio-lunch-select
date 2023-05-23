@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AuthInput from '../../components/auth/AuthInput';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { AiOutlineContacts } from 'react-icons/ai'
 import * as s from './style'
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ const Register = () => {
         setRegisterUser({...registerUser, [name]: value});
     }
 
-    const registeSubmit = async () => {
+    const registerSubmit = async () => {
         const data = {
             ...registerUser
         }
@@ -35,43 +35,47 @@ const Register = () => {
         }
     }
 
-
+    const loginSubmit = () => {
+        navigate("/auth/login");
+    }
 
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <img src="JMC.png" alt="" />
+            <header css={s.headerContainer}>
+                <img src="../main/logo1.png"/>
             </header>
+
+            <div css={s.comment}><AiOutlineContacts/>Register<AiOutlineContacts/></div>
+
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.inputLabel}>email</label>
+                    <label css={s.inputLabel}>Email</label>
                     <AuthInput type="email" onChange={onChangeHandle} name="email">
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.email}</div>
 
-                    <label css={s.inputLabel}>password</label>
+                    <label css={s.elseLabel}>Password</label>
                     <AuthInput type="password" onChange={onChangeHandle} name="password">
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.password}</div>
 
-                    <label css={s.inputLabel}>name</label>
+                    <label css={s.elseLabel}>Name</label>
                     <AuthInput type="text" onChange={onChangeHandle} name="name">
 
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.name}</div>
 
-                    <label css={s.inputLabel}>phone</label>
+                    <label css={s.elseLabel}>Phone</label>
                     <AuthInput type="tel" onChange={onChangeHandle} name="phone">
 
                     </AuthInput>
                     <div css={s.errorMsg}>{errorMessages.phone}</div>
-                    
-
                 </div>
             </main>
-                <div css={s.login}><Link to="/auth/login">로그인</Link></div>
+
             <footer css={s.footerContainer}>
-                <button css={s.registerButton} onClick={registeSubmit}>회원가입</button>
+                <button css={s.registerButton} onClick={registerSubmit}>회원가입</button>
+                <button css={s.loginButton} onClick={loginSubmit}>로그인</button>
             </footer>
         </div>
     );

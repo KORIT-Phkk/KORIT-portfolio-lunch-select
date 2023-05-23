@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.lunchSelect.repository.LunchSelectRepository">
+
+	<resultMap type="com.korit.lunchSelect.entity.LunchSelect" id="LunchSelectMap">
+		<id property="id" column="restaurant_id"/>
+		<result property="name" column="restaurant_name"/>
+		<result property="address" column="restaurant_address"/>
+		<result property="category" column="restaurant_category"/>
+		<result property="lat" column="restaurant_lat"/>
+		<result property="lng" column="restaurant_lng"/>
+		<result property="categoryCount" column="category_count"/>
+		
+		<association property="categories" resultMap="CategoryMap" ></association>
+	</resultMap>
+	
+	<resultMap type="com.korit.lunchSelect.entity.Category" id="CategoryMap">
+		<id property="categoryId" column="category_id" />
+		<result property="categoryName" column="category_name"/>
+	</resultMap>
+	
+	
+	<select id="findByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
+		SELECT 
+			rt.restaurant_id,
+			rt.restaurant_name,
+			rt.restaurant_address,
+			rt.restaurant_lat,
+			rt.restaurant_lng,
+			rt.restaurant_category,
+			ct.category_id,
+			ct.category_name,
+		    rmct.category_count,
+			(6371 * acos(cos(radians(#{lat})) * cos(radians(restaurant_lat)) * cos(radians(restaurant_lng) - radians(#{lng})) + sin(radians(#{lat})) * sin(radians(restaurant_lat)))) AS distance
+		FROM 
+			restaurant_tb rt
+			LEFT OUTER JOIN category_tb ct ON (ct.category_id = rt.restaurant_category)
+		    LEFT OUTER JOIN (SELECT
+								rjt.category_id,
+								count(*) as category_count
+							FROM
+								room_tb rt
+								left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
+							WHERE
+								rt.room_master_code = #{roomUrl}
+							GROUP BY
+								rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
+		WHERE
+			1=1
+			<if test="categoryIds != null">
+			and restaurant_category IN (
+				<foreach item="categoryId" collection="categoryIds" separator=",">
+					#{categoryId}
+				</foreach>
+			)
+			</if>
+		HAVING 
+			0.5 > distance;
+	</select>
+	
+	<select id=""></select>
+
+</mapper>

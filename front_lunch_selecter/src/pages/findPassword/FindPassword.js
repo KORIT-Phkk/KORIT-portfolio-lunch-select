@@ -5,6 +5,7 @@ import * as s from './style'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { RiLockPasswordFill } from 'react-icons/ri';
 
 const FindPassword = () => {
     const [ email, setEmail ] = useState("");
@@ -34,12 +35,13 @@ const FindPassword = () => {
 
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Find Password</h1> 
+            <header css={s.headerContainer}>
+                <img src="../../main/logo1.png"/>
             </header>
+            <div css={s.comment}><RiLockPasswordFill/> Find Password <RiLockPasswordFill/></div>
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.inputLabel}>email</label>
+                    <label css={s.inputLabel}>Email</label>
                     <AuthInput type="email" onChange={onChangeHandle} name="email" />
                 </div>
             

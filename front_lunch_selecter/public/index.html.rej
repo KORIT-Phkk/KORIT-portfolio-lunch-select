@@ -1,0 +1,9 @@
+diff a/front_lunch_selecter/public/index.html b/front_lunch_selecter/public/index.html	(rejected hunks)
+@@ -24,7 +24,6 @@
+       work correctly both with client-side routing and a non-root public URL.
+       Learn how to configure a non-root public URL by running `npm run build`.
+     -->
+-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3f8a8175fe050dc1f76175e92e552df5&libraries=services,clusterer,drawing"></script>
+     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33c4314f8f06ba1c408e47635d2f69b6&libraries=services,clusterer,drawing"></script>
+     <title>React App</title>
+   </head>

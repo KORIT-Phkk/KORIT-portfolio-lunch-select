@@ -1,38 +1,46 @@
 import { Global } from '@emotion/react';
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import './App.css';
-import { Reset } from './style/Reset';
+import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import Main from './pages/main/Main';
-import FindEmail from './pages/findEmail/FindEmail';
-import FindPassword from './pages/findPassword/FindPassword';
+import './App.css';
 import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
+
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster';
+
+import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
+import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
-import OAuth2Login from './pages/login/OAuth2Login';
-import OAuth2Register from './pages/register/OAuth2Register';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
-import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
+import FindEmail from './pages/findEmail/FindEmail';
+import FindEmailResult from './pages/findEmail/findEmailResult/FindEmailResult';
+import FindPassword from './pages/findPassword/FindPassword';
+import Login from './pages/login/Login';
+import OAuth2Login from './pages/login/OAuth2Login';
+import Main from './pages/main/Main';
+import OAuth2Register from './pages/register/OAuth2Register';
+import Register from './pages/register/Register';
+import { Reset } from './style/Reset';
+import SelectLunch from './pages/LunchSelect/SelectLunch';
 
 
 const mainContainer = css`
     position: relative;
     margin: 10px auto;
-    border: 3px solid BLACK;
+    border: 3px solid #dbdbdb;
+    border-radius: 20px;
     padding: 10px;
     font-size: 1.6rem;
     width: 1400px;
-    height: 3000px;
-    overflow: hidden;
+    height: 2700px;
 `;
 function App() {
+
   return (
-    <div css={mainContainer}>
+    <div css={mainContainer}> 
       <Global styles={Reset}></Global>
       <Routes>
         <Route path="/auth/login" element={<AuthRouteReactQuery path="/auth/login" element={<Login/>}/>}/>
@@ -46,7 +54,15 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRouteReactQuery path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
+        <Route path="/lunchselect/select" element={<AuthRouteReactQuery path="/lunchselect/select" element={<SelectLunch/>}/>}/>
+        <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
+        <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu/>}/>}/>
         <Route path="/lunchselect/room/:roomURL" element={<AuthRouteReactQuery path="/lunchselect/room" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/location" element={<AuthRouteReactQuery path="/lunchselect/location" element={<LunchSelect/>}/>}/>
+        <Route path="/lunchselect/room/master/:roomMasterURL" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
+        <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRouteReactQuery path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
+        <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
+        <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu />}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>

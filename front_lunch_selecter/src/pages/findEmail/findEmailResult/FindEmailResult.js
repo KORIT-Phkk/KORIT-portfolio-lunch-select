@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import * as s from './style'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { MdSearch } from 'react-icons/md';
 
 const FindEmailResult = () => {
     const { name, phone } = useParams();
@@ -36,18 +37,33 @@ const FindEmailResult = () => {
         }
     })
 
+    const loginHandleClick = () => {
+        navigate("/auth/login");
+    }
+
+    const findPasswordHandleClick = () => {
+        navigate("/auth/findpassword");
+    }
+
     if(!getEmail.isLoading)
     return (
         <div css={s.container}>
-            <header css={s.header}>
-                <h1 css={s.logo}>Find Email</h1> 
+            <header css={s.headerContainer}>
+                <img src="../../main/logo1.png"/>
             </header>
+
+            <div css={s.comment}><MdSearch/>Your Email<MdSearch/></div>
+            
             <main css={s.mainContainer}>
+                <div css={s.resultBox}>
+                    공사중. 건들지마라
                 <div>{email}</div>
+                </div>
             </main>
 
             <footer css={s.footerContainer}>
-                <div css={s.login}><Link to="/auth/login">로그인</Link></div>
+                <button onClick={findPasswordHandleClick} css={s.findPassword}>비밀번호 찾기</button>
+                <button onClick={loginHandleClick} css={s.loginButton}>로그인</button>
             </footer>
         </div>
     );

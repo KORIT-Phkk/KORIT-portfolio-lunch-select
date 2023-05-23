@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Room {
 	private int roomId;
-	private String roomURL;
+	private String roomMasterCode;
+	private String roomGuestCode;
 	private int roomMasterId;
 	private int flag;
 }
