@@ -108,10 +108,10 @@ const LunchSelectMaster = () => {
     return (
         <div css={s.container}>
             <header>
-            <Invite />
                 <button css={s.backButtonClick} onClick={backButtonHandle}>
                     <IoMdArrowRoundBack css={s.backButton} />
                 </button>
+            <Invite />
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
