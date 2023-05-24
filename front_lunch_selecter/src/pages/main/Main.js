@@ -26,9 +26,9 @@ const Main = () => {
                 }
             };
             const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
-            setMasterRoomCode(response.data);
             window.location.href = response.data;
-            console.log(masterRoomCode);
+            // navigate(response);
+            console.log(response.data);
             return response;
         } catch(error) {
             alert("관리자에게 문의하세요.");

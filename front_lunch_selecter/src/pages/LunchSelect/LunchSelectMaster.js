@@ -11,9 +11,6 @@ import QueryString from 'qs';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const LunchSelectMaster = () => {
-    const [ name, setName ] = useState("");
-    const [ userId, setUserId ] = useState("");
-    const [ roomUrl, setRoomUrl ] = useState("");
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ markerPosition, setMarkerPosition ] = useState({
         lat: null,
@@ -58,6 +55,7 @@ const LunchSelectMaster = () => {
             }
         }
         const response = await axios.put("http://localhost:8080/lunchselect/updateflag", {roomMasterCode}, option)
+        window.location.href = "http://localhost:3000/";
     });
 
     const getMenuButtonHandle = () => {

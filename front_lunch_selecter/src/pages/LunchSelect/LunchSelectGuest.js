@@ -11,14 +11,11 @@ import * as s from './style';
 const test = css`
     font-size: 50px;
 `;
-
-
 const LunchSelectGuest = () => {
     const [ name, setName ] = useState("");
     const [ userId, setUserId ] = useState(""); 
     const [ userInsert, setUserInsert ] = useState(false);
     const [ insert, setInsert ] = useState(false);
-    const [ joinCode, setJoinCode ] = useState("");
     const [ markerPosition, setMarkerPosition ] = useState({
         lat: null,
         lng: null
