@@ -14,6 +14,7 @@ const Main = () => {
 
     const [ userId, setUserId ] = useState(""); 
 
+    const [ masterRoomCode, setMasterRoomCode ] = useState("");
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
@@ -33,11 +34,13 @@ const Main = () => {
         try {
             const option = {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 }
             };
             const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
             window.location.href = response.data;
+            // navigate(response);
+            console.log(response.data);
             return response;
         } catch(error) {
             alert("관리자에게 문의하세요.");
@@ -99,7 +102,7 @@ const Main = () => {
                 </div>
                 <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
                 <div css={s.lunchSelect}>
-                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle} >참여하기</button>
+                    <button css={s.lunchButton} >참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>

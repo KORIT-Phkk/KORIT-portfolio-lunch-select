@@ -6,6 +6,25 @@ export const container = css`
     justify-content: center;
     flex-direction: column;  
 `;
+export const backButtonClick = css`
+    border: none;
+`;
+export const backButton = css`
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    &:hover{
+        width: 55px;
+        height: 55px;
+    }
+    &:active{
+        box-shadow: 1px 1px 0px 1px;
+        background-color: whitesmoke;
+        /* background-color: #eee; */
+    }
+`;
 
 export const mapExplain = css`
     display: flex;

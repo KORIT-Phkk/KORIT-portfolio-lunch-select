@@ -1,7 +1,6 @@
 package com.korit.lunchSelect.service;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,7 @@ public class LunchSelectService {
 				.build();
 
 		lunchSelectRepository.createLunchSelectRoom(room);
-		
+
 		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
 	
@@ -96,6 +95,9 @@ public class LunchSelectService {
 		
 
 		return 0;
+	}
+	public int roomUpdateFlag(String roomMasterCode) {
+		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
 	}
 
 	public int insertMaster(MasterRoomJoin masterRoomJoin) {

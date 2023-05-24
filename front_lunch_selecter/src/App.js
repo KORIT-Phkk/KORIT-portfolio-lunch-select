@@ -54,7 +54,7 @@ function App() {
         <Route path="/auth/oauth2/merge" element={<AuthRouteReactQuery path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/lunchselect/location" element={<AuthRouteReactQuery path="/lunchselect/location" element={<LunchSelect/>}/>}/>
-        <Route path="/lunchselect/room/master/:roomMasterURL" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
+        <Route path="/lunchselect/room/master/:roomMasterCode" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRouteReactQuery path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
         <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<ChooseMenu />}/>}/>
