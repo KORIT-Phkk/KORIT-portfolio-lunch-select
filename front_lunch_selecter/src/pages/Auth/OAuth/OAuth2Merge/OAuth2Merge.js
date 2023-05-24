@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import axios from 'axios';
@@ -28,8 +28,9 @@ const OAuth2Merge = () => {
     const [ searchParams, setSearchParams ] = useSearchParams();
     const email = searchParams.get("email");
     const provider = searchParams.get("provider");
+    const navigate = useNavigate();
     
-    const passwordChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         setPassword(e.target.value);
     }
 
@@ -41,6 +42,10 @@ const OAuth2Merge = () => {
         })
     }
 
+    const onClickCancleButtonClick = () => {
+        navigate("/auth/login");
+    }
+
     const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
             submitProviderMergeHandle();
@@ -50,10 +55,10 @@ const OAuth2Merge = () => {
     return (
         <div onKeyUp={onEnterKeyUp}>
             <h1>"{email}" 계정을 "{provider}"와 통합하는 것에 동의 하십니까?</h1>
-            <input type="password" onChange={passwordChangeHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
+            <input type="password" onChange={onChangeInputHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
             <p>{errorMessage}</p>
             <button onClick={submitProviderMergeHandle}>동의</button>
-            <button >취소</button>
+            <button onClick={onClickCancleButtonClick}>취소</button>
         </div>
     );
 };

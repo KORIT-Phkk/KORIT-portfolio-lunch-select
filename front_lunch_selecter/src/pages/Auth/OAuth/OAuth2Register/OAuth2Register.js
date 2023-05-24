@@ -43,13 +43,13 @@ const OAuth2Register = () => {
     });
  
 
-    const InputChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         const { name, value } = e.target;
         setRegisterUser({...registerUser, [name]: value});
     }
 
 
-    const oauth2RegisterSubmitHandle = () => {
+    const submitOauth2RegisterHandle = () => {
         oauth2Register.mutate(registerUser);
     }
 
@@ -57,10 +57,10 @@ const OAuth2Register = () => {
         <div>
             <input type="text" value={email} disabled={true}/>
             <input type="text" value={name} disabled={true}/>
-            <input type="password" name='password' placeholder='비밀번호' onChange={InputChangeHandle} />
-            <input type="password" name='checkPassword' placeholder='비밀번호확인' onChange={InputChangeHandle} />
-            <input type="text" name='phone' placeholder='연락처' onChange={InputChangeHandle}/>
-            <button onClick={oauth2RegisterSubmitHandle}>가입하기</button>
+            <input type="password" name='password' placeholder='비밀번호' onChange={onChangeInputHandle} />
+            <input type="password" name='checkPassword' placeholder='비밀번호확인' onChange={onChangeInputHandle} />
+            <input type="text" name='phone' placeholder='연락처' onChange={onChangeInputHandle}/>
+            <button onClick={submitOauth2RegisterHandle}>가입하기</button>
         </div>
     );
 };
