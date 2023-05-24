@@ -6,7 +6,7 @@ import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import QueryString from 'qs';
 
 
@@ -26,14 +26,40 @@ const LunchSelectMaster = () => {
 
     const { roomURL } = useParams();
     const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
+    const { roomMasterURL } = useParams();
+
     const location = useLocation();
 
+    const getUserInfo = useQuery(["getUserInfo"], async () => {
+        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
+        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+            headers: {
+                Authorization: accessToken
+            }
+        });
+        setUserId(response.data.userId)
+        return response;
+    });
 
+    const userInfoInsert = useMutation(async() => {
+        const option = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        }
+        const response = await axios.post("http://localhost:8080/lunchselect/roommasterinsert", {
+            masterURL: roomMasterURL,
+            userId: userId,
+            categoryId: [...selectedCategories]
+        }, option);
+        
+        return response
+    },);
 
     const getMenu = useQuery(["getMenu"], async() => {
         const option = {
             params: {
-                categoryId: [...selectedCategories],
+                masterId: userId,
                 ...markerPosition
             },
             headers: {
@@ -55,6 +81,7 @@ const LunchSelectMaster = () => {
     })
 
     const getMenuButtonHandle = () => {
+        userInfoInsert.mutate();
         setMenuRefresh(true);
     }
     
@@ -63,9 +90,9 @@ const LunchSelectMaster = () => {
         setTodayLunchLoading(false);
     }
    
-    if(getMenu.isLoading){
-        return <div>불러오는 중....</div>
-    }
+    // if(getMenu.isLoading){
+    //     return <div>불러오는 중....</div>
+    // }
 
     
     return (

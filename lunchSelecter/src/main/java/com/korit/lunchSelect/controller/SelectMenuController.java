@@ -22,14 +22,5 @@ public class SelectMenuController {
 
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}
-	
-//	@GetMapping("/lunchselect/result")
-//	public ResponseEntity<?> groupLunchSelect(LunchSelectReqDto lunchSelectReqDto){
-//		lunchSelectService.lunchSelect(lunchSelectReqDto);
-//		
-//		
-//		return ResponseEntity.ok(null);
-//	}
-//	
 
 }

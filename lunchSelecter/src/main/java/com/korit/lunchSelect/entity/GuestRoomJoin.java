@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class RoomJoin {
+public class GuestRoomJoin {
+	
+	private String guestURL;
 	private int userId;
-	private String guestUrl;
-//	private List<Integer> categoryId;
+	private List<Integer> categoryId;
 }

@@ -19,8 +19,19 @@
 		<result property="categoryName" column="category_name"/>
 	</resultMap>
 	
+	<select id="findRoomByMasterId" parameterType="Integer" resultType="Integer">
+		SELECT
+			rt.room_id
+		FROM
+			room_join_tb rjt
+			LEFT OUTER JOIN room_tb rt ON (rt.room_id = rjt.room_id)
+		WHERE
+			rjt.user_id= #{masterId}
+		GROUP BY
+			rjt.user_id
+	</select>
 	
-	<select id="findByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
+	<select id="findMenuByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
 		SELECT 
 			rt.restaurant_id,
 			rt.restaurant_name,
@@ -36,28 +47,24 @@
 			restaurant_tb rt
 			LEFT OUTER JOIN category_tb ct ON (ct.category_id = rt.restaurant_category)
 		    LEFT OUTER JOIN (SELECT
-								rjt.category_id,
-								count(*) as category_count
-							FROM
-								room_tb rt
-								left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
-							WHERE
-								rt.room_master_code = #{roomUrl}
-							GROUP BY
-								rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
+											rjt.category_id,
+											count(*) as category_count
+										FROM
+											room_tb rt
+											left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
+										WHERE
+											rt.room_master_id = #{masterId}
+										GROUP BY
+											rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
 		WHERE
 			1=1
-			<if test="categoryIds != null">
-			and restaurant_category IN (
-				<foreach item="categoryId" collection="categoryIds" separator=",">
-					#{categoryId}
-				</foreach>
-			)
-			</if>
+			and restaurant_category IN(SELECT
+													category_id
+												FROM
+													room_join_tb
+												WHERE
+													room_id = #{roomId})
 		HAVING 
 			0.5 > distance;
 	</select>
-	
-	<select id=""></select>
-
 </mapper>

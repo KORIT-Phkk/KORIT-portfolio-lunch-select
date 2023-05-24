@@ -13,7 +13,6 @@ const Main = () => {
     const [ joinCode, setJoinCode ] = useState("");
 
     const [ userId, setUserId ] = useState(""); 
-    
 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
@@ -46,6 +45,8 @@ const Main = () => {
         }
     });
 
+   
+
     const userInfoInsert = useMutation(async() => {
         
         const option = {
@@ -54,8 +55,7 @@ const Main = () => {
             }
         }
         const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
-            guestUrl: joinCode,
-            userId: userId
+            guestUrl: joinCode
         }, option);
         return response
     });
