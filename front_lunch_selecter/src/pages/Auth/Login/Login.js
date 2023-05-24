@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
+import { BsFillPersonFill } from 'react-icons/bs'
 import * as s from './style';
 import AuthInput from './../../../components/auth/AuthInput';
 import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
@@ -68,15 +69,15 @@ const Login = () => {
                 <img css={s.imgCss} src="../main/logo1.png"/>
             </header>
 
-            <main css={s.mainContainer}>
-                <div css={s.input}>
-                    <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={handleChange} name="email" />
-                    <div css={s.errorMsg}>{errorMessages.email}</div>
+                <div css={s.comment}><BsFillPersonFill/>&nbsp;Login&nbsp;<BsFillPersonFill/></div>
 
-                    <label css={s.inputLabel}>Password</label>
-                    <AuthInput type="password" onChange={handleChange} name="password" />
-                </div>
+            <main css={s.mainContainer}>
+                <label css={s.inputLabel}>Email</label>
+                <AuthInput type="email" onChange={handleChange} name="email" />
+                <div css={s.errorMsg}>{errorMessages.email}</div>
+
+                <label css={s.inputLabel}>Password</label>
+                <AuthInput type="password" onChange={handleChange} name="password" />
             </main>
             
             <footer css={s.footerContainer}>

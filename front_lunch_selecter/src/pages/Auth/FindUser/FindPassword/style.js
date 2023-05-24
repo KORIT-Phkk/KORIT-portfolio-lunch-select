@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,56 +10,43 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
 `;
+export const imgCss = css`
+    width: 270px;
+    height: 196px;
+`;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
 `;
 export const mainContainer =css`
     margin: auto;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-`;
-export const input = css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`;
-export const emailLabel = css`
-    padding-top: 10px;
-    padding-bottom: 2px;
-    color: black;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-`;
-export const codeLabel = css`
-    padding-top: 30px;
-    padding-bottom: 2px;
-    color: black;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-`;
-export const blank = css`
-    margin-top: 15px;
 `;
 export const inputLabel = css`
-    padding-top: 10px;
-    padding-bottom: 2px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
+`;
+export const errorMsg = css`
+    margin-left: 3px;
+    margin-top: 4px;
+    zoom: 0.7;
+    font-size: 10px;
+    color: red;
 `;
 export const footerContainer =css`
     margin: auto;
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -68,8 +54,6 @@ export const footerContainer =css`
 export const checkButton = css`
     width: 250px;
     height: 20px;
-    margin-top: 50px;
-    margin-bottom: 75px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
@@ -78,6 +62,7 @@ export const checkButton = css`
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
+
     cursor: pointer;
     &:hover {
         color: black;
@@ -92,10 +77,26 @@ export const checkButton = css`
         background-color: #dbdbdb;
     }
 `;
-export const errorMsg = css`
-    margin-left: 3px;
-    margin-top: 1px;
-    zoom: 0.8;
+export const findEmail = css`
+    margin-top: 20px;
+    width: 250px;
+    height: 20px;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    background-color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
     font-size: 10px;
-    color: red;
+
+    cursor: pointer;
+    &:hover {
+        border-radius: 5px;
+        border-bottom: 1px solid #fafafa;
+        background-color: #fafafa;
+    }
+    &:active {
+        border-radius: 5px;
+        border-bottom: 1px solid #dbdbdb;
+        background-color: #dbdbdb;
+    }
 `;

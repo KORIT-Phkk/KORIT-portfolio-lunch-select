@@ -1,7 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
+import * as s from './style';
+import { AiOutlineContacts } from 'react-icons/ai'
 
 const OAuth2Register = () => {
     const [ phone, setPhone ] = useState({phone: ""})
@@ -50,13 +53,33 @@ const OAuth2Register = () => {
     }
 
     return (
-        <div>
-            <input type="text" value={email} disabled={true}/>
-            <input type="text" value={name} disabled={true}/>
-            <input type="password" name='password' placeholder='비밀번호' onChange={InputChangeHandle} />
-            <input type="password" name='checkPassword' placeholder='비밀번호확인' onChange={InputChangeHandle} />
-            <input type="text" name='phone' placeholder='연락처' onChange={InputChangeHandle}/>
-            <button onClick={oauth2RegisterSubmitHandle}>가입하기</button>
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <img css={s.imgCss} src="../../main/logo1.png"/>
+            </header>
+
+            <div css={s.comment}><AiOutlineContacts/>&nbsp;Register&nbsp;<AiOutlineContacts/></div>
+
+            <main css={s.mainContainer}>
+                <label css={s.inputLabel}>Email</label>
+                <input css={s.inputBox} type="text" value={email} disabled={true}/>
+
+                <label css={s.inputLabel}>Name</label>
+                <input css={s.inputBox} type="text" value={name} disabled={true}/>
+
+                <label css={s.inputLabel}>Password</label>
+                <input css={s.inputBox} type="password" name='password' placeholder='비밀번호' onChange={InputChangeHandle} />
+
+                <label css={s.inputLabel}>CheckPassword</label>
+                <input css={s.inputBox} type="password" name='checkPassword' placeholder='비밀번호확인' onChange={InputChangeHandle} />
+
+                <label css={s.inputLabel}>Phone</label>
+                <input css={s.inputBox} type="text" name='phone' placeholder='연락처' onChange={InputChangeHandle}/>
+            </main>
+
+            <footer css={s.footerContainer}>
+                <button css={s.registerButton} onClick={oauth2RegisterSubmitHandle}>가입하기</button>
+            </footer>
         </div>
     );
 };

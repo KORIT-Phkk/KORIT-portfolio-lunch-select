@@ -40,22 +40,24 @@ const FindPassword = () => {
         }
     }
 
+    const findEmailHandle = () => {
+        navigate("/auth/findemail");
+    }
+
     return (
         <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
-                <img src="../../main/logo1.png"/>
+                <img css={s.imgCss} src="../../main/logo1.png"/>
             </header>
-            <div css={s.comment}><RiLockPasswordFill/> Find Password <RiLockPasswordFill/></div>
+            <div css={s.comment}><RiLockPasswordFill/> &nbsp;Find Password&nbsp; <RiLockPasswordFill/></div>
             <main css={s.mainContainer}>
-                <div css={s.input}>
-                    <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
-                    <div css={s.errorMsg}>{errorMessage.email}</div>
-                </div>
-            
+                <label css={s.inputLabel}>Email</label>
+                <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
+                <div css={s.errorMsg}>{errorMessage.email}</div>            
             </main>
             <footer css={s.footerContainer}>
                 <button css={s.checkButton} onClick={submitFindPasswordHanle}>확인</button>
+                <button css={s.findEmail} onClick={findEmailHandle}>이메일 찾기</button>
             </footer>
         </div>
     );

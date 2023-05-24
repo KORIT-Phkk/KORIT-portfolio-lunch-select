@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -15,21 +14,24 @@ export const imgCss = css`
     width: 270px;
     height: 196px;
 `;
+export const comment = css`
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+`;
 export const mainContainer =css`
-    padding-top: 1px;
     margin: auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
 `;
-export const input = css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`;
 export const inputLabel = css`
-    padding-top: 25px;
-    padding-bottom: 3px;
+    margin-top: 20px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
@@ -37,12 +39,13 @@ export const inputLabel = css`
 `;
 export const errorMsg = css`
     margin-left: 3px;
-    margin-top: 1px;
+    margin-top: 2px;
     zoom: 0.7;
     font-size: 10px;
     color: red;
 `;
 export const footerContainer =css`
+    margin: auto;
     display: flex;
     justify-content: center;
     flex-direction: column;

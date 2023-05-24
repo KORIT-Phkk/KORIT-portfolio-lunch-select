@@ -21,7 +21,7 @@ const FindEmailResult = () => {
                 <img css={s.imgCss} src="/main/logo1.png"/>
             </header>
 
-            <div css={s.comment}><MdSearch/>Your Email<MdSearch/></div>
+            <div css={s.comment}><MdSearch/>&nbsp;Your Email&nbsp;<MdSearch/></div>
             
             <main css={s.mainContainer}>
                 <div css={s.resultBox}>

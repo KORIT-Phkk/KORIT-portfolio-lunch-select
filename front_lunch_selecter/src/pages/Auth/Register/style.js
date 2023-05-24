@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -16,38 +15,30 @@ export const imgCss = css`
     height: 196px;
 `;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
 `;
 export const mainContainer =css`
     margin: auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`;
-export const input = css`
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
 `;
 export const inputLabel = css`
-    padding-top: 10px;
-    padding-bottom: 2px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
 `;
 export const elseLabel = css`
-    margin-top: 6px;
-    padding-top: 10px;
-    padding-bottom: 2px;
+    margin-top: 10px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
@@ -55,15 +46,14 @@ export const elseLabel = css`
 `;
 export const footerContainer =css`
     margin: auto;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `;
 export const registerButton = css`
     width: 250px;
     height: 20px;
-    margin-top: 50px;
-    margin-bottom: 10px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
@@ -72,6 +62,7 @@ export const registerButton = css`
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
+    
     cursor: pointer;
     &:hover {
         color: black;
@@ -87,10 +78,9 @@ export const registerButton = css`
     }
 `;
 export const loginButton = css`
+    margin-top: 10px;
     width: 250px;
     height: 20px;
-    margin-top: 50px;
-    margin-bottom: 10px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: white;

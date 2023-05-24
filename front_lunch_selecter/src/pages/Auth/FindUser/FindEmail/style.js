@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -16,14 +15,14 @@ export const imgCss = css`
     height: 196px;
 `;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
 `;
 export const mainContainer =css`
     margin: auto;
@@ -36,8 +35,16 @@ export const input = css`
     justify-content: center;
     flex-direction: column;
 `;
+export const inputLabel = css`
+    margin-top: 20px;
+    color: black;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+`;
 export const footerContainer =css`
     margin: auto;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -45,8 +52,6 @@ export const footerContainer =css`
 export const checkButton = css`
     width: 250px;
     height: 20px;
-    margin-top: 40px;
-    margin-bottom: 75px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
@@ -69,25 +74,26 @@ export const checkButton = css`
         background-color: #dbdbdb;
     }
 `;
+export const findPassword = css`
+    margin-top: 20px;
+    width: 250px;
+    height: 20px;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    background-color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
 
-export const nameLabel = css`
-    padding-top: 10px;
-    padding-bottom: 2px;
-    color: black;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-`;
-export const PhoneLabel = css`
-    padding-top: 40px;
-    padding-bottom: 2px;
-    color: black;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-`;
-export const login = css`
-    display: flex;
-    justify-content: center;
-    margin-top: 25px ;
+    cursor: pointer;
+    &:hover {
+        border-radius: 5px;
+        border-bottom: 1px solid #fafafa;
+        background-color: #fafafa;
+    }
+    &:active {
+        border-radius: 5px;
+        border-bottom: 1px solid #dbdbdb;
+        background-color: #dbdbdb;
+    }
 `;

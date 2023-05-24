@@ -5,7 +5,6 @@ import Input from '../Input/Input';
 
 const authInput = css`
     width: 250px;
-    margin-bottom: 1px;
 `;
 
 

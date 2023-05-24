@@ -36,25 +36,30 @@ const FindEmail = () => {
         }
     }
 
+    const onClickFindPasswordButton = () => {
+        navigate("/auth/findpassword");
+    }
+
     return (
         <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
                 <img css={s.imgCss} src="../main/logo1.png"/>
             </header>
 
-            <div css={s.comment}><MdAlternateEmail/> Find Email <MdAlternateEmail/></div>
+            <div css={s.comment}><MdAlternateEmail/> &nbsp;Find Email&nbsp; <MdAlternateEmail/></div>
             
             <main css={s.mainContainer}>
                 <div css={s.input}>
-                    <label css={s.nameLabel}>Name</label>
+                    <label css={s.inputLabel}>Name</label>
                     <AuthInput type="text" onChange={onChangeInputHandle} name="name" />
-                    <label css={s.PhoneLabel}>Phone</label>
+                    <label css={s.inputLabel}>Phone</label>
                     <AuthInput type="tel" onChange={onChangeInputHandle} name="phone" />
                 </div>
             </main>
 
             <footer css={s.footerContainer}>
                 <button css={s.checkButton} onClick={submitFindEmailHandle}>확인</button>
+                <button css={s.findPassword} onClick={onClickFindPasswordButton}>비밀번호 찾기</button>
             </footer>
         </div>
     );

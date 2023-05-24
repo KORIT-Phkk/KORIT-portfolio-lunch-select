@@ -23,7 +23,7 @@ export const comment = css`
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
 `;
 export const mainContainer =css`
     padding-top: 1px;

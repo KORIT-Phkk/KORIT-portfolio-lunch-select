@@ -94,7 +94,7 @@ const ResetPassword = () => {
                 <img src="../main/logo1.png" />
             </header>
 
-            <div css={s.comment}><MdLockReset/>Reset Password<MdLockReset/></div>
+            <div css={s.comment}><MdLockReset/>&nbsp;Reset Password&nbsp;<MdLockReset/></div>
 
             <main css={s.mainContainer}>
                 <div css={s.input}>
