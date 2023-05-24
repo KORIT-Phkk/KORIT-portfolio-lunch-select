@@ -22,10 +22,9 @@ const LunchSelectMaster = () => {
     const { roomMasterCode } = useParams();
     const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
     const { roomMasterURL } = useParams();
-
+    const { userId, setUserId } = useState();
     const location = useLocation();
 
-<<<<<<< HEAD
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {
@@ -52,8 +51,6 @@ const LunchSelectMaster = () => {
         return response
     },);
 
-=======
->>>>>>> kimjonghwan
     const getMenu = useQuery(["getMenu"], async() => {
         const option = {
             params: {
@@ -65,12 +62,8 @@ const LunchSelectMaster = () => {
             },
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
-<<<<<<< HEAD
-        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-=======
         const response = await axios.get("http://localhost:8080/lunchselect/roulette",  option)
 
->>>>>>> kimjonghwan
         const names = await response.data.map(store => store.name);
         setTodayLunch(names);
         console.log("names: " + names)
@@ -103,11 +96,6 @@ const LunchSelectMaster = () => {
         setTodayLunchLoading(false);
     }
    
-<<<<<<< HEAD
-    // if(getMenu.isLoading){
-    //     return <div>불러오는 중....</div>
-    // }
-=======
     if(getMenu.isLoading){
         return <div>불러오는 중....</div>
     }
@@ -115,19 +103,15 @@ const LunchSelectMaster = () => {
     const backButtonHandle = () => {
         backButton.mutate();
     }
->>>>>>> kimjonghwan
 
     
     return (
         <div css={s.container}>
             <header>
-<<<<<<< HEAD
             <Invite />
-=======
                 <button css={s.backButtonClick} onClick={backButtonHandle}>
                     <IoMdArrowRoundBack css={s.backButton} />
                 </button>
->>>>>>> kimjonghwan
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>

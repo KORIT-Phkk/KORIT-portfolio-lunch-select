@@ -102,7 +102,7 @@ const Main = () => {
                 </div>
                 <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
                 <div css={s.lunchSelect}>
-                    <button css={s.lunchButton} >참여하기</button>
+                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle}>참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>
