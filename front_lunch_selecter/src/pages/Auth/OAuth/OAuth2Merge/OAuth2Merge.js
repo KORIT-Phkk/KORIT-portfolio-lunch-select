@@ -4,6 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import axios from 'axios';
 import { useMutation } from 'react-query';
+import * as s from './style';
+import { AiFillNotification } from 'react-icons/ai'
 
 const OAuth2Merge = () => {
     const providerMerge = useMutation(async (mergeData) => {
@@ -47,12 +49,22 @@ const OAuth2Merge = () => {
     }
 
     return (
-        <div>
-            <h1>"{email}" 계정을 "{provider}"와 통합하는 것에 동의 하십니까?</h1>
-            <input type="password" onChange={passwordChangeHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
-            <p>{errorMessage}</p>
-            <button onClick={providerMergeSubmitHandle}>동의</button>
-            <button >취소</button>
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <img css={s.imgCss} src="../../main/logo1.png"/>
+            </header>
+            <div css={s.comment}><AiFillNotification/>Notice<AiFillNotification/></div>
+            <main css={s.mainContainer}>
+                <h1 css={s.question}>"{email}" 계정을 "{provider}"와 통합하는 것에 동의하십니까?</h1>
+                <input css={s.passwordBox} type="password" onChange={passwordChangeHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
+                <p css={s.errMsg}>{errorMessage}</p>
+
+            </main>
+
+            <footer css={s.footerContainer}>
+                <button onClick={providerMergeSubmitHandle}>동의</button>
+                <button >취소</button>
+            </footer>
         </div>
     );
 };

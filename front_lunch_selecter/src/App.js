@@ -38,8 +38,8 @@ const mainContainer = css`
     border-radius: 20px;
     padding: 10px;
     font-size: 1.6rem;
-    width: 1400px;
-    height: 2700px;
+    width: 360px;
+    height: 640px;
 `;
 function App() {
 

@@ -18,7 +18,7 @@ const FindEmailResult = () => {
     return (
         <div css={s.container}>
             <header css={s.headerContainer}>
-                <img src="/main/logo1.png"/>
+                <img css={s.imgCss} src="/main/logo1.png"/>
             </header>
 
             <div css={s.comment}><MdSearch/>Your Email<MdSearch/></div>
@@ -31,8 +31,8 @@ const FindEmailResult = () => {
             </main>
 
             <footer css={s.footerContainer}>
-                <button onClick={onClickFindPasswordButton} css={s.findPassword}>비밀번호 찾기</button>
-                <button onClick={onClickLoginButton} css={s.loginButton}>로그인</button>
+                <button onClick={onClickLoginButton} css={s.findPassword}>로그인</button>
+                <button onClick={onClickFindPasswordButton} css={s.loginButton}>비밀번호 찾기</button>
             </footer>
         </div>
     );

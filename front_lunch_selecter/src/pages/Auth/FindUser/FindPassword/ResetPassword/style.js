@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 150px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -12,14 +12,14 @@ export const headerContainer = css`
     justify-content: center;
 `;
 export const comment = css`
-    padding-top: 50px;
+    padding-top: 10px;
     margin: auto;
     display: flex;
     justify-content: center;
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 50px;
+    font-size: 10px;
 `;
 export const mainContainer =css`
     margin: auto;
@@ -33,12 +33,12 @@ export const input = css`
     flex-direction: column;
 `;
 export const inputLabel = css`
-    padding-top: 50px;
-    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 2px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 10px;
 `;
 export const footerContainer =css`
     margin: auto;
@@ -47,39 +47,36 @@ export const footerContainer =css`
     flex-direction: column;
 `;
 export const checkButton = css`
-    width: 850px;
-    height: 80px;
-    margin-top: 190px;
-    margin-bottom: 300px;
+    width: 250px;
+    height: 20px;
+    margin-top: 50px;
+    margin-bottom: 75px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
     color: white;
-    border-radius: 20px;
+    border-radius: 5px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 10px;
     cursor: pointer;
     &:hover {
         color: black;
-        border-radius: 20px;
+        border-radius: 5px;
         border-bottom: 1px solid #fafafa;
         background-color: #fafafa;
     }
     &:active {
         color: black;
-        border-radius: 20px;
+        border-radius: 5px;
         border-bottom: 1px solid #dbdbdb;
         background-color: #dbdbdb;
     }
 `;
 export const errorMsg = css`
-    margin-left: 5px;
-  margin-top: 3px;
-  margin-bottom: 10px;
-  font-size: 25px;
-  color: red;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    margin-left: 3px;
+    margin-top: 1px;
+    zoom: 0.8;
+    font-size: 10px;
+    color: red;
 `;
