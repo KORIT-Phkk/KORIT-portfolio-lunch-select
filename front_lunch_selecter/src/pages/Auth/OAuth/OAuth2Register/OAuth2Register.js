@@ -13,6 +13,7 @@ const OAuth2Register = () => {
     const name = searchParams.get("name");
     const provider = searchParams.get("provider");
     const [ registerUser, setRegisterUser ] = useState({email:email, password:"", checkPassword: "", name:name, phone:"", provider:provider})
+    const [ errorMessages, setErrorMessages ] = useState({email: "", password: "", name: "", phone:""});
     
     
     const oauth2Register = useMutation(async (registerData) => {
@@ -25,8 +26,11 @@ const OAuth2Register = () => {
             const response =  await axios.post("http://localhost:8080/auth/oauth2/register", registerData, option);
             return response;
         }catch(error) {
-            alert("페이지가 만료되었습니다.")
-            window.location.replace("/auth/login");
+
+            console.log(error)
+
+            // alert("페이지가 만료되었습니다.")
+            // window.location.replace("/auth/login");
             return error;
         }
     }, {
