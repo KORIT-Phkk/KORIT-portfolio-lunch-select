@@ -2,18 +2,18 @@
 import { css } from '@emotion/react';
 import axios from 'axios';
 import QueryString from 'qs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Category from '../../components/SelectPage/Category/Category';
 import * as s from './style';
 import Invite from './Invite';
+import { useParams } from 'react-router';
+import { async } from 'q';
 
 
 const test = css`
     font-size: 50px;
 `;
-
-
 const LunchSelectGuest = () => {
     const [ name, setName ] = useState("");
     const [ userId, setUserId ] = useState(""); 
@@ -24,7 +24,9 @@ const LunchSelectGuest = () => {
         lng: null
     });
     const [ selectedCategories, setSelectedCategories ] = useState([]);
-
+    
+    const [ ckeckURLHandle, setCheckURLHandle ] = useState(false);
+    const { roomGuestURL } = useParams();
 
     const userInfoInsertButton = () => {
         setUserInsert(true);
@@ -33,6 +35,35 @@ const LunchSelectGuest = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
     }
+
+    useEffect(() => {
+        async function fetchData() {
+          const option = {
+            params: {
+              guestURL: roomGuestURL,
+            },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          };
+          try {
+            const response = await axios.get("http://localhost:8080/lunchselect/checkroom", option);
+      
+            if (response.data === false) {
+              alert("없는 방입니다~");
+              window.location.replace("http://localhost:3000");
+            }
+          } catch (error) {
+            // Handle any errors that occur during the request
+            console.error(error);
+          }
+        }
+      
+        fetchData();
+      }, []);
+      
+
+
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -44,17 +75,18 @@ const LunchSelectGuest = () => {
         setUserId(response.data.userId)
         return response;
     });
+
+
     
 
     const userInfoInsert = useMutation(async() => {
-        
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
         const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
-            // gestUrl: joinCode,
+            guestURL: roomGuestURL,
             userId: userId,
             categoryId: [...selectedCategories]
         }, option);
@@ -67,9 +99,9 @@ const LunchSelectGuest = () => {
 
     const readyHandleOnClick = () => {
         console.log("참여하기 누름?")
-        console.log(selectedCategories)
-        console.log(userId)
-        // userInfoInsert.mutate();
+        
+        setCheckURLHandle(true);
+        userInfoInsert.mutate();
         setInsert(true);
     }
 
@@ -77,7 +109,7 @@ const LunchSelectGuest = () => {
     return (
         <div css={s.container}>
             <header>
-            <Invite />
+           
 
             </header>
 

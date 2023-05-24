@@ -14,5 +14,9 @@
 		FROM
 			category_tb
 	</select>
+	
+	<insert id="">
+	
+	</insert>
 
 </mapper>

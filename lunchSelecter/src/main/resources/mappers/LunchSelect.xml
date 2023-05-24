@@ -16,22 +16,66 @@
 		insert into room_tb
 		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1)
 	</insert>
-	
-	<select id="findByMasterRoomId" parameterType="String" resultType="Integer">
+
+
+	<select id="checkRoom" parameterType="String" resultType="String">
 		SELECT
-			room_id
+			room_master_code
 		FROM
 			room_tb
 		WHERE
-			room_master_code = #{guestUrl}
+			room_master_code = #{guestURL}
 		and flag = 1
 	</select>
 	
-	<select id="findMasterUserIdByRoomId" parameterType="Integer" resultType="Integer">
-		SELECT
-			
-	</select>
+	<insert id="roomGuestInsert" parameterType="hashmap">
+	INSERT INTO room_join_tb
+	VALUES
+	<foreach collection="categoryIds" item="categoryId" separator="," >
+		(
+			0,
+			(SELECT room_id FROM room_tb WHERE room_master_code = #{guestURL} AND flag = 1),
+			#{userId},
+			#{categoryId}
+		)
+	</foreach>
+	</insert>
+
+
+	<insert id="roomMasterInsert" parameterType="hashmap">
+	INSERT INTO room_join_tb
+	VALUES
+	<foreach collection="categoryIds" item="categoryId" separator="," >
+		(
+			0,
+			(SELECT room_id FROM room_tb WHERE room_master_code = #{masterURL} AND flag = 1),
+			#{userId},
+			#{categoryId}
+		)
+	</foreach>
+	</insert>
+
 	
+	
+<!-- flag update -->
+	<update id="roomUpdateFlag" parameterType="String">
+		update
+			room_tb
+		set
+			flag = 0
+		where
+			room_master_code = #{roomMasterCode};
+	</update>
+	
+	<select id="getGuestURL" parameterType="String" resultType="String">
+      SELECT
+         room_guest_code
+      FROM
+         room_tb
+      WHERE
+         room_master_code = #{roomMasterCode}
+      and flag = 1
+   </select>
 
 
 </mapper>

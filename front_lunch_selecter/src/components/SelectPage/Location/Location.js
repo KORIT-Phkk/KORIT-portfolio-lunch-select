@@ -35,7 +35,6 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
             lng: e.latLng.getLng(),
         };
         setMarkerPosition(clickedPosition);
-        console.log(markerPosition)
 
     };
 
@@ -46,7 +45,7 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
                 center={markerPosition}
                 style={{
                     width: "100%",
-                    height: "1000px"
+                    height: "200px"
                 }}
                 onClick={markerHandle}
             >
