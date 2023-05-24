@@ -47,33 +47,31 @@ const Register = () => {
     return (
         <div css={s.container} onKeyUp={onEnterKeyUp}>
             <header css={s.headerContainer}>
-                <img src="../main/logo1.png"/>
+                <img css={s.imgCss} src="../main/logo1.png"/>
             </header>
 
-            <div css={s.comment}><AiOutlineContacts/>Register<AiOutlineContacts/></div>
+            <div css={s.comment}><AiOutlineContacts/>&nbsp;Register&nbsp;<AiOutlineContacts/></div>
 
             <main css={s.mainContainer}>
-                <div css={s.input}>
-                    <label css={s.inputLabel}>Email</label>
-                    <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
-                    <div css={s.errorMsg}>{errorMessages.email}</div>
+                <label css={s.inputLabel}>Email</label>
+                <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
+                <div css={s.errorMsg}>{errorMessages.email}</div>
 
-                    <label css={s.elseLabel}>Password</label>
-                    <AuthInput type="password" onChange={onChangeInputHandle} name="password" />
-                    <div css={s.errorMsg}>{errorMessages.password}</div>
+                <label css={s.elseLabel}>Password</label>
+                <AuthInput type="password" onChange={onChangeInputHandle} name="password" />
+                <div css={s.errorMsg}>{errorMessages.password}</div>
 
-                    <label css={s.elseLabel}>CheckPassword</label>
-                    <AuthInput type="password" onChange={onChangeInputHandle} name="checkPassword" />
-                    <div css={s.errorMsg}>{errorMessages.password}</div>
+                <label css={s.elseLabel}>CheckPassword</label>
+                <AuthInput type="password" onChange={onChangeInputHandle} name="checkPassword" />
+                <div css={s.errorMsg}>{errorMessages.password}</div>
 
-                    <label css={s.elseLabel}>Name</label>
-                    <AuthInput type="text" onChange={onChangeInputHandle} name="name" />
-                    <div css={s.errorMsg}>{errorMessages.name}</div>
+                <label css={s.elseLabel}>Name</label>
+                <AuthInput type="text" onChange={onChangeInputHandle} name="name" />
+                <div css={s.errorMsg}>{errorMessages.name}</div>
 
-                    <label css={s.elseLabel}>Phone</label>
-                    <AuthInput type="tel" onChange={onChangeInputHandle} name="phone" />
-                    <div css={s.errorMsg}>{errorMessages.phone}</div>
-                </div>
+                <label css={s.elseLabel}>Phone</label>
+                <AuthInput type="tel" onChange={onChangeInputHandle} name="phone" />
+                <div css={s.errorMsg}>{errorMessages.phone}</div>
             </main>
 
             <footer css={s.footerContainer}>

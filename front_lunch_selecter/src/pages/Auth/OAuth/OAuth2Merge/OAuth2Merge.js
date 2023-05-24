@@ -4,6 +4,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import axios from 'axios';
 import { useMutation } from 'react-query';
+import * as s from './style';
+import { AiFillNotification } from 'react-icons/ai'
 
 const OAuth2Merge = () => {
     const providerMerge = useMutation(async (mergeData) => {
@@ -42,23 +44,32 @@ const OAuth2Merge = () => {
         })
     }
 
-    const onClickCancleButtonClick = () => {
+    const cancelHandle = () => {
         navigate("/auth/login");
     }
 
-    const onEnterKeyUp = (e) => {
-        if(e.keyCode === 13) {
-            submitProviderMergeHandle();
-        }
-    }
-
     return (
-        <div onKeyUp={onEnterKeyUp}>
-            <h1>"{email}" 계정을 "{provider}"와 통합하는 것에 동의 하십니까?</h1>
-            <input type="password" onChange={onChangeInputHandle} placeholder='기존 계정의 비밀번호를 입력하세요.'/>
-            <p>{errorMessage}</p>
-            <button onClick={submitProviderMergeHandle}>동의</button>
-            <button onClick={onClickCancleButtonClick}>취소</button>
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <img css={s.imgCss} src="../../main/logo1.png"/>
+            </header>
+            <div css={s.comment}><AiFillNotification/>&nbsp;Notice&nbsp;<AiFillNotification/></div>
+            <main css={s.mainContainer}>
+                <h1 css={s.question}>
+                    {/* <div>"{email}" 계정을 "{provider}"(과)와</div>
+                    <div css={s.point}>통합</div>
+                    <div>하는 것에 동의하십니까?</div> */}
+                    <div>"{email}" 계정을 "{provider}"(과)와</div>
+                    <div><span css={s.point}>통합</span>하는 것에 동의하십니까?</div>
+                </h1>
+                <input css={s.passwordBox} type="password" onChange={onChangeInputHandle} placeholder='기존 비밀번호를 입력해주세요'/>
+                <p css={s.errMsg}>{errorMessage}</p>
+            </main>
+
+            <footer css={s.footerContainer}>
+                <button css={s.buttonCss1} onClick={submitProviderMergeHandle}>동의</button>
+                <button css={s.buttonCss2} onClick={cancelHandle}>취소</button>
+            </footer>
         </div>
     );
 };

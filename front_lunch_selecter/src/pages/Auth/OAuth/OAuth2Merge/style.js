@@ -1,7 +1,6 @@
-import { css } from '@emotion/react'
+import { css } from "@emotion/react";
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -26,82 +25,91 @@ export const comment = css`
     font-size: 15px;
 `;
 export const mainContainer =css`
-    padding-top: 1px;
     margin: auto;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     flex-direction: column;
 `;
-export const resultBox = css`
-    margin-top: 25px;
+export const question = css`
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
     width: 250px;
-    height: 100px;
-    border: 1px solid black;
-    border-radius: 5px;
+
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600px;
+    font-size: 12px;
+`;
+export const point = css`
+    color: red;
+`;
+export const passwordBox = css`
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 250px;
+    height: 20px;
+
+    border: none;
+    border-bottom: 1px solid black;
+`;
+export const errMsg = css`
+    margin-left: 3px;
+    margin-top: 4px;
+    font-size: 10px;
+    zoom: 0.7;
+    color: red;
 `;
 export const footerContainer =css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`;
-export const findPassword = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 20px;
     margin: auto;
     margin-top: 40px;
-    margin-bottom: 75px;
-    border: none;
-    border-bottom: 1px solid #dbdbdb;
-    background-color: black;
+    display: flex;
+    justify-content: center;
+`;
+export const buttonCss1 = css`
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
     color: white;
+    background-color: black;
+    margin-right: 5px;
     border-radius: 5px;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
-    cursor: pointer;
-    &:hover {
-        color: black;
-        border-radius: 5px;
-        border-bottom: 1px solid #fafafa;
-        background-color: #fafafa;
-    }
-    &:active {
-        color: black;
-        border-radius: 5px;
-        border-bottom: 1px solid #dbdbdb;
-        background-color: #dbdbdb;
-    }
-`;
-export const loginButton = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 20px;
-    margin: auto;
-    margin-top: 40px;
     border: none;
-    border-bottom: 1px solid #dbdbdb;
-    background-color: white;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 600;
-    font-size: 10px;
 
     cursor: pointer;
     &:hover {
+        color: black;
         border-radius: 5px;
-        border-bottom: 1px solid #fafafa;
         background-color: #fafafa;
     }
     &:active {
+        color: black;
         border-radius: 5px;
-        border-bottom: 1px solid #dbdbdb;
+        background-color: #dbdbdb;
+    }
+`;
+export const buttonCss2 = css`
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+    &:hover {
+        color: black;
+        border-radius: 5px;
+        background-color: #fafafa;
+    }
+    &:active {
+        color: black;
+        border-radius: 5px;
         background-color: #dbdbdb;
     }
 `;
