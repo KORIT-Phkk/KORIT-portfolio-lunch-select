@@ -1,29 +1,53 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router';
 
-class Invite extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        inviteLink: '',
-      };
-    }
 
-    generateInviteLink = () => {
-      const inviteLink = window.location.href;
-      const modifiedInviteLink = inviteLink.slice(46);
-      this.setState({ inviteLink: modifiedInviteLink });
-    };
+
+const Invite = () => {
+ 
+  const [ guestURL, setGuestURL ] = useState(false);
+  const [ getURL, setGetURL ] = useState();
   
-    render() {
-      const { inviteLink } = this.state;
-  
-      return (
-        <div>
-          <button onClick={this.generateInviteLink} >초대 링크 생성</button>
-          {inviteLink && <input type="text" value={inviteLink} readOnly inviteLink={inviteLink}/>}
-        </div>
-      );
-    }
+  const { roomMasterCode } = useParams();
+  const getGuestURL = useQuery(["getGuestURL"], async() => {
+      const option = {
+        params: {
+          roomMasterCode: roomMasterCode
+        },
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }
+      }
+      const response = await axios.get("http://localhost:8080/lunchselect/guesturl", option)
+      setGetURL(response.data);
+      return response;
+  },{
+      enabled: !guestURL,
+      onSuccess: () => {
+          setGuestURL(false);
+      }
+  })
+
+  const inviteCodeHandleClick = () => {
+      setGuestURL(true);
   }
 
+
+
+  return (
+    <div>
+      <button onClick={inviteCodeHandleClick}>
+        친구초대코드
+      </button>
+        <p>
+          {getURL}
+        </p>
+      
+    
+    </div>
+  );
+
+}
 export default Invite;

@@ -61,6 +61,12 @@ public class LunchSelectController {
 		return ResponseEntity.ok().body(lunchSelectService.roomUpdateFlag(requestData.get("roomMasterCode")));
 	}
 	
+	@GetMapping("/guesturl")
+	   public ResponseEntity<?> getGuestURL(String roomMasterCode) {
+	      System.out.println(roomMasterCode);
+	      return ResponseEntity.ok().body(lunchSelectService.getGuestURL(roomMasterCode));
+	   }
+	
 	
 	
 }

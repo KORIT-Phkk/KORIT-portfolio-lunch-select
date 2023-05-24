@@ -22,7 +22,7 @@ export const backButton = css`
     &:active{
         box-shadow: 1px 1px 0px 1px;
         background-color: whitesmoke;
-        /* background-color: #eee; */
+         /* background-color: #eee; */
     }
 `;
 

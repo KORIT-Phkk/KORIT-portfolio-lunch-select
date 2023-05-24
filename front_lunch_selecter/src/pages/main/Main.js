@@ -70,7 +70,8 @@ const Main = () => {
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
     }
-  
+
+
     const lunchSelectClickHandle = () => {
         lunchSelectRoom.mutate();
     }
@@ -91,9 +92,10 @@ const Main = () => {
                 <div css={s.setting}>
                     <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
                     <UserInfo css={s.userInfo} isOpen={isOpen}/>
-                    
                 </div>
-                    <div css={s.logo}><img src="main/003.png" alt=""/></div>
+                <div css={s.logoContainer}>
+                    <img css={s.logo} src="../main/logo1.png" alt=""/>
+                </div>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>

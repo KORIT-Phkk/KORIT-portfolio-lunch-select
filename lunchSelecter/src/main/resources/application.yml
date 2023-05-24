@@ -45,11 +45,14 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: jmclunchselect@gmail.com
-    password: gmvzvpjprkbuhncp
+    password: uxngkaoalppcywxt
     properties:
-      mail.smtp.auth: true
-      mail.smtp.timeout: 5000
-      mail.smtp.starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
               
 mybatis:
   mapper-locations:

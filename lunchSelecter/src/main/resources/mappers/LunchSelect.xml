@@ -56,15 +56,6 @@
 	</insert>
 
 	
-<!-- 	<select id="findMasterCode" parameterType="Integer" resultType="Integer"> -->
-<!-- 		SELECT -->
-<!-- 			room_id -->
-<!-- 		FROM -->
-<!-- 			room_tb -->
-<!-- 		WHERE -->
-<!-- 			room_master_id = #{userId} -->
-<!-- 		and flag = 1 -->
-<!-- 	</select> -->
 	
 <!-- flag update -->
 	<update id="roomUpdateFlag" parameterType="String">
@@ -75,6 +66,16 @@
 		where
 			room_master_code = #{roomMasterCode};
 	</update>
+	
+	<select id="getGuestURL" parameterType="String" resultType="String">
+      SELECT
+         room_guest_code
+      FROM
+         room_tb
+      WHERE
+         room_master_code = #{roomMasterCode}
+      and flag = 1
+   </select>
 
 
 </mapper>

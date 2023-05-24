@@ -4,9 +4,8 @@ import React from 'react';
 import Input from '../Input/Input';
 
 const authInput = css`
-    width: 850px;
-    margin-bottom: 5px;
-    
+    width: 250px;
+    margin-bottom: 1px;
 `;
 
 
@@ -14,7 +13,6 @@ const authInput = css`
 const AuthInput = ({ type, placeholder, onChange, name, children }) => {
     return (
         <div css={authInput}>
-            
             <Input
             type={type}
             placeholder={placeholder}

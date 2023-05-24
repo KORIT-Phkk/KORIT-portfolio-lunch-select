@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.korit.lunchSelect.dto.account.ResetPasswordReqDto;
 import com.korit.lunchSelect.dto.auth.JwtRespDto;
 import com.korit.lunchSelect.dto.auth.LoginReqDto;
 import com.korit.lunchSelect.dto.auth.SignupDto;
@@ -36,6 +37,12 @@ public class AuthenticationService implements UserDetailsService {
 	}
 	
 	public void signup(SignupDto signupDto) {
+		
+		if(misMatchPassword(signupDto)) {
+			throw new CustomException("error", 
+					ErrorMap.builder().put("password", "비밀번호가 일치하지 않습니다.").build());
+		}
+		
 		User userEntity = signupDto.toEntity();
 		
 		userRepository.saveUser(userEntity);
@@ -44,6 +51,10 @@ public class AuthenticationService implements UserDetailsService {
 				.userId(userEntity.getUserId())
 				.roleId(2)
 				.build());
+	}
+	
+	public boolean misMatchPassword(SignupDto signupDto) {
+		return !signupDto.getPassword().equals(signupDto.getCheckPassword());
 	}
 	
 	public String signin(LoginReqDto loginReqDto) {
@@ -62,6 +73,7 @@ public class AuthenticationService implements UserDetailsService {
 		return userEntity.toPrincipal();
 				
 	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User userEntity = userRepository.findUserByEmail(username);

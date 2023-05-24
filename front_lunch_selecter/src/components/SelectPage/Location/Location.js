@@ -35,7 +35,6 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
             lng: e.latLng.getLng(),
         };
         setMarkerPosition(clickedPosition);
-        console.log(markerPosition)
 
     };
 
@@ -46,11 +45,14 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
                 center={markerPosition}
                 style={{
                     width: "100%",
-                    height: "1000px"
+                    height: "200px"
                 }}
                 onClick={markerHandle}
             >
-                {<MapMarker position={markerPosition}/>}
+                {<MapMarker
+                    position={markerPosition}
+                />}
+                <div>클릭한 위치 좌표: {markerPosition.lat}, {markerPosition.lng}</div>
             </Map>
         </>
     );
