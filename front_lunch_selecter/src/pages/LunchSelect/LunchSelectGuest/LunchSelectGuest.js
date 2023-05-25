@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import * as s from './style';
 import axios from 'axios';
 import QueryString from 'qs';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import Category from '../../components/SelectPage/Category/Category';
-import * as s from './style';
-import Invite from './Invite';
+import Category from '../../../components/SelectPage/Category/Category';
+import Invite from '../Invite';
 import { useParams } from 'react-router';
 import { async } from 'q';
 
@@ -121,7 +121,7 @@ const LunchSelectGuest = () => {
                 </div>
             </main>
             
-            <footer css={s.mainContainer}>
+            <footer>
                 <div css={s.selectMenu}></div>
                 <button css={test} onClick={readyHandleOnClick} >준비완료!</button>
             </footer>

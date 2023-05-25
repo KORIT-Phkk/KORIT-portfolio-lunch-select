@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import Invite from './Invite';
+import Invite from '../Invite';
 import React, { useEffect, useState } from 'react';
-import Category from '../../components/SelectPage/Category/Category';
-import Location from '../../components/SelectPage/Location/Location';
+import Category from '../../../components/SelectPage/Category/Category';
+import Location from '../../../components/SelectPage/Location/Location';
 import * as s from './style';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router';
@@ -108,26 +108,25 @@ const LunchSelectMaster = () => {
     return (
         <div css={s.container}>
             <header>
-                <button css={s.backButtonClick} onClick={backButtonHandle}>
-                    <IoMdArrowRoundBack css={s.backButton} />
-                </button>
-            <Invite />
+                <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
+                <Invite/>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
-            <main>
+            <main css={s.mainContainer}>
                 <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오
+                    <h1 css={s.categoryName}>카테고리를 선택하시오</h1>
+                    <div css={s.category}>
                         <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </h1>
+                    </div>
+                            
                 </div>
             </main>
             
-            <footer css={s.mainContainer}>
+            <footer css={s.footerContainer}>
                 <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
-                <h2>유저</h2>
-                홍길동
+                
             
             </footer>
         </div>
