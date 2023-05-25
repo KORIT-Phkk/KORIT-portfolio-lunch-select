@@ -31,7 +31,7 @@
 			rjt.user_id
 	</select>
 	
-	<select id="findMenuByLocation" parameterType="hashmap" resultMap="LunchSelectMap">
+	<select id="lunchSelect" parameterType="hashmap" resultMap="LunchSelectMap">
 		SELECT 
 			rt.restaurant_id,
 			rt.restaurant_name,
@@ -53,17 +53,25 @@
 											room_tb rt
 											left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
 										WHERE
-											rt.room_master_id = #{masterId}
+											rt.room_master_id = #{roomMasterCode}
 										GROUP BY
 											rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
 		WHERE
 			1=1
 			and restaurant_category IN(SELECT
-													category_id
-												FROM
-													room_join_tb
-												WHERE
-													room_id = #{roomId})
+														category_id
+													FROM
+														room_join_tb
+													WHERE
+														room_id = (
+																	SELECT
+																		room_id
+																	FROM
+																		room_tb
+																	WHERE
+																		room_master_code = #{roomMasterCode}
+																		)
+			                                                    )
 		HAVING 
 			0.5 > distance;
 	</select>

@@ -17,6 +17,15 @@
 		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1)
 	</insert>
 
+	<select id="getGuestURL" parameterType="String" resultType="String">
+		SELECT
+			room_guest_code
+		FROM
+			room_tb
+		WHERE
+			room_master_code = #{roomMasterCode}
+		and flag = 1
+	</select>
 
 	<select id="checkRoom" parameterType="String" resultType="String">
 		SELECT
@@ -24,7 +33,7 @@
 		FROM
 			room_tb
 		WHERE
-			room_master_code = #{guestURL}
+			room_guest_code = #{guestURL}
 		and flag = 1
 	</select>
 	
@@ -34,7 +43,7 @@
 	<foreach collection="categoryIds" item="categoryId" separator="," >
 		(
 			0,
-			(SELECT room_id FROM room_tb WHERE room_master_code = #{guestURL} AND flag = 1),
+			(SELECT room_id FROM room_tb WHERE room_guest_code = #{guestURL} AND flag = 1),
 			#{userId},
 			#{categoryId}
 		)
@@ -56,17 +65,17 @@
 	</insert>
 
 	
-<!-- 	<select id="findMasterCode" parameterType="Integer" resultType="Integer"> -->
-<!-- 		SELECT -->
-<!-- 			room_id -->
-<!-- 		FROM -->
-<!-- 			room_tb -->
-<!-- 		WHERE -->
-<!-- 			room_master_id = #{userId} -->
-<!-- 		and flag = 1 -->
-<!-- 	</select> -->
+	<select id="findMasterCode" parameterType="Integer" resultType="Integer">
+		SELECT
+			room_id
+		FROM
+			room_tb
+		WHERE
+			room_master_id = #{userId}
+		and flag = 1
+	</select>
 	
-<!-- flag update -->
+
 	<update id="roomUpdateFlag" parameterType="String">
 		update
 			room_tb

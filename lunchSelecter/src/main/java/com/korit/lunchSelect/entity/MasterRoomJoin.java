@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MasterRoomJoin {
 
-	private String masterURL;
+	private String roomMasterCode;
 	private int userId;
 	private List<Integer> categoryId;
 }

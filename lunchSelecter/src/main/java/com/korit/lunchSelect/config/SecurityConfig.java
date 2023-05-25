@@ -41,20 +41,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.authorizeRequests()
-			.antMatchers("/auth/**")
-			.permitAll()
-			.anyRequest()
-			.authenticated()
-			.and()
-			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-			.exceptionHandling()
-			.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-			.and()
-            .oauth2Login()
-            .loginPage("http://localhost:3000/auth/login")
-            .successHandler(oAuth2SuccessHandler)
-            .userInfoEndpoint()
-            .userService(oAuthService);
+			    .antMatchers("/auth/**", "**/guest/*")
+			    .permitAll()
+			    .antMatchers("/lunchselect/room/guest/**")
+			    .permitAll()
+			    .anyRequest()
+			    .authenticated()
+			    .and()
+			    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+			    .exceptionHandling()
+			    .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+			    .and()
+			    .oauth2Login()
+			    .loginPage("http://localhost:3000/auth/login")
+			    .successHandler(oAuth2SuccessHandler)
+			    .userInfoEndpoint()
+			    .userService(oAuthService);
+
 		
 	}
 }

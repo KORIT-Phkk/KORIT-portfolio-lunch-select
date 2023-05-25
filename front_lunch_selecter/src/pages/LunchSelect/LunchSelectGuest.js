@@ -67,13 +67,17 @@ const LunchSelectGuest = () => {
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
-            headers: {
-                Authorization: accessToken
-            }
-        });
-        setUserId(response.data.userId)
-        return response;
+        try{
+            const response = await axios.get("http://localhost:8080/auth/userInfo", {
+                headers: {
+                    Authorization: accessToken
+                }
+            });
+            setUserId(response.data.userId)
+            return response;
+        }catch{
+            setUserId(0)
+        }
     });
 
 

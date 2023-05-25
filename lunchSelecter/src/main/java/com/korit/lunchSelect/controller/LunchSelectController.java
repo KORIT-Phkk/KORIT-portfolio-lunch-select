@@ -31,12 +31,18 @@ public class LunchSelectController {
 		return ResponseEntity.ok().body(lunchSelectService.createLunchSelectRoom());
 	}
 	
+	@GetMapping("/guesturl")
+	public ResponseEntity<?> getGuestURL(String roomMasterCode) {
+		
+		return ResponseEntity.ok().body(lunchSelectService.getGuestURL(roomMasterCode));
+	}
+	
 	@GetMapping("/checkroom")
-	public ResponseEntity<?> checkroom(GuestRoomJoin roomJoin){
+	public ResponseEntity<?> checkroom(GuestRoomJoin guestRoomJoin){
 		
 //		System.out.println("controller: " + roomJoin);
 		
-		return ResponseEntity.ok().body(lunchSelectService.checkRoom(roomJoin));
+		return ResponseEntity.ok().body(lunchSelectService.checkRoom(guestRoomJoin));
 	}
 
 	@PostMapping("/roomuserinsert")

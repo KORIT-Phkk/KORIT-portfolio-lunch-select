@@ -1,5 +1,8 @@
 package com.korit.lunchSelect.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +20,21 @@ public class SelectMenuController {
 
 	@GetMapping("/lunchselect/roulette")
 	public ResponseEntity<?> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
-		System.out.println("controller: " +lunchSelectReqDto);
-
-
+//		System.out.println(lunchSelectReqDto);
+		System.out.println(lunchSelectService.lunchSelect(lunchSelectReqDto));
 		return ResponseEntity.ok(lunchSelectService.lunchSelect(lunchSelectReqDto));
 	}
-
+	
+	@GetMapping("/lunchselect/result")
+	public ResponseEntity<?> lunchResult(LunchSelectReqDto lunchSelectReqDto){
+		List<String> list = new ArrayList<>();
+		
+		list.add(lunchSelectService.lunchResult(lunchSelectReqDto).getName());
+		list.add(lunchSelectService.lunchResult(lunchSelectReqDto).getAddress());
+		
+		System.out.println(lunchSelectService.lunchResult(lunchSelectReqDto));
+		
+		return ResponseEntity.ok(lunchSelectService.lunchResult(lunchSelectReqDto));
+	}
 }
+

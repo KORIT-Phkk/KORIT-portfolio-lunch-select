@@ -16,16 +16,17 @@ const LunchSelectMaster = () => {
         lat: null,
         lng: null
     });
-    const [ menuRefresh, setMenuRefresh ] = useState(false);
+    // const [ menuRefresh, setMenuRefresh ] = useState(false);
     const [ todayLunch, setTodayLunch ] = useState([]);
     const navigate = useNavigate();
     const { roomMasterCode } = useParams();
-    const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
-    const { roomMasterURL } = useParams();
+    // const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
+    const [ userId, setUserId ] = useState("");
+    const [ userInfo, setUserInfo ] = useState(true);
+    const [ todayLunch, setTodayLunch ] = useState([]); 
 
-    const location = useLocation();
+   
 
-<<<<<<< HEAD
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {
@@ -33,8 +34,14 @@ const LunchSelectMaster = () => {
                 Authorization: accessToken
             }
         });
+        console.log(roomMasterCode);
         setUserId(response.data.userId)
         return response;
+    }, {
+        enabled: userInfo,
+        onSuccess: () => {
+            setUserInfo(false)
+        } 
     });
 
     const userInfoInsert = useMutation(async() => {
@@ -44,7 +51,7 @@ const LunchSelectMaster = () => {
             }
         }
         const response = await axios.post("http://localhost:8080/lunchselect/roommasterinsert", {
-            masterURL: roomMasterURL,
+            roomMasterCode: roomMasterCode,
             userId: userId,
             categoryId: [...selectedCategories]
         }, option);
@@ -52,11 +59,10 @@ const LunchSelectMaster = () => {
         return response
     },);
 
-=======
->>>>>>> kimjonghwan
     const getMenu = useQuery(["getMenu"], async() => {
         const option = {
             params: {
+                roomMasterCode: roomMasterCode,
                 masterId: userId,
                 ...markerPosition
             },
@@ -65,21 +71,17 @@ const LunchSelectMaster = () => {
             },
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
-<<<<<<< HEAD
         const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-=======
-        const response = await axios.get("http://localhost:8080/lunchselect/roulette",  option)
-
->>>>>>> kimjonghwan
         const names = await response.data.map(store => store.name);
         setTodayLunch(names);
         console.log("names: " + names)
+        
         return response;
     },{
         enabled: menuRefresh,
         onSuccess:  () => {
-            setMenuRefresh(false);
             setTodayLunchLoading(true);
+            setMenuRefresh(false);
         }
     });
 
@@ -94,40 +96,31 @@ const LunchSelectMaster = () => {
     });
 
     const getMenuButtonHandle = () => {
+        // setMenuRefresh(true);
         userInfoInsert.mutate();
-        setMenuRefresh(true);
+        navigate(`/lunchselect/roulette?roomMasterCode=${roomMasterCode}&userId=${userId}&lat=${markerPosition.lat}&lng=${markerPosition.lng}`);
     }
-    
-    if(todayLunchLoading) {
-        navigate(`/lunchselect/roulette?todayLunch=${todayLunch}`);
-        setTodayLunchLoading(false);
-    }
-   
-<<<<<<< HEAD
-    // if(getMenu.isLoading){
-    //     return <div>불러오는 중....</div>
-    // }
-=======
-    if(getMenu.isLoading){
-        return <div>불러오는 중....</div>
-    }
-    
     const backButtonHandle = () => {
         backButton.mutate();
     }
->>>>>>> kimjonghwan
 
+    console.log(todayLunch)
+    // if(todayLunchLoading) {
+        // setTodayLunchLoading(false);
+        
+    // }
+
+    // if(getMenu.isLoading) {
+    //     return <div>불러오는 중....</div>
+    // }
     
     return (
         <div css={s.container}>
             <header>
-<<<<<<< HEAD
-            <Invite />
-=======
+           
                 <button css={s.backButtonClick} onClick={backButtonHandle}>
                     <IoMdArrowRoundBack css={s.backButton} />
                 </button>
->>>>>>> kimjonghwan
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
@@ -141,10 +134,7 @@ const LunchSelectMaster = () => {
             </main>
             
             <footer css={s.mainContainer}>
-                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
-                <h2>유저</h2>
-                홍길동
-            
+                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>      
             </footer>
         </div>
     );

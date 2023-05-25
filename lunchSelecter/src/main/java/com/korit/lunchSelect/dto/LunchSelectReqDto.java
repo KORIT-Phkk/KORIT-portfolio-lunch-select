@@ -8,6 +8,7 @@ import lombok.Data;
 public class LunchSelectReqDto {
 
 	private int masterId;
+	private String roomMasterCode;
 	private String lat;
 	private String lng;
 	
