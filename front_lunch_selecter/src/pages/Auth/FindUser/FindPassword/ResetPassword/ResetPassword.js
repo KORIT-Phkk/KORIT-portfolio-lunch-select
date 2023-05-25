@@ -91,7 +91,7 @@ const ResetPassword = () => {
     return (
         <div css={s.container} onKeyUp={onEnterKeyup}>
             <header css={s.headerContainer}>
-                <img src="../main/logo1.png" />
+                <img css={s.imgCss} src="../main/logo1.png" />
             </header>
 
             <div css={s.comment}><MdLockReset/>&nbsp;Reset Password&nbsp;<MdLockReset/></div>

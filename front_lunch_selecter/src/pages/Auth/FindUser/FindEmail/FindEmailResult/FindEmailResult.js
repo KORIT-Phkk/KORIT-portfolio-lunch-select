@@ -25,8 +25,8 @@ const FindEmailResult = () => {
             
             <main css={s.mainContainer}>
                 <div css={s.resultBox}>
-                    공사중. 건들지마라
-                <div>{email}</div>
+                    <div css={s.informment}>검색결과:</div>
+                    <div css={s.yourEmail}>dnr1112@naver.com</div>
                 </div>
             </main>
 
