@@ -5,8 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import LunchSelect from './pages/LunchSelect/LunchSelect';
 
-import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
-import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster';
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
 
 import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';

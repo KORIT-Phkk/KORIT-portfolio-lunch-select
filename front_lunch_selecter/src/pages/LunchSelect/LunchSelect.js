@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
-import * as s from './style';
+import * as s from './LunchSelectMaster/style';
 
 
 

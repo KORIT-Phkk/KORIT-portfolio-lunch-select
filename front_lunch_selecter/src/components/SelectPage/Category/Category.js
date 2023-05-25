@@ -1,8 +1,13 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
+
+
 const Category = ({ selectedCategories, setSelectedCategories }) => {
+    
 
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
@@ -39,7 +44,7 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
                 {getCategory.data !== undefined ? getCategory.data.data.map(category => (
                                     <div key={category.categoryId}>
                                         <input onChange={checkedHandleOnClick} type="checkbox"  id={category.categoryId} value={category.categoryId}/>
-                                        <label htmlFor={category.categoryId}>{category.categoryName}</label>
+                                        <label htmlFor={category.categoryId} >{category.categoryName}</label>
                                     </div>))
                                 : ""}
             </div>
