@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.korit.lunchSelect.repository.LunchSelectRepository">
+<mapper namespace="com.korit.lunchSelect.repository.RoomRepository">
 
 	<resultMap type="com.korit.lunchSelect.entity.Room" id="RoomMap">
 		<id property="roomId" column="room_id"/>
@@ -33,36 +33,40 @@
 		FROM
 			room_tb
 		WHERE
-			room_guest_code = #{guestURL}
+			room_guest_code = #{guestCode}
 		and flag = 1
 	</select>
 	
-	<insert id="roomGuestInsert" parameterType="hashmap">
+	<insert id="saveRoomJoin" parameterType="hashmap">
 	INSERT INTO room_join_tb
 	VALUES
 	<foreach collection="categoryIds" item="categoryId" separator="," >
 		(
 			0,
-			(SELECT room_id FROM room_tb WHERE room_guest_code = #{guestURL} AND flag = 1),
+			#{roomId},
 			#{userId},
 			#{categoryId}
 		)
 	</foreach>
 	</insert>
-
-
-	<insert id="roomMasterInsert" parameterType="hashmap">
-	INSERT INTO room_join_tb
-	VALUES
-	<foreach collection="categoryIds" item="categoryId" separator="," >
-		(
-			0,
-			(SELECT room_id FROM room_tb WHERE room_master_code = #{masterURL} AND flag = 1),
-			#{userId},
-			#{categoryId}
-		)
-	</foreach>
-	</insert>
+	
+	<select id="findRoomIdByMasterCode" parameterType="String" resultType="Integer">
+		SELECT
+			room_id
+		FROM
+			room_tb
+		WHERE
+			room_master_code = #{code}
+	</select>
+	
+	<select id="findRoomIdByGuestCode" parameterType="String" resultType="Integer">
+		SELECT
+			room_id
+		FROM
+			room_tb
+		WHERE
+			room_guest_code = #{code}
+	</select>
 
 	
 	<select id="findMasterCode" parameterType="Integer" resultType="Integer">

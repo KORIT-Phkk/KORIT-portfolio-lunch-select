@@ -11,45 +11,23 @@ const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
-    const [ userId, setUserId ] = useState(""); 
     const [ masterRoomCode, setMasterRoomCode ] = useState("");
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
 
-    const getUserInfo = useQuery(["getUserInfo"], async () => {
-        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+    const createRoom = useMutation(async () => {
+        const option = {
             headers: {
-                Authorization: accessToken
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             }
-        });
-        setUserId(response.data.userId)
-        return response;
+        };
+        const response = await axios.post("http://localhost:8080/lunchselect/room/create", {}, option);
+        window.location.href = response.data;
     });
 
-    const lunchSelectRoom = useMutation(async () => {
-        try {
-            const option = {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                }
-            };
-            const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
-            window.location.href = response.data;
-            // navigate(response);
-            console.log(response.data);
-            return response;
-        } catch(error) {
-            alert("관리자에게 문의하세요.");
-            return error;
-        }
-    });
-
-   
-
+    // ----------------------------------------------------------------
     const userInfoInsert = useMutation(async() => {
-        
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -60,17 +38,9 @@ const Main = () => {
         }, option);
         return response
     });
-
-    if(getUserInfo.isLoading) {
-        return <></>;
-    }
-
-    if(lunchSelectRoom.isLoading){
-        return <div>불러오는중</div>
-    }
-  
+    
     const lunchSelectClickHandle = () => {
-        lunchSelectRoom.mutate();
+        createRoom.mutate();
     }
 
     const lunchSelectJoinClickHandle = () => {
@@ -80,8 +50,9 @@ const Main = () => {
 
     const joinCodeInputHandle = (e) => {
         setJoinCode(e.target.value);
-        console.log(joinCode)
     }
+    // ----------------------------------------------------------------
+  
 
     return (
         <div css={s.container}>

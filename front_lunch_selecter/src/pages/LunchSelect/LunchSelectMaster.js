@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
+import QueryString from 'qs';
 import React, { useState } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation, useQuery } from 'react-query';
@@ -7,7 +8,6 @@ import { useNavigate, useParams } from 'react-router';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
-import QueryString from 'qs';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -15,52 +15,37 @@ const LunchSelectMaster = () => {
         lat: null,
         lng: null
     });
-    // const [ menuRefresh, setMenuRefresh ] = useState(false);
-    const [ todayLunch, setTodayLunch ] = useState([]);
+
+    const [ flag, setFlag ] = useState(false);
+
     const navigate = useNavigate();
-    const { roomMasterCode } = useParams();
-    // const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
-    const [ userId, setUserId ] = useState("");
-    const [ userInfo, setUserInfo ] = useState(true);
-    const [ menuRefresh, setMenuRefresh ] = useState(false);
+    const { code } = useParams();
 
-    const getUserInfo = useQuery(["getUserInfo"], async () => {
-        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
-            headers: {
-                Authorization: accessToken
-            }
-        });
-        console.log(roomMasterCode);
-        setUserId(response.data.userId)
-        return response;
-    }, {
-        enabled: userInfo,
-        onSuccess: () => {
-            setUserInfo(false)
-        } 
-    });
 
-    const userInfoInsert = useMutation(async() => {
+
+    const insertCategory = useMutation(async() => {
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/room/guest/category", {
-            roomMasterCode: roomMasterCode,
-            userId: userId,
+        const response = await axios.post("http://localhost:8080/lunchselect/room/insert/category", {
+            code: `0 ${code}`,
             categoryId: [...selectedCategories]
         }, option);
-        
-        return response
-    },);
+        return response;
+    }, {
+        onSuccess: (response) => {
+            if(response.status === 200) {
+                setFlag(true)
+            }
+        }
+    });
 
-    const getMenus = useQuery(["getMenu"], async() => {
+    const getMenus = useQuery(["getMenus"], async() => {
         const option = {
             params: {
-                roomMasterCode: roomMasterCode,
-                masterId: userId,
+                code: `0 ${code}`,
                 ...markerPosition
             },
             headers: {
@@ -68,18 +53,18 @@ const LunchSelectMaster = () => {
             },
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/roulette", option)
-        const names = await response.data.map(store => store.name);
-        setTodayLunch(names);
-        console.log("names: " + names)
-        
+        const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)
         return response;
-    },{
-        enabled: menuRefresh,
-        onSuccess:  () => {
-            setMenuRefresh(false);
+    }, {
+        enabled: flag,
+        onSuccess: () => {
+            setFlag(false);
         }
     });
+
+
+
+
 
     const backButton = useMutation(async() => {
         const option = {
@@ -87,24 +72,17 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.put("http://localhost:8080/lunchselect/updateflag", {roomMasterCode}, option)
+        const response = await axios.put("http://localhost:8080/lunchselect/updateflag", {code}, option)
         window.location.href = "http://localhost:3000/";
     });
 
     const getMenuButtonHandle = () => {
-        // setMenuRefresh(true);
-        userInfoInsert.mutate();
-        navigate(`/lunchselect/roulette?roomMasterCode=${roomMasterCode}&userId=${userId}&lat=${markerPosition.lat}&lng=${markerPosition.lng}`);
+        insertCategory.mutate();
+        // navigate(`/lunchselect/roulette?roomMasterCode=${code}&lat=${markerPosition.lat}&lng=${markerPosition.lng}`);
     }
     const backButtonHandle = () => {
         backButton.mutate();
     }
-
-    // console.log(todayLunch)
-    // if(todayLunchLoading) {
-        // setTodayLunchLoading(false);
-        
-    // }
 
     if(getMenus.isLoading) {
         return <div>불러오는 중....</div>
