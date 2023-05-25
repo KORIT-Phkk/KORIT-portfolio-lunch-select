@@ -25,16 +25,18 @@ export const userName = css`
     display: flex;
     justify-content: center;
     margin-top: 5px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 100;
     color: white;
 `;
 export const userEmail =css`
     display: flex;
     justify-content: center;
     margin-top: 3px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-size: 10px;
-    font-weight: 400;
+    font-weight: 100;
     color: white;
 `;
 export const mainContainer = css`
@@ -45,6 +47,8 @@ export const myInfoUpdate = css`
     width: 100px;
     height: 20px;
     margin-top: 10px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 100;
     font-size: 8px;
     border-radius: 5px;
     cursor: pointer;
@@ -74,8 +78,9 @@ export const logout = css`
     border-radius: 5px;
     background-color: black;
     color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 100;
     cursor: pointer;
     &:hover {
         background-color: #fafafa;

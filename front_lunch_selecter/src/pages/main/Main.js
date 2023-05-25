@@ -11,6 +11,8 @@ const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
+    const [imageSrc, setImageSrc] = useState("../main/logo1.png");
+    const [isClicked, setIsClicked] = useState(false);
 
     const [ userId, setUserId ] = useState(""); 
 
@@ -86,6 +88,17 @@ const Main = () => {
         console.log(joinCode)
     }
 
+    
+    const imageHandle = () => {
+        if(isClicked){
+            setImageSrc("../main/logo1.png");
+            setIsClicked(false);
+        }else{
+            setImageSrc("../main/logo2.png");
+            setIsClicked(true);
+        }
+    }
+
     return (
         <div css={s.container}>
             <header css={s.headerContainer}>
@@ -94,23 +107,16 @@ const Main = () => {
                     <UserInfo css={s.userInfo} isOpen={isOpen}/>
                 </div>
                 <div css={s.logoContainer}>
-                    <img css={s.logo} src="../main/logo1.png" alt=""/>
+                    <img css={s.logo} onClick={imageHandle} src={imageSrc} alt=""/>
                 </div>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.lunchSelect}>
                     <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
-                    
-                </div>
-                <input css={s.joinUrlInput} type="text" onChange={joinCodeInputHandle} placeholder='참여 코드 입력'/>
-                <div css={s.lunchSelect}>
-                    <button css={s.lunchButton} onClick={lunchSelectJoinClickHandle}>참여하기</button>
                 </div>
             </main>
             <footer css={s.footerContainer}>
-                <div css={s.rangeSetting}>
-                    
-                </div>
+                <div css={s.hello}>hello</div>
             </footer>
         </div>
     );

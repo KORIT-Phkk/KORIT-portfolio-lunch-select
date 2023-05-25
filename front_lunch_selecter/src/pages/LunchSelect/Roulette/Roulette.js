@@ -6,12 +6,12 @@ import { useSearchParams } from 'react-router-dom';
 // import * as s from './style';
 
 const test2 = css`
-    font-size: 100px;
+    font-size: 10px;
 `;
 
 const b = css`
   width: 100%;
-  height: 800px;
+  height: 80px;
   border: 1px solid #121212;
   align-items: center;
   justify-content: center;
@@ -19,16 +19,15 @@ const b = css`
 `;
 
 const a = css`
-  font-size: 100px;
+  font-size: 10px;
   margin: 300px auto;
 `;
 
 const test = css`
   color: #999;
   text-transform: uppercase;
-  font-size: 36px;
+  font-size: 10px;
   font-weight: bold;
-  padding-top: 200px;
   width: 100%;
   display: block;
   margin: auto;
@@ -40,11 +39,9 @@ const rouletteBoxStyles = css`
   justify-content: center;
   align-items: center;
   width: 80%;
-  height: 500px;
+  height: 100px;
   border: 1px solid #121212;
-  font-size: 100px;
-  margin-top: 300px;
-  margin-left: 130px;
+  font-size: 10px;
   overflow: hidden;
   position: relative;
 `;
@@ -79,7 +76,7 @@ const Roulette = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     let restaurantNames  = searchParams.get("todayLunch");
-    const restaurantNameList = restaurantNames  ? restaurantNames .split(",") : [];
+    const restaurantNameList = restaurantNames  ? restaurantNames.split(",") : [];
 
     const [currentNameIndex, setCurrentNameIndex] = useState(0);
 

@@ -25,11 +25,9 @@ export const header = css`
 export const categoryBox = css`
     display: flex;
     justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 50px;
 `;
 export const category = css`
-    font-size: 70px;
+    font-size: 10px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
 `;
 
@@ -57,18 +55,16 @@ export const selectMenu = css`
     justify-content: center;
     align-items: center;
 
-    margin: 100px;
-
     height: 50%;
     width: 100%;
 
-    font-size: 100px;
+    font-size: 10px;
 `;
 
 export const selectButton = css`
     border: 1px solid #121212;
     border-radius: 7px;
-    font-size: 50px;
+    font-size: 10px;
 
     margin: 50px;
 
@@ -86,5 +82,5 @@ export const selectButton = css`
 
 export const lunchMenu = css`
 
-    font-size: 100px;
+    font-size: 10px;
 `;
