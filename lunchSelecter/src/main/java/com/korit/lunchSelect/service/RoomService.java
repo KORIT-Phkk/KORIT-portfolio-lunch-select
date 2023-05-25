@@ -21,19 +21,20 @@ import com.korit.lunchSelect.entity.GuestRoomJoin;
 import com.korit.lunchSelect.entity.LunchSelect;
 import com.korit.lunchSelect.entity.MasterRoomJoin;
 import com.korit.lunchSelect.entity.Room;
-import com.korit.lunchSelect.repository.LunchSelectRepository;
+import com.korit.lunchSelect.repository.RoomRepository;
 import com.korit.lunchSelect.security.PrincipalUser;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LunchSelectService {
+public class RoomService {
 
 	
-	private final LunchSelectRepository lunchSelectRepository;
+	private final RoomRepository lunchSelectRepository;
 
-	public List<LunchSelect> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
+	public Map<String, Object> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
+		Map<String, Object> resultMap = new HashMap<>();
 				
 		Map<String, Object> map = new HashMap<>();
 		map.put("masterId", lunchSelectReqDto.getMasterId());
@@ -41,19 +42,22 @@ public class LunchSelectService {
 		map.put("lat", lunchSelectReqDto.getLat());
 		map.put("lng", lunchSelectReqDto.getLng());
 		
-//		System.out.println(map);
 		List<LunchSelect> a = lunchSelectRepository.lunchSelect(map);
-		return lunchSelectRepository.lunchSelect(map);
+		
+		LunchSelect result = lunchResult(a);
+		
+		resultMap.put("list", a);
+		resultMap.put("result", result);
+		
+		return resultMap;
 	}
 	
-	public LunchSelect lunchResult(LunchSelectReqDto lunchSelectReqDto){
-		List<LunchSelect> lunchSelectList = lunchSelect(lunchSelectReqDto);
-		
+	public LunchSelect lunchResult(List<LunchSelect> list){
 		Random random = new Random();
 		
-		int randomIndex = random.nextInt(lunchSelectList.size());
+		int randomIndex = random.nextInt(list.size());
 		
-		LunchSelect randomLunchSelect = lunchSelectList.get(randomIndex);
+		LunchSelect randomLunchSelect = list.get(randomIndex);
 		
 		return randomLunchSelect;
 
@@ -98,18 +102,12 @@ public class LunchSelectService {
 		insertMap.put("userId",roomJoin.getUserId());
 		insertMap.put("categoryIds",roomJoin.getCategoryId());
 		
-
-//		System.out.println("map: " + insertMap);
 		lunchSelectRepository.roomGuestInsert(insertMap);
 		
 
 		return 0;
 	}
 	
-	public int roomUpdateFlag(String roomMasterCode) {
-		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
-	}
-
 	public int insertMaster(MasterRoomJoin masterRoomJoin) {
 		Map<String, Object> insertMap = new HashMap<>();
 		
@@ -117,10 +115,13 @@ public class LunchSelectService {
 		insertMap.put("userId",masterRoomJoin.getUserId());
 		insertMap.put("categoryIds",masterRoomJoin.getCategoryId());
 		
-//		System.out.println("service: " + masterRoomJoin);
 		lunchSelectRepository.roomMasterInsert(insertMap);
 		
 		return 0;
+	}
+	
+	public int roomUpdateFlag(String roomMasterCode) {
+		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
 	}
 	
 }

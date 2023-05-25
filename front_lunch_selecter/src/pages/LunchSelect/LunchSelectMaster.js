@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import Invite from './Invite';
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { useMutation, useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
-import axios from 'axios';
-import { useLocation, useNavigate, useParams } from 'react-router';
-import { useMutation, useQuery } from 'react-query';
 import QueryString from 'qs';
-import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -23,9 +22,7 @@ const LunchSelectMaster = () => {
     // const [ todayLunchLoading, setTodayLunchLoading ] = useState(false);
     const [ userId, setUserId ] = useState("");
     const [ userInfo, setUserInfo ] = useState(true);
-    const [ todayLunch, setTodayLunch ] = useState([]); 
-
-   
+    const [ menuRefresh, setMenuRefresh ] = useState(false);
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -50,7 +47,7 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/roommasterinsert", {
+        const response = await axios.post("http://localhost:8080/lunchselect/room/guest/category", {
             roomMasterCode: roomMasterCode,
             userId: userId,
             categoryId: [...selectedCategories]
@@ -59,7 +56,7 @@ const LunchSelectMaster = () => {
         return response
     },);
 
-    const getMenu = useQuery(["getMenu"], async() => {
+    const getMenus = useQuery(["getMenu"], async() => {
         const option = {
             params: {
                 roomMasterCode: roomMasterCode,
@@ -80,7 +77,6 @@ const LunchSelectMaster = () => {
     },{
         enabled: menuRefresh,
         onSuccess:  () => {
-            setTodayLunchLoading(true);
             setMenuRefresh(false);
         }
     });
@@ -104,15 +100,15 @@ const LunchSelectMaster = () => {
         backButton.mutate();
     }
 
-    console.log(todayLunch)
+    // console.log(todayLunch)
     // if(todayLunchLoading) {
         // setTodayLunchLoading(false);
         
     // }
 
-    // if(getMenu.isLoading) {
-    //     return <div>불러오는 중....</div>
-    // }
+    if(getMenus.isLoading) {
+        return <div>불러오는 중....</div>
+    }
     
     return (
         <div css={s.container}>

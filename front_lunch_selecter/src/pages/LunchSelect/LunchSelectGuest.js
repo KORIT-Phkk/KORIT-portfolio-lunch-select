@@ -40,7 +40,7 @@ const LunchSelectGuest = () => {
         async function fetchData() {
           const option = {
             params: {
-              guestURL: roomGuestURL,
+              guestURL: `guest ${roomGuestURL}`,
             },
             headers: {
               Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

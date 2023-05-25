@@ -13,21 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.korit.lunchSelect.entity.GuestRoomJoin;
 import com.korit.lunchSelect.entity.MasterRoomJoin;
-import com.korit.lunchSelect.service.LunchSelectService;
+import com.korit.lunchSelect.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/lunchselect")
+@RequestMapping("/")
 @RequiredArgsConstructor
 
-public class LunchSelectController {
+public class RoomController {
+//	@GetMapping("/room/guest")
+//	@GetMapping("/room/ckeck")
+//	@PostMapping("/room/guest/category")
+//	@PostMapping("/room/master/category")
+	private final RoomService lunchSelectService;
 	
-	private final LunchSelectService lunchSelectService;
-	
-	@PostMapping("/room")
+	@PostMapping("/room/create")
 	public ResponseEntity<?> createLunchSelectRoom(){
-		
 		return ResponseEntity.ok().body(lunchSelectService.createLunchSelectRoom());
 	}
 	
@@ -45,7 +47,7 @@ public class LunchSelectController {
 		return ResponseEntity.ok().body(lunchSelectService.checkRoom(guestRoomJoin));
 	}
 
-	@PostMapping("/roomuserinsert")
+	@PostMapping("/room/guest/category")
 	public ResponseEntity<?> roomUserInfo(@RequestBody GuestRoomJoin roomJoin){
 		
 //		System.out.println("controller: " + roomJoin);

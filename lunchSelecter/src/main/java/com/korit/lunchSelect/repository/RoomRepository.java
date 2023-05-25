@@ -10,11 +10,10 @@ import com.korit.lunchSelect.entity.LunchSelect;
 import com.korit.lunchSelect.entity.Room;
 
 @Mapper
-public interface LunchSelectRepository {
-	
-//	public int findRoomByMasterId(int masterId);
-	public List<LunchSelect> lunchSelect(Map<String, Object> map);
+public interface RoomRepository {
 	public int createLunchSelectRoom(Room room);
+	
+	public List<LunchSelect> lunchSelect(Map<String, Object> map);
 
 	public String checkRoom(String guestURL);
 	public int roomGuestInsert(Map<String, Object> map);

@@ -6,7 +6,7 @@ import { useSearchParams, useParams } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import QueryString from 'qs';
 
 
@@ -98,6 +98,7 @@ const Roulette = () => {
     const [ chooseMenuAddress, setChooseMenuAddress ] = useState("")
     const [animationStarted, setAnimationStarted] = useState(true);
     const textContainerRef = useRef(null);
+    const queryClient = useQueryClient();
 
     let roomMasterCode = searchParams.get("roomMasterCode");
     let masterId = searchParams.get("userId");
@@ -106,11 +107,12 @@ const Roulette = () => {
 
     console.log(roomMasterCode, masterId, lat, lng)
 
+    useEffect(() => {
+      setTodayLunch(queryClient.getQueryData("getMenus"))
+      console.log(todayLunch)
+    },[])
 
-  
-
-
-    // const getMenu = useQuery(["getMenu"], async() => {
+  // const getMenu = useQuery(["getMenu"], async() => {
     //   const option = {
     //       params: {
     //           roomMasterCode: roomMasterCode,
@@ -177,13 +179,15 @@ const Roulette = () => {
       return response
     }
 
+
+
     const selectLunchMenu = () => {
       navigate(`/lunchselect/result?name=${chooseMenuName}&address=${chooseMenuAddress}`);
     }
 
-    if(getMenu.isLoading){
-      return <div>불러오는중</div>
-    }
+    // if(getMenu.isLoading){
+    //   return <div>불러오는중</div>
+    // }
  
     if(chooseMenu.isLoading){
       return <div>결과 불러오는 중</div>
