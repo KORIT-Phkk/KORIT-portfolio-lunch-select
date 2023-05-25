@@ -36,6 +36,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 			errorResponseDto = new ErrorResponseDto<>("로그인 실패", ErrorMap.builder().put("email", "사용자 정보가 일치하지 않습니다.").build());
 		}
 		
+		
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String responseJson = objectMapper.writeValueAsString(errorResponseDto);
 		

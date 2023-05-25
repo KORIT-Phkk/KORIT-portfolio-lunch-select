@@ -9,14 +9,15 @@ const authInput = css`
 
 
 
-const AuthInput = ({ type, placeholder, onChange, name, children }) => {
+const AuthInput = ({ type, placeholder, onChange, name, disabled }) => {
     return (
         <div css={authInput}>
             <Input
             type={type}
             placeholder={placeholder}
             onChange={onChange}
-            name={name}/>
+            name={name}
+            disabled={disabled}/>
         </div>
     );
 };

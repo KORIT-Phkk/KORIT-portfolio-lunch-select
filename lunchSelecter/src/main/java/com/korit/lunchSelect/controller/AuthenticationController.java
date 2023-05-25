@@ -17,6 +17,8 @@ import com.korit.lunchSelect.dto.auth.LoginReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2ProviderMergeReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2RegisterReqDto;
 import com.korit.lunchSelect.dto.auth.SignupDto;
+import com.korit.lunchSelect.exception.CustomException;
+import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
 import com.korit.lunchSelect.service.AuthenticationService;
 import com.korit.lunchSelect.service.OAuthService;
@@ -55,13 +57,14 @@ public class AuthenticationController{
 		return ResponseEntity.ok().body(authenticationService.getUserInfo(accessToken));
 	}
 	
+	@ValidAspect
 	@PostMapping("/oauth2/register")
-	public ResponseEntity<?> oauth2Register(@RequestHeader(value="registerToken") String registerToken, @RequestBody OAuth2RegisterReqDto oAuth2RegisterReqDto){
-		
+	public ResponseEntity<?> oauth2Register(@RequestHeader(value="registerToken") String registerToken, @Valid @RequestBody OAuth2RegisterReqDto oAuth2RegisterReqDto, BindingResult bindingResult){
 		boolean validated = jwtTokenProvider.validateToken(jwtTokenProvider.getToken(registerToken));
 		
 		if(!validated) {
-			return ResponseEntity.badRequest().body("회원가입 요청 시간이 초과하였습니다.");
+			throw new CustomException("Invalid Token", 
+					ErrorMap.builder().put("error", "요청이 만료되었습니다.").build());
 		}
 		
 		return ResponseEntity.ok().body(oAuthService.oauth2Register(oAuth2RegisterReqDto));	
