@@ -29,8 +29,6 @@ import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordR
 import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
 
 
-
-
 const mainContainer = css`
     position: relative;
     margin: 10px auto;

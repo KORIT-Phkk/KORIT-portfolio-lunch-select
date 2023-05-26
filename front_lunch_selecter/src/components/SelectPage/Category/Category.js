@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import * as s from './style';
 
 
 
@@ -36,18 +36,17 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
             setSelectedCategories([...selectedCategories.filter(id => id !== e.target.value)]);
         }
     }
-
+    
     return (
         <div>
-            <div>  
-                
-                {getCategory.data !== undefined ? getCategory.data.data.map(category => (
-                                    <div key={category.categoryId}>
-                                        <input onChange={checkedHandleOnClick} type="checkbox"  id={category.categoryId} value={category.categoryId}/>
-                                        <label htmlFor={category.categoryId} >{category.categoryName}</label>
-                                    </div>))
-                                : ""}
-            </div>
+            {getCategory.data !== undefined ? getCategory.data.data.map(category => (
+                                <div key={category.categoryId}>
+                                    <img css={s.imgCss} src={`../../../category/food${category.categoryId}.png`} alt="" />
+                                    
+                                    <input onChange={checkedHandleOnClick} type="checkbox" id={category.categoryId} value={category.categoryId}/>
+                                    <label htmlFor={category.categoryId} >{category.categoryName}</label>
+                                </div>))
+                            : ""}
         </div>
     );
 };

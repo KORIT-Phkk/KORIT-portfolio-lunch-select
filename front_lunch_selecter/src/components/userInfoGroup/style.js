@@ -9,7 +9,7 @@ export const userInfoGroup = (isOpen) => css`
     border: 1px solid black;
     border-radius: 5px;
     width: 150px;
-    height: 150px;
+    height: 100px;
     background-color: white;
     overflow-y: auto;
 `;
@@ -46,7 +46,7 @@ export const mainContainer = css`
 export const myInfoUpdate = css`
     width: 100px;
     height: 20px;
-    margin-top: 10px;
+    margin-top: 7px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 100;
     font-size: 8px;
@@ -70,7 +70,8 @@ export const footerContainer =css`
     justify-content: center;
 `;
 export const logout = css`
-    margin-top: 50px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     width: 100px;
     height: 20px;
     border: none;

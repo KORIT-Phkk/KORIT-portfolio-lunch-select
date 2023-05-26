@@ -24,6 +24,8 @@ const LunchSelectMaster = () => {
     const { roomMasterURL } = useParams();
     const { userId, setUserId } = useState();
     const location = useLocation();
+    const [ imageChicken, setImageChicken ] = useState("../../../category/colorFood1.png");
+    const [ isClicked, setIsClicked ] = useState(false);
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -104,6 +106,17 @@ const LunchSelectMaster = () => {
         backButton.mutate();
     }
 
+    const chickenIcon = () => {
+        console.log("heelo");
+        if(isClicked){
+            setImageChicken("../../../category/food1.png");
+            setIsClicked(false);
+        }else{
+            setImageChicken("../../../category/colorFood1.png");
+            setIsClicked(true);
+        }
+    }
+
     
     return (
         <div css={s.container}>
@@ -115,13 +128,51 @@ const LunchSelectMaster = () => {
             </header>
 
             <main css={s.mainContainer}>
+                <h1 css={s.categoryName}>카테고리를 선택하시오</h1>
                 <div css={s.categoryBox}>
-                    <h1 css={s.categoryName}>카테고리를 선택하시오</h1>
                     <div css={s.category}>
                         <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
                     </div>
-                            
                 </div>
+                <div css={s.imgContainer}>
+                    <div css={s.imgChicken}>
+                        <img css={s.imgCss} onClick={chickenIcon} src="../../../category/colorFood2.png" />
+                        치킨
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src={imageChicken} />
+                        중식
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/fastfood1.png" />
+                        패스트푸드
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/japanesefood1.png" />
+                        일식
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/koreanfood1.png" />
+                        한식
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/lawfish1.png" />
+                        회
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/lightfood1.png" />
+                        양식
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/meat1.png" />
+                        고기/구이
+                    </div>
+                    <div>
+                        <img css={s.imgCss} src="../../../category/schoolfood1.png" />
+                        분식
+                    </div>
+                </div>
+                
             </main>
             
             <footer css={s.footerContainer}>

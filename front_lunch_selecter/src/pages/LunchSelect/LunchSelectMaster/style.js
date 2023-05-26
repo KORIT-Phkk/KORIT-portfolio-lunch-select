@@ -12,8 +12,9 @@ export const backButton = css`
     height: 20px;
     border: none;
     background-color: white;
-    cursor: pointer;
     border-radius: 50%;
+
+    cursor: pointer;
     &:hover{
         width: 25px;
         height: 25px;
@@ -24,8 +25,6 @@ export const backButton = css`
          background-color: #eee;
     }
 `;
-
-
 export const mapExplain = css`
     display: flex;
     justify-content: center;
@@ -40,11 +39,29 @@ export const mainContainer =css`
     align-items: center;
     flex-direction: column;
 `;
+export const imgContainer = css`
+    display: flex;
+    width: 250px;
+    margin: 2px auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+`;
+export const imgCss = css`
+    margin: 0 20px;
+    width: 40px;
+    height: 40px;
+`;
+export const imgChicken = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+`
 export const categoryBox = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 `;
 export const categoryName = css`
     margin-top: 10px;

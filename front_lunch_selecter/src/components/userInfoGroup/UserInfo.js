@@ -46,11 +46,11 @@ const UserInfo = ({ isOpen }) => {
             </header>
             <main css={s.mainContainer}>
                 <button css={s.myInfoUpdate}>
-                    내정보 수정
+                    마이페이지
                 </button>
             </main>
             <footer css={s.footerContainer}>
-                <button onClick={logoutClickHandle} css={s.logout}>Logout</button>
+                <button onClick={logoutClickHandle} css={s.logout}>로그아웃</button>
             </footer>
         </div>
     );
