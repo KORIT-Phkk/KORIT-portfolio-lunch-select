@@ -56,9 +56,6 @@ const OAuth2Merge = () => {
             <div css={s.comment}><AiFillNotification/>&nbsp;Notice&nbsp;<AiFillNotification/></div>
             <main css={s.mainContainer}>
                 <h1 css={s.question}>
-                    {/* <div>"{email}" 계정을 "{provider}"(과)와</div>
-                    <div css={s.point}>통합</div>
-                    <div>하는 것에 동의하십니까?</div> */}
                     <div>"{email}" 계정을 "{provider}"(과)와</div>
                     <div><span css={s.point}>통합</span>하는 것에 동의하십니까?</div>
                 </h1>

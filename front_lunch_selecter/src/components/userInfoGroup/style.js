@@ -51,17 +51,17 @@ export const myInfoUpdate = css`
     font-weight: 100;
     font-size: 8px;
     border-radius: 5px;
-    cursor: pointer;
     background-color: black;
     color: white;
     border: none;
-    border: 1px solid #dbdbdb;
+
+    cursor: pointer;
     &:hover {
         background-color: #fafafa;
         color: black;
     }
     &:active {
-        background-color: white;
+        background-color: #dbdbdb;
         color: black;
     }
 `;
@@ -75,20 +75,20 @@ export const logout = css`
     width: 100px;
     height: 20px;
     border: none;
-    border: 1px solid #dbdbdb;
     border-radius: 5px;
     background-color: black;
     color: white;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-size: 10px;
     font-weight: 100;
+
     cursor: pointer;
     &:hover {
         background-color: #fafafa;
         color: black;
     }
     &:active {
-        background-color: white;
+        background-color: #dbdbdb;
         color: black;
     }
 `;

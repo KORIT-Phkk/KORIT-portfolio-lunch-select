@@ -75,6 +75,7 @@ export const findPassword = css`
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
+    
     cursor: pointer;
     &:hover {
         color: black;

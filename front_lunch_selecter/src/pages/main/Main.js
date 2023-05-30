@@ -13,10 +13,8 @@ const Main = () => {
     const [ joinCode, setJoinCode ] = useState("");
     const [imageSrc, setImageSrc] = useState("../main/logo1.png");
     const [isClicked, setIsClicked] = useState(false);
-
     const [ userId, setUserId ] = useState(""); 
-
-    const [ masterRoomCode, setMasterRoomCode ] = useState("");
+    
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
@@ -48,8 +46,6 @@ const Main = () => {
         }
     });
 
-   
-
     const userInfoInsert = useMutation(async() => {
         
         const option = {
@@ -71,20 +67,9 @@ const Main = () => {
         return <div>불러오는중</div>
     }
 
-
     const lunchSelectClickHandle = () => {
         lunchSelectRoom.mutate();
     }
-
-    const lunchSelectJoinClickHandle = () => {
-        userInfoInsert.mutate();
-        window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
-    }
-
-    const joinCodeInputHandle = (e) => {
-        setJoinCode(e.target.value);
-    }
-
     
     const imageHandle = () => {
         if(isClicked){

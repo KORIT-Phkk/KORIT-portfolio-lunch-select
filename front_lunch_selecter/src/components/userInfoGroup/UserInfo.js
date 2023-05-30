@@ -2,7 +2,7 @@
 import * as s from './style';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { QueryClient, useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
