@@ -50,11 +50,7 @@ const MenuRoulette = ({ menuNames }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((index) => {
-                if(index === 0) {
-                    setIntervalDuration(1500);
-                } else if(index === 1) {
-                    setIntervalDuration(80);
-                } else if (index === 60) {
+                if (index === 60) {
                     setIntervalDuration(100);
                 } else if (index === 65) {
                     setIntervalDuration(150);

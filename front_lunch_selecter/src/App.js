@@ -3,11 +3,11 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster';
 
+import Result from './pages/LunchSelect/Result/Result';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import OAuth2Merge from './pages/OAuth2Merge/OAuth2Merge';
@@ -22,7 +22,7 @@ import Main from './pages/main/Main';
 import OAuth2Register from './pages/register/OAuth2Register';
 import Register from './pages/register/Register';
 import { Reset } from './style/Reset';
-import Result from './pages/LunchSelect/Result/Result';
+import AuthRouteReactQuery from './components/Routes/AuthRoute/AuthRouteReactQuery';
 
 
 
