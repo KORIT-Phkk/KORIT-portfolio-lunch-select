@@ -26,7 +26,7 @@ import ResetPassword from './pages/Auth/FindUser/ResetPassword/ResetPassword';
 import ResetPasswordResult from './pages/Auth/FindUser/ResetPassword/ResetPasswordResult/ResetPasswordResult';
 import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordResult/FindPasswordResult';
 import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
-import MyPage from './pages/Auth/MyPage/MyPage';
+import MyPage from './pages/MyPage/MyPage';
 
 
 const mainContainer = css`
