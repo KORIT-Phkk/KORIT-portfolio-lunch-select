@@ -4,11 +4,6 @@ import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
-import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
-
-import ChooseMenu from './pages/LunchSelect/ChooseMenu/ChooseMenu';
-import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import NotFound from './pages/NotFound/NotFound';
 import Main from './pages/main/Main';
 import { Reset } from './style/Reset';
@@ -59,10 +54,6 @@ function App() {
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
-        <Route path="/lunchselect/room/master/:roomMasterCode" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
-        <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
-        <Route path="/lunchselect/roulette" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
-        <Route path="/lunchselect/result" element={<AuthRoute path="/lunchselect/result" element={<ChooseMenu />}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
     </div>
