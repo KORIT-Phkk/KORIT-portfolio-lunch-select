@@ -25,18 +25,21 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 30px;
 `;
 export const inform = css`
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 35px;
     font-size: 18px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
 `;
 export const imgCss = css`
+    display: flex;
     justify-content: center;
+    align-items: center;
     margin: 20px auto 0;
     width: 280px;
     height: 190px;

@@ -113,7 +113,7 @@ const LunchSelectGuest = () => {
 
     return (
         <div css={s.container}>
-            <header css={s.headerContainer}>
+            <header>
                 <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
                 <span css={s.inform}>카테고리 선택 후 <br/> 준비완료 버튼을 눌러주세요!</span>
                 <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
