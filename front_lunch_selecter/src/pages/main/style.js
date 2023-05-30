@@ -1,12 +1,10 @@
 import { css } from '@emotion/react'
 
-
 export const container = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
 `;
-
 export const headerContainer =css`
  
     display: flex;
@@ -18,7 +16,6 @@ export const setting =css`
     justify-content: flex-end;
 
 `;
-
 export const settingButton =css`
     width: 25px;
     height: 25px;
@@ -67,7 +64,6 @@ export const lunchButton =css`
         color: black;
     }
 `;
-
 export const joinUrlInput = css`
     margin-bottom: 15px;
     width: 250px;
@@ -77,17 +73,14 @@ export const joinUrlInput = css`
     border-radius: 5px;
     border: 1px solid black;
 `;
-
 export const footerContainer =css`
     display: flex;
     justify-content: center;
 `;
-export const rangeSetting =css`
-    margin-top: 200px;
-    display: flex;
-    justify-content: center;
-`;
-
 export const userInfo = (isOpen) => css`
     display: ${isOpen ? "flex" : "none"};
+`;
+export const hello = css`
+    display: flex;
+    align-items: flex-end;
 `;

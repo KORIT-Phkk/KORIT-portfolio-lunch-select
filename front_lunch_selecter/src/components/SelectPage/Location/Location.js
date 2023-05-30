@@ -3,9 +3,11 @@ import { css } from '@emotion/react';
 import React, { useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const coordinate = css`
-    font-size: 10px;
+const mapCss = css`
+    margin: 0px auto;
+    width: 280px;
 `;
+
 const Location = ({ markerPosition, setMarkerPosition }) => {
     
     useEffect(() => {
@@ -45,7 +47,7 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
 
 
     return (
-        <>
+        <div css={mapCss}>
             <Map
                 center={markerPosition}
                 style={{
@@ -57,9 +59,8 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
                 {<MapMarker
                     position={markerPosition}
                 />}
-                <div css={coordinate}>클릭한 위치 좌표: {markerPosition.lat}, {markerPosition.lng}</div>
             </Map>
-        </>
+        </div>
     );
 };
 

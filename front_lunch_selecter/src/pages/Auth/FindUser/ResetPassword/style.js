@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,15 +10,19 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
 `;
+export const imgCss = css`
+    width: 270px;
+    height: 196px;
+`;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
 `;
 export const mainContainer =css`
     margin: auto;
@@ -33,12 +36,18 @@ export const input = css`
     flex-direction: column;
 `;
 export const inputLabel = css`
-    padding-top: 10px;
-    padding-bottom: 2px;
+    margin-top: 20px;
     color: black;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
     font-size: 10px;
+`;
+export const errorMsg = css`
+    margin-left: 3px;
+    margin-top: 2px;
+    zoom: 0.8;
+    font-size: 10px;
+    color: red;
 `;
 export const footerContainer =css`
     margin: auto;
@@ -50,7 +59,6 @@ export const checkButton = css`
     width: 250px;
     height: 20px;
     margin-top: 50px;
-    margin-bottom: 75px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
@@ -72,11 +80,4 @@ export const checkButton = css`
         border-bottom: 1px solid #dbdbdb;
         background-color: #dbdbdb;
     }
-`;
-export const errorMsg = css`
-    margin-left: 3px;
-    margin-top: 1px;
-    zoom: 0.8;
-    font-size: 10px;
-    color: red;
 `;

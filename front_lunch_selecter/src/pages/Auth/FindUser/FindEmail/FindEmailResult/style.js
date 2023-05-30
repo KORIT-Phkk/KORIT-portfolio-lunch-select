@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 
 export const container = css`
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -16,8 +15,8 @@ export const imgCss = css`
     height: 196px;
 `;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
@@ -26,21 +25,34 @@ export const comment = css`
     font-size: 15px;
 `;
 export const mainContainer =css`
-    padding-top: 1px;
     margin: auto;
     display: flex;
     justify-content: center;
-    flex-direction: column;
 `;
 export const resultBox = css`
-    margin-top: 25px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 100px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+`;
+export const informment = css`
+    display: flex;
+    align-items: baseline;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 10px;
+`;
+export const yourEmail = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 250px;
-    height: 100px;
-    border: 1px solid black;
-    border-radius: 5px;
+    margin-top: 50px;
 `;
 export const footerContainer =css`
     display: flex;
@@ -55,7 +67,6 @@ export const findPassword = css`
     height: 20px;
     margin: auto;
     margin-top: 40px;
-    margin-bottom: 75px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: black;
@@ -85,7 +96,7 @@ export const loginButton = css`
     width: 250px;
     height: 20px;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 10px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
     background-color: white;

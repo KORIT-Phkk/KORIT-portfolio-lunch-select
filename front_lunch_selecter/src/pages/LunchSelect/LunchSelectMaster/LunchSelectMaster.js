@@ -9,6 +9,7 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import { useMutation, useQuery } from 'react-query';
 import QueryString from 'qs';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaRegSmileWink } from 'react-icons/fa'
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -103,31 +104,23 @@ const LunchSelectMaster = () => {
     const backButtonHandle = () => {
         backButton.mutate();
     }
-
     
     return (
         <div css={s.container}>
             <header>
                 <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
                 <Invite/>
-            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+                <div css={s.mapExplain}>현재 위치를 선택해주세요&nbsp;<FaRegSmileWink/></div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
             <main css={s.mainContainer}>
-                <div css={s.categoryBox}>
-                    <h1 css={s.categoryName}>카테고리를 선택하시오</h1>
-                    <div css={s.category}>
-                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </div>
-                            
-                </div>
+                <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
+                <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>                
             </main>
             
             <footer css={s.footerContainer}>
-                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
-                
-            
+                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>선택 완료!!</button>
             </footer>
         </div>
     );

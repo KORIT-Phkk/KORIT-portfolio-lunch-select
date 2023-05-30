@@ -15,8 +15,8 @@ export const imgCss = css`
     height: 196px;
 `;
 export const comment = css`
-    padding-top: 10px;
     margin: auto;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     
@@ -26,7 +26,7 @@ export const comment = css`
 `;
 export const mainContainer =css`
     margin: auto;
-    margin-top: 40px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -37,7 +37,7 @@ export const question = css`
     flex-direction: column;
     text-align: center;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     width: 250px;
 
     font-family: 'Ansungtangmyun-Bold', sans-serif;
@@ -66,7 +66,7 @@ export const errMsg = css`
 `;
 export const footerContainer =css`
     margin: auto;
-    margin-top: 40px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
 `;

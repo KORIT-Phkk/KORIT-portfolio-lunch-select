@@ -9,6 +9,7 @@ import AuthInput from '../../../../components/auth/AuthInput';
 
 const FindPassword = () => {
     const [ email, setEmail ] = useState("");
+    const [ loadingFlag, setLoadingFlag ] = useState(false);
     const [ errorMessage, setErrorMessage] = useState({email: ""});
     const navigate = useNavigate();
 
@@ -19,16 +20,17 @@ const FindPassword = () => {
     const findPassword = useMutation(async (email) => {
         try {
             const response = await axios.post("http://localhost:8080/auth/findpassword", email);
-            alert("비밀번호 재설정 이메일이 발송되었습니다.")
-            navigate("/auth/login")
+            navigate("/auth/findpassword/result")
             return response;
         } catch(error) {
             setErrorMessage({email: error.response.data.errorData.error})
+            setLoadingFlag(false);
             return error;
         }
     });
 
-    const submitFindPasswordHanle = () => {
+    const submitFindPasswordHandle = () => {
+        setLoadingFlag(true);
         findPassword.mutate({
             email: email
         })
@@ -36,7 +38,7 @@ const FindPassword = () => {
 
     const onEnterKeyUp = (e) => {
         if(e.keyCode === 13) {
-            submitFindPasswordHanle();
+            submitFindPasswordHandle();
         }
     }
 
@@ -56,7 +58,7 @@ const FindPassword = () => {
                 <div css={s.errorMsg}>{errorMessage.email}</div>            
             </main>
             <footer css={s.footerContainer}>
-                <button css={s.checkButton} onClick={submitFindPasswordHanle}>확인</button>
+                <button css={s.checkButton} onClick={submitFindPasswordHandle}>확인</button>
                 <button css={s.findEmail} onClick={findEmailHandle}>이메일 찾기</button>
             </footer>
         </div>

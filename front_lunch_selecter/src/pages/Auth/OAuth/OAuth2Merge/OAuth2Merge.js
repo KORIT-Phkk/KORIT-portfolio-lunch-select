@@ -11,7 +11,6 @@ const OAuth2Merge = () => {
     const providerMerge = useMutation(async (mergeData) => {
         try{
             const response = await axios.put("http://localhost:8080/auth/oauth2/merge", mergeData);
-            setErrorMessage("");
             return response;
         } catch(error){
             setErrorMessage(error.response.data);
@@ -31,17 +30,13 @@ const OAuth2Merge = () => {
     const [ searchParams, setSearchParams ] = useSearchParams();
     const email = searchParams.get("email");
     const provider = searchParams.get("provider");
-    const naigate = useNavigate();
+    const navigate = useNavigate();
     
-    const passwordChangeHandle = (e) => {
+    const onChangeInputHandle = (e) => {
         setPassword(e.target.value);
     }
 
-    const providerMergeSubmitHandle = () => {
-        if(password === "") {
-            alert("공백은 입력할 수 없습니다.")
-            return
-        }
+    const submitProviderMergeHandle = () => {
         providerMerge.mutate({
             email,
             password,
@@ -50,7 +45,7 @@ const OAuth2Merge = () => {
     }
 
     const cancelHandle = () => {
-        naigate("/auth/login");
+        navigate("/auth/login");
     }
 
     return (
@@ -67,12 +62,12 @@ const OAuth2Merge = () => {
                     <div>"{email}" 계정을 "{provider}"(과)와</div>
                     <div><span css={s.point}>통합</span>하는 것에 동의하십니까?</div>
                 </h1>
-                <input css={s.passwordBox} type="password" onChange={passwordChangeHandle} placeholder='기존 비밀번호를 입력해주세요'/>
+                <input css={s.passwordBox} type="password" onChange={onChangeInputHandle} placeholder='기존 비밀번호를 입력해주세요'/>
                 <p css={s.errMsg}>{errorMessage}</p>
             </main>
 
             <footer css={s.footerContainer}>
-                <button css={s.buttonCss1} onClick={providerMergeSubmitHandle}>동의</button>
+                <button css={s.buttonCss1} onClick={submitProviderMergeHandle}>동의</button>
                 <button css={s.buttonCss2} onClick={cancelHandle}>취소</button>
             </footer>
         </div>

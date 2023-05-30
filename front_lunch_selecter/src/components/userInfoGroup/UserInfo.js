@@ -55,7 +55,7 @@ const UserInfo = ({ isOpen }) => {
                 </button>
             </main>
             <footer css={s.footerContainer}>
-                <button onClick={logoutClickHandle} css={s.logout}>Logout</button>
+                <button onClick={logoutClickHandle} css={s.logout}>로그아웃</button>
             </footer>
         </div>
     );

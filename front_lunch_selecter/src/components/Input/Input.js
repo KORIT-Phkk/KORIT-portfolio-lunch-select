@@ -12,14 +12,15 @@ const input = css`
     border-bottom: 1px solid BLACK;
 `;
 
-const Input = ({ type, placeholder, onChange, name}) => {
+const Input = ({ type, placeholder, onChange, name, disabled }) => {
     return (
         <div>
              <input css={input} 
             type={type} 
             placeholder={placeholder} 
             onChange={onChange}
-            name={name}/>
+            name={name}
+            disabled={disabled}/>
         </div>
     );
 };

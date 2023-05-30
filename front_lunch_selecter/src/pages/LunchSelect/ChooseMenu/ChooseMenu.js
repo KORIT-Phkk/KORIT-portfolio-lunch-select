@@ -4,30 +4,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
-import { css } from '@emotion/react';
+import * as s from './style';
 
-const headerStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    margin-top: 100px;
-    margin-bottom: 30px;
-`;
-
-const mainStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 100px;
-`;
-
-const footerStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
 
 const ChooseMenu = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -47,9 +25,6 @@ const ChooseMenu = () => {
     let restaurantRoadAddress = searchParams.get("address");
     // 입력할 데이터: 가게이름 
     let restaurantName = searchParams.get("todayLunch");
-
-  
-    // const restaurantRoadAddress = "부산광역시 부산진구 가야공원로 62-1, 1층 (가야동)";
 
     // useQuery를 사용해 kakaoAPI로 get요청 (kakaoRestAPI)
     const getRestaurantRoadAddress = useQuery(["getRestaurantRoadAddress"], async () => {
@@ -103,80 +78,83 @@ const ChooseMenu = () => {
         }
     })
 
+    const lookRestaurant = () => {
+
+    }
+
     if(getRestaurantData.isLoading){
         <>로딩중...</>
     }
     
- 
-    
     if(getRestaurantData.data)
     return (
-        <>
-        <header css={headerStyle}>
-            <h1>{restaurantName}</h1>
-        </header>
+        <div css={s.container}>
+            <header css={s.headerContainer}>
+                <div>결과는...</div>
+                <h1>가게이름</h1>
+            </header>
 
-        <main css={mainStyle}>
-            <Map
-                center={{
-                    lat: restaurantLocation_y,
-                    lng: restaurantLocation_x,
-                }}
-                style={{
-                    width: "1000px",
-                    height: "1000px",
-                }}
-                level={2}
-                >
-                    {/* 반복을 통해 마커 여러개 표시 */}
-                    {getRestaurantData.data.data.documents.map(store => (
-                        <MapMarker
-                            key={store.id}
-                            position={{
-                                lat: store.y,
-                                lng: store.x,
-                            }}
-                            clickable={true}
-                            // 마우스 하버 시 정보 띄우기
-                            onMouseOver={() => setIsVisible(true)}
-                            onMouseOut={() => setIsVisible(false)}
-                            // 클릭 이벤트 시 링크 이동
-                            onClick={() => {
-                                window.location.href = `http://place.map.kakao.com/${store.id}`
-                            }}
-                        >
-                            {isVisible && (
-                                <div style={{ minWidth: "150px" }}>
-                                    <img
-                                        alt="close"
-                                        width="14"
-                                        height="15"
-                                        src="https://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
-                                        style={{
-                                            position: "absolute",
-                                            right: "5px",
-                                            top: "5px",
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={(e) => {
-                                            // 이벤트 버블링 방지
-                                            e.stopPropagation();
-                                            window.location.href = `https://place.map.kakao.com/${store.id}`;
-                                        }}
-                                    />
-                                    <div style={{ padding: "5px", color: "#000", fontSize: "15px" }}>{store.place_name}</div>
-                                </div>
-                            )}
-                        </MapMarker>
-                    ))}
-            </Map>
-        </main>
+            <main css={s.mainContainer}>
+                <Map
+                    center={{
+                        lat: restaurantLocation_y,
+                        lng: restaurantLocation_x,
+                    }}
+                    style={{
+                        width: "300px",
+                        height: "200px",
+                    }}
+                    level={4}
+                    >
+                        {/* 반복을 통해 마커 여러개 표시 */}
+                        {getRestaurantData.data.data.documents.map(store => (
+                            <MapMarker
+                                key={store.id}
+                                position={{
+                                    lat: store.y,
+                                    lng: store.x,
+                                }}
+                                clickable={true}
+                                // 마우스 하버 시 정보 띄우기
+                                onMouseOver={() => setIsVisible(true)}
+                                onMouseOut={() => setIsVisible(false)}
+                                // 클릭 이벤트 시 링크 이동
+                                onClick={() => {
+                                    window.location.href = `http://place.map.kakao.com/m/${store.id}`
+                                }}
+                            >
+                                {isVisible && (
+                                    <div style={{ minWidth: "150px" }}>
+                                        <img
+                                            alt="close"
+                                            width="14"
+                                            height="15"
+                                            src="https://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
+                                            style={{
+                                                position: "absolute",
+                                                right: "5px",
+                                                top: "5px",
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={(e) => {
+                                                // 이벤트 버블링 방지
+                                                e.stopPropagation();
+                                                window.location.href = `https://place.map.kakao.com/${store.id}`;
+                                            }}
+                                        />
+                                        <div style={{ padding: "5px", color: "#000", fontSize: "15px" }}>{store.place_name}</div>
+                                    </div>
+                                )}
+                            </MapMarker>
+                        ))}
+                </Map>
+            </main>
 
-        <footer css={footerStyle}>
-            <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
-            <Link><button >음식점 자세히 보기</button></Link>
-        </footer>
-        </>
+            <footer css={s.footerContainer}>
+                <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
+                <button onClick={lookRestaurant}>자세히보기</button>
+            </footer>
+        </div>
     );
 };
 

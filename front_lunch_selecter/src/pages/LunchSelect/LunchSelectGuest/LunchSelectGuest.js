@@ -7,8 +7,10 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Category from '../../../components/SelectPage/Category/Category';
 import Invite from '../Invite';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { async } from 'q';
+import { FaRegSmileWink } from 'react-icons/fa'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 
 const test = css`
@@ -24,9 +26,9 @@ const LunchSelectGuest = () => {
         lng: null
     });
     const [ selectedCategories, setSelectedCategories ] = useState([]);
-    
     const [ ckeckURLHandle, setCheckURLHandle ] = useState(false);
     const { roomGuestURL } = useParams();
+    const navigate = useNavigate();
 
     const userInfoInsertButton = () => {
         setUserInsert(true);
@@ -105,25 +107,27 @@ const LunchSelectGuest = () => {
         setInsert(true);
     }
 
+    const backButtonHandle = () => {
+        navigate("/")
+    }
 
     return (
         <div css={s.container}>
-            <header>
-           
-
+            <header css={s.headerContainer}>
+                <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
+                <span css={s.inform}>카테고리 선택 후 <br/> 준비완료 버튼을 눌러주세요!</span>
+                <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
             </header>
 
-            <main>
+            <main css={s.mainContainer}>
                 <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오
+                    <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
                     <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </h1>
                 </div>
             </main>
             
-            <footer>
-                <div css={s.selectMenu}></div>
-                <button css={test} onClick={readyHandleOnClick} >준비완료!</button>
+            <footer css={s.footerContainer}>
+                <button css={s.readySubmitButton} onClick={readyHandleOnClick} >준비완료!!</button>
             </footer>
         </div>
     );
