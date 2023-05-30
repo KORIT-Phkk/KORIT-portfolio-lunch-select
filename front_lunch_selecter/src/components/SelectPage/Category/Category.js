@@ -7,8 +7,6 @@ import * as s from './style';
 
 
 const Category = ({ selectedCategories, setSelectedCategories }) => {
-    
-
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
     const getCategory = useQuery(["getCategory"], async () => {
@@ -38,15 +36,14 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
     }
     
     return (
-        <div>
+        <div css={s.categoryContainer}>
             {getCategory.data !== undefined ? getCategory.data.data.map(category => (
-                                <div key={category.categoryId}>
-                                    <img css={s.imgCss} src={`../../../category/food${category.categoryId}.png`} alt="" />
-                                    
-                                    <input onChange={checkedHandleOnClick} type="checkbox" id={category.categoryId} value={category.categoryId}/>
-                                    <label htmlFor={category.categoryId} >{category.categoryName}</label>
-                                </div>))
-                            : ""}
+                <div css={s.categoryBox} key={category.categoryId}>
+                    <img css={s.imgCss} src={`../../../category/colorFood${category.categoryId}.png`} alt="" />
+                    <input css={s.checkbox} onChange={checkedHandleOnClick} type="checkbox" id={category.categoryId} value={category.categoryId}/>
+                    <label css={s.label} htmlFor={category.categoryId} >{category.categoryName}</label>
+                </div>))
+            : ""}
         </div>
     );
 };

@@ -6,58 +6,92 @@ export const container = css`
     justify-content: center;
     flex-direction: column;  
 `;
+export const backButton = css`
+    position: absolute;     
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: white;
+    border-radius: 50%;
 
-
-
+    cursor: pointer;
+    &:active{
+        box-shadow: 0px 0px 2px 0px;
+        background-color: whitesmoke;
+        background-color: #eee;
+    }
+`;
+export const headerContainer = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+`;
+export const inform = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+`;
+export const imgCss = css`
+    justify-content: center;
+    margin: 20px auto 0;
+    width: 280px;
+    height: 190px;
+`;
+export const mainContainer = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+`;
 export const categoryBox = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 `;
-export const category = css`
-    margin-top: 10px;
-    font-size: 15px;
+export const categoryName = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
 `;
-
-
-
 export const footerContainer =css`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
 `;
-
 export const selectMenu = css`
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin: 100px;
-
     height: 50%;
     width: 100%;
-
     font-size: 100px;
 `;
+export const readySubmitButton = css`
+    font-size: 10px;
+    width: 150px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
 
-// export const selectButton = css`
-//     border: 1px solid #121212;
-//     border-radius: 7px;
-//     font-size: 50px;
-
-//     margin: 50px;
-
-//     background-color: #fafafa;
-
-
-//     &:hover{
-//         background-color: #dbdbdb;
-//     }
-
-//     &:active{
-//         background-color: #eee;
-//     }
-// `;
-
+    cursor: pointer;
+    &:hover{
+        color: black;
+        background-color: #fafafa;
+    }
+    &:active{
+        color: black;
+        background-color: #dbdbdb;
+    }
+`

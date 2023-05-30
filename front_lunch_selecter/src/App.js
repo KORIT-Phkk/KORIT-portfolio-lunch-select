@@ -3,7 +3,6 @@ import { Global } from '@emotion/react';
 import { css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import LunchSelect from './pages/LunchSelect/LunchSelect';
 
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
@@ -58,7 +57,6 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
-        <Route path="/lunchselect/location" element={<AuthRoute path="/lunchselect/location" element={<LunchSelect/>}/>}/>
         <Route path="/lunchselect/room/master/:roomMasterCode" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:roomGuestURL" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
         <Route path="/lunchselect/roulette" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>

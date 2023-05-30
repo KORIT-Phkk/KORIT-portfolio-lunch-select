@@ -1,37 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-
-const inviteButton = css`
-  width: 80px;
-  height: 20px;
-  margin-top: 25px;
-  font-size: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-  &:hover{
-        background-color: #dbdbdb;
-        color: black;
-    }
-    &:active{
-        background-color: #eee;
-    }
-`;
-const getUrlCode =css`
-  font-size: 13px;
-`;
+import * as s from './style-Invite';
 
 const Invite = () => {
- 
+
   const [ guestURL, setGuestURL ] = useState(false);
   const [ getURL, setGetURL ] = useState();
-  
+
   const { roomMasterCode } = useParams();
   const getGuestURL = useQuery(["getGuestURL"], async() => {
       const option = {
@@ -56,16 +34,10 @@ const Invite = () => {
       setGuestURL(true);
   }
 
-
-
   return (
-    <div>
-      <button onClick={inviteCodeHandleClick} css={inviteButton}>
-        친구초대코드
-      </button>
-        <p css={getUrlCode}>
-          {getURL}
-        </p>
+    <div css={s.inviteContainer}>
+      <p css={s.getUrlCode}>{getURL}</p>
+      <button onClick={inviteCodeHandleClick} css={s.inviteButton}>링크복사</button>
     </div>
   );
 

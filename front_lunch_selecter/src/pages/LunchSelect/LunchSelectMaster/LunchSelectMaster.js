@@ -9,6 +9,7 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import { useMutation, useQuery } from 'react-query';
 import QueryString from 'qs';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaRegSmileWink } from 'react-icons/fa'
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -24,8 +25,6 @@ const LunchSelectMaster = () => {
     const { roomMasterURL } = useParams();
     const { userId, setUserId } = useState();
     const location = useLocation();
-    const [ imageChicken, setImageChicken ] = useState("../../../category/colorFood1.png");
-    const [ isClicked, setIsClicked ] = useState(false);
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -105,80 +104,23 @@ const LunchSelectMaster = () => {
     const backButtonHandle = () => {
         backButton.mutate();
     }
-
-    const chickenIcon = () => {
-        console.log("heelo");
-        if(isClicked){
-            setImageChicken("../../../category/food1.png");
-            setIsClicked(false);
-        }else{
-            setImageChicken("../../../category/colorFood1.png");
-            setIsClicked(true);
-        }
-    }
-
     
     return (
         <div css={s.container}>
             <header>
                 <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
                 <Invite/>
-            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+                <div css={s.mapExplain}>현재 위치를 선택해주세요&nbsp;<FaRegSmileWink/></div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
             <main css={s.mainContainer}>
-                <h1 css={s.categoryName}>카테고리를 선택하시오</h1>
-                <div css={s.categoryBox}>
-                    <div css={s.category}>
-                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </div>
-                </div>
-                <div css={s.imgContainer}>
-                    <div css={s.imgChicken}>
-                        <img css={s.imgCss} onClick={chickenIcon} src="../../../category/colorFood2.png" />
-                        치킨
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src={imageChicken} />
-                        중식
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/fastfood1.png" />
-                        패스트푸드
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/japanesefood1.png" />
-                        일식
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/koreanfood1.png" />
-                        한식
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/lawfish1.png" />
-                        회
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/lightfood1.png" />
-                        양식
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/meat1.png" />
-                        고기/구이
-                    </div>
-                    <div>
-                        <img css={s.imgCss} src="../../../category/schoolfood1.png" />
-                        분식
-                    </div>
-                </div>
-                
+                <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
+                <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>                
             </main>
             
             <footer css={s.footerContainer}>
-                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>
-                
-            
+                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>선택 완료!!</button>
             </footer>
         </div>
     );

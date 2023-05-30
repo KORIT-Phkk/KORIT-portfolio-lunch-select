@@ -26,5 +26,6 @@ export const mainContainer = css`
 export const footerContainer = css`
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
 `;
