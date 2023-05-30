@@ -1,6 +1,8 @@
 package com.korit.lunchSelect.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.korit.lunchSelect.dto.GetMenusReqDto;
-import com.korit.lunchSelect.dto.room.InsertCategoryReqDto;
+import com.korit.lunchSelect.dto.lunchselect.GetMenusReqDto;
+import com.korit.lunchSelect.dto.lunchselect.InsertCategoryReqDto;
+import com.korit.lunchSelect.dto.lunchselect.SelectLunchReqDto;
 import com.korit.lunchSelect.service.LunchSelectService;
 
 import lombok.RequiredArgsConstructor;
@@ -45,14 +48,17 @@ public class LunchSelectController {
 	
 	@GetMapping("/getmenus")
 	public ResponseEntity<?> getMenus(GetMenusReqDto getMenusReqDto) {
-		System.out.println(getMenusReqDto);
-		System.out.println(lunchSelectService.getMenuList(getMenusReqDto));
 		return ResponseEntity.ok(lunchSelectService.getMenuList(getMenusReqDto));
 	}
 	
-	public ResponseEntity<?> getResult() {
+	@GetMapping("/selectmenu")
+	public ResponseEntity<?> selectMenu(SelectLunchReqDto selectLunchReqDto) {
+		return ResponseEntity.ok(lunchSelectService.selectMenu(selectLunchReqDto));
+	}
 	
-		return null;
+	@GetMapping("/category")
+	public ResponseEntity<?> getCategory() {
+		return ResponseEntity.ok(lunchSelectService.getCategory());
 	}
 	
 	

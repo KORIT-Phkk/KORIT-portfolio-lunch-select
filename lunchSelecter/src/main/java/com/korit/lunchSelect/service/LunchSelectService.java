@@ -11,8 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.korit.lunchSelect.dto.GetMenusReqDto;
-import com.korit.lunchSelect.dto.room.InsertCategoryReqDto;
+import com.korit.lunchSelect.dto.lunchselect.GetMenusReqDto;
+import com.korit.lunchSelect.dto.lunchselect.InsertCategoryReqDto;
+import com.korit.lunchSelect.dto.lunchselect.SelectLunchReqDto;
+import com.korit.lunchSelect.dto.lunchselect.SelectLunchRespDto;
+import com.korit.lunchSelect.entity.Category;
 import com.korit.lunchSelect.entity.Menu;
 import com.korit.lunchSelect.entity.Room;
 import com.korit.lunchSelect.repository.LunchSelectRepository;
@@ -23,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LunchSelectService {
-
 	
 	private final LunchSelectRepository lunchSelectRepository;
 	
@@ -77,32 +79,26 @@ public class LunchSelectService {
 		return lunchSelectRepository.getMenuList(getMenusReqDto.toMap());
 	}
 	
-	public Menu lunchResult(List<Menu> list){
+	public SelectLunchRespDto selectMenu(SelectLunchReqDto selectLunchReqDto){
+		List<Integer> menuList = selectLunchReqDto.getMenuIds();
 		Random random = new Random();
-		
-		int randomIndex = random.nextInt(list.size());
-		
-		Menu randomLunchSelect = list.get(randomIndex);
-		
-		return randomLunchSelect;
+		int randomIndex = random.nextInt(menuList.size());
+		int randomMenu = menuList.get(randomIndex);
+		return lunchSelectRepository.findRestaurantById(randomMenu).toDto();
 
 	}
 
-
-	
-
-	
 	public String getGuestURL(String roomMasterCode) {
-		
 		return lunchSelectRepository.getGuestURL(roomMasterCode);
 	}
-
-		
-	
 
 	
 	public int roomUpdateFlag(String roomMasterCode) {
 		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
 	}
 	
+    public List<Category> getCategory(){
+        return lunchSelectRepository.getCategory();
+    }
+
 }

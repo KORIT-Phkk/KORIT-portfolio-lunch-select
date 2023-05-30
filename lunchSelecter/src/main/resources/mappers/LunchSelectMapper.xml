@@ -14,6 +14,17 @@
 		<id property="id" column="restaurant_id"/>
 		<result property="name" column="restaurant_name"/>
 	</resultMap>
+	
+	<resultMap type="com.korit.lunchSelect.entity.Category" id="CategoryMap">
+		<id property="categoryId" column="category_id" />
+		<result property="categoryName" column="category_name"/>
+	</resultMap>
+
+	<resultMap type="com.korit.lunchSelect.entity.Restaurant" id="RestaurantMap">
+		<id property="restaurantId" column="rastaurant_id" />
+		<result property="restaurantName" column="restaurant_name"/>
+		<result property="restaurantAddress" column="restaurant_address"/>
+	</resultMap>
 
 	<insert id="createLunchSelectRoom" parameterType="com.korit.lunchSelect.entity.Room"
 	useGeneratedKeys="true"
@@ -84,6 +95,17 @@
 		and flag = 1
 	</select>
 	
+	<select id="findRestaurantById" parameterType="Integer" resultMap="RestaurantMap">
+		select
+			restaurant_id,
+			restaurant_name,
+			restaurant_address
+		from
+			restaurant_tb
+		where
+			restaurant_id = #{restaurantId}
+	</select>
+	
 
 	<update id="roomUpdateFlag" parameterType="String">
 		update
@@ -130,6 +152,14 @@
 			                                       )
 		HAVING 
 			0.5 > distance;
+	</select>
+	
+	<select id="getCategory" resultMap="CategoryMap" >
+		SELECT
+			category_id,
+			category_name
+		FROM
+			category_tb
 	</select>
 
 </mapper>

@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
-import QueryString from 'qs';
 import React, { useState } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 import Category from '../../components/SelectPage/Category/Category';
 import Location from '../../components/SelectPage/Location/Location';
@@ -15,8 +14,6 @@ const LunchSelectMaster = () => {
         lat: null,
         lng: null
     });
-
-    const [ flag, setFlag ] = useState(false);
 
     const navigate = useNavigate();
     const { code } = useParams();
@@ -35,36 +32,10 @@ const LunchSelectMaster = () => {
     }, {
         onSuccess: (response) => {
             if(response.status === 200) {
-                setFlag(true)
+                navigate(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
             }
         }
     });
-
-    const getMenus = useQuery(["getMenus"], async() => {
-        const option = {
-            params: {
-                roomMasterCode: code,
-                ...markerPosition
-            },
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
-            },
-
-            paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
-        }
-
-        const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)   
-        return response;
-    }, {
-        enabled: flag,
-        onSuccess: () => {
-            setFlag(false);
-            navigate("/lunchselect/roulette");
-        }
-    });
-
-
-
 
 
     const backButton = useMutation(async() => {
@@ -82,10 +53,6 @@ const LunchSelectMaster = () => {
     }
     const backButtonHandle = () => {
         backButton.mutate();
-    }
-
-    if(getMenus.isLoading) {
-        return <div>불러오는 중....</div>
     }
     
     return (

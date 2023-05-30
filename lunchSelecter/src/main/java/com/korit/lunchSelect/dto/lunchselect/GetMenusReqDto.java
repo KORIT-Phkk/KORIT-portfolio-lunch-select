@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.dto;
+package com.korit.lunchSelect.dto.lunchselect;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.dto.room;
+package com.korit.lunchSelect.dto.lunchselect;
 
 import java.util.List;
 

@@ -54,7 +54,7 @@ function App() {
         <Route path="/" element={<AuthRouteReactQuery path="/" element={<Main/>}/>}/>
         <Route path="/lunchselect/room/master/:code" element={<AuthRouteReactQuery path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRouteReactQuery path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
-        <Route path="/lunchselect/roulette" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
+        <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRouteReactQuery path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/lunchselect/result" element={<AuthRouteReactQuery path="/lunchselect/result" element={<Result />}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>

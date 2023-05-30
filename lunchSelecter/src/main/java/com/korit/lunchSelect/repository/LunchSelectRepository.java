@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.korit.lunchSelect.entity.Category;
 import com.korit.lunchSelect.entity.Menu;
+import com.korit.lunchSelect.entity.Restaurant;
 import com.korit.lunchSelect.entity.Room;
 
 @Mapper
@@ -14,6 +16,7 @@ public interface LunchSelectRepository {
 	public int createLunchSelectRoom(Room room);
 	public Integer findRoomIdByMasterCode(String code);
 	public Integer findRoomIdByGuestCode(String code);
+	public Restaurant findRestaurantById(int id);
 	public int saveRoomJoin(Map<String, Object> map);
 	
 	public String checkRoom(String guestURL);
@@ -26,4 +29,6 @@ public interface LunchSelectRepository {
 	public int roomUpdateFlag(String roomMasterCode);
 
 	public String getGuestURL(String roomMasterCode);
+	
+	public List<Category> getCategory();
 }

@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.dto;
+package com.korit.lunchSelect.dto.lunchselect;
 
 import lombok.Builder;
 import lombok.Data;
