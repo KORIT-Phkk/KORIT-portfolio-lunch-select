@@ -6,7 +6,6 @@ export const container = css`
     flex-direction: column;
 `;
 export const headerContainer =css`
- 
     display: flex;
     justify-content: center;
     flex-direction: column;
