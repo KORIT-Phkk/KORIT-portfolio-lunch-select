@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import QueryString from 'qs';
+import MenuRoulette from '../../../components/Roulette/MenuRoulette';
 
 
 const Roulette = () => {    
@@ -60,21 +61,21 @@ const Roulette = () => {
   }, {
       enabled: flag,
       onSuccess: (response) => {
-        console.log(response)
+        // console.log(response)
       }
   });
-
-
 
   if(getMenus.isLoading) {
     <>로딩중...</>
   }
 
   if(!getMenus.isLoading)
-  return (
-    <div>
 
-    </div>
+  return (
+    <>
+      <MenuRoulette menuNames={menuNames}/>
+    </>
+    
   );
 };
 
