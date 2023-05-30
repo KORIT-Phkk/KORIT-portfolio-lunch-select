@@ -11,21 +11,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.korit.lunchSelect.dto.LunchSelectReqDto;
+import com.korit.lunchSelect.dto.GetMenusReqDto;
 import com.korit.lunchSelect.dto.room.InsertCategoryReqDto;
-import com.korit.lunchSelect.entity.LunchSelect;
+import com.korit.lunchSelect.entity.Menu;
 import com.korit.lunchSelect.entity.Room;
-import com.korit.lunchSelect.repository.RoomRepository;
+import com.korit.lunchSelect.repository.LunchSelectRepository;
 import com.korit.lunchSelect.security.PrincipalUser;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class RoomService {
+public class LunchSelectService {
 
 	
-	private final RoomRepository roomRepository;
+	private final LunchSelectRepository lunchSelectRepository;
 	
 	public String createLunchSelectRoom() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,7 +37,7 @@ public class RoomService {
 				.roomMasterId(principalUser.getUserId())
 				.build();
 
-		roomRepository.createLunchSelectRoom(room);
+		lunchSelectRepository.createLunchSelectRoom(room);
 
 		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
@@ -52,58 +52,37 @@ public class RoomService {
 		insertMap.put("userId",principalUser.getUserId());
 		insertMap.put("categoryIds",insertCategoryReqDto.getCategoryId());
 
-		return roomRepository.saveRoomJoin(insertMap);
+		return lunchSelectRepository.saveRoomJoin(insertMap);
 	}
 	
 	public Integer findRoomIdByCode(String code) {
 		if(code.startsWith("0")) {
-			return roomRepository.findRoomIdByMasterCode(code.substring(2));
+			return lunchSelectRepository.findRoomIdByMasterCode(code.substring(2));
 		} else if(code.startsWith("1")) {
-			return roomRepository.findRoomIdByGuestCode(code.substring(2));
+			return lunchSelectRepository.findRoomIdByGuestCode(code.substring(2));
 		}
 		return 0;
 	}
 	
 
 	public boolean checkRoom(String guestCode) {	
-		if(roomRepository.findRoomIdByGuestCode(guestCode) == null) {
+		if(lunchSelectRepository.findRoomIdByGuestCode(guestCode) == null) {
 			return false;
 		} 
 		
 		return true;
 	}
 	
-	
-	
-	
-	
-	
-
-	public Map<String, Object> lunchSelect(LunchSelectReqDto lunchSelectReqDto) {
-		Map<String, Object> resultMap = new HashMap<>();
-				
-		Map<String, Object> map = new HashMap<>();
-		map.put("masterId", lunchSelectReqDto.getMasterId());
-		map.put("roomMasterCode", lunchSelectReqDto.getRoomMasterCode());
-		map.put("lat", lunchSelectReqDto.getLat());
-		map.put("lng", lunchSelectReqDto.getLng());
-		
-		List<LunchSelect> a = lunchSelectRepository.lunchSelect(map);
-		
-		LunchSelect result = lunchResult(a);
-		
-		resultMap.put("list", a);
-		resultMap.put("result", result);
-		
-		return resultMap;
+	public List<Menu> getMenuList(GetMenusReqDto getMenusReqDto) {
+		return lunchSelectRepository.getMenuList(getMenusReqDto.toMap());
 	}
 	
-	public LunchSelect lunchResult(List<LunchSelect> list){
+	public Menu lunchResult(List<Menu> list){
 		Random random = new Random();
 		
 		int randomIndex = random.nextInt(list.size());
 		
-		LunchSelect randomLunchSelect = list.get(randomIndex);
+		Menu randomLunchSelect = list.get(randomIndex);
 		
 		return randomLunchSelect;
 

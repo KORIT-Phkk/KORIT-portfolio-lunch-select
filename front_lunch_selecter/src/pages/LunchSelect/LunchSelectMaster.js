@@ -21,8 +21,6 @@ const LunchSelectMaster = () => {
     const navigate = useNavigate();
     const { code } = useParams();
 
-
-
     const insertCategory = useMutation(async() => {
         const option = {
             headers: {
@@ -45,20 +43,23 @@ const LunchSelectMaster = () => {
     const getMenus = useQuery(["getMenus"], async() => {
         const option = {
             params: {
-                code: `0 ${code}`,
+                roomMasterCode: code,
                 ...markerPosition
             },
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
             },
+
             paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)
+
+        const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)   
         return response;
     }, {
         enabled: flag,
         onSuccess: () => {
             setFlag(false);
+            navigate("/lunchselect/roulette");
         }
     });
 
@@ -78,7 +79,6 @@ const LunchSelectMaster = () => {
 
     const getMenuButtonHandle = () => {
         insertCategory.mutate();
-        // navigate(`/lunchselect/roulette?roomMasterCode=${code}&lat=${markerPosition.lat}&lng=${markerPosition.lng}`);
     }
     const backButtonHandle = () => {
         backButton.mutate();

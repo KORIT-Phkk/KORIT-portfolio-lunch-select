@@ -9,15 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LunchSelect {
-
+public class Menu {
 	private int id;
 	private String name;
-	private String address;
-	private String category;
-	private String lat;
-	private String lng;
-	private int categoryCount;
-	
-	private Category categories;
 }
