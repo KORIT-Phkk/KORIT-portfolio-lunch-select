@@ -98,4 +98,10 @@
 		WHERE
 			user_id = #{userId}
 	</update>
+	<delete id="userDelte" parameterType="map">
+		delete from
+			user_tb
+		where
+			user_id = #{userId}
+	</delete>
 </mapper>

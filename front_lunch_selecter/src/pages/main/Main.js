@@ -39,8 +39,6 @@ const Main = () => {
             };
             const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
             window.location.href = response.data;
-            // navigate(response);
-            console.log(response.data);
             return response;
         } catch(error) {
             alert("관리자에게 문의하세요.");
@@ -83,7 +81,6 @@ const Main = () => {
 
     const joinCodeInputHandle = (e) => {
         setJoinCode(e.target.value);
-        console.log(joinCode)
     }
 
     return (

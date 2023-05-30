@@ -1,9 +1,13 @@
 package com.korit.lunchSelect.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +21,7 @@ import com.korit.lunchSelect.dto.auth.LoginReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2ProviderMergeReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2RegisterReqDto;
 import com.korit.lunchSelect.dto.auth.SignupDto;
+import com.korit.lunchSelect.entity.User;
 import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
 import com.korit.lunchSelect.service.AuthenticationService;
 import com.korit.lunchSelect.service.OAuthService;
@@ -75,5 +80,10 @@ public class AuthenticationController{
 		}
 			
 		return ResponseEntity.ok().body(oAuthService.oAuth2ProviderMerge(oAuth2ProviderMergeReqDto));
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> userDelete(@RequestBody User user){
+		return ResponseEntity.ok().body(authenticationService.userDelete(user));
 	}
 }

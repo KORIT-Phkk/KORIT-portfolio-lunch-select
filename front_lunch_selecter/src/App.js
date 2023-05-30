@@ -25,6 +25,7 @@ import FindEmailResult from './pages/Auth/FindUser/FindEmail/FindEmailResult/Fin
 import FindPassword from './pages/Auth/FindUser/FindPassword/FindPassword';
 import ResetPassword from './pages/Auth/FindUser/FindPassword/ResetPassword/ResetPassword';
 import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
+import MyPage from './pages/Auth/MyPage/MyPage';
 
 
 
@@ -55,6 +56,7 @@ function App() {
         <Route path="/auth/oauth2/login" element={<AuthRoute path={"/auth/oauth2/login"} element={<OAuth2Login/>}/>}/>
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
+        <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/lunchselect/location" element={<AuthRoute path="/lunchselect/location" element={<LunchSelect/>}/>}/>
         <Route path="/lunchselect/room/master/:roomMasterCode" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>

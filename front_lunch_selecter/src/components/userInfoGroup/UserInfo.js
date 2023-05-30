@@ -15,6 +15,7 @@ const UserInfo = ({ isOpen }) => {
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
 
+
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
         const response = await axios.get("http://localhost:8080/auth/userInfo", {
@@ -28,6 +29,9 @@ const UserInfo = ({ isOpen }) => {
         return response;
     });
 
+    const myPageButtonClick = () => {
+        navigate("/mypage")
+    }
    
     const logoutClickHandle = () => {
         if(window.confirm("로그아웃할꺼?")){
@@ -36,6 +40,7 @@ const UserInfo = ({ isOpen }) => {
             navigate("/auth/login");
         }
     }
+    
 
     return (
         <div css={s.userInfoGroup(isOpen)}>
@@ -45,7 +50,7 @@ const UserInfo = ({ isOpen }) => {
             
             </header>
             <main css={s.mainContainer}>
-                <button css={s.myInfoUpdate}>
+                <button css={s.myInfoUpdate} onClick={myPageButtonClick}>
                     내정보 수정
                 </button>
             </main>
