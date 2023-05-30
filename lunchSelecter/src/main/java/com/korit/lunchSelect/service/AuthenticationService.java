@@ -1,5 +1,7 @@
 package com.korit.lunchSelect.service;
 
+import java.util.Map;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -83,5 +85,10 @@ public class AuthenticationService implements UserDetailsService {
 	
 	public boolean authenticate(String accessToken) {
 		return jwtTokenProvider.validateToken(jwtTokenProvider.getToken(accessToken));
+	}
+
+	public int userDelete(User user) {
+		userRepository.userDelte(user);
+		return userRepository.userDelte(user);
 	}
 }
