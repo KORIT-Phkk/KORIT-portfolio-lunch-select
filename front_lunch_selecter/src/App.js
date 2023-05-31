@@ -8,25 +8,26 @@ import NotFound from './pages/NotFound/NotFound';
 import Main from './pages/main/Main';
 import { Reset } from './style/Reset';
 
-import Login from './pages/Auth/Login/Login';
-import Register from './pages/Auth/Register/Register';
-import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
-import OAuth2Login from './pages/Auth/OAuth/OAuth2Login/OAuth2Login';
-import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
-import OAuth2Merge from './pages/Auth/OAuth/OAuth2Merge/OAuth2Merge';
+import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
 import FindEmail from './pages/Auth/FindUser/FindEmail/FindEmail';
 import FindEmailResult from './pages/Auth/FindUser/FindEmail/FindEmailResult/FindEmailResult';
 import FindPassword from './pages/Auth/FindUser/FindPassword/FindPassword';
+import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordResult/FindPasswordResult';
 import ResetPassword from './pages/Auth/FindUser/ResetPassword/ResetPassword';
 import ResetPasswordResult from './pages/Auth/FindUser/ResetPassword/ResetPasswordResult/ResetPasswordResult';
-import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordResult/FindPasswordResult';
-import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
-import MyPage from './pages/MyPage/MyPage';
-import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
-import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
-import Roulette from './pages/LunchSelect/Roulette/Roulette';
-import Result from './pages/LunchSelect/Result/Result';
+import Login from './pages/Auth/Login/Login';
+import OAuth2Login from './pages/Auth/OAuth/OAuth2Login/OAuth2Login';
+import OAuth2Merge from './pages/Auth/OAuth/OAuth2Merge/OAuth2Merge';
+import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
+import Register from './pages/Auth/Register/Register';
 import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
+import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest/LunchSelectGuest';
+import WaitingRoom from './pages/LunchSelect/LunchSelectGuest/WaitingRoom/WaitingRoom';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
+import Roulette from './pages/LunchSelect/Roulette/Roulette';
+import MyPage from './pages/MyPage/MyPage';
+import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
 
 
 const mainContainer = css`
@@ -59,13 +60,11 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
-
-        
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
+        <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/>
         <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
-        <Route path="/lunchselect/result" element={<AuthRoute path="/lunchselect/result" element={<Result />}/>}/>
-
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>
