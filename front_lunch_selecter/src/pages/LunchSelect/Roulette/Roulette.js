@@ -1,32 +1,104 @@
 /** @jsxImportSource @emotion/react */
-import { css, keyframes } from '@emotion/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useSearchParams } from 'react-router-dom';
-import * as s from './style';
+import axios from 'axios';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import RouletteComponent from '../../../components/Roulette/RouletteComponent';
 
 
+const Roulette = () => {    
+  const navigate = useNavigate();
+  const [ flag, setFlag ] = useState(false);
+  const { code, lat, lng } = useParams();
+  const [ menuNames, setMenuNames ] = useState();
+  const [ selectedMenu, setSelectedMenu ] = useState();
+  
+  const getMenus = useQuery(["getMenus"], async () => {
+    setFlag(false)
+    const option = {
+      params: {
+          roomMasterCode: code,
+          lat: lat,
+          lng: lng
+      },
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
+      }
+    }
+    const response = await axios.get("http://localhost:8080/lunchselect/menu/list", option)
+    return response;
+    }
 
+  , {
+    enabled: flag,
+    onSuccess: (response) => {
+      if(response.status === 200) {
+        const menuNameList = [];
+        response.data.forEach(element => {
+          menuNameList.push(element.name);
+        });
+  
+        setMenuNames(menuNameList);
+  
+        selectMenu.mutate(response.data);
+      }
+    }
+  });
 
+  const selectMenu = useMutation(["selectmenu"], async(menuList) => {  
+    const option = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json"
+      }
+    }
+    const data = {
+      roomMasterCode: `0 ${code}`,
+      menuList: menuList
+    }
+    const response = await axios.put("http://localhost:8080/lunchselect/menu/select", JSON.stringify(data), option);
+    return response;
+  }, {
+      onSuccess: () => {
+        getSelectedMenu();
+      }
+  });
 
-const Roulette = () => {
- 
+  const getSelectedMenu = async () => {
+    const option = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      },
+      params: {
+        code: `0 ${code}`
+      }
+    }
 
+    try {
+      const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
+      setSelectedMenu(response.data.restaurantName);
+      return response;
+    } catch(error) {
+      return error;
+    }
+  }
+
+  useEffect(() => {
+    setFlag(true);
+  }, [])
+
+  if(getMenus.isLoading) {
+    <>로딩중...</>
+  }
+
+  if(!getMenus.isLoading)
   return (
-    <div css={s.container}>
-      <header css={s.headerContainer}>
-        <img src="../main/logo1.png" css={s.img} />
-      </header>
-      <main css={s.mainContainer}>
-        룰렛
-      </main>
-      <footer css={s.footerContatiner}>
-          <button css={s.detailsButton}>상세히보기</button>
-          <button css={s.returnButton}>다시돌리기</button>
-
-      </footer>
-   </div>
-);
+    <>
+      <RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu}/>
+    </>
+    
+  );
 };
 
 export default Roulette;

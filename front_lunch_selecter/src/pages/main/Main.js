@@ -20,15 +20,14 @@ const Main = () => {
         setIsOpen(!isOpen)
     }
 
-    const getUserInfo = useQuery(["getUserInfo"], async () => {
-        const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+    const createRoom = useMutation(async () => {
+        const option = {
             headers: {
-                Authorization: accessToken
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             }
-        });
-        setUserId(response.data.userId)
-        return response;
+        };
+        const response = await axios.post("http://localhost:8080/lunchselect/room/create", {}, option);
+        window.location.href = response.data;
     });
 
     const lunchSelectRoom = useMutation(async () => {
@@ -48,7 +47,6 @@ const Main = () => {
     });
 
     const userInfoInsert = useMutation(async() => {
-        
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -60,16 +58,12 @@ const Main = () => {
         return response
     });
 
-    if(getUserInfo.isLoading) {
-        return <></>;
-    }
-
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
     }
 
     const lunchSelectClickHandle = () => {
-        lunchSelectRoom.mutate();
+        createRoom.mutate();
     }
     
     const imageHandle = () => {
@@ -81,6 +75,8 @@ const Main = () => {
             setIsClicked(true);
         }
     }
+    // ----------------------------------------------------------------
+  
 
     return (
         <div css={s.container}>

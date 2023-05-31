@@ -1,4 +1,4 @@
-package com.korit.lunchSelect.entity;
+package com.korit.lunchSelect.dto.lunchselect;
 
 import java.util.List;
 
@@ -7,13 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class GuestRoomJoin {
-	
-	private String guestURL;
-	private int userId;
+@Builder
+public class InsertCategoryReqDto {
+	private String Code;
 	private List<Integer> categoryId;
 }

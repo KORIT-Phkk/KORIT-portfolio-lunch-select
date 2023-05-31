@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.lunchSelect.repository.LunchSelectRepository">
+
+	<resultMap type="com.korit.lunchSelect.entity.Room" id="RoomMap">
+		<id property="roomId" column="room_id"/>
+		<result property="roomMasterCode" column="room_master_code"/>
+		<result property="roomGuestCode" column="room_guest_code"/>
+		<result property="roomMasterId" column="room_master_id"/>
+		<result property="restaurantId" column="restaurant_id"/>
+		<result property="flag" column="flag"/>
+		<collection property="restaurant" resultMap="RestaurantMap" />
+	</resultMap>
+	
+	<resultMap type="com.korit.lunchSelect.entity.Menu" id="MenuMap">
+		<id property="id" column="restaurant_id"/>
+		<result property="name" column="restaurant_name"/>
+	</resultMap>
+	
+	<resultMap type="com.korit.lunchSelect.entity.Category" id="CategoryMap">
+		<id property="categoryId" column="category_id" />
+		<result property="categoryName" column="category_name"/>
+	</resultMap>
+
+	<resultMap type="com.korit.lunchSelect.entity.Restaurant" id="RestaurantMap">
+		<id property="restaurantId" column="restaurant_id" />
+		<result property="restaurantName" column="restaurant_name"/>
+		<result property="restaurantAddress" column="restaurant_address"/>
+	</resultMap>
+
+	<insert id="createLunchSelectRoom" parameterType="com.korit.lunchSelect.entity.Room"
+	useGeneratedKeys="true"
+	keyProperty="roomId"> 
+		insert into room_tb
+		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1, null)
+	</insert>
+
+	<select id="getGuestURL" parameterType="String" resultType="String">
+		SELECT
+			room_guest_code
+		FROM
+			room_tb
+		WHERE
+			room_master_code = #{roomMasterCode}
+		and flag = 1
+	</select>
+
+	<select id="checkRoom" parameterType="String" resultType="String">
+		SELECT
+			room_master_code
+		FROM
+			room_tb
+		WHERE
+			room_guest_code = #{guestCode}
+		and flag = 1
+	</select>
+	
+	<insert id="saveRoomJoin" parameterType="hashmap">
+		INSERT INTO room_join_tb
+		VALUES
+		<foreach collection="categoryIds" item="categoryId" separator="," >
+			(
+				0,
+				#{roomId},
+				#{userId},
+				#{categoryId}
+			)
+		</foreach>
+	</insert>
+	
+	<select id="findRoomByMasterCode" parameterType="String" resultMap="RoomMap">
+		SELECT
+			rt.room_id,
+			rst.restaurant_id,
+			rst.restaurant_name,
+			rst.restaurant_address
+		FROM
+			room_tb rt
+			left outer join restaurant_tb rst on(rt.restaurant_id = rst.restaurant_id)
+		WHERE
+			room_master_code = #{code}
+	</select>
+	
+	<select id="findRoomByGuestCode" parameterType="String" resultMap="RoomMap">
+		SELECT
+			rt.room_id,
+			rst.restaurant_id,
+			rst.restaurant_name,
+			rst.restaurant_address
+		FROM
+			room_tb rt
+			left outer join restaurant_tb rst on(rt.restaurant_id = rst.restaurant_id)
+		WHERE
+			room_guest_code = #{code}
+	</select>	
+
+	<update id="roomUpdateFlag" parameterType="String">
+		update
+			room_tb
+		set
+			flag = 0
+		where
+			room_master_code = #{roomMasterCode};
+	</update>
+
+	<select id="getMenuList" parameterType="hashmap" resultMap="MenuMap">
+		SELECT
+			rt.restaurant_id,
+			rt.restaurant_name,
+			(6371 * acos(cos(radians(#{lat})) * cos(radians(restaurant_lat)) * cos(radians(restaurant_lng) - radians(#{lng})) + sin(radians(#{lat})) * sin(radians(restaurant_lat)))) AS distance
+		FROM 
+			restaurant_tb rt
+			LEFT OUTER JOIN category_tb ct ON (ct.category_id = rt.restaurant_category)
+		    LEFT OUTER JOIN (SELECT
+											rjt.category_id,
+											count(*) as category_count
+										FROM
+											room_tb rt
+											left outer join room_join_tb rjt ON(rjt.room_id = rt.room_id)
+										WHERE
+											rt.room_master_id = #{roomMasterCode}
+										GROUP BY
+											rjt.category_id) rmct ON(rmct.category_id = ct.category_id)
+		WHERE
+			1=1
+			and restaurant_category IN(SELECT
+														category_id
+													FROM
+														room_join_tb
+													WHERE
+														room_id = (
+																	SELECT
+																		room_id
+																	FROM
+																		room_tb
+																	WHERE
+																		room_master_code = #{roomMasterCode}
+																	)
+			                                       )
+		HAVING 
+			0.5 > distance;
+	</select>
+	
+	<select id="getCategory" resultMap="CategoryMap" >
+		SELECT
+			category_id,
+			category_name
+		FROM
+			category_tb
+	</select>
+	
+	<update id="updateRoomMenu" parameterType="com.korit.lunchSelect.entity.Room">
+		update room_tb
+		set
+			restaurant_id = #{restaurantId}
+		where
+			room_id = #{roomId}
+	</update>
+
+
+</mapper>

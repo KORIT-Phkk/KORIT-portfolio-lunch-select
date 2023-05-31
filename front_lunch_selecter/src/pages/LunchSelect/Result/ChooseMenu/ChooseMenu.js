@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useQuery } from 'react-query';
 import { css } from '@emotion/react';
-
 
 const headerStyle = css`
     display: flex;
@@ -30,9 +29,7 @@ const footerStyle = css`
     align-items: center;
 `;
 
-const Result = () => {
-
-    const navigate = useNavigate();
+const ChooseMenu = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     
     console.log(searchParams)
@@ -46,25 +43,12 @@ const Result = () => {
     const [ restaurantLocation_x, setRestaurantLocation_x ] = useState();
     const [ restaurantLocation_y, setRestaurantLocation_y ] = useState();
     const [ isVisible, setIsVisible ] = useState(false);
-    // 최초 도로명 주소를 넣을 곳
+     // 최초 도로명 주소를 넣을 곳
     let restaurantRoadAddress = searchParams.get("address");
     // 입력할 데이터: 가게이름 
-    let restaurantName = searchParams.get("name");
+    let restaurantName = searchParams.get("todayLunch");
 
-    useEffect(() => {
-        setLoadState(true);
-    }, [])
-
-    const getLocation = useQuery(["getLocation"], async() => {
-        const option = {
-            headers : {
-                Authorization: "Bearer " + localStorage.getItem("accessToken")
-            }
-        }
-        const response = await axios.get("http://localhost:8080/lunchselect/result", option)
-    })
-
-
+  
     // const restaurantRoadAddress = "부산광역시 부산진구 가야공원로 62-1, 1층 (가야동)";
 
     // useQuery를 사용해 kakaoAPI로 get요청 (kakaoRestAPI)
@@ -90,7 +74,10 @@ const Result = () => {
         }
     })
 
-    
+    useEffect(() => {
+        setLoadState(true);
+        
+    }, [])
 
     // 위에서 반환된 주소 ex) 부산 부산진구 중앙대로 000번길
     const getRestaurantData = useQuery(["getRestaurantData"], async () => {
@@ -105,18 +92,11 @@ const Result = () => {
         enabled: flag,
         onSuccess: (response) => {
             if(!response.isLoading){
-                // console.log(response);
+                console.log(response);
                 // 받아올 데이터: 가게ID, x좌표, y좌표
-                try{
-                    setRestaurantId(response.data.documents[0].id);
-                    setRestaurantLocation_x(response.data.documents[0].x);
-                    setRestaurantLocation_y(response.data.documents[0].y);
-                } catch {
-                    alert("가게정보 못찾음")
-                    // navigate(가게정보 찾지 못했을 경우)
-                }
-            
-                
+                setRestaurantId(response.data.documents[0].id);
+                setRestaurantLocation_x(response.data.documents[0].x);
+                setRestaurantLocation_y(response.data.documents[0].y);
                 
             }
             setFlag(false);
@@ -126,16 +106,17 @@ const Result = () => {
     if(getRestaurantData.isLoading){
         <>로딩중...</>
     }
-
-    console.log(restaurantId===undefined)
-   
+    
+ 
+    
     if(getRestaurantData.data)
-
-
     return (
-        <div>
-            asdfasdfasdfasdf
-            <main css={mainStyle}>
+        <>
+        <header css={headerStyle}>
+            <h1>{restaurantName}</h1>
+        </header>
+
+        <main css={mainStyle}>
             <Map
                 center={{
                     lat: restaurantLocation_y,
@@ -191,7 +172,12 @@ const Result = () => {
             </Map>
         </main>
 
-        </div>
+        <footer css={footerStyle}>
+            <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
+            <Link><button >음식점 자세히 보기</button></Link>
+        </footer>
+        </>
     );
 };
-export default Result;
+
+export default ChooseMenu;
