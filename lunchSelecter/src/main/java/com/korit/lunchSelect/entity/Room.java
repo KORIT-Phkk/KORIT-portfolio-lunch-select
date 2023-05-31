@@ -16,5 +16,5 @@ public class Room {
 	private int roomMasterId;
 	private int restaurantId;
 	private Restaurant restaurant;
-//	private Map<String, Object> flag;
+	private int flag;
 }

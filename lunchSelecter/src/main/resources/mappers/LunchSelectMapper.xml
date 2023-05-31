@@ -85,12 +85,23 @@
 		WHERE
 			room_guest_code = #{code}
 	</select>	
+	
+	<select id="findActiveRoomByMasterId" parameterType="Integer" resultMap="RoomMap">
+		select
+			room_master_code,
+			flag
+		from
+			room_tb
+		where
+			room_master_id = #{userId}
+		and flag = 1
+	</select>
 
-	<update id="roomUpdateFlag" parameterType="String">
+	<update id="updateRoomFlag" parameterType="hashmap">
 		update
 			room_tb
 		set
-			flag = 0
+			flag = #{flag}
 		where
 			room_master_code = #{roomMasterCode};
 	</update>
