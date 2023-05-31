@@ -34,6 +34,7 @@ const MenuRoulette = ({ menuNames }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentMenuNames, setCurrentMenuNames] = useState([]);
     const [intervalDuration, setIntervalDuration] = useState(50);
+    const [stopRoulette, setStopRoulette] = useState(false); 
   
     useEffect(() => {
       if (menuNames) {
@@ -62,8 +63,11 @@ const MenuRoulette = ({ menuNames }) => {
                 return (index + 1) % 80;
             });
         }, intervalDuration);
+        setStopRoulette(true)
         return () => clearInterval(interval);
     }, [intervalDuration]);
+
+
 
     return (
       <div css={container}>
@@ -86,6 +90,7 @@ const MenuRoulette = ({ menuNames }) => {
                 )}
             </div>
             ))}
+            {stopRoulette ? (<div><button>다시돌려</button> <button>좋아</button></div>) : ""}
         </main>
       </div>
     );
