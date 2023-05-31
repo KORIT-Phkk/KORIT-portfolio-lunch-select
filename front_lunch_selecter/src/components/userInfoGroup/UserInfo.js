@@ -34,7 +34,7 @@ const UserInfo = ({ isOpen }) => {
     }
    
     const logoutClickHandle = () => {
-        if(window.confirm("로그아웃할꺼?")){
+        if(window.confirm("로그아웃하시겠습니까?")){
             localStorage.removeItem("accessToken");
             setAuthState(false);
             navigate("/auth/login");

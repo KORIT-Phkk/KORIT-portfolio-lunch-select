@@ -31,10 +31,20 @@ export const inform = css`
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 35px;
+    margin-top: 30px;
     font-size: 18px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
+`;
+export const warning = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    color: red;
 `;
 export const imgCss = css`
     display: flex;

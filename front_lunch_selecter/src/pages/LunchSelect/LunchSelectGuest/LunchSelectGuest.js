@@ -66,6 +66,7 @@ const LunchSelectGuest = () => {
       <header css={s.headerContainer}>
           <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
           <span css={s.inform}>카테고리 선택 후 <br/> 준비완료 버튼을 눌러주세요!</span>
+          <span css={s.warning}>위치는 방장만 선택할 수 있습니다</span>
           <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
       </header>
 

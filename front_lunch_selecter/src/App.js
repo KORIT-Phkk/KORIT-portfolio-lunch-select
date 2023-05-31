@@ -26,6 +26,7 @@ import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelect
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import Result from './pages/LunchSelect/Result/Result';
+import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
 
 
 const mainContainer = css`
@@ -46,6 +47,7 @@ function App() {
       <Routes>
         <Route path="/auth/login" element={<AuthRoute path="/auth/login" element={<Login/>}/>}/>
         <Route path="/auth/register" element={<AuthRoute path="/auth/register" element={<Register/>}/>}/>
+        <Route path="/auth/register/result" element={<AuthRoute path="/auth/register" element={<RegisterResult/>}/>}/>
         <Route path="/auth/findemail" element={<AuthRoute path="/auth/findemail" element={<FindEmail/>}/>}/>
         <Route path="/auth/findemail/result/:email" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRoute path="/auth/findpassword" element={<FindPassword/>}/>}/>
