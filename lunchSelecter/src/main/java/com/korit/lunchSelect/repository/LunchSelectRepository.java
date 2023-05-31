@@ -14,13 +14,14 @@ public interface LunchSelectRepository {
 	public int createLunchSelectRoom(Room room);
 	public Room findRoomByMasterCode(String code);
 	public Room findRoomByGuestCode(String code);
+	public Room findActiveRoomByMasterId(int userId);
 	public int saveRoomJoin(Map<String, Object> map);
 	
 	public String checkRoom(String guestURL);
 	public List<Menu> getMenuList(Map<String, Object> map);
 
 	public int roomUserInsert(Map<String, Object> map);
-	public int roomUpdateFlag(String roomMasterCode);
+	public int updateRoomFlag(Map<String, Object> map);
 	
 	public List<Category> getCategory();
 	
