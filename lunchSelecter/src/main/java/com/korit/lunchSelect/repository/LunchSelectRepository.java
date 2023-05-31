@@ -1,6 +1,5 @@
 package com.korit.lunchSelect.repository;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +21,6 @@ public interface LunchSelectRepository {
 
 	public int roomUserInsert(Map<String, Object> map);
 	public int roomUpdateFlag(String roomMasterCode);
-
-	public String getGuestURL(String roomMasterCode);
 	
 	public List<Category> getCategory();
 	

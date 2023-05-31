@@ -33,8 +33,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 				new ErrorResponseDto<AuthenticationException>("", authException);
 		
 		if(authException.getClass() == BadCredentialsException.class || authException.getClass() == InternalAuthenticationServiceException.class) {
-			errorResponseDto = new ErrorResponseDto<>("로그인 실패", ErrorMap.builder().put("email", "사용자 정보를 확인하세요").build());
+			errorResponseDto = new ErrorResponseDto<>("로그인 실패", ErrorMap.builder().put("email", "사용자 정보가 일치하지 않습니다.").build());
 		}
+		
+		
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String responseJson = objectMapper.writeValueAsString(errorResponseDto);

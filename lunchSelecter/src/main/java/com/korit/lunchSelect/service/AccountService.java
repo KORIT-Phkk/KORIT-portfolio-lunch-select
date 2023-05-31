@@ -52,6 +52,9 @@ public class AccountService {
 					ErrorMap.builder().put("error", "비밀번호가 일치하지 않습니다.").build());
 		}
 		
+		Map<String, Object> tokenMap = cacheTokenProvider.getTokenMap("passwordResetToken", resetPasswordReqDto.getToken());
+		cacheTokenProvider.validateToken(tokenMap);
+		
 		User userEntity = cacheTokenProvider.findUserByToken(resetPasswordReqDto.getToken());
 		userEntity.setPassword(new BCryptPasswordEncoder().encode(resetPasswordReqDto.getPassword()));
 		
@@ -65,12 +68,15 @@ public class AccountService {
 	}
 	
 	public void sendUpdatePasswordEmail(String email) {
+		String subject = "비밀번호 재설정 안내";
 		String token = cacheTokenProvider.generateResetPasswordToken(email);
 		String url = "http://localhost:3000/auth/resetpassword?"
 													+ "token=" + token;
-		String subject = "비밀번호 재설정 안내";
 		
-		sendEmail(email, subject, url);
+		String text = "아래 링크를 클릭하여 비밀번호를 다시 설정해주세요." 
+				 		+ url;
+		
+		sendEmail(email, subject, text);
 	}
 	
 

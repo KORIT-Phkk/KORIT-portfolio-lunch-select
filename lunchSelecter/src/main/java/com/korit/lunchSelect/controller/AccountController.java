@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.korit.lunchSelect.aop.annotation.ValidAspect;
 import com.korit.lunchSelect.dto.account.FindEmailReqDto;
 import com.korit.lunchSelect.dto.account.ResetPasswordReqDto;
 import com.korit.lunchSelect.service.AccountService;
+import com.korit.lunchSelect.util.cache.CacheTokenProvider;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountController {
 	
 	private final AccountService accountService;
+	private final CacheTokenProvider cacheTokenProvider;
 	
 	@GetMapping("/findemail")
 	public ResponseEntity<?> findEmail(FindEmailReqDto findEmailReqDto) {
@@ -39,8 +42,14 @@ public class AccountController {
 	}
 	
 	@ValidAspect
-	@PutMapping("/resetPassword")
+	@PutMapping("/resetpassword")
 	public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordReqDto resetPasswordReqDto, BindingResult bindingResult) {
 		return ResponseEntity.ok().body(accountService.resetPassword(resetPasswordReqDto));
+	}
+	
+	@GetMapping("/resetpassword/validatetoken")
+	public ResponseEntity<?> validatetoken(@RequestParam String token) {
+		cacheTokenProvider.validateToken(cacheTokenProvider.getTokenMap("passwordResetToken", token));
+		return ResponseEntity.ok(true);
 	}
 }

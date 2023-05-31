@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import * as s from './style';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { QueryClient, useQuery, useQueryClient } from 'react-query';
@@ -7,65 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
-const userInfoGroup = (isOpen) => css`
-    position: absolute;
-    top: 100px;
-    right: 30px;
-    display: ${isOpen ? "flex" : "none"};
-    flex-direction: column;
-    border: 1px solid #dbdbdb;
-    width: 800px;
-    height: 800px;
-    background-color: white;
-    overflow-y: auto;
-`;
-const headerContainer = css`
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    border-bottom: 1px solid #dbdbdb;
-`;
 
-const userName = css`
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    font-size: 50px;
-    font-weight: 600;
-`;
-const userEmail =css`
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    font-size: 35px;
-    font-weight: 400;
-`;
-const footerContainer =css`
-    display: flex;
-    justify-content: center;
-`;
-const logout = css`
-    margin-top: 350px;
-    width: 600px;
-    height: 80px;
-    border: none;
-    border: 1px solid #dbdbdb;
-    background-color: white;
-    font-size: 40px;
-    cursor: pointer;
-    &:hover {
-        background-color: #fafafa;
-    }
-    &:active {
-        background-color: #dbdbdb;
-    }
-`;
 
 const UserInfo = ({ isOpen }) => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
     const navigate = useNavigate();
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
+
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -80,6 +29,9 @@ const UserInfo = ({ isOpen }) => {
         return response;
     });
 
+    const myPageButtonClick = () => {
+        navigate("/mypage")
+    }
    
     const logoutClickHandle = () => {
         if(window.confirm("로그아웃할꺼?")){
@@ -88,19 +40,22 @@ const UserInfo = ({ isOpen }) => {
             navigate("/auth/login");
         }
     }
+    
 
     return (
-        <div css={userInfoGroup(isOpen)}>
-            <header css={headerContainer}>
-                <h1 css={userName}>{name}</h1>
-                <h2 css={userEmail}>{email}</h2>
+        <div css={s.userInfoGroup(isOpen)}>
+            <header css={s.headerContainer}>
+                <h1 css={s.userName}>{name}</h1>
+                <h2 css={s.userEmail}>{email}</h2>
             
             </header>
-            <main>
-
+            <main css={s.mainContainer}>
+                <button css={s.myInfoUpdate} onClick={myPageButtonClick}>
+                    내정보 수정
+                </button>
             </main>
-            <footer css={footerContainer}>
-                <button onClick={logoutClickHandle} css={logout}>Logout</button>
+            <footer css={s.footerContainer}>
+                <button onClick={logoutClickHandle} css={s.logout}>로그아웃</button>
             </footer>
         </div>
     );

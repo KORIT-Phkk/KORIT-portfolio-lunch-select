@@ -7,19 +7,20 @@ const input = css`
     outline: none;
     padding: 5px 10px;
     width: 100%;
-    height: 80px;
-    font-size: 40px;
+    height: 20px;
+    font-size: 12px;
     border-bottom: 1px solid BLACK;
 `;
 
-const Input = ({ type, placeholder, onChange, name}) => {
+const Input = ({ type, placeholder, onChange, name, disabled }) => {
     return (
         <div>
              <input css={input} 
             type={type} 
             placeholder={placeholder} 
             onChange={onChange}
-            name={name}/>
+            name={name}
+            disabled={disabled}/>
         </div>
     );
 };

@@ -1,9 +1,13 @@
 package com.korit.lunchSelect.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +21,9 @@ import com.korit.lunchSelect.dto.auth.LoginReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2ProviderMergeReqDto;
 import com.korit.lunchSelect.dto.auth.OAuth2RegisterReqDto;
 import com.korit.lunchSelect.dto.auth.SignupDto;
+import com.korit.lunchSelect.entity.User;
+import com.korit.lunchSelect.exception.CustomException;
+import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.security.jwt.JwtTokenProvider;
 import com.korit.lunchSelect.service.AuthenticationService;
 import com.korit.lunchSelect.service.OAuthService;
@@ -55,13 +62,14 @@ public class AuthenticationController{
 		return ResponseEntity.ok().body(authenticationService.getUserInfo(accessToken));
 	}
 	
+	@ValidAspect
 	@PostMapping("/oauth2/register")
-	public ResponseEntity<?> oauth2Register(@RequestHeader(value="registerToken") String registerToken, @RequestBody OAuth2RegisterReqDto oAuth2RegisterReqDto){
-		
+	public ResponseEntity<?> oauth2Register(@RequestHeader(value="registerToken") String registerToken, @Valid @RequestBody OAuth2RegisterReqDto oAuth2RegisterReqDto, BindingResult bindingResult){
 		boolean validated = jwtTokenProvider.validateToken(jwtTokenProvider.getToken(registerToken));
 		
 		if(!validated) {
-			return ResponseEntity.badRequest().body("회원가입 요청 시간이 초과하였습니다.");
+			throw new CustomException("Invalid Token", 
+					ErrorMap.builder().put("error", "요청이 만료되었습니다.").build());
 		}
 		
 		return ResponseEntity.ok().body(oAuthService.oauth2Register(oAuth2RegisterReqDto));	
@@ -75,5 +83,10 @@ public class AuthenticationController{
 		}
 			
 		return ResponseEntity.ok().body(oAuthService.oAuth2ProviderMerge(oAuth2ProviderMergeReqDto));
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> userDelete(@RequestBody User user){
+		return ResponseEntity.ok().body(authenticationService.userDelete(user));
 	}
 }

@@ -40,9 +40,9 @@ public class LunchSelectService {
 				.roomMasterId(principalUser.getUserId())
 				.build();
 
-		lunchSelectRepository.createLunchSelectRoom(room);
+      lunchSelectRepository.createLunchSelectRoom(room);
 
-		return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
+      return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
 	
 	public int createRoomJoin(InsertCategoryReqDto insertCategoryReqDto) {
@@ -93,11 +93,6 @@ public class LunchSelectService {
 	public SelectedMenuRespDto getSelectedMenu(String code) {
 		return findRoomByCode(code).getRestaurant().toDto();
 	}
-
-	public String getGuestURL(String roomMasterCode) {
-		return lunchSelectRepository.getGuestURL(roomMasterCode);
-	}
-
 	
 	public int roomUpdateFlag(String roomMasterCode) {
 		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
@@ -108,3 +103,4 @@ public class LunchSelectService {
     }
 
 }
+

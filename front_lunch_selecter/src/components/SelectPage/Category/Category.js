@@ -1,9 +1,12 @@
+/** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import * as s from './style';
+
+
 
 const Category = ({ selectedCategories, setSelectedCategories }) => {
-
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
     const getCategory = useQuery(["getCategory"], async () => {
@@ -31,18 +34,16 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
             setSelectedCategories([...selectedCategories.filter(id => id !== e.target.value)]);
         }
     }
-
+    
     return (
-        <div>
-            <div>  
-                
-                {getCategory.data !== undefined ? getCategory.data.data.map(category => (
-                                    <div key={category.categoryId}>
-                                        <input onChange={checkedHandleOnClick} type="checkbox"  id={category.categoryId} value={category.categoryId}/>
-                                        <label htmlFor={category.categoryId}>{category.categoryName}</label>
-                                    </div>))
-                                : ""}
-            </div>
+        <div css={s.categoryContainer}>
+            {getCategory.data !== undefined ? getCategory.data.data.map(category => (
+                <div css={s.categoryBox} key={category.categoryId}>
+                    <img css={s.imgCss} src={`../../../category/colorFood${category.categoryId}.png`} alt="" />
+                    <input css={s.checkbox} onChange={checkedHandleOnClick} type="checkbox" id={category.categoryId} value={category.categoryId}/>
+                    <label css={s.label} htmlFor={category.categoryId} >{category.categoryName}</label>
+                </div>))
+            : ""}
         </div>
     );
 };

@@ -1,5 +1,12 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+
+const mapCss = css`
+    margin: 0px auto;
+    width: 280px;
+`;
 
 const Location = ({ markerPosition, setMarkerPosition }) => {
     
@@ -35,24 +42,25 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
             lng: e.latLng.getLng(),
         };
         setMarkerPosition(clickedPosition);
-        console.log(markerPosition)
 
     };
 
 
     return (
-        <>
+        <div css={mapCss}>
             <Map
                 center={markerPosition}
                 style={{
                     width: "100%",
-                    height: "1000px"
+                    height: "200px"
                 }}
                 onClick={markerHandle}
             >
-                {<MapMarker position={markerPosition}/>}
+                {<MapMarker
+                    position={markerPosition}
+                />}
             </Map>
-        </>
+        </div>
     );
 };
 
