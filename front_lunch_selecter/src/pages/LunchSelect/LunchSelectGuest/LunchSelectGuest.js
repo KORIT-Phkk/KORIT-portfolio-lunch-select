@@ -12,6 +12,7 @@ import { FaRegSmileWink } from 'react-icons/fa';
 
 const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
+    const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
     const { code } = useParams();
     const navigate = useNavigate();
 
@@ -55,6 +56,7 @@ const LunchSelectGuest = () => {
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();
+        setReadyButtonHandle(false)
     }
 
     const backButtonHandle = () => {
@@ -70,17 +72,17 @@ const LunchSelectGuest = () => {
           <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
       </header>
 
-      <main css={s.mainContainer}>
-          <div css={s.categoryBox}>
-              <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
-              <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-          </div>
-      </main>
-      
-      <footer css={s.footerContainer}>
-          <button css={s.readySubmitButton} onClick={readyHandleOnClick} >준비완료!!</button>
-      </footer>
-  </div>
+            <main>
+                <div css={s.categoryBox}>
+                    <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
+                </div>
+            </main>
+            
+            <footer css={s.mainContainer}>
+                <div css={s.selectMenu}></div>
+                {readyButtonHandle ? (<div><button onClick={readyHandleOnClick}>카테고리 선택 완료?</button></div>) : <div><button onClick={readyHandleOnClick} disabled={true}>카테고리 선택 완료됨 버튼</button></div>}
+            </footer>
+        </div>
     );
 }
 
