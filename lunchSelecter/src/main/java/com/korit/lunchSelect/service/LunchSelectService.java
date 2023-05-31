@@ -101,6 +101,11 @@ public class LunchSelectService {
     public List<Category> getCategory(){
         return lunchSelectRepository.getCategory();
     }
+    
+
+    public String getGuestURL(String roomMasterCode) {
+ 	   return lunchSelectRepository.findRoomByMasterCode(roomMasterCode).getRoomGuestCode();
+    }
 
 }
 
