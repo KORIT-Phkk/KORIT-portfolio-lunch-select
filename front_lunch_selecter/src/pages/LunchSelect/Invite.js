@@ -20,7 +20,7 @@ const Invite = () => {
               Authorization: `Bearer ${localStorage.getItem("accessToken")}`
           }
       }
-      const response = await axios.get("http://localhost:8080/lunchselect/guesturl", option)
+      const response = await axios.get("http://localhost:8080/lunchselect/room/check", option)
       setGetURL(response.data);
       return response;
   },{
@@ -33,12 +33,13 @@ const Invite = () => {
   const inviteCodeHandleClick = () => {
       setGuestURL(true);
   }
-  
+
   return (
-    <div>
-      {/* <button onClick={inviteCodeHandleClick}>초대코드</button> */}
-      {getGuestURL ? (<p>{guestURL}</p>) : (<p>초대코드 생성 중</p>)} 
+    <div css={s.inviteContainer}>
+      <p css={s.getUrlCode}>{getURL}</p>
+      <button onClick={inviteCodeHandleClick} css={s.inviteButton}>링크복사</button>
     </div>
   );
+
 }
 export default Invite;

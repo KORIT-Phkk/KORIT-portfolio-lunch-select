@@ -74,7 +74,7 @@ export const selectMenu = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 100px;
+    margin: 40px;
     height: 50%;
     width: 100%;
     font-size: 100px;
