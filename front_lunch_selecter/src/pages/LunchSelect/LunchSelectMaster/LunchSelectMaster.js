@@ -46,7 +46,11 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.put("http://localhost:8080/lunchselect/room/updateflag", {code}, option)
+        const data = {
+            code: code,
+            flag: 0
+        }
+        const response = await axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
         window.location.href = "http://localhost:3000/";
     });
 

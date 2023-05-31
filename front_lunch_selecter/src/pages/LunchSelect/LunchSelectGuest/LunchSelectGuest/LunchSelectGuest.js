@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
-import * as s from './style';
-import Category from './../../../components/SelectPage/Category/Category';
+import * as s from '../style';
+import Category from '../../../../components/SelectPage/Category/Category';
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { FaRegSmileWink } from 'react-icons/fa';
 
@@ -37,7 +37,6 @@ const LunchSelectGuest = () => {
             console.error(error);
           }
         }
-      
         fetchData();
       }, []);
       
@@ -47,7 +46,7 @@ const LunchSelectGuest = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+        await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
             code: `1 ${code}`,
             categoryId: [...selectedCategories]
         }, option);
@@ -56,7 +55,8 @@ const LunchSelectGuest = () => {
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();
-        setReadyButtonHandle(false)
+        setReadyButtonHandle(false);
+        navigate(`/lunchselect/room/guest/waiting/${code}`);
     }
 
     const backButtonHandle = () => {
@@ -80,7 +80,7 @@ const LunchSelectGuest = () => {
             
             <footer css={s.mainContainer}>
                 <div css={s.selectMenu}></div>
-                {readyButtonHandle ? (<div><button onClick={readyHandleOnClick}>카테고리 선택 완료?</button></div>) : <div><button onClick={readyHandleOnClick} disabled={true}>카테고리 선택 완료됨 버튼</button></div>}
+                <button onClick={readyHandleOnClick}>카테고리 선택 완료!</button>           
             </footer>
         </div>
     );

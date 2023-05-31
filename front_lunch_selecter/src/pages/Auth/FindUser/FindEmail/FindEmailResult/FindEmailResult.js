@@ -26,7 +26,7 @@ const FindEmailResult = () => {
             <main css={s.mainContainer}>
                 <div css={s.resultBox}>
                     <div css={s.informment}>검색결과:</div>
-                    <div css={s.yourEmail}>dnr1112@naver.com</div>
+                    <div css={s.yourEmail}>{email}</div>
                 </div>
             </main>
 
