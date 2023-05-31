@@ -10,6 +10,7 @@ import Category from './../../../components/SelectPage/Category/Category';
 
 const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
+    const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
     const { code } = useParams();
 
     useEffect(() => {
@@ -52,6 +53,7 @@ const LunchSelectGuest = () => {
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();
+        setReadyButtonHandle(false)
     }
 
 
@@ -69,7 +71,7 @@ const LunchSelectGuest = () => {
             
             <footer css={s.mainContainer}>
                 <div css={s.selectMenu}></div>
-                <button onClick={readyHandleOnClick} >김재영 바보!</button>
+                {readyButtonHandle ? (<div><button onClick={readyHandleOnClick}>카테고리 선택 완료?</button></div>) : <div><button onClick={readyHandleOnClick} disabled={true}>카테고리 선택 완료됨 버튼</button></div>}
             </footer>
         </div>
     );

@@ -12,24 +12,17 @@ const headerStyle = css`
     align-items: center;
     font-size: 50px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 `;
 
 const mainStyle = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 `;
 
-const footerStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ChooseMenu = () => {
+const ResultMap = ({ setResultRestaurantName, setResultRestaurantAddress }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     
     console.log(searchParams)
@@ -43,10 +36,10 @@ const ChooseMenu = () => {
     const [ restaurantLocation_x, setRestaurantLocation_x ] = useState();
     const [ restaurantLocation_y, setRestaurantLocation_y ] = useState();
     const [ isVisible, setIsVisible ] = useState(false);
+    const [ restaurantRoadAddress ] = setResultRestaurantAddress;
+    const [ restaurantName ] = setResultRestaurantName;
      // 최초 도로명 주소를 넣을 곳
-    let restaurantRoadAddress = searchParams.get("address");
     // 입력할 데이터: 가게이름 
-    let restaurantName = searchParams.get("todayLunch");
 
   
     // const restaurantRoadAddress = "부산광역시 부산진구 가야공원로 62-1, 1층 (가야동)";
@@ -124,7 +117,7 @@ const ChooseMenu = () => {
                 }}
                 style={{
                     width: "1000px",
-                    height: "1000px",
+                    height: "300px",
                 }}
                 level={2}
                 >
@@ -138,8 +131,8 @@ const ChooseMenu = () => {
                             }}
                             clickable={true}
                             // 마우스 하버 시 정보 띄우기
-                            onMouseOver={() => setIsVisible(true)}
-                            onMouseOut={() => setIsVisible(false)}
+                            // onMouseOver={() => setIsVisible(true)}
+                            // onMouseOut={() => setIsVisible(false)}
                             // 클릭 이벤트 시 링크 이동
                             onClick={() => {
                                 window.location.href = `http://place.map.kakao.com/${store.id}`
@@ -171,13 +164,8 @@ const ChooseMenu = () => {
                     ))}
             </Map>
         </main>
-
-        <footer css={footerStyle}>
-            <Link to="/lunchselect"><button  onClick={returnButtonHandle}>다시돌려~</button></Link>
-            <Link><button >음식점 자세히 보기</button></Link>
-        </footer>
         </>
     );
 };
 
-export default ChooseMenu;
+export default ResultMap;

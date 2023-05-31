@@ -2,20 +2,14 @@
 import { css } from '@emotion/react';
 import React, { useEffect, useState } from 'react';
 
-const container = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`;
+
 
 const mainContainer = css`
   display: flex;
   position: relative;
   flex-direction: column;
   width: 80%;
-  height: 350px;
+  height: 80px;
   border: 1px solid #121212;
 `;
 
@@ -27,15 +21,16 @@ const textContainerStyles = css`
   justify-content: center;
   text-align: center;
   top: 30%;
-  font-size: 80px;
+  font-size: 20px;
 `;
 
-const RouletteComponent = ({ menuNames, selectedMenu }) => {
+const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentMenuNames, setCurrentMenuNames] = useState([]);
     const [intervalDuration, setIntervalDuration] = useState(50);
-    const [stopRoulette, setStopRoulette] = useState(false); 
-  
+    const [stopRoulette, setStopRoulette] = useState(true);
+    const [ roulettFlag, setRoulettFlag ] = setRoulettState;
+
     useEffect(() => {
       if (menuNames) {
         let names = menuNames;
@@ -59,40 +54,52 @@ const RouletteComponent = ({ menuNames, selectedMenu }) => {
                     setIntervalDuration(300);
                 } else if (index === 79) {
                     clearInterval(interval);
+                    setStopRoulette(false);
                 }
                 return (index + 1) % 80;
             });
         }, intervalDuration);
-        setStopRoulette(true)
         return () => clearInterval(interval);
     }, [intervalDuration]);
 
-
+  
+    const rouletteHandleOnClick = () => {
+      if (!stopRoulette) {
+        setCurrentIndex(0);
+        setIntervalDuration(50);
+      }
+      setStopRoulette(false);
+    };
+    
+    if(menuNames === null){
+      return <div>선택하신 카테고리의 메뉴가 주변에 없습니다</div>
+    }
 
     return (
-      <div css={container}>
-        <main css={mainContainer}>
-            {currentMenuNames.map((name, index) => (
-            <div
-                key={index}
-                css={[
-                textContainerStyles,
-                css`
-                    opacity: ${index === currentIndex ? 1 : 0};
-                    animation-duration: ${intervalDuration}ms;
-                `
-                ]}
-            >
-                {currentIndex === 0 ? (
-                <>{selectedMenu}</>
-                ) : (
-                <>{name}</>
-                )}
-            </div>
-            ))}
-            {stopRoulette ? (<div><button>다시돌려</button> <button>좋아</button></div>) : ""}
-        </main>
-      </div>
+      
+        <>
+          <main css={mainContainer}>
+              {currentMenuNames.map((name, index) => (
+              <div
+                  key={index}
+                  css={[
+                  textContainerStyles,
+                  css`
+                      opacity: ${index === currentIndex ? 1 : 0};
+                      animation-duration: ${intervalDuration}ms;
+                  `
+                  ]}
+              >
+                  {currentIndex === 0 ? (
+                  <>{selectedMenu}</>
+                  ) : (
+                  <>{name}</>
+                  )}
+              </div>
+              ))}
+          </main>
+              {stopRoulette ? "" : setRoulettFlag(true)}
+        </>
     );
   };
   

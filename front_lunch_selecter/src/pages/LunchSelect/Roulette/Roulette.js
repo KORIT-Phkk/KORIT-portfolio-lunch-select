@@ -1,11 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { css } from '@emotion/react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import RouletteComponent from '../../../components/Roulette/RouletteComponent';
+import Location from '../../../components/SelectPage/Location/Location'
+import ResultMap from '../../../components/SelectPage/ResultMap/ResultMap';
 
+const container = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`;
 
 const Roulette = () => {    
   const navigate = useNavigate();
@@ -13,6 +24,10 @@ const Roulette = () => {
   const { code, lat, lng } = useParams();
   const [ menuNames, setMenuNames ] = useState();
   const [ selectedMenu, setSelectedMenu ] = useState();
+  const [ roulettFlag, setRoulettFlag ] = useState(false);
+  const [ restaurantAddress, setRestaurantAddress ] = useState("");
+  const [ restaurantName, setRestaurantName ] = useState("");
+
   
   const getMenus = useQuery(["getMenus"], async () => {
     setFlag(false)
@@ -40,7 +55,6 @@ const Roulette = () => {
         });
   
         setMenuNames(menuNameList);
-  
         selectMenu.mutate(response.data);
       }
     }
@@ -78,6 +92,8 @@ const Roulette = () => {
     try {
       const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
       setSelectedMenu(response.data.restaurantName);
+      setRestaurantName(response.data.restaurantName);
+      setRestaurantAddress(response.data.restaurantAddress);
       return response;
     } catch(error) {
       return error;
@@ -88,15 +104,27 @@ const Roulette = () => {
     setFlag(true);
   }, [])
 
+  console.log(menuNames)
+  const reRenderButton = () => {
+    window.location.reload();
+  }
+
+  const homeButton = () => {
+    window.location.replace("/");
+  }
+
+  
+  
   if(getMenus.isLoading) {
     <>로딩중...</>
   }
-
+  
   if(!getMenus.isLoading)
   return (
-    <>
-      <RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu}/>
-    </>
+    <div css={container}>
+      <RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>
+      {roulettFlag ? (<div><button onClick={reRenderButton}>다시돌려</button> <button onClick={homeButton}>메인으로</button></div>) : ""}
+    </div>
     
   );
 };
