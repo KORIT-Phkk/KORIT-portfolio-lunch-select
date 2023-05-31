@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SelectLunchRespDto {
+public class SelectedMenuRespDto {
 	private int restaurantId;
 	private String restaurantName;
 	private String restaurantAddress;

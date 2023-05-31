@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import QueryString from 'qs';
 
@@ -10,11 +10,10 @@ import QueryString from 'qs';
 const Roulette = () => {    
   const navigate = useNavigate();
   const { code, lat, lng } = useParams();
-  const [ flag, setFlag ] = useState(false);
   const [ menuNames, setMenuNames ] = useState([]);
-  const [ menuIds, setMenuIds ] = useState([]);
   
-  const getMenus = useQuery(["getMenus"], async() => {
+  const getMenus = async () => {
+    const menuNameList = [];
     const option = {
       params: {
           roomMasterCode: code,
@@ -26,43 +25,61 @@ const Roulette = () => {
       }
     }
 
-    const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)   
+    try {
+      const response = await axios.get("http://localhost:8080/lunchselect/menu/list", option)
+
+      response.data.forEach(element => {
+        menuNameList.push(element.name);
+      });
+
+      setMenuNames(menuNameList);
+
+      selectMenu.mutate(response.data);
+      
+      return response;
+    } catch(error) {
+      return null;
+    }
+
+  };
+
+  const selectMenu = useMutation(["selectmenu"], async(menuList) => {  
+    const option = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json"
+      }
+    }
+    const data = {
+      roomMasterCode: `0 ${code}`,
+      menuList: menuList
+    }
+    const response = await axios.put("http://localhost:8080/lunchselect/menu/select", JSON.stringify(data), option);
     return response;
   }, {
-      onSuccess: (response) => {
-        setFlag(true);
-        const menuNameList = [];
-        const menuIdList = [];
-
-        response.data.forEach(element => {
-          menuNameList.push(element.name);
-          menuIdList.push(element.id);
-        });
-
-        setMenuNames(menuNameList);
-        setMenuIds(menuIdList);
+      onSuccess: () => {
+        getSelectedMenu();
       }
   });
 
-  const selectMenu = useQuery(["selectmenu"], async() => {
-    setFlag(false);    
+  const getSelectedMenu = async () => {
     const option = {
-      params: {
-        menuIds: menuIds
-      },
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
-      paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
-    }
-    const response = await axios.get("http://localhost:8080/lunchselect/selectmenu", option);
-    return response;
-  }, {
-      enabled: flag,
-      onSuccess: (response) => {
-        console.log(response)
+      params: {
+        code: `0 ${code}`
       }
-  });
+    }
+
+    const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
+    console.log(response)
+    return response
+  }
+
+  useEffect(() => {
+    getMenus();
+  }, [])
 
 
 
