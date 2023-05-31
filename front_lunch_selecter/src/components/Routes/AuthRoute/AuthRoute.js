@@ -1,7 +1,3 @@
-<<<<<<< HEAD:front_lunch_selecter/src/components/Routes/AuthRoute/AuthRouteReactQuery.js
-=======
-import { Navigate } from 'react-router-dom';
->>>>>>> main:front_lunch_selecter/src/components/Routes/AuthRoute/AuthRoute.js
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';

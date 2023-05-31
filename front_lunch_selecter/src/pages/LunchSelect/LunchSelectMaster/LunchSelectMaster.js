@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useState } from 'react';
-import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
-import Category from '../../components/SelectPage/Category/Category';
-import Location from '../../components/SelectPage/Location/Location';
 import * as s from './style';
+import Category from './../../../components/SelectPage/Category/Category';
+import Location from './../../../components/SelectPage/Location/Location';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -58,19 +57,13 @@ const LunchSelectMaster = () => {
     return (
         <div css={s.container}>
             <header>
-           
-                <button css={s.backButtonClick} onClick={backButtonHandle}>
-                    <IoMdArrowRoundBack css={s.backButton} />
-                </button>
             <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
             <main>
                 <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오
-                        <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </h1>
+                    <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
                 </div>
             </main>
             

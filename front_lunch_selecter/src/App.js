@@ -22,6 +22,10 @@ import ResetPasswordResult from './pages/Auth/FindUser/ResetPassword/ResetPasswo
 import FindPasswordResult from './pages/Auth/FindUser/FindPassword/FindPasswordResult/FindPasswordResult';
 import AuthRoute from './components/Routes/AuthRoute/AuthRoute';
 import MyPage from './pages/MyPage/MyPage';
+import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
+import Roulette from './pages/LunchSelect/Roulette/Roulette';
+import Result from './pages/LunchSelect/Result/Result';
 
 
 const mainContainer = css`
@@ -53,6 +57,13 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
+
+        
+        <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
+        <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
+        <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
+        <Route path="/lunchselect/result" element={<AuthRoute path="/lunchselect/result" element={<Result />}/>}/>
+
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
       </Routes>

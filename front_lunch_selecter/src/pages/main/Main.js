@@ -61,10 +61,6 @@ const Main = () => {
         return response
     });
 
-    if(getUserInfo.isLoading) {
-        return <></>;
-    }
-
     if(lunchSelectRoom.isLoading){
         return <div>불러오는중</div>
     }

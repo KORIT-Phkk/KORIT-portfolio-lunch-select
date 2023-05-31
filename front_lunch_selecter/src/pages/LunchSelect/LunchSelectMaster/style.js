@@ -71,3 +71,8 @@ export const locationAndCetegorySubmitButton = css`
         background-color: #dbdbdb;
     }
 `;
+export const categoryBox = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+`;

@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useParams } from 'react-router';
-import Category from '../../components/SelectPage/Category/Category';
 import * as s from './style';
+import Category from './../../../components/SelectPage/Category/Category';
 
 
 
@@ -64,9 +63,7 @@ const LunchSelectGuest = () => {
 
             <main>
                 <div css={s.categoryBox}>
-                    <h1 css={s.category}>카테고리를 선택하시오
                     <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                    </h1>
                 </div>
             </main>
             
