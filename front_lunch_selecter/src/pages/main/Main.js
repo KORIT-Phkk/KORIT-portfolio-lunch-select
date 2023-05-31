@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdContact } from 'react-icons/io';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,15 @@ const Main = () => {
     const [ joinCode, setJoinCode ] = useState("");
     const [imageSrc, setImageSrc] = useState("../main/logo1.png");
     const [isClicked, setIsClicked] = useState(false);
-    const [ userId, setUserId ] = useState(""); 
+    const [ userId, setUserId ] = useState("");
+    const [ showElements, setShowElements ] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowElements(true);
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, [])
 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
@@ -75,33 +83,40 @@ const Main = () => {
             setIsClicked(true);
         }
     }
-    // ----------------------------------------------------------------
-  
 
     return (
-        <div css={s.container}>
-            <header css={s.headerContainer}>
-                <div css={s.setting}>
-                    <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
-                    <UserInfo css={s.userInfo} isOpen={isOpen}/>
-                </div>
-                <div css={s.logoContainer}>
-                    <img css={s.logo} onClick={imageHandle} src={imageSrc} alt=""/>
-                </div>
-            </header>
-            <main css={s.mainContainer}>
-                <div css={s.lunchSelect}>
-                    <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
-                </div>
-            </main>
-            <footer css={s.footerContainer}>
+        <div>
+            {!showElements && 
                 <Reveal repeat>
                     <Tween from={{ opacity: 0 }} duration={2}>
                         <h3>Hello</h3>
                     </Tween>
                 </Reveal>
-                {/* <div css={s.hello}>hello</div> */}
-            </footer>
+            }
+            {showElements && (
+                <div className='fade-in-elements'>
+                    <div css={s.container}>
+                        <header css={s.headerContainer}>
+                            <div css={s.setting}>
+                                <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
+                                <UserInfo css={s.userInfo} isOpen={isOpen}/>
+                            </div>
+                            <div css={s.logoContainer}>
+                                <img css={s.logo} onClick={imageHandle} src={imageSrc} alt=""/>
+                            </div>
+                        </header>
+
+                        <main css={s.mainContainer}>
+                            <div css={s.lunchSelect}>
+                                <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                            </div>
+                        </main>
+
+                        <footer css={s.footerContainer}>
+                        </footer>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

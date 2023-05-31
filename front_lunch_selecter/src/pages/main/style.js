@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 
+
 export const container = css`
     display: flex;
     justify-content: center;
@@ -46,7 +47,8 @@ export const lunchButton =css`
     align-items: center;
     width: 250px;
     height: 20px;
-    font-size: 10px;
+    font-size: 15px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
     text-decoration: none;
     color: white;
     border: none;
