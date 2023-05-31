@@ -27,8 +27,8 @@ export const logoContainer = css`
    margin: auto;
 `;
 export const logo =css`
-    width: 270px;
-    height: 196px;
+    width: 272px;
+    height: 153px;
     margin-bottom: 50px;
 `;
 export const mainContainer =css`
