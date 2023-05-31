@@ -22,10 +22,12 @@ import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
 import Register from './pages/Auth/Register/Register';
 import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
 import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
-import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
+import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest/LunchSelectGuest';
+import WaitingRoom from './pages/LunchSelect/LunchSelectGuest/WaitingRoom/WaitingRoom';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import MyPage from './pages/MyPage/MyPage';
+import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
 
 
 const mainContainer = css`
@@ -60,6 +62,8 @@ function App() {
         <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
+        <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/>
         <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/*" element={<NotFound />}/>
