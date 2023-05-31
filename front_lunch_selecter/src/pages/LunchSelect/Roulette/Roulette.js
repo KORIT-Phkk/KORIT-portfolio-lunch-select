@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import MenuRoulette from '../../../components/Roulette/MenuRoulette';
+import RouletteComponent from '../../../components/Roulette/RouletteComponent';
 
 
 const Roulette = () => {    
@@ -95,7 +95,7 @@ const Roulette = () => {
   if(!getMenus.isLoading)
   return (
     <>
-      <MenuRoulette menuNames={menuNames} selectedMenu={selectedMenu}/>
+      <RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu}/>
     </>
     
   );

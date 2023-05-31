@@ -30,7 +30,7 @@ const textContainerStyles = css`
   font-size: 80px;
 `;
 
-const MenuRoulette = ({ menuNames, selectedMenu }) => {
+const RouletteComponent = ({ menuNames, selectedMenu }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentMenuNames, setCurrentMenuNames] = useState([]);
     const [intervalDuration, setIntervalDuration] = useState(50);
@@ -98,5 +98,5 @@ const MenuRoulette = ({ menuNames, selectedMenu }) => {
   
   
 
-export default MenuRoulette;
+export default RouletteComponent;
 
