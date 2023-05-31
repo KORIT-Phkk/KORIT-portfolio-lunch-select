@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import * as s from './style';
+import { Reveal, Timeline, Tween } from 'react-gsap'
 
 const Main = () => {
     const navigate = useNavigate();
@@ -13,10 +14,8 @@ const Main = () => {
     const [ joinCode, setJoinCode ] = useState("");
     const [imageSrc, setImageSrc] = useState("../main/logo1.png");
     const [isClicked, setIsClicked] = useState(false);
-
     const [ userId, setUserId ] = useState(""); 
 
-    const [ masterRoomCode, setMasterRoomCode ] = useState("");
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
     }
@@ -47,8 +46,6 @@ const Main = () => {
         }
     });
 
-   
-
     const userInfoInsert = useMutation(async() => {
         const option = {
             headers: {
@@ -65,20 +62,9 @@ const Main = () => {
         return <div>불러오는중</div>
     }
 
-
     const lunchSelectClickHandle = () => {
         createRoom.mutate();
     }
-
-    const lunchSelectJoinClickHandle = () => {
-        userInfoInsert.mutate();
-        window.location.href = "http://localhost:3000/lunchselect/room/guest/" + joinCode;
-    }
-
-    const joinCodeInputHandle = (e) => {
-        setJoinCode(e.target.value);
-    }
-
     
     const imageHandle = () => {
         if(isClicked){
@@ -109,7 +95,12 @@ const Main = () => {
                 </div>
             </main>
             <footer css={s.footerContainer}>
-                <div css={s.hello}>hello</div>
+                <Reveal repeat>
+                    <Tween from={{ opacity: 0 }} duration={2}>
+                        <h3>Hello</h3>
+                    </Tween>
+                </Reveal>
+                {/* <div css={s.hello}>hello</div> */}
             </footer>
         </div>
     );

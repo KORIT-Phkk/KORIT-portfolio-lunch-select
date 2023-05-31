@@ -25,18 +25,31 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 30px;
 `;
 export const inform = css`
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 30px;
     font-size: 18px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+`;
+export const warning = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    color: red;
 `;
 export const imgCss = css`
+    display: flex;
     justify-content: center;
+    align-items: center;
     margin: 20px auto 0;
     width: 280px;
     height: 190px;
@@ -71,7 +84,7 @@ export const selectMenu = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 100px;
+    margin: 40px;
     height: 50%;
     width: 100%;
     font-size: 100px;

@@ -1,8 +1,6 @@
 import { css } from '@emotion/react'
 
-
 export const container = css`
-    margin-top: 150px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -12,41 +10,70 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
 `;
+export const imgCss = css`
+    width: 270px;
+    height: 196px;
+`;
+export const comment = css`
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+`;
+export const notice = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    width: 250px;
 
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600px;
+    font-size: 12px;
+`;
 export const mainContainer =css`
     margin: auto;
     display: flex;
     justify-content: center;
+`;
+export const footerContainer =css`
+    display: flex;
+    justify-content: center;
     flex-direction: column;
 `;
-
-export const footerContainer =css`
-    margin: auto;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
-`;
-
 export const loginButton = css`
-    width: 850px;
-    height: 80px;
-    margin-top: 30px;
-    margin-bottom: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 20px;
+    margin: auto;
+    margin-top: 100px;
     border: none;
     border-bottom: 1px solid #dbdbdb;
-    background-color: white;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 10px;
 
     cursor: pointer;
     &:hover {
-        border-radius: 20px;
+        color: black;
+        border-radius: 5px;
         border-bottom: 1px solid #fafafa;
         background-color: #fafafa;
     }
     &:active {
-        border-radius: 20px;
+        color: black;
+        border-radius: 5px;
         border-bottom: 1px solid #dbdbdb;
         background-color: #dbdbdb;
     }

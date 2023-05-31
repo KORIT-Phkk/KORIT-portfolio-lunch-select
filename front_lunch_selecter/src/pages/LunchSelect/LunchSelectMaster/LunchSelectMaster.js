@@ -6,6 +6,9 @@ import { useNavigate, useParams } from 'react-router';
 import * as s from './style';
 import Category from './../../../components/SelectPage/Category/Category';
 import Location from './../../../components/SelectPage/Location/Location';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaRegSmileWink } from 'react-icons/fa';
+import Invite from './../Invite';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -43,7 +46,7 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.put("http://localhost:8080/lunchselect/updateflag", {code}, option)
+        const response = await axios.put("http://localhost:8080/lunchselect/room/updateflag", {code}, option)
         window.location.href = "http://localhost:3000/";
     });
 
@@ -57,18 +60,19 @@ const LunchSelectMaster = () => {
     return (
         <div css={s.container}>
             <header>
-            <div css={s.mapExplain}>현재 위치를 선택해주세용♡</div>
+                <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
+                <Invite/>
+                <div css={s.mapExplain}>현재 위치를 선택해주세요&nbsp;<FaRegSmileWink/></div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
 
-            <main>
-                <div css={s.categoryBox}>
-                    <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                </div>
+            <main css={s.mainContainer}>
+                <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
+                <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>                
             </main>
             
-            <footer css={s.mainContainer}>
-                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>위치 및 카테고리 선택 완료!!</button>      
+            <footer css={s.footerContainer}>
+                <button css={s.locationAndCetegorySubmitButton} onClick={getMenuButtonHandle}>선택 완료!!</button>
             </footer>
         </div>
     );

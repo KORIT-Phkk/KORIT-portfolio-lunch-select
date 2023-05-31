@@ -6,7 +6,6 @@ export const container = css`
     flex-direction: column;
 `;
 export const headerContainer =css`
- 
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -20,7 +19,6 @@ export const settingButton =css`
     width: 25px;
     height: 25px;
     display: flex;
-    border: none;
     background-color: white;
     cursor: pointer;
 `;
@@ -50,10 +48,11 @@ export const lunchButton =css`
     height: 20px;
     font-size: 10px;
     text-decoration: none;
-    border: 1px solid black;
     color: white;
+    border: none;
     border-radius: 5px;
     background-color: black;
+
     cursor: pointer;
     &:hover {
         background-color: #fafafa;

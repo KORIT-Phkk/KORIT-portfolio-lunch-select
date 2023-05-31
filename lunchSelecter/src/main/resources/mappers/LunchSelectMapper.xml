@@ -35,16 +35,6 @@
 		values(0, #{roomMasterCode}, #{roomGuestCode}, #{roomMasterId}, 1, null)
 	</insert>
 
-	<select id="getGuestURL" parameterType="String" resultType="String">
-		SELECT
-			room_guest_code
-		FROM
-			room_tb
-		WHERE
-			room_master_code = #{roomMasterCode}
-		and flag = 1
-	</select>
-
 	<select id="checkRoom" parameterType="String" resultType="String">
 		SELECT
 			room_master_code
@@ -71,6 +61,7 @@
 	<select id="findRoomByMasterCode" parameterType="String" resultMap="RoomMap">
 		SELECT
 			rt.room_id,
+			rt.room_guest_code,
 			rst.restaurant_id,
 			rst.restaurant_name,
 			rst.restaurant_address
@@ -84,6 +75,7 @@
 	<select id="findRoomByGuestCode" parameterType="String" resultMap="RoomMap">
 		SELECT
 			rt.room_id,
+			rt.room_master_code,
 			rst.restaurant_id,
 			rst.restaurant_name,
 			rst.restaurant_address

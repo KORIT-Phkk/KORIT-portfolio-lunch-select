@@ -2,7 +2,7 @@
 import * as s from './style';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { QueryClient, useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
@@ -34,7 +34,7 @@ const UserInfo = ({ isOpen }) => {
     }
    
     const logoutClickHandle = () => {
-        if(window.confirm("로그아웃할꺼?")){
+        if(window.confirm("로그아웃하시겠습니까?")){
             localStorage.removeItem("accessToken");
             setAuthState(false);
             navigate("/auth/login");

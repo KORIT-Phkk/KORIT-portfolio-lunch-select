@@ -20,6 +20,7 @@ import OAuth2Login from './pages/Auth/OAuth/OAuth2Login/OAuth2Login';
 import OAuth2Merge from './pages/Auth/OAuth/OAuth2Merge/OAuth2Merge';
 import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
 import Register from './pages/Auth/Register/Register';
+import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
 import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
@@ -45,6 +46,7 @@ function App() {
       <Routes>
         <Route path="/auth/login" element={<AuthRoute path="/auth/login" element={<Login/>}/>}/>
         <Route path="/auth/register" element={<AuthRoute path="/auth/register" element={<Register/>}/>}/>
+        <Route path="/auth/register/result" element={<AuthRoute path="/auth/register" element={<RegisterResult/>}/>}/>
         <Route path="/auth/findemail" element={<AuthRoute path="/auth/findemail" element={<FindEmail/>}/>}/>
         <Route path="/auth/findemail/result/:email" element={<AuthRoute path="/auth/findemail/result" element={<FindEmailResult/>}/>}/>
         <Route path="/auth/findpassword" element={<AuthRoute path="/auth/findpassword" element={<FindPassword/>}/>}/>

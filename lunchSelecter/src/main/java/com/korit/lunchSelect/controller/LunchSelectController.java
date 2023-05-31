@@ -64,4 +64,8 @@ public class LunchSelectController {
 		return ResponseEntity.ok(lunchSelectService.getCategory());
 	}
 	
+	@GetMapping("/guesturl")
+	   public ResponseEntity<?> getGuestURL(String roomMasterCode) {
+	      return ResponseEntity.ok().body(lunchSelectService.getGuestURL(roomMasterCode));
+	}
 }
