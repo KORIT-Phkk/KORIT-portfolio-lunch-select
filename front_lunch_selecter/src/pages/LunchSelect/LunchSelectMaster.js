@@ -24,7 +24,7 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/room/insert/category", {
+        const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
             code: `0 ${code}`,
             categoryId: [...selectedCategories]
         }, option);

@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import axios from 'axios';
-import QueryString from 'qs';
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import MenuRoulette from '../../../components/Roulette/MenuRoulette';
 
 
 const Roulette = () => {    
   const navigate = useNavigate();
-  const { code, lat, lng } = useParams();
   const [ flag, setFlag ] = useState(false);
-  const [ menuNames, setMenuNames ] = useState([]);
-  const [ menuIds, setMenuIds ] = useState([]);
+  const { code, lat, lng } = useParams();
+  const [ menuNames, setMenuNames ] = useState();
+  const [ selectedMenu, setSelectedMenu ] = useState();
   
-  const getMenus = useQuery(["getMenus"], async() => {
+  const getMenus = useQuery(["getMenus"], async () => {
+    setFlag(false)
     const option = {
       params: {
           roomMasterCode: code,
@@ -26,54 +26,76 @@ const Roulette = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
       }
     }
-
-    const response = await axios.get("http://localhost:8080/lunchselect/getmenus", option)   
+    const response = await axios.get("http://localhost:8080/lunchselect/menu/list", option)
     return response;
-  }, {
-      onSuccess: (response) => {
-        setFlag(true);
-        const menuNameList = [];
-        const menuIdList = [];
+    }
 
+  , {
+    enabled: flag,
+    onSuccess: (response) => {
+      if(response.status === 200) {
+        const menuNameList = [];
         response.data.forEach(element => {
           menuNameList.push(element.name);
-          menuIdList.push(element.id);
         });
-
+  
         setMenuNames(menuNameList);
-        setMenuIds(menuIdList);
+  
+        selectMenu.mutate(response.data);
+      }
+    }
+  });
+
+  const selectMenu = useMutation(["selectmenu"], async(menuList) => {  
+    const option = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json"
+      }
+    }
+    const data = {
+      roomMasterCode: `0 ${code}`,
+      menuList: menuList
+    }
+    const response = await axios.put("http://localhost:8080/lunchselect/menu/select", JSON.stringify(data), option);
+    return response;
+  }, {
+      onSuccess: () => {
+        getSelectedMenu();
       }
   });
 
-  const selectMenu = useQuery(["selectmenu"], async() => {
-    setFlag(false);    
+  const getSelectedMenu = async () => {
     const option = {
-      params: {
-        menuIds: menuIds
-      },
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
-      paramsSerializer: params => QueryString.stringify(params, {arrayFormat: 'repeat'})
-    }
-    const response = await axios.get("http://localhost:8080/lunchselect/selectmenu", option);
-    return response;
-  }, {
-      enabled: flag,
-      onSuccess: (response) => {
-        // console.log(response)
+      params: {
+        code: `0 ${code}`
       }
-  });
+    }
+
+    try {
+      const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
+      setSelectedMenu(response.data.restaurantName);
+      return response;
+    } catch(error) {
+      return error;
+    }
+  }
+
+  useEffect(() => {
+    setFlag(true);
+  }, [])
 
   if(getMenus.isLoading) {
     <>로딩중...</>
   }
 
   if(!getMenus.isLoading)
-
   return (
     <>
-      <MenuRoulette menuNames={menuNames}/>
+      <MenuRoulette menuNames={menuNames} selectedMenu={selectedMenu}/>
     </>
     
   );

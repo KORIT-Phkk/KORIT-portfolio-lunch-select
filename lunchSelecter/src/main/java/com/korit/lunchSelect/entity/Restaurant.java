@@ -1,6 +1,6 @@
 package com.korit.lunchSelect.entity;
 
-import com.korit.lunchSelect.dto.lunchselect.SelectLunchRespDto;
+import com.korit.lunchSelect.dto.lunchselect.SelectedMenuRespDto;
 
 import lombok.Data;
 
@@ -10,10 +10,11 @@ public class Restaurant {
 	private String restaurantName;
 	private String restaurantAddress;
 	
-	public SelectLunchRespDto toDto() {
-		return SelectLunchRespDto.builder()
-								.restaurantName(restaurantName)
-								.restaurantAddress(restaurantAddress)
-								.build();
+	public SelectedMenuRespDto toDto() {
+		return SelectedMenuRespDto.builder()
+									.restaurantId(restaurantId)
+									.restaurantName(restaurantName)
+									.restaurantAddress(restaurantAddress)
+									.build();
 	}
 }

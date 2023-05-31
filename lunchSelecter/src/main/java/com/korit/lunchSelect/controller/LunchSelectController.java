@@ -1,8 +1,6 @@
 package com.korit.lunchSelect.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -31,7 +29,7 @@ public class LunchSelectController {
 		return ResponseEntity.ok().body(lunchSelectService.createLunchSelectRoom());
 	}
 		
-	@PostMapping("/room/insert/category")
+	@PostMapping("/room/category/insert")
 	public ResponseEntity<?> insertCategory(@RequestBody InsertCategoryReqDto insertCategoryReqDto) {
 		return ResponseEntity.ok().body(lunchSelectService.createRoomJoin(insertCategoryReqDto));
 	} 
@@ -46,20 +44,24 @@ public class LunchSelectController {
 		return ResponseEntity.ok().body(lunchSelectService.roomUpdateFlag(requestData.get("roomMasterCode")));
 	}
 	
-	@GetMapping("/getmenus")
-	public ResponseEntity<?> getMenus(GetMenusReqDto getMenusReqDto) {
+	@GetMapping("/menu/list")
+	public ResponseEntity<?> getMenuList(GetMenusReqDto getMenusReqDto) {
 		return ResponseEntity.ok(lunchSelectService.getMenuList(getMenusReqDto));
 	}
 	
-	@GetMapping("/selectmenu")
-	public ResponseEntity<?> selectMenu(SelectLunchReqDto selectLunchReqDto) {
+	@PutMapping("/menu/select")
+	public ResponseEntity<?> selectMenu(@RequestBody SelectLunchReqDto selectLunchReqDto) {
 		return ResponseEntity.ok(lunchSelectService.selectMenu(selectLunchReqDto));
+	}
+	
+	@GetMapping("/menu/result")
+	public ResponseEntity<?> getSelectedMenu(String code) {
+		return ResponseEntity.ok().body(lunchSelectService.getSelectedMenu(code));
 	}
 	
 	@GetMapping("/category")
 	public ResponseEntity<?> getCategory() {
 		return ResponseEntity.ok(lunchSelectService.getCategory());
 	}
-	
 	
 }

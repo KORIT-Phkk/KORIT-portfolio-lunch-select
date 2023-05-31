@@ -30,7 +30,7 @@ const textContainerStyles = css`
   font-size: 80px;
 `;
 
-const MenuRoulette = ({ menuNames }) => {
+const MenuRoulette = ({ menuNames, selectedMenu }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentMenuNames, setCurrentMenuNames] = useState([]);
     const [intervalDuration, setIntervalDuration] = useState(50);
@@ -39,7 +39,7 @@ const MenuRoulette = ({ menuNames }) => {
     useEffect(() => {
       if (menuNames) {
         let names = menuNames;
-        const dataLength = names.length;
+        const dataLength = names.length;  
         if (dataLength < 80) {
           const repeatCount = Math.ceil(80 / dataLength);
           names = Array.from({ length: repeatCount }, () => names).flat().slice(0, 80);
@@ -84,7 +84,7 @@ const MenuRoulette = ({ menuNames }) => {
                 ]}
             >
                 {currentIndex === 0 ? (
-                <>{currentMenuNames[currentMenuNames.length - 1]}</>
+                <>{selectedMenu}</>
                 ) : (
                 <>{name}</>
                 )}
