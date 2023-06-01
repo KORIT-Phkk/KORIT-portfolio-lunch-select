@@ -51,19 +51,19 @@ const PasswordChange = () => {
         <div css={s.container}>
             <header css={s.headerContainer}>
                 <div css={s.input}>
-                    <label css={s.inputLabel}>Default Password</label>
+                    <label css={s.inputLabel}>현재 비밀번호</label>
                     <AuthInput type="password" name="currentPassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.currentPassword}</div>
                 </div>
 
                 <div css={s.input}>
-                    <label css={s.inputLabel}>Password</label>
+                    <label css={s.inputLabel}>새 비밀번호</label>
                     <AuthInput type="password" name="updatePassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.updatePassword}</div>
                 </div>
 
                 <div css={s.input}>
-                    <label css={s.inputLabel}>Password</label>
+                    <label css={s.inputLabel}>새 비밀번호 확인</label>
                     <AuthInput type="password" name="updateCheckPassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.updateCheckPassword}</div>
                 </div>

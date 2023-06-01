@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class PasswordChangeDto {
-
+	
 	private String currentPassword;
 	
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$", 

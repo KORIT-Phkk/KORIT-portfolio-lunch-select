@@ -7,7 +7,7 @@ export const container = css`
     flex-direction: column;  
 `;
 export const backButton = css`
-    position: absolute;     
+    /* position: absolute; */
     width: 20px;
     height: 20px;
     border: none;
@@ -31,7 +31,7 @@ export const inform = css`
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 18px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
