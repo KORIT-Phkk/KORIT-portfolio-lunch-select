@@ -5,11 +5,12 @@ import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import AuthInput from '../../../../components/auth/AuthInput';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const PasswordChange = () => {
     const [ updateUser, setUpdateUser ] = useState({currentPassword: "", updatePassword: "", updateCheckPassword: ""});
     const [ errorMessages, setErrorMessages ] = useState({currentPassword: "", updatePassword: "", updateCheckPassword: ""});
-
+    const navigate = useNavigate();
 
     const passwordChange = useMutation(async() => {
         const option = {
@@ -44,11 +45,14 @@ const PasswordChange = () => {
         const { name, value } = e.target;
         setUpdateUser({...updateUser, [name]: value});
     }
-
+    const backButtonHandle = () => {
+        navigate("/mypage")
+    }
     
 
     return (
         <div css={s.container}>
+            <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
             <header css={s.headerContainer}>
                 <div css={s.input}>
                     <label css={s.inputLabel}>현재 비밀번호</label>
@@ -68,7 +72,7 @@ const PasswordChange = () => {
                     <div css={s.errorMessages}>{errorMessages.updateCheckPassword}</div>
                 </div>
             </header>
-            <main>
+            <main css={s.mainContainer}>
                 <button css={s.okButton} onClick={okButtonClick}>확인</button>
             </main>
         </div>

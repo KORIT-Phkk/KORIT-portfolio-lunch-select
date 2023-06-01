@@ -5,6 +5,7 @@ import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const MyPage = () => {
     const [ name, setName ] = useState("");
@@ -43,16 +44,20 @@ const MyPage = () => {
     };
 
     const userDeleteClickHandle = () => {
-        userDelete.mutate();
         if(window.confirm("회원탈퇴")){
+            userDelete.mutate();
             localStorage.removeItem("accessToken");
             navigate("/auth/login");
         }
     }
+    const backButtonHandle = () => {
+        navigate("/")
+      }
     
 
     return (
         <div css={s.container}>
+            <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
             <header css={s.headerContainer}>
                 <div css={s.userLogoBox}><AiOutlineUser css={s.userLogo}/></div>
             </header>

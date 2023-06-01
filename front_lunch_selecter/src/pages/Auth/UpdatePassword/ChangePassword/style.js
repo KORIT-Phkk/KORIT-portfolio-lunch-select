@@ -4,10 +4,26 @@ export const container = css`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
 `;
 export const headerContainer = css`
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+`;
+export const backButton = css`
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    &:active{
+        box-shadow: 0px 0px 2px 0px;
+        background-color: whitesmoke;
+        background-color: #eee;
+    }
 `;
 export const input = css`
     margin-bottom: 15px;
@@ -36,9 +52,16 @@ export const okButtonClick = css`
     }
 `;
 export const errorMessages = css`
+    width: 250px;
     margin-top: 2px;
     font-size: 10px;
     color: red;
+`;
+export const mainContainer = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 export const okButton = css`
     margin-top: 100px;
