@@ -43,8 +43,8 @@ const MyPage = () => {
     };
 
     const userDeleteClickHandle = () => {
-        userDelete.mutate();
         if(window.confirm("회원탈퇴")){
+            userDelete.mutate();
             localStorage.removeItem("accessToken");
             navigate("/auth/login");
         }

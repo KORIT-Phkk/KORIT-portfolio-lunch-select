@@ -20,6 +20,7 @@ public class User {
 	private String name;
 	private String phone;
 	private String provider;
+	private String profileImg;
 	
 	private List<Authority> authorities;
 	
@@ -31,6 +32,7 @@ public class User {
 				.name(name)
 				.phone(phone)
 				.authorities(authorities)
+				.profileImg(profileImg)
 				.build();
 	}
 	
