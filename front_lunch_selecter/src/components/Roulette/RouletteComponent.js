@@ -28,7 +28,7 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentMenuNames, setCurrentMenuNames] = useState([]);
     const [intervalDuration, setIntervalDuration] = useState(50);
-    const [stopRoulette, setStopRoulette] = useState(true);
+    const [stopRoulette, setStopRoulette] = useState(false);
     const [ roulettFlag, setRoulettFlag ] = setRoulettState;
 
     useEffect(() => {
@@ -53,30 +53,26 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
                 } else if (index === 73) {
                     setIntervalDuration(300);
                 } else if (index === 79) {
-                    clearInterval(interval);
-                    setStopRoulette(false);
+                    setStopRoulette(true);
+                    setIntervalDuration(0);
                 }
                 return (index + 1) % 80;
             });
         }, intervalDuration);
-        return () => clearInterval(interval);
-    }, [intervalDuration]);
+        return () => {
+          clearInterval(interval);
+          if(stopRoulette){
+            setRoulettFlag(true);
+          }
+        }
 
+    }, [intervalDuration]);
   
-    const rouletteHandleOnClick = () => {
-      if (!stopRoulette) {
-        setCurrentIndex(0);
-        setIntervalDuration(50);
-      }
-      setStopRoulette(false);
-    };
-    
     if(menuNames === null){
       return <div>선택하신 카테고리의 메뉴가 주변에 없습니다</div>
     }
 
     return (
-      
         <>
           <main css={mainContainer}>
               {currentMenuNames.map((name, index) => (
@@ -90,7 +86,7 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
                   `
                   ]}
               >
-                  {currentIndex === 0 ? (
+                  {stopRoulette ? (
                   <>{selectedMenu}</>
                   ) : (
                   <>{name}</>
@@ -98,7 +94,6 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
               </div>
               ))}
           </main>
-              {stopRoulette ? "" : setRoulettFlag(true)}
         </>
     );
   };

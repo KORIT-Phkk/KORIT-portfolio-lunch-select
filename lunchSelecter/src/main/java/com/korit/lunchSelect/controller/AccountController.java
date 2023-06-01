@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.korit.lunchSelect.aop.annotation.ValidAspect;
 import com.korit.lunchSelect.dto.account.FindEmailReqDto;
+import com.korit.lunchSelect.dto.account.PasswordChangeDto;
 import com.korit.lunchSelect.dto.account.ResetPasswordReqDto;
 import com.korit.lunchSelect.service.AccountService;
 import com.korit.lunchSelect.util.cache.CacheTokenProvider;
@@ -51,5 +52,13 @@ public class AccountController {
 	public ResponseEntity<?> validatetoken(@RequestParam String token) {
 		cacheTokenProvider.validateToken(cacheTokenProvider.getTokenMap("passwordResetToken", token));
 		return ResponseEntity.ok(true);
+	}
+	@ValidAspect
+	@PutMapping("/updatepassword")
+	public ResponseEntity<?> passwordChange(@Valid @RequestBody PasswordChangeDto passwordChangeDto, BindingResult bindingResult){
+//		System.out.println(passwordChangeDto);
+		accountService.updatePassword(passwordChangeDto);
+		
+		return ResponseEntity.ok().body(null);
 	}
 }

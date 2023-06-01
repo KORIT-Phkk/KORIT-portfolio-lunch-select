@@ -84,6 +84,19 @@ export const name = css`
     text-align: center;
     align-items: center;
 `;
+export const phone = css`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 250px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    align-items: center;
+`;
 export const phonNumChange = css`
     display: flex;
     justify-content: center;

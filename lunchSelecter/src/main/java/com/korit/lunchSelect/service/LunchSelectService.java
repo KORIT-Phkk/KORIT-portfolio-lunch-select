@@ -34,6 +34,12 @@ public class LunchSelectService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
 		
+		if(findDuplicatedActiveRoom(principalUser.getUserId()) != null) {
+			Room exitRoom = findDuplicatedActiveRoom(principalUser.getUserId());
+			updateRoomFlag(exitRoom.getRoomMasterCode(), 0);
+		}
+		
+		
 		Room room = Room.builder()
 				.roomMasterCode(UUID.randomUUID().toString().replaceAll("-", ""))
 				.roomGuestCode(UUID.randomUUID().toString().replaceAll("-", ""))
@@ -43,6 +49,10 @@ public class LunchSelectService {
       lunchSelectRepository.createLunchSelectRoom(room);
 
       return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
+	}
+	
+	public Room findDuplicatedActiveRoom(int userId) {
+		return lunchSelectRepository.findActiveRoomByMasterId(userId);
 	}
 	
 	public int createRoomJoin(InsertCategoryReqDto insertCategoryReqDto) {
@@ -94,8 +104,11 @@ public class LunchSelectService {
 		return findRoomByCode(code).getRestaurant().toDto();
 	}
 	
-	public int roomUpdateFlag(String roomMasterCode) {
-		return lunchSelectRepository.roomUpdateFlag(roomMasterCode);
+	public int updateRoomFlag(String roomMasterCode, int flag) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("roomMasterCode", roomMasterCode);
+		map.put("flag", flag);
+		return lunchSelectRepository.updateRoomFlag(map);
 	}
 	
     public List<Category> getCategory(){

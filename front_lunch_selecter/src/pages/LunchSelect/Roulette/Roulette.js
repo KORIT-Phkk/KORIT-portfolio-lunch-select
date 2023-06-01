@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import RouletteComponent from '../../../components/Roulette/RouletteComponent';
 import Location from '../../../components/SelectPage/Location/Location'
-import ResultMap from '../../../components/SelectPage/ResultMap/ResultMap';
+import ResultMap from './../../../components/SelectPage/ResultMap/ResultMap';
 
 const container = css`
   display: flex;
@@ -90,7 +90,6 @@ const Roulette = () => {
     try {
       const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
       setSelectedMenu(response.data);
-      
       return response;
     } catch(error) {
       return error;
@@ -98,6 +97,7 @@ const Roulette = () => {
   }
 
   useEffect(() => {
+    setRoulettFlag(false);
     setFlag(true);
   }, [])
 
@@ -112,11 +112,13 @@ const Roulette = () => {
   if(getMenus.isLoading) {
     <>로딩중...</>
   }
+
   
   if(!getMenus.isLoading)
   return (
     <div css={container}>
-      <RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>
+      {roulettFlag ? <ResultMap restaurantAddress={selectedMenu.restaurantAddress} restaurantName={selectedMenu.restaurantName}/> : ""}
+      {roulettFlag ? (<div>{selectedMenu.restaurantName}</div>): (<RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>)}  
       {roulettFlag ? (<div><button onClick={reRenderButton}>다시돌려</button> <button onClick={homeButton}>메인으로</button></div>) : ""}
     </div>
     

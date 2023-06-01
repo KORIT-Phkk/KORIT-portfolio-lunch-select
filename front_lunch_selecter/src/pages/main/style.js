@@ -1,5 +1,11 @@
 import { css } from '@emotion/react'
+/* .style */
 
+export const hello = css`
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+`;
 export const container = css`
     display: flex;
     justify-content: center;
@@ -13,7 +19,6 @@ export const headerContainer =css`
 export const setting =css`
     display: flex;
     justify-content: flex-end;
-
 `;
 export const settingButton =css`
     width: 25px;
@@ -22,64 +27,48 @@ export const settingButton =css`
     background-color: white;
     cursor: pointer;
 `;
-export const logoContainer = css`
-   margin: auto;
-`;
-export const logo =css`
-    width: 270px;
-    height: 196px;
-    margin-bottom: 50px;
+export const userInfo = (isOpen) => css`
+    display: ${isOpen ? "flex" : "none"};
 `;
 export const mainContainer =css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 100px;
 `;
-export const lunchSelect =css`
+export const imgCss =css`
+    width: 272px;
+    height: 153px;
+`;
+export const footerContainer =css`
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 `;
 export const lunchButton =css`
-    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 250px;
     height: 20px;
-    font-size: 10px;
+    font-size: 15px;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
     text-decoration: none;
-    color: white;
+    color: black;
     border: none;
     border-radius: 5px;
-    background-color: black;
+    background-color: white;
 
     cursor: pointer;
     &:hover {
-        background-color: #fafafa;
-        color: black;
+        transition: .4s ease-in;
+        box-shadow: inset 125px 0 0 black, inset -125px 0 0 black;
+
+        font-weight: 600;
+        color: white;
     }
     &:active {
-        background-color: #dbdbdb;
-        color: black;
+        color: #dbdbdb;
     }
-`;
-export const joinUrlInput = css`
-    margin-bottom: 15px;
-    width: 250px;
-    height: 20px;
-    font-size: 10px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid black;
-`;
-export const footerContainer =css`
-    display: flex;
-    justify-content: center;
-`;
-export const userInfo = (isOpen) => css`
-    display: ${isOpen ? "flex" : "none"};
-`;
-export const hello = css`
-    display: flex;
-    align-items: flex-end;
 `;
