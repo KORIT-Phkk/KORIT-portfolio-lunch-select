@@ -35,10 +35,13 @@ const MyPage = () => {
         {data: {userId: userId}},option);
         return response;
     });
-    
+    const passwordChangeClickHandle = () => {
+        navigate("/mypage/passwordchange");
+    };
+
     const userDeleteClickHandle = () => {
         userDelete.mutate();
-        if(window.confirm("정말로 회원탈퇴를 할꼬야?")){
+        if(window.confirm("회원탈퇴")){
             localStorage.removeItem("accessToken");
             navigate("/auth/login");
         }
@@ -52,7 +55,7 @@ const MyPage = () => {
             </header>
             <main css={s.mainContainer}>
                 <div css={s.email}>{email}</div>
-                <button css={s.passwordChange}>비민번호변경</button>
+                <button css={s.passwordChange} onClick={passwordChangeClickHandle}>비밀번호변경</button>
                 <div css={s.name}>{name}</div>
                 <button css={s.phonNumChange}>전화번호변경</button>
             </main>

@@ -27,6 +27,8 @@ import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGu
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import Result from './pages/LunchSelect/Result/Result';
 import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
+import PasswordChangeResult from './pages/Auth/UpdatePassword/PasswordChangeResult/PasswordChangeResult';
+import PasswordChange from './pages/Auth/UpdatePassword/ChangePassword/PasswordChange';
 
 
 const mainContainer = css`
@@ -59,7 +61,8 @@ function App() {
         <Route path="/auth/oauth2/register" element={<AuthRoute path={"/auth/oauth2/register"} element={<OAuth2Register/>}/>}/>
         <Route path="/auth/oauth2/merge" element={<AuthRoute path={"/auth/oauth2/merge"} element={<OAuth2Merge/>}/>}/>
         <Route path="/mypage" element={<AuthRoute path={"/mypage"} element={<MyPage/>}/>}/>
-
+        <Route path="/mypage/passwordchange" element={<AuthRoute path={"/mypage/passwordchange"} element={<PasswordChange/>}/>}/>
+        <Route path="/mypage/passwordchangeresult" element={<AuthRoute path={"/mypage/passwordchangeresult"} element={<PasswordChangeResult/>}/>}/>
         
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
