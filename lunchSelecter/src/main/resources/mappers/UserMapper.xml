@@ -9,6 +9,7 @@
 		<result property="name" column="name"/>
 		<result property="phone" column="phone"/>
 		<result property="provider" column="provider"/>
+		<result property="profileImg" column="profile_img"/>
 		<collection property="authorities" javaType="list" resultMap="AuthorityMap" />
 	</resultMap>
 	
@@ -32,6 +33,7 @@
 			ut.name,
 			ut.phone,
 			ut.provider,
+			ut.profile_img,
 			
 			at.authority_id,
 			at.user_id,
@@ -55,6 +57,7 @@
 			ut.name,
 			ut.phone,
 			ut.provider,
+			ut.profile_img,
 			
 			at.authority_id,
 			at.user_id,
@@ -99,7 +102,7 @@
 		WHERE
 			user_id = #{userId}
 	</update>
-	<delete id="userDelte" parameterType="map">
+	<delete id="userDelete" parameterType="com.korit.lunchSelect.entity.User">
 		delete from
 			user_tb
 		where

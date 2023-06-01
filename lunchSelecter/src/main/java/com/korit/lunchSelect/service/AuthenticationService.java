@@ -88,7 +88,7 @@ public class AuthenticationService implements UserDetailsService {
 	}
 
 	public int userDelete(User user) {
-		userRepository.userDelte(user);
-		return userRepository.userDelte(user);
+		userRepository.userDelete(user);
+		return userRepository.userDelete(user);
 	}
 }

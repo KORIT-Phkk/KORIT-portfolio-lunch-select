@@ -6,7 +6,6 @@ import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import RouletteComponent from '../../../components/Roulette/RouletteComponent';
-import Location from '../../../components/SelectPage/Location/Location'
 import ResultMap from './../../../components/SelectPage/ResultMap/ResultMap';
 
 const container = css`

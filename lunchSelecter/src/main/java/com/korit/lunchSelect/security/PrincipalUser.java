@@ -22,6 +22,7 @@ public class PrincipalUser implements UserDetails {
 	private String name;
 	private String phone;
 	private List<Authority> authorities;
+	private String profileImg;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
