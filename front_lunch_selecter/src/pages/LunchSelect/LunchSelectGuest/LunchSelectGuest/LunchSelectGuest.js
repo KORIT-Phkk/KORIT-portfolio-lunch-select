@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
-import * as s from './style';
-import Category from './../../../components/SelectPage/Category/Category';
+import * as s from '../style';
+import Category from '../../../../components/SelectPage/Category/Category';
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { FaRegSmileWink } from 'react-icons/fa';
 
@@ -12,6 +12,7 @@ import { FaRegSmileWink } from 'react-icons/fa';
 
 const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
+    const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
     const { code } = useParams();
     const navigate = useNavigate();
 
@@ -36,7 +37,6 @@ const LunchSelectGuest = () => {
             console.error(error);
           }
         }
-      
         fetchData();
       }, []);
       
@@ -46,7 +46,7 @@ const LunchSelectGuest = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+        await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
             code: `1 ${code}`,
             categoryId: [...selectedCategories]
         }, option);
@@ -55,6 +55,8 @@ const LunchSelectGuest = () => {
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();
+        setReadyButtonHandle(false);
+        navigate(`/lunchselect/room/guest/waiting/${code}`);
     }
 
     const backButtonHandle = () => {
@@ -70,17 +72,17 @@ const LunchSelectGuest = () => {
           <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
       </header>
 
-      <main css={s.mainContainer}>
-          <div css={s.categoryBox}>
-              <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
-              <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-          </div>
-      </main>
-      
-      <footer css={s.footerContainer}>
-          <button css={s.readySubmitButton} onClick={readyHandleOnClick} >준비완료!!</button>
-      </footer>
-  </div>
+            <main>
+                <div css={s.categoryBox}>
+                    <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
+                </div>
+            </main>
+            
+            <footer css={s.mainContainer}>
+                <div css={s.selectMenu}></div>
+                <button onClick={readyHandleOnClick}>카테고리 선택 완료!</button>           
+            </footer>
+        </div>
     );
 }
 

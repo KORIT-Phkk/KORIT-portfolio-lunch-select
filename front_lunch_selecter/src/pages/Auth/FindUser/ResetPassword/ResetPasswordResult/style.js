@@ -7,12 +7,13 @@ export const container = css`
 `;
 export const headerContainer = css`
     margin: auto;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 `;
 export const imgCss = css`
-    width: 270px;
-    height: 196px;
+    width: 272px;
+    height: 153px;
 `;
 export const comment = css`
     margin: auto;

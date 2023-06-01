@@ -39,6 +39,7 @@ public class LunchSelectService {
 			updateRoomFlag(exitRoom.getRoomMasterCode(), 0);
 		}
 		
+		
 		Room room = Room.builder()
 				.roomMasterCode(UUID.randomUUID().toString().replaceAll("-", ""))
 				.roomGuestCode(UUID.randomUUID().toString().replaceAll("-", ""))
