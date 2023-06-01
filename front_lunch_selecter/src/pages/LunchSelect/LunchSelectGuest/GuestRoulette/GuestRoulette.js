@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
-import { Navigate, useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 
 const GuestRoulette = () => {
+    const navigate = useNavigate();
     const { code } = useParams();
-    const [test, setTest] = useState(true);
-    const { selectedMenu, setSelectedMenu } = useState("");
+    const [searchParams] = useSearchParams();
 
     const getSelectedMenu = useQuery(["getSelectedMenu"], async () => {
         const option = {
@@ -18,22 +19,24 @@ const GuestRoulette = () => {
           }
         }
         const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
-        setSelectedMenu(response.data.restaurantName)
-        console.log(response.data.restaurantName)
+
         return response;
     }, {
-        enabled:test,
+        refetchInterval: 1000,
         onSuccess: (response) => {
-            if(response !== undefined){
-                setTest(false)
+            if(response.data.restaurantName !== searchParams.get("selectedMenu")){
+                navigate(`/lunchselect/room/guest/waiting/${code}`);
             }
         }
     }) 
-  
+    
+    // if(getSelectedMenu.isLoading){
+    //     return <div>로딩 중...</div>
+    // }
+    console.log(searchParams.get("selectedMenu"))
     return (
         <div>
-          asdf
-            {selectedMenu}
+            {searchParams.get("selectedMenu")}
         </div>
     );
 };
