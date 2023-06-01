@@ -6,8 +6,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { useRecoilState } from 'recoil';
+import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const MyPage = () => {
+    const [ authState, setAuthState ] = useRecoilState(authenticatedState);
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ userId, setUserId ] = useState("");
@@ -47,6 +50,7 @@ const MyPage = () => {
         if(window.confirm("회원탈퇴")){
             userDelete.mutate();
             localStorage.removeItem("accessToken");
+            setAuthState(false);
             navigate("/auth/login");
         }
     }

@@ -76,7 +76,7 @@
 	useGeneratedKeys="true"
 	keyProperty="userId">
 		insert into user_tb
-		values (0, #{email}, #{password}, #{name}, #{phone}, #{provider})
+		values (0, #{email}, #{password}, #{name}, #{phone}, #{provider}, "default.jpg")
 	</insert>
 	
 	<insert id="saveAuthority" parameterType="com.korit.lunchSelect.entity.Authority">
