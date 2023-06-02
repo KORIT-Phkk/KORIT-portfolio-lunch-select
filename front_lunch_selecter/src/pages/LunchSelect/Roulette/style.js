@@ -37,10 +37,10 @@ export const buttonStyle = css`
     cursor:pointer;
     &:hover {
         color: black;
-        background-color: #dbdbdb;
+        background-color: #fafafa;
     }
     &:active {
         color: black;
-        background-color: whitesmoke;
+        background-color: #dbdbdb;
     }
 `;

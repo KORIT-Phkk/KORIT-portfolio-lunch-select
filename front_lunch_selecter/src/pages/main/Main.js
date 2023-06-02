@@ -1,26 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoMdContact } from 'react-icons/io';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import * as s from './style';
-import { Reveal, Tween } from 'react-gsap'
 import Loading from '../../components/Loading/Loading';
+import { Reveal } from 'react-gsap';
+import { Tween } from 'react-gsap';
 
 const Main = () => {
     const navigate = useNavigate();
     const [ isOpen, setIsOpen ] = useState(false);
     const [ joinCode, setJoinCode ] = useState("");
-    const [ showElements, setShowElements ] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowElements(true);
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, [])
 
     const userInfoHandle = () => {
         setIsOpen(!isOpen)
@@ -74,33 +67,26 @@ const Main = () => {
 
     return (
         <div>
-            {!showElements && 
-                <Reveal repeat>
-                    <Tween from={{ opacity: 0 }} duration={2}>
-                        <h3 css={s.hello}>気持ちいい</h3>
-                    </Tween>
-                </Reveal>
-            }
-            {showElements && (
-                <div className='fade-in-elements'>
-                    <div css={s.container}>
-                        <header css={s.headerContainer}>
-                            <div css={s.setting}>
-                                <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
-                                <UserInfo css={s.userInfo} isOpen={isOpen}/>
-                            </div>
-                        </header>
-
-                        <main css={s.mainContainer}>
-                            <img css={s.imgCss} src="../main/logo1.png" alt=""/>
-                        </main>
-
-                        <footer css={s.footerContainer}>
-                            <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
-                        </footer>
+            <div css={s.container}>
+                <header css={s.headerContainer}>
+                    <div css={s.setting}>
+                        <IoMdContact css={s.settingButton} onClick={userInfoHandle} />
+                        <UserInfo css={s.userInfo} isOpen={isOpen}/>
                     </div>
-                </div>
-            )}
+                </header>
+
+                <main css={s.mainContainer}>
+                    <Reveal repeat>
+                        <Tween from={{opacity: 0}} duration={2}>
+                            <img css={s.imgCss} src="../main/logo1.png" alt=""/>
+                        </Tween>
+                    </Reveal>
+                </main>
+
+                <footer css={s.footerContainer}>
+                    <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                </footer>
+            </div>
         </div>
     );
 };

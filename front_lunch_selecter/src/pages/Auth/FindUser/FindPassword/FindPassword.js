@@ -31,9 +31,11 @@ const FindPassword = () => {
 
     const submitFindPasswordHandle = () => {
         setLoadingFlag(true);
-        findPassword.mutate({
-            email: email
-        })
+        if(!loadingFlag) {
+            findPassword.mutate({
+                email: email
+            })
+        }
     }
 
     const onEnterKeyUp = (e) => {
@@ -54,11 +56,13 @@ const FindPassword = () => {
             <div css={s.comment}><RiLockPasswordFill/> &nbsp;Find Password&nbsp; <RiLockPasswordFill/></div>
             <main css={s.mainContainer}>
                 <label css={s.inputLabel}>Email</label>
-                <AuthInput type="email" onChange={onChangeInputHandle} name="email" />
+                <AuthInput disabled={loadingFlag} type="email" onChange={onChangeInputHandle} name="email" />
                 <div css={s.errorMsg}>{errorMessage.email}</div>            
             </main>
             <footer css={s.footerContainer}>
-                <button css={s.checkButton} onClick={submitFindPasswordHandle}>확인</button>
+                <button css={s.checkButton} onClick={submitFindPasswordHandle} disabled={loadingFlag}>
+                    {loadingFlag ? 'Loading...' : '확인'}
+                    </button>
                 <button css={s.findEmail} onClick={findEmailHandle}>이메일 찾기</button>
             </footer>
         </div>

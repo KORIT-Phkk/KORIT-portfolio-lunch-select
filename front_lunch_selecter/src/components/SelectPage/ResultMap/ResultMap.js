@@ -71,8 +71,9 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
                 style={{
                     width: "280px",
                     height: "200px",
+                    borderRadius: "5px"
                 }}
-                level={2}
+                level={3}
                 >
                     {restaurantDatas.map((store, index) => (
                         <MapMarker

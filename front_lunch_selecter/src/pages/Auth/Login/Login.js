@@ -31,7 +31,6 @@ const Login = () => {
 
         try {
             const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
-            alert("로그인 성공!");
 
             localStorage.setItem("accessToken", response.data);
             setRefresh(true);

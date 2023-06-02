@@ -52,7 +52,8 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
                 center={markerPosition}
                 style={{
                     width: "100%",
-                    height: "200px"
+                    height: "200px",
+                    borderRadius: "5px"
                 }}
                 onClick={markerHandle}
             >

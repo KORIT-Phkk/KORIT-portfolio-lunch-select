@@ -30,7 +30,6 @@ import MyPage from './pages/MyPage/MyPage';
 import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
 import PasswordChangeResult from './pages/Auth/UpdatePassword/PasswordChangeResult/PasswordChangeResult';
 import PasswordChange from './pages/Auth/UpdatePassword/ChangePassword/PasswordChange';
-import Loading from './components/Loading/Loading';
 
 
 const mainContainer = css`
