@@ -1,38 +1,62 @@
 import axios from 'axios';
 import { async } from 'q';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 
 const WaitingRoom = () => {
-    const navigate = useNavigate();
     const { code } = useParams();
     const [ outWaitingRoomFlag, setOutWaitingRoomFlag ] = useState(false);
-    const [ selectedMenu, setSelectedMenu ] = useState("");
 
-    const getSelectedMenu = useQuery(["getSelectedMenu"], async () => {
+    useEffect(() => {
+        async function fetchData() {
+          const option = {
+            params: {
+              code: code,
+            },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          };
+          try {
+            const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
+      
+            if (response.data === false) {
+              window.location.replace("http://localhost:3000/lunchselect/room/close");
+            }
+          } catch (error) {
+
+          }
+        }
+        fetchData();
+      }, []);
+
+      const getFlagAndSeletedMenu = useQuery(["getFlagAndSeletedMenu"], async() => {
         const option = {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`
           },
           params: {
-            code: `1 ${code}`
+            code: code
           }
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
-        setSelectedMenu(response.data.restaurantName)
-        return response;
-    }, {
+        const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
+        localStorage.setItem("selectedMenu", response.data.restaurantName)
+        console.log(response)
+        return response
+      }, {
         refetchInterval: 1000,
         onSuccess: (response) => {
-            if(response !== null) {
-                setOutWaitingRoomFlag(true);
-            }
+          if(response.data.flag === 0){
+            window.location.replace("http://localhost:3000/lunchselect/room/close");
+          } else if(response.data.restaurantName !== null && response.data.flag !== 0 && response.data.restaurantName !== "N/A") {
+            setOutWaitingRoomFlag(true);
+          }     
         }
-    }) 
+      });
 
     const outWaitingRoomButtonHandle = () => {
-        navigate(`/lunchselect/guest/roulette/${code}?selectedMenu=${selectedMenu}`)
+        window.location.replace(`/lunchselect/guest/roulette/${code}`)
     }
 
     return (

@@ -58,11 +58,14 @@ public class LunchSelectService {
 	public int createRoomJoin(InsertCategoryReqDto insertCategoryReqDto) {
 		Map<String, Object> insertMap = new HashMap<>();
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-		
+		if(!(insertCategoryReqDto.getCode().startsWith("0") || insertCategoryReqDto.getCode().startsWith("1"))) {
+			insertMap.put("userId", 0);
+		} else {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+			insertMap.put("userId",principalUser.getUserId());						
+		}
 		insertMap.put("roomId", findRoomByCode(insertCategoryReqDto.getCode()).getRoomId());
-		insertMap.put("userId",principalUser.getUserId());
 		insertMap.put("categoryIds",insertCategoryReqDto.getCategoryId());
 
 		return lunchSelectRepository.saveRoomJoin(insertMap);
@@ -73,7 +76,9 @@ public class LunchSelectService {
 			return lunchSelectRepository.findRoomByMasterCode(code.substring(2));
 		} else if(code.startsWith("1")) {
 			return lunchSelectRepository.findRoomByGuestCode(code.substring(2));
-		}
+		} else if(code.startsWith("2")) {
+			return lunchSelectRepository.findRoomByGuestCode(code.substring(2));
+		} 
 		return null;
 	}
 	
@@ -106,8 +111,10 @@ public class LunchSelectService {
 	
 	public int updateRoomFlag(String roomMasterCode, int flag) {
 		Map<String, Object> map = new HashMap<>();
+		System.out.println(flag);
 		map.put("roomMasterCode", roomMasterCode);
 		map.put("flag", flag);
+		
 		return lunchSelectRepository.updateRoomFlag(map);
 	}
 	
@@ -115,9 +122,22 @@ public class LunchSelectService {
         return lunchSelectRepository.getCategory();
     }
     
-
     public String getGuestURL(String roomMasterCode) {
  	   return lunchSelectRepository.findRoomByMasterCode(roomMasterCode).getRoomGuestCode();
+    }
+    
+    public Map<String, Object> getFlagAndSelectedMenu(String code) {
+    	Map<String, Object> map = new HashMap<>();
+//    	System.out.println("왜 널??;;"+ lunchSelectRepository.findRoomByGuestCode(code));
+    	if(lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName() == null ) {
+    		map.put("flag", 0);
+    		map.put("restaurantName", null);
+    	}else {    		
+    		map.put("flag", lunchSelectRepository.findRoomByGuestCode(code).getFlag());
+    		map.put("restaurantName", lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName());    		    		
+    	}
+    	
+    	return map;
     }
 
 }

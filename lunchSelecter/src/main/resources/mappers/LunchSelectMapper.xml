@@ -9,12 +9,12 @@
 		<result property="roomMasterId" column="room_master_id"/>
 		<result property="restaurantId" column="restaurant_id"/>
 		<result property="flag" column="flag"/>
-		<collection property="restaurant" resultMap="RestaurantMap" />
+		<collection property="restaurant" resultMap="RestaurantMap"/>
 	</resultMap>
 	
 	<resultMap type="com.korit.lunchSelect.entity.Menu" id="MenuMap">
 		<id property="id" column="restaurant_id"/>
-		<result property="name" column="restaurant_name"/>
+		<result property="name" column="restaurant_name" />
 	</resultMap>
 	
 	<resultMap type="com.korit.lunchSelect.entity.Category" id="CategoryMap">
@@ -62,6 +62,7 @@
 		SELECT
 			rt.room_id,
 			rt.room_guest_code,
+			rt.flag,
 			rst.restaurant_id,
 			rst.restaurant_name,
 			rst.restaurant_address
@@ -70,20 +71,23 @@
 			left outer join restaurant_tb rst on(rt.restaurant_id = rst.restaurant_id)
 		WHERE
 			room_master_code = #{code}
+		and flag != 0
 	</select>
 	
 	<select id="findRoomByGuestCode" parameterType="String" resultMap="RoomMap">
 		SELECT
 			rt.room_id,
 			rt.room_master_code,
+			rt.flag,
 			rst.restaurant_id,
-			rst.restaurant_name,
+			COALESCE(rst.restaurant_name, 'N/A') AS restaurant_name,
 			rst.restaurant_address
 		FROM
 			room_tb rt
 			left outer join restaurant_tb rst on(rt.restaurant_id = rst.restaurant_id)
 		WHERE
 			room_guest_code = #{code}
+		and flag != 0
 	</select>	
 	
 	<select id="findActiveRoomByMasterId" parameterType="Integer" resultMap="RoomMap">
@@ -105,7 +109,7 @@
 		where
 			room_master_code = #{roomMasterCode};
 	</update>
-
+	
 	<select id="getMenuList" parameterType="hashmap" resultMap="MenuMap">
 		SELECT
 			rt.restaurant_id,

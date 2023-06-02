@@ -24,6 +24,22 @@ const Roulette = () => {
   const [ menuNames, setMenuNames ] = useState();
   const [ selectedMenu, setSelectedMenu ] = useState({restaurantAddress: "", restaurantId: "", restaurantName: ""});
   const [ roulettFlag, setRoulettFlag ] = useState(false);
+  const [ upFlag, setUpFlag] = useState(false);
+
+
+  useEffect(() => {
+    const option = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }
+    }
+    const data = {
+        code: code,
+        flag: 2,
+        returnRoulette: false
+    }
+    axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
+  }, [])
 
   const getMenus = useQuery(["getMenus"], async () => {
     setFlag(false)
@@ -38,10 +54,9 @@ const Roulette = () => {
       }
     }
     const response = await axios.get("http://localhost:8080/lunchselect/menu/list", option)
+    
     return response;
-    }
-
-  , {
+    } , {
     enabled: flag,
     onSuccess: (response) => {
       if(response.status === 200) {
@@ -101,6 +116,7 @@ const Roulette = () => {
   }, [])
 
   const reRenderButton = () => {
+    // nowFlagUp.mutate();
     window.location.reload();
   }
 

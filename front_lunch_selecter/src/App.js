@@ -30,6 +30,7 @@ import MyPage from './pages/MyPage/MyPage';
 import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
 import PasswordChangeResult from './pages/Auth/UpdatePassword/PasswordChangeResult/PasswordChangeResult';
 import PasswordChange from './pages/Auth/UpdatePassword/ChangePassword/PasswordChange';
+import RoomClose from './pages/NotFound/RoomClose';
 
 
 const mainContainer = css`
@@ -67,8 +68,11 @@ function App() {
         
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
-        <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
-        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/>
+        {/* <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/> */}
+        <Route path="/lunchselect/room/guest/waiting/:code" element={<WaitingRoom/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<GuestRoulette />}/>
+        <Route path="/lunchselect/room/close" element={<RoomClose />}/>
         <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/*" element={<NotFound />}/>

@@ -89,8 +89,8 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
                     // lng: 36.888
                 }}
                 style={{
-                    width: "1000px",
-                    height: "300px",
+                    width: "300px",
+                    height: "200px",
                 }}
                 level={2}
                 >

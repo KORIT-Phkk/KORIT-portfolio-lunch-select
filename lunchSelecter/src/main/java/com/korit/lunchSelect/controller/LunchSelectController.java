@@ -41,7 +41,7 @@ public class LunchSelectController {
 	
 	@PutMapping("/room/updateflag")
 	public ResponseEntity<?> updateFlag(@RequestBody Map<String, String> requestData) {
-		return ResponseEntity.ok().body(lunchSelectService.updateRoomFlag(requestData.get("roomMasterCode"), Integer.parseInt( requestData.get("flag"))));
+		return ResponseEntity.ok().body(lunchSelectService.updateRoomFlag(requestData.get("code"), Integer.parseInt( requestData.get("flag"))));
 	}
 	
 	@GetMapping("/menu/list")
@@ -57,6 +57,12 @@ public class LunchSelectController {
 	@GetMapping("/menu/result")
 	public ResponseEntity<?> getSelectedMenu(String code) {
 		return ResponseEntity.ok().body(lunchSelectService.getSelectedMenu(code));
+	}
+	
+	@GetMapping("/room/getflag")
+	public ResponseEntity<?> getFlagAndSelectedMenu(String code) {
+		
+		return ResponseEntity.ok().body(lunchSelectService.getFlagAndSelectedMenu(code));
 	}
 	
 	@GetMapping("/category")
