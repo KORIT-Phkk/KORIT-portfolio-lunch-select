@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import UserInfo from '../../components/userInfoGroup/UserInfo';
 import * as s from './style';
 import { Reveal, Tween } from 'react-gsap'
+import Loading from '../../components/Loading/Loading';
 
 const Main = () => {
     const navigate = useNavigate();
@@ -64,7 +65,7 @@ const Main = () => {
     });
 
     if(lunchSelectRoom.isLoading){
-        return <div>불러오는중</div>
+        return <><Loading /></>
     }
 
     const lunchSelectClickHandle = () => {

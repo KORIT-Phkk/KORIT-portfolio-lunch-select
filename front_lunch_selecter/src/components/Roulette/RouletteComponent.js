@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { useEffect, useState } from 'react';
+import { HiOutlineEmojiSad } from 'react-icons/hi'
 import * as s from './style'
 
 const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
@@ -48,7 +49,15 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
     }, [intervalDuration]);
   
     if(menuNames === null){
-      return <div>선택하신 카테고리의 메뉴가 주변에 없습니다</div>
+      return(
+        <div css={s.fail}>
+          <img css={s.imgCss} src="../../../../main/logo1.png" />
+          <div css={s.size}>
+            <HiOutlineEmojiSad/>
+          </div>
+          선택하신 카테고리의 메뉴가 주변에 없습니다
+        </div>
+      )
     }
 
     return (

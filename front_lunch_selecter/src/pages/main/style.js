@@ -63,9 +63,8 @@ export const lunchButton =css`
 
     cursor: pointer;
     &:hover {
-        transition: .4s ease-in;
+        transition: .3s ease-in;
         box-shadow: inset 125px 0 0 black, inset -125px 0 0 black;
-
         font-weight: 600;
         color: white;
     }

@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../../atoms/Auth/AuthAtom';
+import Loading from '../../Loading/Loading';
 
 
 const AuthRoute = ({ path, element }) => {
@@ -27,7 +28,7 @@ const AuthRoute = ({ path, element }) => {
     })
 
     if(authenticate.isLoading) {
-        return <div>로딩중...</div>;
+        return <Loading/>;
     }
 
     if(guestPaths.filter(guestPath => path.startsWith(guestPath)).length > 0) {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { css } from '@emotion/react';
 import * as s from './style';
 
 const ResultMap = ({ restaurantName, restaurantAddress }) => {
@@ -60,7 +59,7 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
     return (
         <>
         <header css={s.headerContainer}>
-            <h1>{restaurantName}</h1>
+            <h1 css={s.restaurantName}>{restaurantName}</h1>
         </header>
 
         <main css={s.mainContainer}>
@@ -68,12 +67,10 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
                 center={{
                     lat: restaurantDatas[0].y,
                     lng: restaurantDatas[0].x,
-                    // lat: 127.888,
-                    // lng: 36.888
                 }}
                 style={{
-                    width: "300px",
-                    height: "300px",
+                    width: "280px",
+                    height: "200px",
                 }}
                 level={2}
                 >
