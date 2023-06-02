@@ -5,6 +5,11 @@ export const container = css`
     display: flex;
     justify-content: center;
     flex-direction: column;  
+    `;
+export const headerContainer = css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `;
 export const backButton = css`
     /* position: absolute; */
@@ -20,11 +25,6 @@ export const backButton = css`
         background-color: whitesmoke;
         background-color: #eee;
     }
-`;
-export const headerContainer = css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 `;
 export const inform = css`
     display: flex;
@@ -59,12 +59,7 @@ export const mainContainer = css`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 40px;
-`;
-export const categoryBox = css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    margin-top: 32px;
 `;
 export const categoryName = css`
     display: flex;
@@ -80,23 +75,15 @@ export const footerContainer =css`
     align-items: center;
     margin-top: 30px;
 `;
-export const selectMenu = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px;
-    height: 50%;
-    width: 100%;
-    font-size: 100px;
-`;
 export const readySubmitButton = css`
-    font-size: 10px;
-    width: 150px;
+    width: 250px;
     height: 20px;
     border: none;
     border-radius: 5px;
     background-color: black;
     color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-size: 12px;
 
     cursor: pointer;
     &:hover{

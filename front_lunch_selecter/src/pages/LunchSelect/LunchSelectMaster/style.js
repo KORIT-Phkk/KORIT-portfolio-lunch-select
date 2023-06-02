@@ -53,13 +53,14 @@ export const footerContainer =css`
     margin-top: 30px;
 `;
 export const locationAndCetegorySubmitButton = css`
-    font-size: 10px;
-    width: 150px;
+    width: 250px;
     height: 20px;
     border: none;
     border-radius: 5px;
     background-color: black;
     color: white;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-size: 12px;
 
     cursor: pointer;
     &:hover{
@@ -70,9 +71,4 @@ export const locationAndCetegorySubmitButton = css`
         color: black;
         background-color: #dbdbdb;
     }
-`;
-export const categoryBox = css`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 `;

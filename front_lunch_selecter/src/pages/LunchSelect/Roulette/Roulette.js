@@ -26,7 +26,6 @@ const Roulette = () => {
   const [ selectedMenu, setSelectedMenu ] = useState({restaurantAddress: "", restaurantId: "", restaurantName: ""});
   const [ roulettFlag, setRoulettFlag ] = useState(false);
 
-  
   const getMenus = useQuery(["getMenus"], async () => {
     setFlag(false)
     const option = {
@@ -90,6 +89,7 @@ const Roulette = () => {
     try {
       const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
       setSelectedMenu(response.data);
+      // setSelectedMenu({restaurantName:"시엔스시(CN'스시)", restaurantAddress:"서울특별시 종로구 종로 19, 르메이에르종로타운 2층 201-1, 201-2호 (종로1가)"})
       return response;
     } catch(error) {
       return error;
@@ -113,12 +113,11 @@ const Roulette = () => {
     <>로딩중...</>
   }
 
-  
   if(!getMenus.isLoading)
   return (
     <div css={container}>
       {roulettFlag ? <ResultMap restaurantAddress={selectedMenu.restaurantAddress} restaurantName={selectedMenu.restaurantName}/> : ""}
-      {roulettFlag ? (<div>{selectedMenu.restaurantName}</div>): (<RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>)}  
+      {roulettFlag ? <></> : (<RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>)}  
       {roulettFlag ? (<div><button onClick={reRenderButton}>다시돌려</button> <button onClick={homeButton}>메인으로</button></div>) : ""}
     </div>
     

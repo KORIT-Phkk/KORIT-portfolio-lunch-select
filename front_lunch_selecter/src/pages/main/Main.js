@@ -76,7 +76,7 @@ const Main = () => {
             {!showElements && 
                 <Reveal repeat>
                     <Tween from={{ opacity: 0 }} duration={2}>
-                        <h3 css={s.hello}>Hello</h3>
+                        <h3 css={s.hello}>気持ちいい</h3>
                     </Tween>
                 </Reveal>
             }

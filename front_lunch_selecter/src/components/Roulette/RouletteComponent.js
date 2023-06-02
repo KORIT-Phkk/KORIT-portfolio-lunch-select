@@ -1,28 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { useEffect, useState } from 'react';
-
-
-
-const mainContainer = css`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 80%;
-  height: 80px;
-  border: 1px solid #121212;
-`;
-
-
-const textContainerStyles = css`
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  top: 30%;
-  font-size: 20px;
-`;
+import * as s from './style'
 
 const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,12 +53,13 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
 
     return (
         <>
-          <main css={mainContainer}>
+        <span css={s.message}>오늘의 점심은~~?</span>
+          <main css={s.mainContainer}>
               {currentMenuNames.map((name, index) => (
               <div
                   key={index}
                   css={[
-                  textContainerStyles,
+                  s.textContainerStyles,
                   css`
                       opacity: ${index === currentIndex ? 1 : 0};
                       animation-duration: ${intervalDuration}ms;
@@ -97,8 +77,5 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
         </>
     );
   };
-  
-  
 
 export default RouletteComponent;
-

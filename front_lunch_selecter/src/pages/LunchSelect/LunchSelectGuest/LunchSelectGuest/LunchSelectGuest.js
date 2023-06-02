@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import * as s from '../style';
 import Category from '../../../../components/SelectPage/Category/Category';
 import { IoMdArrowRoundBack } from 'react-icons/io'
-import { FaRegSmileWink } from 'react-icons/fa';
+import { FaRegSmileWink } from 'react-icons/fa'
 
 
 
@@ -65,24 +65,22 @@ const LunchSelectGuest = () => {
 
     return (
       <div css={s.container}>
-      <header css={s.headerContainer}>
-          <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
-          <span css={s.inform}>카테고리 선택 후 <br/> 준비완료 버튼을 눌러주세요!</span>
-          <span css={s.warning}>위치는 방장만 선택할 수 있습니다</span>
-          <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
-      </header>
+        <header css={s.headerContainer}>
+            <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
+            <span css={s.inform}>카테고리 선택 후 <br/> 준비완료 버튼을 눌러주세요!</span>
+            <span css={s.warning}>위치는 방장만 선택할 수 있습니다</span>
+            <img css={s.imgCss} src="../../../main/yammy.png" alt="" />
+        </header>
 
-            <main>
-                <div css={s.categoryBox}>
-                    <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-                </div>
-            </main>
-            
-            <footer css={s.mainContainer}>
-                <div css={s.selectMenu}></div>
-                <button onClick={readyHandleOnClick}>카테고리 선택 완료!</button>           
-            </footer>
-        </div>
+        <main css={s.mainContainer}>
+              <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
+              <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
+        </main>
+        
+        <footer css={s.footerContainer}>
+            <button css={s.readySubmitButton} onClick={readyHandleOnClick}>카테고리 선택 완료!</button>           
+        </footer>
+    </div>
     );
 }
 
