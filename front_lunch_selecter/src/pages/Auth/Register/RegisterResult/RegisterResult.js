@@ -20,7 +20,7 @@ const RegisterResult = () => {
             <div css={s.comment}><AiFillNotification/>&nbsp;Notice&nbsp;<AiFillNotification/></div>
             
             <main css={s.mainContainer}>
-                <span css={s.notice}>회원가입 변경 완료</span>
+                <span css={s.notice}>회원가입 완료</span>
             </main>
 
             <footer css={s.footerContainer}>

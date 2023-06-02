@@ -31,7 +31,7 @@ const Invite = () => {
   }
 
   const inviteCodeHandleClick = () => {
-      setGuestURL(true);
+    navigator.clipboard.writeText(`http://localhost:3000/lunchselect/room/guest/${guestURL}`);
   }
 
   useEffect(() => {
