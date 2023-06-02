@@ -16,4 +16,5 @@ public interface UserRepository {
 	public int updateProvider(User user);
 	public int updatePassword(User user);
 	public int userDelete(User user);
+	public int updateProfileImg(User user);
 }
