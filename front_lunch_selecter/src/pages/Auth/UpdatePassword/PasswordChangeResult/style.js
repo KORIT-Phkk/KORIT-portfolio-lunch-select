@@ -19,10 +19,12 @@ export const mainContainer =css`
     justify-content: center;
     flex-direction: column;
     font-size: 17px;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid #dbdbdb; */
+    text-decoration: underline;
+    text-decoration-color: #dbdbdb;
+    text-underline-offset : 10px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
     font-weight: 600;
-    color: red;
 `;
 
 export const footerContainer =css`
