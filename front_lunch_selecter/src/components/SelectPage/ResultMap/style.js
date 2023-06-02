@@ -9,17 +9,15 @@ export const headerContainer = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     font-size: 50px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 `;
 export const mainContainer = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 `;
 export const footerContainer = css`
     display: flex;
