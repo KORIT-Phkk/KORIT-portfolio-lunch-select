@@ -9,7 +9,6 @@ import Category from './../../../components/SelectPage/Category/Category';
 import Location from './../../../components/SelectPage/Location/Location';
 import Invite from './../Invite';
 import * as s from './style';
-import { createBrowserHistory } from "history";
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
