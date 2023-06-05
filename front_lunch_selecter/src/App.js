@@ -71,8 +71,6 @@ function App() {
 
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
-        {/* <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
-        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/> */}
         <Route path="/lunchselect/room/guest/waiting/:code" element={<WaitingRoom/>}/>
         <Route path="/lunchselect/guest/roulette/:code" element={<GuestRoulette />}/>
         <Route path="/lunchselect/room/close" element={<RoomClose />}/>

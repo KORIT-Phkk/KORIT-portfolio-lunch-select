@@ -48,7 +48,6 @@ const LunchSelectMaster = () => {
     }, []);
     
     const insertCategory = useMutation(async() => {
-        console.log(selectedCategories.length !== 0)
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -59,19 +58,13 @@ const LunchSelectMaster = () => {
                 code: `0 ${code}`,
                 categoryId: [...selectedCategories]
             }, option);
-
-            // return esponse;
+            if(response.status === 200) {
+                window.location.replace(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`)
+            }
         } catch(error){
             setErrorMessage(error.response.data.errorData.category)
             setErrorMessageFlag(true);
         }
-
-    }, {
-        // onSuccess: (response) => {
-        //     if(response.status === 200) {
-        //         window.location.replace(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
-        //     }
-        // }
     });
    
     const backButton = useMutation(async() => {
@@ -89,9 +82,8 @@ const LunchSelectMaster = () => {
     });
 
     const getMenuButtonHandle = () => {
-        // if(selectedCategories.length !== 0){
-            insertCategory.mutate();
-        // }
+        insertCategory.mutate();
+      
     }
 
     const backButtonHandle = () => {
@@ -106,7 +98,6 @@ const LunchSelectMaster = () => {
                 <div css={s.mapExplain}>현재 위치를 선택해주세요&nbsp;<FaRegSmileWink/></div>
                 <Location markerPosition={markerPosition} setMarkerPosition={setMarkerPosition}/>
             </header>
-
             <main css={s.mainContainer}>
                 <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
                 {errorMessageFlag ? (<p css={s.errorMessage}>{errorMessage}</p>) : ""}

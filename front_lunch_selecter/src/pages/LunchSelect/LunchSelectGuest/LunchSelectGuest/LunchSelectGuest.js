@@ -14,6 +14,8 @@ const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
     const [ checkRoomCount, setCheckRoomCount ] = useState(0); 
+    const [ errorMessage, setErrorMessage ] = useState("");
+    const [ errorMessageFlag, setErrorMessageFlag ] = useState(false);
     const { code } = useParams();
 
     useEffect(() => {
@@ -28,7 +30,6 @@ const LunchSelectGuest = () => {
           };
           try {
             const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
-            console.log("useEffect: " + response.data)
             if (response.data === false) {
               window.location.replace("http://localhost:3000/lunchselect/room/close");
             }
@@ -69,27 +70,33 @@ const LunchSelectGuest = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-       
-        if(option.headers.Authorization === "Bearer null") {
-          await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
-            code: `2 ${code}`,
-            categoryId: [...selectedCategories]
-          }, option);
-        } else {
-          await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
-              code: `1 ${code}`,
-              categoryId: [...selectedCategories]
-          }, option);
-        }
+       try{
+         if(option.headers.Authorization === "Bearer null") {
+           await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+             code: `2 ${code}`,
+             categoryId: [...selectedCategories]
+           }, option);
+         } else {
+           await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+               code: `1 ${code}`,
+               categoryId: [...selectedCategories]
+           }, option);
+         }
+       }catch(error){
+        setErrorMessage(error.response.data.errorData.category)
+        setErrorMessageFlag(true);
+    }
     });
     if(checkRoomCount > 1){
       window.location.replace("http://localhost:3000/lunchselect/room/close");
     }
 
     const readyHandleOnClick = () => {
-        insertCategory.mutate();
-        setReadyButtonHandle(false);
+      insertCategory.mutate();
+      setReadyButtonHandle(false);
+      if(selectedCategories.length > 0) {
         window.location.replace(`/lunchselect/room/guest/waiting/${code}`);
+      }
     }
 
     const backButtonHandle = () => {
@@ -107,7 +114,8 @@ const LunchSelectGuest = () => {
 
         <main css={s.mainContainer}>
               <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
-              <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
+              {errorMessageFlag ? (<p css={s.errorMessage}>{errorMessage}</p>) : ""}
+              <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} setErrorMessageFlag={setErrorMessageFlag}/>
         </main>
         
         <footer css={s.footerContainer}>

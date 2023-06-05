@@ -95,3 +95,9 @@ export const readySubmitButton = css`
         background-color: #dbdbdb;
     }
 `
+export const errorMessage = css`
+    font-size: 10px;
+    zoom: 0.8;
+    margin-top: 5px;
+    color: red;
+`;

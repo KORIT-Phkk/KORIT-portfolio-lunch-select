@@ -59,7 +59,6 @@ public class LunchSelectService {
 	
 	public int createRoomJoin(InsertCategoryReqDto insertCategoryReqDto) {
 		Map<String, Object> insertMap = new HashMap<>();
-		
 		if(insertCategoryReqDto.getCategoryId().size() == 0) {
 			throw new CustomException("error", ErrorMap.builder().put("category", "카테고리를 하나 이상 선택해 주세요!!").build());
 		}
