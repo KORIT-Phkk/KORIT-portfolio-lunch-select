@@ -99,7 +99,7 @@ const ResetPassword = () => {
                     <div css={s.errorMsg}>{errorMessage.data.password}</div>
                 </div>
                 <div css={s.input}>
-                    <label css={s.inputLabel}>checkPassword</label>
+                    <label css={s.inputLabel}>Check Password</label>
                     <AuthInput type="password" name="checkPassword" onChange={onChangeInputHandle} />
                 </div>
             </main>

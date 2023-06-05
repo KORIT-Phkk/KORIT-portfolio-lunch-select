@@ -103,6 +103,10 @@ const Roulette = () => {
     window.location.replace("/");
   }
 
+  const clickhere = () => {
+    window.location.replace(`http://search.naver.com/search.naver?where=nexearch?sm=top_hty&fbm=0&ie=utf8&query=${selectedMenu.restaurantName}`)
+  }
+
   if(getMenus.isLoading) {
     return <Loading/>
   }
@@ -129,7 +133,20 @@ const Roulette = () => {
       </main>
 
       <footer>
-        {roulettFlag ? (<div><button css={s.buttonStyle} onClick={reRenderButton}>다시!!</button> <button css={s.buttonStyle} onClick={homeButton}>홈으로</button></div>) : ""}
+        {roulettFlag ? (
+        <div css={s.buttonStyle}>
+          <button css={s.buttonStyle1} onClick={reRenderButton}>다시!!</button>
+          <button css={s.buttonStyle2} onClick={homeButton}>홈으로</button>
+        </div>
+        ) : ""}
+
+        {roulettFlag ? (
+        <div css={s.comment}>
+          <div css={s.ifnotclick}>클릭이 안된다면?</div>
+          <div css={s.clickhere} onClick={clickhere}>여기를 클릭하세요!</div>
+        </div>
+        ) : ""}
+        
       </footer>
     </div>
     

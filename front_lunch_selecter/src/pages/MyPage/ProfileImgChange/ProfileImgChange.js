@@ -4,6 +4,8 @@ import * as s from './style';
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { HiOutlinePhotograph } from 'react-icons/hi';
 
 
 const ProfileImgChange = () => {
@@ -42,20 +44,27 @@ const ProfileImgChange = () => {
         return response;
     }, {
         onSuccess: () => {
-            navigate("/mypage");
+            navigate('/mypage');
         }
     })
+
+    const backButton = () => {
+        navigate('/mypage')
+    }
+
     return (
         <div css={s.container}>
+            <IoMdArrowRoundBack css={s.backButton} onClick={backButton}/>
             <header css={s.headerContainer}>
-
+                <div css={s.comment}><HiOutlinePhotograph/>&nbsp;프로필 사진 변경&nbsp;<HiOutlinePhotograph/></div>
             </header>
             <main css={s.mainContainer} onClick={profileImgChangeHandle}>
                 <img css={s.img} src={profileImgURL} alt="" />
                 <input css={s.fileInput} type="file" onChange={profileImgFileChangeHandle} ref={fileRef} />
             </main>
             <footer css={s.footerContainer}>
-                <button onClick={() => profileImgSubmit.mutate()}>저장</button>
+                <button onClick={backButton} css={s.cancelButton}>취소</button>
+                <button onClick={() => profileImgSubmit.mutate()} css={s.saveButton}>저장</button>
             </footer>
         </div>
     );

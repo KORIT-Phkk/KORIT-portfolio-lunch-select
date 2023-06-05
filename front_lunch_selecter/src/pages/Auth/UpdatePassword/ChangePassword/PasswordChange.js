@@ -54,20 +54,21 @@ const PasswordChange = () => {
         <div css={s.container}>
             <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
             <header css={s.headerContainer}>
+                <img css={s.imgCss} src="../main/logo1.png" />
                 <div css={s.input}>
-                    <label css={s.inputLabel}>현재 비밀번호</label>
+                    <label css={s.inputLabel}>Password</label>
                     <AuthInput type="password" name="currentPassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.currentPassword}</div>
                 </div>
 
                 <div css={s.input}>
-                    <label css={s.inputLabel}>새 비밀번호</label>
+                    <label css={s.inputLabel}>New Password</label>
                     <AuthInput type="password" name="updatePassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.updatePassword}</div>
                 </div>
 
                 <div css={s.input}>
-                    <label css={s.inputLabel}>새 비밀번호 확인</label>
+                    <label css={s.inputLabel}>Check Password</label>
                     <AuthInput type="password" name="updateCheckPassword" onChange={inputChangeHandle}/>
                     <div css={s.errorMessages}>{errorMessages.updateCheckPassword}</div>
                 </div>

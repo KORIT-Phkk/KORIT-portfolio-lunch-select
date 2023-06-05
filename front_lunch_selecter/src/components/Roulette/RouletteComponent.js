@@ -61,7 +61,7 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
     }
 
     return (
-        <>
+        <div css={s.container}>
         <span css={s.message}>오늘의 점심은~~?</span>
           <main css={s.mainContainer}>
               {currentMenuNames.map((name, index) => (
@@ -83,7 +83,7 @@ const RouletteComponent = ({ menuNames, selectedMenu, setRoulettState }) => {
               </div>
               ))}
           </main>
-        </>
+        </div>
     );
   };
 

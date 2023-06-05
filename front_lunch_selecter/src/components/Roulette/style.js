@@ -17,6 +17,9 @@ export const imgCss = css`
 export const size = css`
   font-size: 25px;
 `;
+export const container = css`
+  margin-top: -50px;
+`;
 export const mainContainer = css`
   display: flex;
   position: relative;

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
+import { AiOutlineUser } from 'react-icons/ai';
 
 const MyPage = () => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
@@ -49,7 +50,7 @@ const MyPage = () => {
     };
 
     const userDeleteClickHandle = () => {
-        if(window.confirm("회원탈퇴")){
+        if(window.confirm("회원탈퇴하시겠습니까?")){
             userDelete.mutate();
             localStorage.removeItem("accessToken");
             setAuthState(false);
@@ -64,27 +65,27 @@ const MyPage = () => {
     const backButtonHandle = () => {
         navigate("/")
       }
-    
 
     return (
         <div css={s.container}>
             <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
-            <header css={s.headerContainer} onClick={profileClickHandle}>
-                <div css={s.imgBox}>
+            <header css={s.headerContainer}>
+                <div css={s.comment}><AiOutlineUser/>&nbsp;My Profile&nbsp;<AiOutlineUser/></div>
+                <div css={s.imgBox} onClick={profileClickHandle}>
                     <img css={s.img} src={profileImgURL} alt="" />
                     <input css={s.fileInput} type="file"/>
                 </div>
             </header>
+
             <main css={s.mainContainer}>
-                <div css={s.email}>{email}</div>
-                <button css={s.passwordChange} onClick={passwordChangeClickHandle}>비밀번호변경</button>
-                <div css={s.name}>{name}</div>
-                <div css={s.phone}>{phone}</div>
+                <div css={s.infrom}>{email}</div>
+                <div css={s.infrom}>{name}</div>
+                <div css={s.infrom}>{phone}</div>
             </main>
+
             <footer css={s.footerContainer}>
-                <button css={s.userDelete} onClick={userDeleteClickHandle}>
-                    회원탈퇴
-                </button>
+                <button css={s.passwordChange} onClick={passwordChangeClickHandle}>비밀번호변경</button>
+                <button css={s.userDelete} onClick={userDeleteClickHandle}>회원탈퇴 </button>
             </footer>
         </div>
     );
