@@ -1,4 +1,6 @@
 import React from 'react';
+/** @jsxImportSource @emotion/react */
+import * as s from './style'
 
 const RoomClose = () => {
 
@@ -6,11 +8,11 @@ const RoomClose = () => {
         window.location.replace("http://localhost:3000/");
     }
     return (
-        <div>
-            방이 닫혔거나 존재하지 않는 방입니다.  
+        <span css={s.roomClose}>
+            방이 닫혔거나 <br/> 존재하지 않는 방입니다.
 
-            <button onClick={homeButton}>메인으로</button>      
-        </div>
+            <button css={s.homeButton} onClick={homeButton}>메인으로</button>      
+        </span>
     );
 };
 
