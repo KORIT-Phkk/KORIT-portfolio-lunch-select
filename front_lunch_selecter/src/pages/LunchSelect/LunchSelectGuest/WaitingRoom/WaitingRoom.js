@@ -10,6 +10,7 @@ import { Reveal, Tween } from 'react-gsap';
 const WaitingRoom = () => {
     const { code } = useParams();
     const [ outWaitingRoomFlag, setOutWaitingRoomFlag ] = useState(false);
+    const [ checkRoomCount, setCheckRoomCount ] = useState(0); 
 
     useEffect(() => {
         async function fetchData() {
@@ -50,7 +51,7 @@ const WaitingRoom = () => {
         refetchInterval: 1000,
         onSuccess: (response) => {
           if(response.data.flag === undefined){
-            window.location.replace("http://localhost:3000/lunchselect/room/close");
+            setCheckRoomCount(checkRoomCount + 1)
           } else if(response.data.restaurantName !== undefined && response.data.flag !== 0) {
             localStorage.setItem("selectedMenu", response.data.restaurantName)
             setOutWaitingRoomFlag(true);
@@ -62,6 +63,9 @@ const WaitingRoom = () => {
         window.location.replace(`/lunchselect/guest/roulette/${code}`)
     }
 
+    if(checkRoomCount === 2){
+      window.location.replace("http://localhost:3000/lunchselect/room/close");
+    }
     return (
         <div css={s.container}>
             <main css={s.loading}>
