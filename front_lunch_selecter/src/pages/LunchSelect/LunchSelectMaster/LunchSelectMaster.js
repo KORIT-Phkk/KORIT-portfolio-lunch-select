@@ -18,6 +18,7 @@ const LunchSelectMaster = () => {
     });
     const { code } = useParams();
     const [ errorMessage, setErrorMessage ] = useState("");
+    const [ errorMessageFlag, setErrorMessageFlag ] = useState(false);
 
     useEffect(() => {
         const dropRoom = () => {
@@ -53,18 +54,24 @@ const LunchSelectMaster = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
-            code: `0 ${code}`,
-            categoryId: [...selectedCategories]
-        }, option);
-       
-        return response;
-    }, {
-        onSuccess: (response) => {
-            if(response.status === 200) {
-                window.location.replace(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
-            }
+        try{
+            const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+                code: `0 ${code}`,
+                categoryId: [...selectedCategories]
+            }, option);
+
+            // return esponse;
+        } catch(error){
+            setErrorMessage(error.response.data.errorData.category)
+            setErrorMessageFlag(true);
         }
+
+    }, {
+        // onSuccess: (response) => {
+        //     if(response.status === 200) {
+        //         window.location.replace(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
+        //     }
+        // }
     });
    
     const backButton = useMutation(async() => {
@@ -82,9 +89,9 @@ const LunchSelectMaster = () => {
     });
 
     const getMenuButtonHandle = () => {
-        if(selectedCategories.length !== 0){
+        // if(selectedCategories.length !== 0){
             insertCategory.mutate();
-        }
+        // }
     }
 
     const backButtonHandle = () => {
@@ -102,7 +109,8 @@ const LunchSelectMaster = () => {
 
             <main css={s.mainContainer}>
                 <h1 css={s.categoryName}>카테고리를 선택해주세요&nbsp;<FaRegSmileWink/></h1>
-                <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>                
+                {errorMessageFlag ? (<p css={s.errorMessage}>{errorMessage}</p>) : ""}
+                <Category selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} setErrorMessageFlag={setErrorMessageFlag}/>                
             </main>
             
             <footer css={s.footerContainer}>

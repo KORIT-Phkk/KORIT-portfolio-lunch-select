@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import * as s from './style';
 
-const Category = ({ selectedCategories, setSelectedCategories }) => {
+const Category = ({ selectedCategories, setSelectedCategories, setErrorMessageFlag }) => {
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
     const getCategory = useQuery(["getCategory"], async () => {
@@ -25,6 +25,7 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
     })
 
     const checkedHandleOnClick = (e) => {
+        setErrorMessageFlag(false)
         if(e.target.checked){
             setSelectedCategories([...selectedCategories, e.target.value]);
         }else {
