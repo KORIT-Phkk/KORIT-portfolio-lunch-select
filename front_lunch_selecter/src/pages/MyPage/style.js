@@ -25,23 +25,18 @@ export const backButton = css`
         background-color: #eee;
     }
 `;
-export const userLogoBox = css`
+export const imgBox = css`
     display: flex;
     justify-content: center;
-    flex-direction: column;
     border: 1px solid black;
     border-radius: 50%;
     width: 100px;
     height: 100px;
     text-align: center;
     align-items: center;
-    background-color: black;
-    margin-bottom: 30px;
-    margin-top: 30px;
-`;
-export const userLogo = css`
-    width: 60px;
-    height: 60px;
+    margin: 30px auto;
+    overflow: hidden;
+    cursor: pointer;
 `;
 export const mainContainer = css`
     display: flex;
@@ -141,7 +136,7 @@ export const footerContainer = css`
     flex-direction: column;
     margin: 0 auto;
 `;
-export const userSecede = css`
+export const userDelete = css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,3 +158,11 @@ export const userSecede = css`
         color: black;
     }
 `;
+
+export const fileInput = css`
+    display: none;
+`
+
+export const img = css`
+    width: 100%;
+`

@@ -1,16 +1,23 @@
 package com.korit.lunchSelect.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.korit.lunchSelect.dto.account.FindEmailReqDto;
 import com.korit.lunchSelect.dto.account.PasswordChangeDto;
@@ -28,9 +35,37 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 	
+	@Value("${file.path}")
+	private String filePath;
 	private final UserRepository userRepository;
 	private final JavaMailSender javaMailSender;
 	private final CacheTokenProvider cacheTokenProvider;
+	
+	
+	public int updateProfileImg(MultipartFile profileImgFile) {
+		String originFileName = profileImgFile.getOriginalFilename();
+		String extension = originFileName.substring(originFileName.lastIndexOf("."));
+		String tempFileName = UUID.randomUUID().toString().replaceAll("-", "") + extension;
+		
+	    String absolutePath = Paths.get("").toAbsolutePath().toString().replace("\\", "/");
+		String resourcePath = absolutePath + filePath + "profile/" + tempFileName;
+		Path uploadPath = Paths.get(resourcePath);
+		
+		try {
+			Files.write(uploadPath, profileImgFile.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		PrincipalUser principalUser = (PrincipalUser) SecurityContextHolder
+													.getContext()
+													.getAuthentication()
+													.getPrincipal();
+		return userRepository.updateProfileImg(User.builder()
+													.userId(principalUser.getUserId())
+													.profileImg(tempFileName)
+													.build());
+	}
 	
 	public String findEmail(FindEmailReqDto findEmailReqDto) {
 		Map<String, Object> map = new HashMap<>();

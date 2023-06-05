@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.korit.lunchSelect.aop.annotation.ValidAspect;
 import com.korit.lunchSelect.dto.account.FindEmailReqDto;
@@ -53,12 +55,17 @@ public class AccountController {
 		cacheTokenProvider.validateToken(cacheTokenProvider.getTokenMap("passwordResetToken", token));
 		return ResponseEntity.ok(true);
 	}
+	
 	@ValidAspect
 	@PutMapping("/updatepassword")
 	public ResponseEntity<?> passwordChange(@Valid @RequestBody PasswordChangeDto passwordChangeDto, BindingResult bindingResult){
-//		System.out.println(passwordChangeDto);
 		accountService.updatePassword(passwordChangeDto);
 		
 		return ResponseEntity.ok().body(null);
+	}
+	
+	@PostMapping("/profile/img")
+	public ResponseEntity<?> updateProfile(@RequestPart MultipartFile profileImgFile) {
+		return ResponseEntity.ok(accountService.updateProfileImg(profileImgFile));
 	}
 }

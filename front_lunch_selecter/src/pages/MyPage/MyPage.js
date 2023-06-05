@@ -1,16 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
 import * as s from './style';
-import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
+import React, { useRef, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineUser } from 'react-icons/ai';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 
 const MyPage = () => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
+    const [ profileImgURL, setprofileImgURL ] = useState();
+
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ userId, setUserId ] = useState("");
@@ -24,6 +25,7 @@ const MyPage = () => {
                 Authorization: accessToken
             }
         });
+        setprofileImgURL("http://localhost:8080/image/profile/" + response.data.profileImg);
         setUserId(response.data.userId)
         setName(response.data.name)
         setEmail(response.data.email)
@@ -54,6 +56,11 @@ const MyPage = () => {
             navigate("/auth/login");
         }
     }
+
+    const profileClickHandle = () => {
+        navigate("/mypage/ProfileImgChange");
+    }
+
     const backButtonHandle = () => {
         navigate("/")
       }
@@ -62,8 +69,11 @@ const MyPage = () => {
     return (
         <div css={s.container}>
             <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
-            <header css={s.headerContainer}>
-                <div css={s.userLogoBox}><AiOutlineUser css={s.userLogo}/></div>
+            <header css={s.headerContainer} onClick={profileClickHandle}>
+                <div css={s.imgBox}>
+                    <img css={s.img} src={profileImgURL} alt="" />
+                    <input css={s.fileInput} type="file"/>
+                </div>
             </header>
             <main css={s.mainContainer}>
                 <div css={s.email}>{email}</div>
@@ -72,7 +82,7 @@ const MyPage = () => {
                 <div css={s.phone}>{phone}</div>
             </main>
             <footer css={s.footerContainer}>
-                <button css={s.userSecede} onClick={userDeleteClickHandle}>
+                <button css={s.userDelete} onClick={userDeleteClickHandle}>
                     회원탈퇴
                 </button>
             </footer>

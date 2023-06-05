@@ -102,10 +102,19 @@
 		WHERE
 			user_id = #{userId}
 	</update>
+	
 	<delete id="userDelete" parameterType="com.korit.lunchSelect.entity.User">
 		delete from
 			user_tb
 		where
 			user_id = #{userId}
 	</delete>
+	
+	<update id="updateProfileImg" parameterType="com.korit.lunchSelect.entity.User">
+		update user_tb
+		set
+			profile_img = #{profileImg}
+		where
+			user_id = #{userId}
+	</update>
 </mapper>
