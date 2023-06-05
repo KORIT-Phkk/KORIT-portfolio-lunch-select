@@ -130,8 +130,6 @@ public class LunchSelectService {
     	Map<String, Object> map = new HashMap<>();
     	
     	try {
-    		System.out.println("findRoom: " + lunchSelectRepository.findRoomByGuestCode(code));
-    		System.out.println("Restaurant: " + lunchSelectRepository.findRoomByGuestCode(code).getRestaurant());
     		map.put("flag", lunchSelectRepository.findRoomByGuestCode(code).getFlag());
     		map.put("restaurantName", lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName());    		    		    		
     	} catch(Exception e){

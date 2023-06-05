@@ -1,21 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { css } from '@emotion/react';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
+import { BiDish } from 'react-icons/bi'
 import RouletteComponent from '../../../components/Roulette/RouletteComponent';
 import ResultMap from './../../../components/SelectPage/ResultMap/ResultMap';
-
-const container = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`;
+import * as s from './style';
+import { Controls, PlayState, SplitWords, Timeline, Tween } from 'react-gsap';
+import Loading from '../../../components/Loading/Loading';
 
 const Roulette = () => {    
   const navigate = useNavigate();
@@ -125,15 +120,33 @@ const Roulette = () => {
   }
 
   if(getMenus.isLoading) {
-    <>로딩중...</>
+    return <Loading/>
   }
 
   if(!getMenus.isLoading)
   return (
-    <div css={container}>
+    <div css={s.container}>
+      <header css={s.headerContainer}>
+        {roulettFlag ?
+        <div css={s.todaymenu}>
+          <div css={s.icon}>
+          <BiDish/>
+          </div>
+          <div>
+            오늘 점심은 이거다!
+          </div>
+        </div>
+          : ""}
+      </header>
+
+      <main>
       {roulettFlag ? <ResultMap restaurantAddress={selectedMenu.restaurantAddress} restaurantName={selectedMenu.restaurantName}/> : ""}
-      {roulettFlag ? <></> : (<RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>)}  
-      {roulettFlag ? (<div><button onClick={reRenderButton}>다시돌려</button> <button onClick={homeButton}>메인으로</button></div>) : ""}
+      {roulettFlag ? <></> : (<RouletteComponent menuNames={menuNames} selectedMenu={selectedMenu.restaurantName} setRoulettState={[ roulettFlag, setRoulettFlag ]}/>)}
+      </main>
+
+      <footer>
+        {roulettFlag ? (<div><button css={s.buttonStyle} onClick={reRenderButton}>다시!!</button> <button css={s.buttonStyle} onClick={homeButton}>홈으로</button></div>) : ""}
+      </footer>
     </div>
     
   );

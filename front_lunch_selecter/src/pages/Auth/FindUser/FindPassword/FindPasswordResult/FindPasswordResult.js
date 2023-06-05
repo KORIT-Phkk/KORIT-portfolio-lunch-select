@@ -16,6 +16,7 @@ const FindPasswordResult = () => {
             <header css={s.headerContainer}>
                 <img css={s.imgCss} src="../../main/logo1.png"/>
             </header>
+            
             <div css={s.comment}><AiFillNotification/>&nbsp;Notice&nbsp;<AiFillNotification/></div>
             <main css={s.mainContainer}>
                 <span css={s.notice}>비밀번호 재설정 이메일 발송 완료</span>

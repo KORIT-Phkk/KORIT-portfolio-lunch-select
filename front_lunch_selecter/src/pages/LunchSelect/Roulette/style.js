@@ -2,64 +2,45 @@ import { css } from '@emotion/react';
 
 export const container = css`
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 `;
 export const headerContainer = css`
+    padding-bottom: 30px;
+`;
+export const todaymenu = css`
+    align-items: center;
+    font-family: 'Ansungtangmyun-Bold', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+`;
+export const icon = css`
     display: flex;
     justify-content: center;
+    align-items: center;
+    font-size: 30px;
 `;
-export const img = css`
-    width: 270px;
-    height: 196px;
-`;
-export const mainContainer = css`
-    display: flex;
-    justify-content: center;
-`;
-export const footerContatiner = css`
-    display: flex;
-    justify-content: center;
-`;
-export const detailsButton = css`
-    width: 100px;
-    height: 30px;
+export const buttonStyle = css`
+    width: 50px;
+    height: 20px;
     border: none;
     background-color: black;
     color: white;
     border-radius: 5px;
     font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 100;
-    font-size: 15px;
-    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    
+    cursor:pointer;
     &:hover {
         color: black;
-        background-color: #dbdbdb;
+        background-color: #fafafa;
     }
     &:active {
         color: black;
-        background-color: whitesmoke;
-    }
-`;
-export const returnButton = css`
-    width: 100px;
-    height: 30px;
-    margin-left: 20px;
-    border: none;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    font-weight: 100;
-    font-size: 15px;
-    cursor: pointer;
-    &:hover {
-        color: black;
         background-color: #dbdbdb;
     }
-    &:active {
-        color: black;
-        background-color: whitesmoke;
-    }
 `;
-

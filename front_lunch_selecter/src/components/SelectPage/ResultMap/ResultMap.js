@@ -1,26 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useQuery } from 'react-query';
-import { css } from '@emotion/react';
-
-const headerStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    font-family: 'Ansungtangmyun-Bold', sans-serif;
-    margin-bottom: 10px;
-`;
-
-const mainStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-`;
+import * as s from './style';
 
 const ResultMap = ({ restaurantName, restaurantAddress }) => {
     const { kakao } = window;
@@ -76,23 +58,22 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
     if(restaurantDatas.length !== 0)
     return (
         <>
-        <header css={headerStyle}>
-            <h1>{restaurantName}</h1>
+        <header css={s.headerContainer}>
+            <h1 css={s.restaurantName}>{restaurantName}</h1>
         </header>
 
-        <main css={mainStyle}>
+        <main css={s.mainContainer}>
             <Map
                 center={{
                     lat: restaurantDatas[0].y,
                     lng: restaurantDatas[0].x,
-                    // lat: 127.888,
-                    // lng: 36.888
                 }}
                 style={{
-                    width: "300px",
+                    width: "280px",
                     height: "200px",
+                    borderRadius: "5px"
                 }}
-                level={2}
+                level={3}
                 >
                     {restaurantDatas.map((store, index) => (
                         <MapMarker

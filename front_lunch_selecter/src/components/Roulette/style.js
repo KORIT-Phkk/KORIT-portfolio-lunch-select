@@ -1,5 +1,22 @@
 import { css } from "@emotion/react";
 
+export const fail = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px;
+  font-family: 'Ansungtangmyun-Bold', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+`;
+export const imgCss = css`
+  width: 272px;
+  height: 153px;
+`;
+export const size = css`
+  font-size: 25px;
+`;
 export const mainContainer = css`
   display: flex;
   position: relative;
