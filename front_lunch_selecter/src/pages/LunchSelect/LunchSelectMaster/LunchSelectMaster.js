@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaRegSmileWink } from 'react-icons/fa';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation } from 'react-query';
-import { useNavigate, useParams } from 'react-router';
-import * as s from './style';
+import { useParams } from 'react-router';
 import Category from './../../../components/SelectPage/Category/Category';
 import Location from './../../../components/SelectPage/Location/Location';
-import { IoMdArrowRoundBack } from 'react-icons/io';
-import { FaRegSmileWink } from 'react-icons/fa';
 import Invite from './../Invite';
+import * as s from './style';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -16,10 +16,36 @@ const LunchSelectMaster = () => {
         lat: null,
         lng: null
     });
-
-    const navigate = useNavigate();
     const { code } = useParams();
+    const [ errorMessage, setErrorMessage ] = useState("");
 
+    useEffect(() => {
+        const dropRoom = () => {
+            const option = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                }
+            };
+            const data = {
+                code: code,
+                flag: 0
+            };
+            axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option);
+        }
+
+        window.onpopstate = () => {
+            dropRoom();
+            window.onpopstate = null;
+            window.onbeforeunload = null;
+        }
+
+        window.onbeforeunload = () => {
+            dropRoom();
+            window.onpopstate = null;
+            window.onbeforeunload = null;
+        }
+    }, []);
+    
     const insertCategory = useMutation(async() => {
         const option = {
             headers: {
@@ -34,12 +60,11 @@ const LunchSelectMaster = () => {
     }, {
         onSuccess: (response) => {
             if(response.status === 200) {
-                navigate(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
+                window.location.replace(`/lunchselect/roulette/${code}/${markerPosition.lat}/${markerPosition.lng}`);
             }
         }
     });
-
-
+   
     const backButton = useMutation(async() => {
         const option = {
             headers: {
@@ -50,14 +75,16 @@ const LunchSelectMaster = () => {
             code: code,
             flag: 0
         }
-        const response = await axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
-        window.location.href = "http://localhost:3000/";
+        await axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
+        window.location.replace("http://localhost:3000/");
     });
 
     const getMenuButtonHandle = () => {
-        if(insertCategory.mutate.length === 0)
-        alert('카테고리를 선택해주세요!');
-        insertCategory.mutate();
+        if(selectedCategories.length === 0){
+            alert("카테고리를 선택해 주세요.")
+        } else{
+            insertCategory.mutate();
+        }
     }
 
     const backButtonHandle = () => {

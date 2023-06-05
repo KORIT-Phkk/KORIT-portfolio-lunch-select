@@ -21,16 +21,17 @@ import OAuth2Merge from './pages/Auth/OAuth/OAuth2Merge/OAuth2Merge';
 import OAuth2Register from './pages/Auth/OAuth/OAuth2Register/OAuth2Register';
 import Register from './pages/Auth/Register/Register';
 import RegisterResult from './pages/Auth/Register/RegisterResult/RegisterResult';
+import PasswordChange from './pages/Auth/UpdatePassword/ChangePassword/PasswordChange';
+import PasswordChangeResult from './pages/Auth/UpdatePassword/PasswordChangeResult/PasswordChangeResult';
 import UpdatePassword from './pages/Auth/UpdatePassword/UpdatePassword';
+import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
 import LunchSelectGuest from './pages/LunchSelect/LunchSelectGuest/LunchSelectGuest/LunchSelectGuest';
 import WaitingRoom from './pages/LunchSelect/LunchSelectGuest/WaitingRoom/WaitingRoom';
 import LunchSelectMaster from './pages/LunchSelect/LunchSelectMaster/LunchSelectMaster';
 import Roulette from './pages/LunchSelect/Roulette/Roulette';
 import MyPage from './pages/MyPage/MyPage';
-import GuestRoulette from './pages/LunchSelect/LunchSelectGuest/GuestRoulette/GuestRoulette';
-import PasswordChangeResult from './pages/Auth/UpdatePassword/PasswordChangeResult/PasswordChangeResult';
-import PasswordChange from './pages/Auth/UpdatePassword/ChangePassword/PasswordChange';
 import ProfileImgChange from './pages/MyPage/ProfileImgChange/ProfileImgChange';
+import RoomClose from './pages/NotFound/RoomClose';
 
 
 const mainContainer = css`
@@ -70,8 +71,11 @@ function App() {
 
         <Route path="/lunchselect/room/master/:code" element={<AuthRoute path="/lunchselect/room/master" element={<LunchSelectMaster/>}/>}/>
         <Route path="/lunchselect/room/guest/:code" element={<AuthRoute path="/lunchselect/room/guest" element={<LunchSelectGuest/>}/>}/>
-        <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
-        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/>
+        {/* <Route path="/lunchselect/room/guest/waiting/:code" element={<AuthRoute path="/lunchselect/room/guest/waiting" element={<WaitingRoom/>}/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<AuthRoute path="/lunchselect/guest/roulette" element={<GuestRoulette />}/>}/> */}
+        <Route path="/lunchselect/room/guest/waiting/:code" element={<WaitingRoom/>}/>
+        <Route path="/lunchselect/guest/roulette/:code" element={<GuestRoulette />}/>
+        <Route path="/lunchselect/room/close" element={<RoomClose />}/>
         <Route path="/lunchselect/roulette/:code/:lat/:lng" element={<AuthRoute path="/lunchselect/roulette" element={<Roulette/>}/>}/>
         <Route path="/" element={<AuthRoute path="/" element={<Main/>}/>}/>
         <Route path="/*" element={<NotFound />}/>

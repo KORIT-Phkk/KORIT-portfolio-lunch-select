@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { FaRegSmileWink } from 'react-icons/fa';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
-import * as s from '../style';
 import Category from '../../../../components/SelectPage/Category/Category';
-import { IoMdArrowRoundBack } from 'react-icons/io'
-import { FaRegSmileWink } from 'react-icons/fa'
+import * as s from '../style';
 
 
 
@@ -14,7 +14,6 @@ const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
     const { code } = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -28,39 +27,71 @@ const LunchSelectGuest = () => {
           };
           try {
             const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
-      
+            console.log("useEffect: " + response.data)
             if (response.data === false) {
-              alert("없는 방입니다~");
-              window.location.replace("http://localhost:3000");
+              window.location.replace("http://localhost:3000/lunchselect/room/close");
             }
           } catch (error) {
-            console.error(error);
+            
           }
         }
         fetchData();
       }, []);
-      
+  
+    const getFlagAndSeletedMenu = useQuery(["getFlagAndSeletedMenu"], async() => {
+      const option = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        },
+        params: {
+          code: code
+        }
+      }
+      const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
+      localStorage.setItem("selectedMenu", response.data.restaurantName)
+      console.log(response.data.flag)
+      return response
+    }, {
+      refetchInterval: 1000,
+      onSuccess: (response) => {
+        if(response.data.flag === 0){
+          console.log("getFlagAndSeletedMenu if문 실행?: " + response.data.flag)
+          window.location.replace("http://localhost:3000/lunchselect/room/close");
+        } else if(response.data.restaurantName !== undefined && response.data.flag !== 0) {
+          window.location.replace(`/lunchselect/room/guest/waiting/${code}`);
+        }     
+      }
+    });
+
     const insertCategory = useMutation(async() => {
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
-            code: `1 ${code}`,
+       
+        if(option.headers.Authorization === "Bearer null") {
+          await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+            code: `2 ${code}`,
             categoryId: [...selectedCategories]
-        }, option);
+          }, option);
+        } else {
+          await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+              code: `1 ${code}`,
+              categoryId: [...selectedCategories]
+          }, option);
+        }
     });
     
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();
         setReadyButtonHandle(false);
-        navigate(`/lunchselect/room/guest/waiting/${code}`);
+        window.location.replace(`/lunchselect/room/guest/waiting/${code}`);
     }
 
     const backButtonHandle = () => {
-      navigate("/")
+      window.location.replace("/")
     }
 
     return (
