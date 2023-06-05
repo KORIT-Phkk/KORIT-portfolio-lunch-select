@@ -83,6 +83,7 @@ export const ifnotclick = css`
 `;
 export const clickhere = css`
     font-size: 10px;
+    color: blue;
 
     cursor: pointer;
     &:hover, :active {

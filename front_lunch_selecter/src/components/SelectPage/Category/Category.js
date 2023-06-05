@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import * as s from './style';
 
-
-
 const Category = ({ selectedCategories, setSelectedCategories }) => {
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
 
@@ -36,7 +34,7 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
     
     return (
         <div css={s.categoryContainer}>
-            {getCategory.data !== undefined ? getCategory.data.data.map(category => (
+            {getCategory.isLoading ? "" : getCategory.data !== undefined ? getCategory.data.data.map(category => (
                 <div css={s.categoryBox} key={category.categoryId}>
                     <img css={s.imgCss} src={`../../../category/colorFood${category.categoryId}.png`} alt="" />
                     <input css={s.checkbox} onChange={checkedHandleOnClick} type="checkbox" id={category.categoryId} value={category.categoryId}/>

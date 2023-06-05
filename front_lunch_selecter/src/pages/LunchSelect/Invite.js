@@ -11,7 +11,8 @@ const Invite = () => {
 
   const { code } = useParams();
 
-  const getGuestURL = async() => {
+  const getGuestURL = useQuery(["getGuestURL"], async() => {
+      console.log(code)
       const option = {
         params: {
           roomMasterCode: code
@@ -26,21 +27,20 @@ const Invite = () => {
         setGuestURL(response.data);
         return response;
       } catch(error) {
-        return error;
+        alert(error.response.data.errorData.room)
+        window.location.replace("http://localhost:3000/")
       }
-  }
+  },{
+    enabled: !!code
+  })
 
   const inviteCodeHandleClick = () => {
     navigator.clipboard.writeText(`http://localhost:3000/lunchselect/room/guest/${guestURL}`);
   }
 
-  useEffect(() => {
-    getGuestURL();
-  })
-
   return (
     <div css={s.inviteContainer}>
-      <p css={s.getUrlCode}>{guestURL}</p>
+      <p css={s.getUrlCode}>{getGuestURL.isLoading ? "" : getGuestURL.data.data}</p>
       <button onClick={inviteCodeHandleClick} css={s.inviteButton}>링크복사</button>
     </div>
   );

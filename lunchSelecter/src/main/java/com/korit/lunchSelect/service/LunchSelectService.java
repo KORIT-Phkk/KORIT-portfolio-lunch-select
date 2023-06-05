@@ -19,6 +19,8 @@ import com.korit.lunchSelect.entity.Category;
 import com.korit.lunchSelect.entity.Menu;
 import com.korit.lunchSelect.entity.Restaurant;
 import com.korit.lunchSelect.entity.Room;
+import com.korit.lunchSelect.exception.CustomException;
+import com.korit.lunchSelect.exception.ErrorMap;
 import com.korit.lunchSelect.repository.LunchSelectRepository;
 import com.korit.lunchSelect.security.PrincipalUser;
 
@@ -123,7 +125,13 @@ public class LunchSelectService {
     }
     
     public String getGuestURL(String roomMasterCode) {
- 	   return lunchSelectRepository.findRoomByMasterCode(roomMasterCode).getRoomGuestCode();
+    
+		Room room = lunchSelectRepository.findRoomByMasterCode(roomMasterCode);   
+		if(room == null) {
+			throw new CustomException("error", ErrorMap.builder().put("room", "방을 새로 만들어주세요.").build());
+		}
+    
+ 	    return room.getRoomGuestCode();
     }
     
     public Map<String, Object> checkFlagAndSelectedMenu(String code) {

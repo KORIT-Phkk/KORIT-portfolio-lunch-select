@@ -47,6 +47,7 @@ const LunchSelectMaster = () => {
     }, []);
     
     const insertCategory = useMutation(async() => {
+        console.log(selectedCategories.length !== 0)
         const option = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -56,6 +57,7 @@ const LunchSelectMaster = () => {
             code: `0 ${code}`,
             categoryId: [...selectedCategories]
         }, option);
+       
         return response;
     }, {
         onSuccess: (response) => {
@@ -80,9 +82,7 @@ const LunchSelectMaster = () => {
     });
 
     const getMenuButtonHandle = () => {
-        if(selectedCategories.length === 0){
-            alert("카테고리를 선택해 주세요.")
-        } else{
+        if(selectedCategories.length !== 0){
             insertCategory.mutate();
         }
     }

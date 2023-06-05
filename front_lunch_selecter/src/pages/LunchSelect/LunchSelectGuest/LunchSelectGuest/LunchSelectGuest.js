@@ -13,6 +13,7 @@ import * as s from '../style';
 const LunchSelectGuest = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
     const [ readyButtonHandle, setReadyButtonHandle ] = useState(true);
+    const [ checkRoomCount, setCheckRoomCount ] = useState(0); 
     const { code } = useParams();
 
     useEffect(() => {
@@ -49,14 +50,13 @@ const LunchSelectGuest = () => {
       }
       const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
       localStorage.setItem("selectedMenu", response.data.restaurantName)
-      console.log(response.data.flag)
+      
       return response
     }, {
       refetchInterval: 1000,
       onSuccess: (response) => {
         if(response.data.flag === 0){
-          console.log("getFlagAndSeletedMenu if문 실행?: " + response.data.flag)
-          window.location.replace("http://localhost:3000/lunchselect/room/close");
+          setCheckRoomCount(checkRoomCount + 1)
         } else if(response.data.restaurantName !== undefined && response.data.flag !== 0) {
           window.location.replace(`/lunchselect/room/guest/waiting/${code}`);
         }     
@@ -82,7 +82,9 @@ const LunchSelectGuest = () => {
           }, option);
         }
     });
-    
+    if(checkRoomCount > 1){
+      window.location.replace("http://localhost:3000/lunchselect/room/close");
+    }
 
     const readyHandleOnClick = () => {
         insertCategory.mutate();

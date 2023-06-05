@@ -42,7 +42,6 @@ const Location = ({ markerPosition, setMarkerPosition }) => {
             lng: e.latLng.getLng(),
         };
         setMarkerPosition(clickedPosition);
-
     };
 
 

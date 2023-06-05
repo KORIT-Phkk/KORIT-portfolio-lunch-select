@@ -111,7 +111,6 @@ const Roulette = () => {
   }, [])
 
   const reRenderButton = () => {
-    // nowFlagUp.mutate();
     window.location.reload();
   }
 
