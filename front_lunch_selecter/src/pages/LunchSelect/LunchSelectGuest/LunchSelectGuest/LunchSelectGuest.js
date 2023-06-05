@@ -27,12 +27,12 @@ const LunchSelectGuest = () => {
           };
           try {
             const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
-      
+            console.log("useEffect: " + response.data)
             if (response.data === false) {
               window.location.replace("http://localhost:3000/lunchselect/room/close");
             }
           } catch (error) {
-            console.error(error);
+            
           }
         }
         fetchData();
@@ -48,16 +48,16 @@ const LunchSelectGuest = () => {
         }
       }
       const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
-      // console.log(response.data.restaurantId)
-      console.log(response.data.flag)
       localStorage.setItem("selectedMenu", response.data.restaurantName)
+      console.log(response.data.flag)
       return response
     }, {
       refetchInterval: 1000,
       onSuccess: (response) => {
         if(response.data.flag === 0){
+          console.log("getFlagAndSeletedMenu if문 실행?: " + response.data.flag)
           window.location.replace("http://localhost:3000/lunchselect/room/close");
-        } else if(response.data.restaurantName !== null && response.data.flag !== 0) {
+        } else if(response.data.restaurantName !== undefined && response.data.flag !== 0) {
           window.location.replace(`/lunchselect/room/guest/waiting/${code}`);
         }     
       }

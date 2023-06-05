@@ -80,7 +80,7 @@
 			rt.room_master_code,
 			rt.flag,
 			rst.restaurant_id,
-			COALESCE(rst.restaurant_name, 'N/A') AS restaurant_name,
+			rst.restaurant_name,
 			rst.restaurant_address
 		FROM
 			room_tb rt

@@ -103,7 +103,7 @@ const Roulette = () => {
     try {
       const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
       setSelectedMenu(response.data);
-      // setSelectedMenu({restaurantName:"시엔스시(CN'스시)", restaurantAddress:"서울특별시 종로구 종로 19, 르메이에르종로타운 2층 201-1, 201-2호 (종로1가)"})
+      
       return response;
     } catch(error) {
       return error;

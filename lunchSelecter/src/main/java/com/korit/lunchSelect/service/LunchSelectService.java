@@ -111,7 +111,7 @@ public class LunchSelectService {
 	
 	public int updateRoomFlag(String roomMasterCode, int flag) {
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(flag);
+		
 		map.put("roomMasterCode", roomMasterCode);
 		map.put("flag", flag);
 		
@@ -126,17 +126,18 @@ public class LunchSelectService {
  	   return lunchSelectRepository.findRoomByMasterCode(roomMasterCode).getRoomGuestCode();
     }
     
-    public Map<String, Object> getFlagAndSelectedMenu(String code) {
+    public Map<String, Object> checkFlagAndSelectedMenu(String code) {
     	Map<String, Object> map = new HashMap<>();
-//    	System.out.println("왜 널??;;"+ lunchSelectRepository.findRoomByGuestCode(code));
-    	if(lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName() == null ) {
-    		map.put("flag", 0);
-    		map.put("restaurantName", null);
-    	}else {    		
-    		map.put("flag", lunchSelectRepository.findRoomByGuestCode(code).getFlag());
-    		map.put("restaurantName", lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName());    		    		
-    	}
     	
+    	try {
+    		System.out.println("findRoom: " + lunchSelectRepository.findRoomByGuestCode(code));
+    		System.out.println("Restaurant: " + lunchSelectRepository.findRoomByGuestCode(code).getRestaurant());
+    		map.put("flag", lunchSelectRepository.findRoomByGuestCode(code).getFlag());
+    		map.put("restaurantName", lunchSelectRepository.findRoomByGuestCode(code).getRestaurant().getRestaurantName());    		    		    		
+    	} catch(Exception e){
+    		
+    	}
+
     	return map;
     }
 

@@ -41,15 +41,15 @@ const WaitingRoom = () => {
           }
         }
         const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
-        localStorage.setItem("selectedMenu", response.data.restaurantName)
-        console.log(response)
+        
         return response
       }, {
         refetchInterval: 1000,
         onSuccess: (response) => {
-          if(response.data.flag === 0){
+          if(response.data.flag === undefined){
             window.location.replace("http://localhost:3000/lunchselect/room/close");
-          } else if(response.data.restaurantName !== null && response.data.flag !== 0 && response.data.restaurantName !== "N/A") {
+          } else if(response.data.restaurantName !== undefined && response.data.flag !== 0) {
+            localStorage.setItem("selectedMenu", response.data.restaurantName)
             setOutWaitingRoomFlag(true);
           }     
         }

@@ -62,7 +62,7 @@ public class LunchSelectController {
 	@GetMapping("/room/getflag")
 	public ResponseEntity<?> getFlagAndSelectedMenu(String code) {
 		
-		return ResponseEntity.ok().body(lunchSelectService.getFlagAndSelectedMenu(code));
+		return ResponseEntity.ok().body(lunchSelectService.checkFlagAndSelectedMenu(code));
 	}
 	
 	@GetMapping("/category")
