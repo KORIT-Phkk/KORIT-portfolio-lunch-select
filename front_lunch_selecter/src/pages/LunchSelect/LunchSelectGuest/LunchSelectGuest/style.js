@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import '../../../fonts/ansungfont.css';
+import '../../../../fonts/ansungfont.css';
 
 export const container = css`
     display: flex;

@@ -1,8 +1,11 @@
+/** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import { async } from 'q';
 import React, { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
+import * as s from './style';
+import { Reveal, Tween } from 'react-gsap';
 
 const WaitingRoom = () => {
     const { code } = useParams();
@@ -60,12 +63,16 @@ const WaitingRoom = () => {
     }
 
     return (
-        <div>
-            <main>
-                기다리는중
+        <div css={s.container}>
+            <main css={s.loading}>
+            <Reveal repeat trigger={<div />}>
+              <Tween from={{opacity: 0}} duration={2}>
+                <h3>기다리는 중...</h3>
+              </Tween>
+            </Reveal>
             </main>
-            <footer>
-                {outWaitingRoomFlag ? (<div><button onClick={outWaitingRoomButtonHandle}>룰렛 결과 보러가기</button></div>) : ""}
+            <footer css={s.footerContainer}>
+                {outWaitingRoomFlag ? (<div><button css={s.button} onClick={outWaitingRoomButtonHandle}>룰렛 결과 보러가기</button></div>) : ""}
             </footer>
 
         </div>

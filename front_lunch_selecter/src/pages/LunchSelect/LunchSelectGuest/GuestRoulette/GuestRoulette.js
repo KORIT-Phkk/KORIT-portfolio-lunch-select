@@ -1,7 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
+import * as s from './style';
+import { BiDish } from 'react-icons/bi';
 
 const GuestRoulette = () => {
     const { code } = useParams();
@@ -26,10 +29,18 @@ const GuestRoulette = () => {
           }     
         }
       });
+      
+      const homeButton = () => {
+        window.location.replace('/');
+      }
 
     return (
-        <div>
-            {localStorage.getItem("selectedMenu")}
+        <div css={s.container}>
+          <div css={s.icon}><BiDish/></div>
+          <div css={s.todayLunch}>오늘 점심은 이거다!</div>
+          <div css={s.todayMenu}>{localStorage.getItem("selectedMenu")}</div>
+          <span css={s.mention}>자세한 정보는 방장 화면을 확인해주세요</span>
+          <button css={s.buttonStyle} onClick={homeButton}>홈으로</button>
         </div>
     );
 };

@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 import Category from '../../../../components/SelectPage/Category/Category';
-import * as s from '../style';
+import * as s from './style';
 
 
 

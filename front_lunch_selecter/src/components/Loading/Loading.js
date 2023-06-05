@@ -18,7 +18,7 @@ const Loading = () => {
       <img css={s.imgCss} src="../../../../main/logo1.png" />
       <Reveal repeat trigger={<div />}>
         <FadeInLeft>
-          <h3>로딩중...</h3>
+          <h3>로딩 중...</h3>
         </FadeInLeft>
       </Reveal>
     </div>

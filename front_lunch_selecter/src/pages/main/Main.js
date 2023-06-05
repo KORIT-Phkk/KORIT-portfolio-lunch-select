@@ -84,7 +84,7 @@ const Main = () => {
                 </main>
 
                 <footer css={s.footerContainer}>
-                    <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심</button>
+                    <button css={s.lunchButton} onClick={lunchSelectClickHandle} >점심 메뉴 추천!</button>
                 </footer>
             </div>
         </div>
