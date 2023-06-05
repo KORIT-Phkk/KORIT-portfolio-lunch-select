@@ -17,6 +17,7 @@ const LunchSelectMaster = () => {
         lng: null
     });
     const { code } = useParams();
+    const [ errorMessage, setErrorMessage ] = useState("");
 
     useEffect(() => {
         const dropRoom = () => {
@@ -79,7 +80,11 @@ const LunchSelectMaster = () => {
     });
 
     const getMenuButtonHandle = () => {
-        insertCategory.mutate();
+        if(selectedCategories.length === 0){
+            alert("카테고리를 선택해 주세요.")
+        } else{
+            insertCategory.mutate();
+        }
     }
     const backButtonHandle = () => {
         backButton.mutate();

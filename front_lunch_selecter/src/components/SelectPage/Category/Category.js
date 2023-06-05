@@ -16,7 +16,6 @@ const Category = ({ selectedCategories, setSelectedCategories }) => {
             }
         }
         const response = await axios.get("http://localhost:8080/lunchselect/category", option)
-        
         return response;
     }, {
         enabled:categoryRefresh,

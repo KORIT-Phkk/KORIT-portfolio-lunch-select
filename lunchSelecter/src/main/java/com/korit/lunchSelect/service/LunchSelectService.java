@@ -57,7 +57,7 @@ public class LunchSelectService {
 	
 	public int createRoomJoin(InsertCategoryReqDto insertCategoryReqDto) {
 		Map<String, Object> insertMap = new HashMap<>();
-		
+	
 		if(!(insertCategoryReqDto.getCode().startsWith("0") || insertCategoryReqDto.getCode().startsWith("1"))) {
 			insertMap.put("userId", 0);
 		} else {
