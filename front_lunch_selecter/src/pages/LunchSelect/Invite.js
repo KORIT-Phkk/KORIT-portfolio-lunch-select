@@ -40,7 +40,7 @@ const Invite = () => {
 
   return (
     <div css={s.inviteContainer}>
-      <p css={s.getUrlCode}>{getGuestURL.isLoading ? "" : getGuestURL.data.data}</p>
+      <p css={s.getUrlCode}>{getGuestURL.isLoading ? "" : getGuestURL?.data?.data}</p>
       <button onClick={inviteCodeHandleClick} css={s.inviteButton}>링크복사</button>
     </div>
   );

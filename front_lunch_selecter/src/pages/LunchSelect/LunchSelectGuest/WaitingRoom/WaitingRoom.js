@@ -63,7 +63,7 @@ const WaitingRoom = () => {
         window.location.replace(`/lunchselect/guest/roulette/${code}`)
     }
 
-    if(checkRoomCount === 2){
+    if(checkRoomCount === 4){
       window.location.replace("http://localhost:3000/lunchselect/room/close");
     }
     return (
