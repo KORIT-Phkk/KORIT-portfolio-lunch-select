@@ -11,9 +11,8 @@ import { HiOutlinePhotograph } from 'react-icons/hi';
 const ProfileImgChange = () => {
     const navigate = useNavigate();
     const [ imgFile, setImgFile ] = useState();
-    const [ profileImgURL, setprofileImgURL ] = useState();
+    const [ profileImgURL, setprofileImgURL ] = useState("http://localhost:8080/image/profile/plus.png");
     const fileRef = useRef();
-    const queryClient = useQueryClient();
 
     const profileImgChangeHandle = () => {
         fileRef.current.click();
