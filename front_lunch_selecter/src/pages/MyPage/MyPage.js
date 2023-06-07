@@ -65,7 +65,9 @@ const MyPage = () => {
     const backButtonHandle = () => {
         navigate("/")
       }
-
+    
+    if(!getUserInfo.isLoading)
+    console.log(profileImgURL)
     return (
         <div css={s.container}>
             <IoMdArrowRoundBack  css={s.backButton} onClick={backButtonHandle}/>
