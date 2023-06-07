@@ -69,7 +69,12 @@ const OAuth2Register = () => {
                 <input css={s.inputBox} type="text" value={email} disabled={true}/>
 
                 <label css={s.inputLabel}>Name</label>
-                <input css={s.inputBox} type="text" value={name} disabled={true}/>
+                {
+                    searchParams.get("name") === "" 
+                        ? <input css={s.inputBox} type="text" name='name' onChange={onChangeInputHandle}/>
+                        : <input css={s.inputBox} type="text" value={name} disabled={true}/>
+                }
+                
 
                 <label css={s.inputLabel}>Password</label>
                 <input css={s.inputBox} type="password" name='password' placeholder='비밀번호' onChange={onChangeInputHandle} />

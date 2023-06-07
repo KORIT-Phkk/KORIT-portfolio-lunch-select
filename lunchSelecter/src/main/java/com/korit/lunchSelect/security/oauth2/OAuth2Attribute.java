@@ -42,11 +42,10 @@ public class OAuth2Attribute {
     private static OAuth2Attribute ofKakao(String provider,Map<String, Object> attributes) {
     	
         Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-        Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
 
         return OAuth2Attribute.builder()
-                .name((String) kakaoProfile.get("nickname"))
                 .email((String) kakaoAccount.get("email"))
+                .name("")
                 .provider(provider)
                 .attributes(kakaoAccount)
                 .build();
