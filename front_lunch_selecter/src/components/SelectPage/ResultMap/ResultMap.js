@@ -86,6 +86,8 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
                             onClick={() => {
                                 if(store.id !== undefined) {
                                     window.location.href = `http://place.map.kakao.com/${store.id}`
+                                } else {
+                                    window.location.replace(`http://search.naver.com/search.naver?where=nexearch?sm=top_hty&fbm=0&ie=utf8&query=${restaurantName}`)
                                 }
                             }}
                         >
@@ -101,10 +103,6 @@ const ResultMap = ({ restaurantName, restaurantAddress }) => {
                                             right: "5px",
                                             top: "5px",
                                             cursor: "pointer",
-                                        }}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            window.location.href = `https://place.map.kakao.com/${store.id}`;
                                         }}
                                     />
                                     <div style={{ padding: "5px", color: "#000", fontSize: "15px" }}>{store.place_name}</div>

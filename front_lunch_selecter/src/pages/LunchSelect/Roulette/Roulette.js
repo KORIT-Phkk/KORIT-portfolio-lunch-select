@@ -153,15 +153,7 @@ const Roulette = () => {
           <button css={s.buttonStyle1} onClick={reRenderButton}>다시!!</button>
           <button css={s.buttonStyle2} onClick={homeButton}>홈으로</button>
         </div>
-        ) : ""}
-
-        {roulettFlag ? (
-        <div css={s.comment}>
-          <div css={s.ifnotclick}>클릭이 안된다면?</div>
-          <div css={s.clickhere} onClick={clickhere}>여기를 클릭하세요!</div>
-        </div>
-        ) : ""}
-        
+        ) : ""}       
       </footer>
     </div>
     
