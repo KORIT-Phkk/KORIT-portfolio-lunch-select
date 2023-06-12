@@ -6,12 +6,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { HiOutlinePhotograph } from 'react-icons/hi';
+import { backEndURL } from '../../../Config/URL/URL';
 
 
 const ProfileImgChange = () => {
     const navigate = useNavigate();
     const [ imgFile, setImgFile ] = useState();
-    const [ profileImgURL, setprofileImgURL ] = useState("http://localhost:8080/image/profile/plus.png");
+    const [ profileImgURL, setprofileImgURL ] = useState(`${backEndURL}/image/profile/plus.png`);
     const fileRef = useRef();
 
     const profileImgChangeHandle = () => {
@@ -39,7 +40,7 @@ const ProfileImgChange = () => {
                 "Content-Type": "multipart/form-data"
             }
         }
-        const response = await axios.post("http://localhost:8080/auth/profile/img", formData, option)
+        const response = await axios.post(`${backEndURL}/auth/profile/img`, formData, option)
         return response;
     }, {
         onSuccess: () => {

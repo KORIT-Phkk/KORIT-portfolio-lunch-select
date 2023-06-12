@@ -1,5 +1,6 @@
 package com.korit.lunchSelect.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final OAuthService oAuthService;
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
+	
+	@Value("${config.front-end-url}")
+	private String frontEndUrl;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -51,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			    .authenticationEntryPoint(jwtAuthenticationEntryPoint)
 			    .and()
 			    .oauth2Login()
-			    .loginPage("http://localhost:3000/auth/login")
+			    .loginPage(frontEndUrl+ "/auth/login")
 			    .successHandler(oAuth2SuccessHandler)
 			    .userInfoEndpoint()
 			    .userService(oAuthService);

@@ -1,11 +1,11 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style'
+import { frontEndURL } from '../../Config/URL/URL';
 
 const RoomClose = () => {
-
     const homeButton = () => {
-        window.location.replace("http://localhost:3000/");
+        window.location.replace(`${frontEndURL}/`);
     }
     return (
         <span css={s.roomClose}>

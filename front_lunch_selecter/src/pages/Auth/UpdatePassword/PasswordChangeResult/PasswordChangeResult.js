@@ -2,6 +2,7 @@
 import React from 'react';
 import * as s from './style';
 import { useNavigate } from 'react-router-dom';
+import { frontEndURL } from '../../../../Config/URL/URL';
 
 const PasswordChangeResult = () => {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ const PasswordChangeResult = () => {
     const loginButtonOnClick = () => {
         localStorage.removeItem("accessToken");
         // navigate("/auth/login")
-        window.location.href = "http://localhost:3000/auth/login";
+        window.location.href = `${frontEndURL}/auth/login`;
     }
     return (
         <div css={s.container}>

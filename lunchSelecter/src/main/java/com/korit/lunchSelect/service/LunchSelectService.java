@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class LunchSelectService {
 	
 	private final LunchSelectRepository lunchSelectRepository;
 	
+	@Value("${config.front-end-url}")
+	private String frontEndUrl;
+	
 	public String createLunchSelectRoom() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
@@ -50,7 +54,7 @@ public class LunchSelectService {
 
       lunchSelectRepository.createLunchSelectRoom(room);
 
-      return "http://localhost:3000/lunchselect/room/master/" + room.getRoomMasterCode();
+      return frontEndUrl + "/lunchselect/room/master/" + room.getRoomMasterCode();
 	}
 	
 	public Room findDuplicatedActiveRoom(int userId) {

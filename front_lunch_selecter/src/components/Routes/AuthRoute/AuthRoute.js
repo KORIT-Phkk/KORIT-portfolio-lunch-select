@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../../atoms/Auth/AuthAtom';
 import Loading from '../../Loading/Loading';
+import { backEndURL } from '../../../Config/URL/URL';
 
 
 const AuthRoute = ({ path, element }) => {
@@ -14,7 +15,7 @@ const AuthRoute = ({ path, element }) => {
 
     const authenticate = useQuery(["authenticate"], async ()=> {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/authenticate", 
+        const response = await axios.get(`${backEndURL}/auth/authenticate`, 
         {headers: {Authorization: accessToken}});
         return response;
     }, {

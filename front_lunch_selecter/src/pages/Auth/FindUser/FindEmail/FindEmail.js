@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md'
 import AuthInput from './../../../../components/auth/AuthInput';
 import axios from 'axios';
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const FindEmail = () => {
     const [ findUser, setFindUser ] = useState({name: "", phone: ""});
@@ -23,7 +24,7 @@ const FindEmail = () => {
             }
         }
         try {
-            const response = await axios.get("http://localhost:8080/auth/findemail", option);
+            const response = await axios.get(`${backEndURL}/auth/findemail`, option);
             navigate(`/auth/findemail/result/${response.data}`)
         } catch (error) {
             alert("사용자 정보가 존재하지 않습니다.")

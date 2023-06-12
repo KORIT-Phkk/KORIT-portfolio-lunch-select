@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import * as s from './style';
+import { backEndURL } from '../../../Config/URL/URL';
 
 const Category = ({ selectedCategories, setSelectedCategories, setErrorMessageFlag }) => {
     const [ categoryRefresh, setCategoryRefresh ] = useState(true);
@@ -13,7 +14,7 @@ const Category = ({ selectedCategories, setSelectedCategories, setErrorMessageFl
                 Authorization : `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/category", option)
+        const response = await axios.get(`${backEndURL}/lunchselect/category`, option)
         return response;
     }, {
         enabled:categoryRefresh,

@@ -37,6 +37,10 @@ public class AccountService {
 	
 	@Value("${file.path}")
 	private String filePath;
+	
+	@Value("${config.front-end-url}")
+	private String frontEndUrl;
+	
 	private final UserRepository userRepository;
 	private final JavaMailSender javaMailSender;
 	private final CacheTokenProvider cacheTokenProvider;
@@ -109,7 +113,7 @@ public class AccountService {
 	public void sendUpdatePasswordEmail(String email) {
 		String subject = "비밀번호 재설정 안내";
 		String token = cacheTokenProvider.generateResetPasswordToken(email);
-		String url = "http://localhost:3000/auth/resetpassword?"
+		String url = frontEndUrl + "/auth/resetpassword?"
 													+ "token=" + token;
 		
 		String text = "아래 링크를 클릭하여 비밀번호를 다시 설정해주세요." 

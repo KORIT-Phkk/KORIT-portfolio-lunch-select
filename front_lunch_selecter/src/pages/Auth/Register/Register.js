@@ -5,6 +5,7 @@ import { AiOutlineContacts } from 'react-icons/ai'
 import * as s from './style'
 import axios from 'axios';
 import AuthInput from '../../../components/auth/AuthInput';
+import { backEndURL } from '../../../Config/URL/URL';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Register = () => {
             }
         }
         try {
-            await axios.post("http://localhost:8080/auth/signup", JSON.stringify(data), option);
+            await axios.post(`${backEndURL}/auth/signup`, JSON.stringify(data), option);
             navigate("/auth/register/result");
         } catch(error) {
             setErrorMessages({email: "", password: "", name: "", phone:"", ...error.response.data.errorData});

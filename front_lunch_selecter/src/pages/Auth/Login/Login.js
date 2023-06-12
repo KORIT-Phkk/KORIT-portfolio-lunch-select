@@ -10,6 +10,7 @@ import { BsFillPersonFill } from 'react-icons/bs'
 import * as s from './style';
 import AuthInput from './../../../components/auth/AuthInput';
 import { authenticatedState } from './../../../atoms/Auth/AuthAtom';
+import { backEndURL } from '../../../Config/URL/URL';
 
 const Login = () => {
     const [ loginUser, setLoginUser ] = useState({email: "", password: ""});
@@ -30,7 +31,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/auth/login", JSON.stringify(loginUser), option);
+            const response = await axios.post(`${backEndURL}/auth/login`, JSON.stringify(loginUser), option);
 
             localStorage.setItem("accessToken", response.data);
             setRefresh(true);
@@ -46,15 +47,15 @@ const Login = () => {
     }
 
     const googleAuthHandleClick = () => {
-        window.location.href = "http://localhost:8080/oauth2/authorization/google"
+        window.location.href = `${backEndURL}/oauth2/authorization/google`
     }
 
     const naverAuthHandleClick = () => {
-        window.location.href = "http://localhost:8080/oauth2/authorization/naver"
+        window.location.href = `${backEndURL}/oauth2/authorization/naver`
     }
 
     const kakaoAuthHandleClick = () => {
-        window.location.href = "http://localhost:8080/oauth2/authorization/kakao"
+        window.location.href = `${backEndURL}/oauth2/authorization/kakao`
     }
 
     const registerHandleClick = () => {

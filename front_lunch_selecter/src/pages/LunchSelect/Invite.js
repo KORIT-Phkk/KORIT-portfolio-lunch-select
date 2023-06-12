@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import * as s from './style-Invite';
+import { backEndURL, frontEndURL } from '../../Config/URL/URL';
+
 
 const Invite = () => {
-
   const [ guestURL, setGuestURL ] = useState(false);
 
   const { code } = useParams();
@@ -23,19 +24,19 @@ const Invite = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:8080/lunchselect/guesturl", option)
+        const response = await axios.get(`${backEndURL}/lunchselect/guesturl`, option)
         setGuestURL(response.data);
         return response;
       } catch(error) {
         alert(error.response.data.errorData.room)
-        window.location.replace("http://localhost:3000/")
+        window.location.replace(`${frontEndURL}/`)
       }
   },{
     enabled: !!code
   })
 
   const inviteCodeHandleClick = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/lunchselect/room/guest/${guestURL}`);
+    navigator.clipboard.writeText(`${frontEndURL}/lunchselect/room/guest/${guestURL}`);
   }
 
   return (

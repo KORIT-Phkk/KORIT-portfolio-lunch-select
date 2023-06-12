@@ -6,11 +6,12 @@ import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 import * as s from './style';
 import { Reveal, Tween } from 'react-gsap';
+import { backEndURL, frontEndURL } from '../../../../Config/URL/URL';
 
 const WaitingRoom = () => {
     const { code } = useParams();
     const [ outWaitingRoomFlag, setOutWaitingRoomFlag ] = useState(false);
-    const [ checkRoomCount, setCheckRoomCount ] = useState(0); 
+    const [ checkRoomCount, setCheckRoomCount ] = useState(0);
 
     useEffect(() => {
         async function fetchData() {
@@ -23,10 +24,10 @@ const WaitingRoom = () => {
             },
           };
           try {
-            const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
+            const response = await axios.get(`${backEndURL}/lunchselect/room/check`, option);
       
             if (response.data === false) {
-              window.location.replace("http://localhost:3000/lunchselect/room/close");
+              window.location.replace(`${frontEndURL}/lunchselect/room/close`);
             }
           } catch (error) {
 
@@ -44,7 +45,7 @@ const WaitingRoom = () => {
             code: code
           }
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
+        const response = await axios.get(`${backEndURL}/lunchselect/room/getflag`, option)
         
         return response
       }, {
@@ -64,7 +65,7 @@ const WaitingRoom = () => {
     }
 
     if(checkRoomCount === 4){
-      window.location.replace("http://localhost:3000/lunchselect/room/close");
+      window.location.replace(`${frontEndURL}/lunchselect/room/close`);
     }
     return (
         <div css={s.container}>

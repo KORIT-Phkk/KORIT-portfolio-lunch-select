@@ -11,6 +11,7 @@ import ResultMap from './../../../components/SelectPage/ResultMap/ResultMap';
 import * as s from './style';
 import { Controls, PlayState, SplitWords, Timeline, Tween } from 'react-gsap';
 import Loading from '../../../components/Loading/Loading';
+import { backEndURL } from '../../../Config/URL/URL';
 
 const Roulette = () => {    
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Roulette = () => {
         flag: 2,
         returnRoulette: false
     }
-    axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
+    axios.put(`${backEndURL}/lunchselect/room/updateflag`, data, option)
   }, [])
 
   const getMenus = useQuery(["getMenus"], async () => {
@@ -48,7 +49,7 @@ const Roulette = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}` 
       }
     }
-    const response = await axios.get("http://localhost:8080/lunchselect/menu/list", option)
+    const response = await axios.get(`${backEndURL}/lunchselect/menu/list`, option)
     
     return response;
     } , {
@@ -77,7 +78,7 @@ const Roulette = () => {
       roomMasterCode: `0 ${code}`,
       menuList: menuList
     }
-    const response = await axios.put("http://localhost:8080/lunchselect/menu/select", JSON.stringify(data), option);
+    const response = await axios.put(`${backEndURL}/lunchselect/menu/select`, JSON.stringify(data), option);
     return response;
   }, {
       onSuccess: () => {
@@ -96,7 +97,7 @@ const Roulette = () => {
     }
 
     try {
-      const response = await axios.get("http://localhost:8080/lunchselect/menu/result", option);
+      const response = await axios.get(`${backEndURL}/lunchselect/menu/result`, option);
       setSelectedMenu(response.data);
       
       return response;

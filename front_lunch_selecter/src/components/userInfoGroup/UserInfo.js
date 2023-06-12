@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
+import { backEndURL } from '../../Config/URL/URL';
 
 
 
@@ -18,7 +19,7 @@ const UserInfo = ({ isOpen }) => {
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+        const response = await axios.get(`${backEndURL}/auth/userInfo`, {
             headers: {
                 Authorization: accessToken
             }

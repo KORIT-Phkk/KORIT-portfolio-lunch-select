@@ -9,6 +9,7 @@ import Category from './../../../components/SelectPage/Category/Category';
 import Location from './../../../components/SelectPage/Location/Location';
 import Invite from './../Invite';
 import * as s from './style';
+import { backEndURL, frontEndURL } from '../../../Config/URL/URL';
 
 const LunchSelectMaster = () => {
     const [ selectedCategories, setSelectedCategories ] = useState([]);
@@ -31,7 +32,7 @@ const LunchSelectMaster = () => {
                 code: code,
                 flag: 0
             };
-            axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option);
+            axios.put(`${backEndURL}/lunchselect/room/updateflag`, data, option);
         }
 
         window.onpopstate = () => {
@@ -54,7 +55,7 @@ const LunchSelectMaster = () => {
             }
         }
         try{
-            const response = await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+            const response = await axios.post(`${backEndURL}/lunchselect/room/category/insert`, {
                 code: `0 ${code}`,
                 categoryId: [...selectedCategories]
             }, option);
@@ -77,8 +78,8 @@ const LunchSelectMaster = () => {
             code: code,
             flag: 0
         }
-        await axios.put("http://localhost:8080/lunchselect/room/updateflag", data, option)
-        window.location.replace("http://localhost:3000/");
+        await axios.put(`${backEndURL}/lunchselect/room/updateflag`, data, option)
+        window.location.replace(`${frontEndURL}/`);
     });
 
     const getMenuButtonHandle = () => {

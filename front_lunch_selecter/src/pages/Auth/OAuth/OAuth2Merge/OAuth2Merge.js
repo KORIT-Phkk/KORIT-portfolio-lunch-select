@@ -6,11 +6,12 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import * as s from './style';
 import { AiFillNotification } from 'react-icons/ai'
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const OAuth2Merge = () => {
     const providerMerge = useMutation(async (mergeData) => {
         try{
-            const response = await axios.put("http://localhost:8080/auth/oauth2/merge", mergeData);
+            const response = await axios.put(`${backEndURL}/auth/oauth2/merge`, mergeData);
             return response;
         } catch(error){
             setErrorMessage(error.response.data);

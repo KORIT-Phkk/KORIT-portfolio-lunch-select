@@ -9,6 +9,7 @@ import * as s from './style';
 import Loading from '../../components/Loading/Loading';
 import { Reveal } from 'react-gsap';
 import { Tween } from 'react-gsap';
+import { backEndURL } from '../../Config/URL/URL';
 
 const Main = () => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Main = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             }
         };
-        const response = await axios.post("http://localhost:8080/lunchselect/room/create", {}, option);
+        const response = await axios.post(`${backEndURL}/lunchselect/room/create`, {}, option);
         window.location.href = response.data;
     });
 
@@ -36,7 +37,7 @@ const Main = () => {
                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 }
             };
-            const response = await axios.post("http://localhost:8080/lunchselect/room", {}, option);
+            const response = await axios.post(`${backEndURL}/lunchselect/room`, {}, option);
             window.location.href = response.data;
             return response;
         } catch(error) {
@@ -51,7 +52,7 @@ const Main = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.post("http://localhost:8080/lunchselect/roomuserinsert", {
+        const response = await axios.post(`${backEndURL}/lunchselect/roomuserinsert`, {
             guestUrl: joinCode
         }, option);
         return response

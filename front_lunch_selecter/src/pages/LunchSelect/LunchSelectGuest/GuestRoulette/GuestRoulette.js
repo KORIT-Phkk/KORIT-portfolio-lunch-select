@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import * as s from './style';
 import { BiDish } from 'react-icons/bi';
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const GuestRoulette = () => {
     const { code } = useParams();
@@ -18,7 +19,7 @@ const GuestRoulette = () => {
             code: code
           }
         }
-        const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
+        const response = await axios.get(`${backEndURL}/lunchselect/room/getflag`, option)
         return response
       }, {
         refetchInterval: 1000,

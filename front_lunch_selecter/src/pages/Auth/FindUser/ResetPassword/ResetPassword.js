@@ -6,6 +6,7 @@ import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
 import { MdLockReset } from 'react-icons/md'
 import AuthInput from './../../../../components/auth/AuthInput';
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ const ResetPassword = () => {
             }
         }
         try {
-            await axios.get("http://localhost:8080/auth/resetpassword/validatetoken", option);
+            await axios.get(`${backEndURL}/auth/resetpassword/validatetoken`, option);
             setFlag(true);
         } catch(error) {
             alert("유효하지 않은 요청입니다.")
@@ -38,7 +39,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.put("http://localhost:8080/auth/resetpassword", data, option)
+            const response = await axios.put(`${backEndURL}/auth/resetpassword`, data, option)
             return response;
         } catch (error) {
             setErrorMessage({

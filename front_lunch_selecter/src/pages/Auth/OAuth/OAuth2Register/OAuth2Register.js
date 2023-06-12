@@ -5,6 +5,7 @@ import { useMutation } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import * as s from './style';
 import { AiOutlineContacts } from 'react-icons/ai'
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const OAuth2Register = () => {
     const [ phone, setPhone ] = useState({phone: ""})
@@ -18,7 +19,6 @@ const OAuth2Register = () => {
     const [ registerUser, setRegisterUser ] = useState({email:email, password:"", checkPassword: "", name:name, phone:"", provider:provider})
     const [ errorMessages, setErrorMessages ] = useState({email: "", password: "", name: "", phone:""});
     
-    
     const oauth2Register = useMutation(async (registerData) => {
         const option = {
             headers: {
@@ -26,14 +26,10 @@ const OAuth2Register = () => {
             }
         }
         try {
-            const response =  await axios.post("http://localhost:8080/auth/oauth2/register", registerData, option);
+            const response =  await axios.post(`${backEndURL}/auth/oauth2/register`, registerData, option);
             return response;
         }catch(error) {
-
             console.log(error)
-
-            // alert("페이지가 만료되었습니다.")
-            // window.location.replace("/auth/login");
             return error;
         }
     }, {

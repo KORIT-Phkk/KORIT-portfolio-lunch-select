@@ -6,6 +6,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import AuthInput from '../../../../components/auth/AuthInput';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { backEndURL, frontEndURL } from '../../../../Config/URL/URL';
 
 const PasswordChange = () => {
     const [ updateUser, setUpdateUser ] = useState({currentPassword: "", updatePassword: "", updateCheckPassword: ""});
@@ -22,7 +23,7 @@ const PasswordChange = () => {
 
         console.log(updateUser)
         try{
-            const response = await axios.put("http://localhost:8080/auth/updatepassword", updateUser, option);
+            const response = await axios.put(`${backEndURL}/auth/updatepassword`, updateUser, option);
             return response;
         }catch(error){
             setErrorMessages({currentPassword: "", updatePassword: "",updateCheckPassword: "", ...error.response.data.errorData});
@@ -31,7 +32,7 @@ const PasswordChange = () => {
         onSuccess:(response) => {
             console.log(response)
             if(response.status === 200){
-                window.location.href = "http://localhost:3000/mypage/passwordchangeresult";
+                window.location.href = `${frontEndURL}/mypage/passwordchangeresult`;
             }
         }
     });

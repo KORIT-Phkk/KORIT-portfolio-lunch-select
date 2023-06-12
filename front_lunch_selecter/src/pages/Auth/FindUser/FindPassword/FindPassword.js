@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import AuthInput from '../../../../components/auth/AuthInput';
+import { backEndURL } from '../../../../Config/URL/URL';
 
 const FindPassword = () => {
     const [ email, setEmail ] = useState("");
@@ -19,7 +20,7 @@ const FindPassword = () => {
 
     const findPassword = useMutation(async (email) => {
         try {
-            const response = await axios.post("http://localhost:8080/auth/findpassword", email);
+            const response = await axios.post(`${backEndURL}/auth/findpassword`, email);
             navigate("/auth/findpassword/result")
             return response;
         } catch(error) {

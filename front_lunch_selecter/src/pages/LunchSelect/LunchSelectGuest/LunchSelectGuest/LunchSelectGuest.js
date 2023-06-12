@@ -7,6 +7,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router';
 import Category from '../../../../components/SelectPage/Category/Category';
 import * as s from './style';
+import { backEndURL, frontEndURL } from '../../../../Config/URL/URL';
 
 
 
@@ -29,9 +30,9 @@ const LunchSelectGuest = () => {
             },
           };
           try {
-            const response = await axios.get("http://localhost:8080/lunchselect/room/check", option);
+            const response = await axios.get(`${backEndURL}/lunchselect/room/check`, option);
             if (response.data === false) {
-              window.location.replace("http://localhost:3000/lunchselect/room/close");
+              window.location.replace(`${frontEndURL}/lunchselect/room/close`);
             }
           } catch (error) {
             
@@ -49,7 +50,7 @@ const LunchSelectGuest = () => {
           code: code
         }
       }
-      const response = await axios.get("http://localhost:8080/lunchselect/room/getflag", option)
+      const response = await axios.get(`${backEndURL}/lunchselect/room/getflag`, option)
       localStorage.setItem("selectedMenu", response.data.restaurantName)
       
       return response
@@ -72,12 +73,12 @@ const LunchSelectGuest = () => {
         }
        try{
          if(option.headers.Authorization === "Bearer null") {
-           await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+           await axios.post(`${backEndURL}/lunchselect/room/category/insert`, {
              code: `2 ${code}`,
              categoryId: [...selectedCategories]
            }, option);
          } else {
-           await axios.post("http://localhost:8080/lunchselect/room/category/insert", {
+           await axios.post(`${backEndURL}/lunchselect/room/category/insert`, {
                code: `1 ${code}`,
                categoryId: [...selectedCategories]
            }, option);
@@ -88,7 +89,7 @@ const LunchSelectGuest = () => {
     }
     });
     if(checkRoomCount > 1){
-      window.location.replace("http://localhost:3000/lunchselect/room/close");
+      window.location.replace(`${frontEndURL}/lunchselect/room/close`);
     }
 
     const readyHandleOnClick = () => {

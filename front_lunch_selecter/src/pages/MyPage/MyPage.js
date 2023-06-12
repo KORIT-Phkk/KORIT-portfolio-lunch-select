@@ -8,6 +8,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { authenticatedState } from '../../atoms/Auth/AuthAtom';
 import { AiOutlineUser } from 'react-icons/ai';
+import { backEndURL } from '../../Config/URL/URL';
 
 const MyPage = () => {
     const [ authState, setAuthState ] = useRecoilState(authenticatedState);
@@ -21,12 +22,12 @@ const MyPage = () => {
 
     const getUserInfo = useQuery(["getUserInfo"], async () => {
         const accessToken = `Bearer ${localStorage.getItem("accessToken")}`;
-        const response = await axios.get("http://localhost:8080/auth/userInfo", {
+        const response = await axios.get(`${backEndURL}/auth/userInfo`, {
             headers: {
                 Authorization: accessToken
             }
         });
-        setprofileImgURL("http://localhost:8080/image/profile/" + response.data.profileImg);
+        setprofileImgURL(`${backEndURL}/image/profile/` + response.data.profileImg);
         setUserId(response.data.userId)
         setName(response.data.name)
         setEmail(response.data.email)
@@ -40,7 +41,7 @@ const MyPage = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.delete("http://localhost:8080/auth/delete",
+        const response = await axios.delete(`${backEndURL}/auth/delete`,
         {data: {userId: userId}},option);
         
         return response;

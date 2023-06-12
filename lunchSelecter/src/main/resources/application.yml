@@ -1,3 +1,6 @@
+config:
+  back-end-url: http://localhost:8080
+  front-end-url: http://localhost:3000
 spring:
   servlet:
     multipart:
@@ -13,6 +16,7 @@ spring:
       client:
         registration:
           google:
+            redirect-uri: ${config.back-end-url}/login/oauth2/code/google
             client-id: 900087453526-t9dmt7d7temari2diuud2hia8noh0v92.apps.googleusercontent.com
             client-secret: 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
             scope:
@@ -20,7 +24,7 @@ spring:
               - profile
           kakao:
             client-id: ced820a00b48fea6cb611fc038aaa4ba
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: ${config.back-end-url}/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             client-name: Kakao
@@ -29,7 +33,7 @@ spring:
           naver:
             client-id: ufgOMy9EVF1_jX5zkSYB
             client-secret: vgNf6Mvsnb
-            redirect-uri:  http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: ${config.back-end-url}/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope:
               - name
