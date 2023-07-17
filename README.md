@@ -24,18 +24,43 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 
 
 ## 메뉴 구조도
-* 회원가입 페이지
-<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/5601554a-b4c3-475c-896c-2bbca47d3157 >
-
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/121993171/de5b8b65-3f5b-408c-ac35-92c9644e49b4 width="1000px" height="400px">
 
 
 ## ERD 명세서
-<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/121993171/ebcffd2a-071c-45a0-ae76-0f58f4fe4337 width="1000px" heigh="400px">
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/121993171/ebcffd2a-071c-45a0-ae76-0f58f4fe4337 width="1000px" height="400px">
 
 
-화면
+## 화면
 
-testImg
- <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/121993171/3c6ed7a6-5a30-4d62-926e-586663b6addc />
+* 회원가입
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/67246f38-870d-4901-9913-192b1947c84c width="200px" height="400px">
+
+* 로그인
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/6f8b437d-89d4-4306-927a-4b6b29fb3555>
+
+* 로그아웃
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/07f35821-5e69-4d27-bd42-0f49579eb1da>
+
+* 마이페이지 - 사진변경
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/de8d165b-829b-4cce-baef-38e7919ae92a>
+
+* 마이페이지 - 비밀번호 변경
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/48c2332b-ad08-4e12-a897-f926fed19da0>
+
+* 마이페이지 - 회원탈퇴
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/d097f857-fe94-42c1-84bc-22a56e2473cc>
+
+* 방장 - 룰렛
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/5d9fabe9-37c3-4601-b935-a5db4f555ce5>
+
+* 방장 - 룰렛 결과창 및 버튼 클릭
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/741df070-deaf-4c7a-9ff7-e5b0cd5fc553>
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5>
+
+* 게스트 - 룰렛
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/721bae43-1b0b-4c52-8e2f-ee13a3516699>
+
+* 방 삭제 시 게스트 화면
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/a7a805bc-ec55-4606-8f69-7069d9e03230>
 
