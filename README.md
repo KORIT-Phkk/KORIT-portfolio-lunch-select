@@ -62,7 +62,10 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 
 
 * 방장 - 룰렛 결과창 및 버튼 클릭
-<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/741df070-deaf-4c7a-9ff7-e5b0cd5fc553 width="400px" height="350px"><img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5 width="200px" height="350px">
+<div>
+   <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/741df070-deaf-4c7a-9ff7-e5b0cd5fc553 width="400px" height="350px"><img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5 width="200px" height="350px">   
+</div>
+
 
 
 * 게스트 - 룰렛
