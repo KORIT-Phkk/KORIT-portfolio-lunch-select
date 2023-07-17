@@ -62,12 +62,12 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 
 
 * 방장 - 룰렛 결과창 및 버튼 클릭
-!<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/741df070-deaf-4c7a-9ff7-e5b0cd5fc553 width="500px" height="350px"> | !<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5 width="200px" height="350px">
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/741df070-deaf-4c7a-9ff7-e5b0cd5fc553 width="400px" height="350px"><img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5 width="200px" height="350px">
 
 
 * 게스트 - 룰렛
-<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/721bae43-1b0b-4c52-8e2f-ee13a3516699 width="350px" height="350px">
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/721bae43-1b0b-4c52-8e2f-ee13a3516699 width="400px" height="350px">
 
 
 * 방 삭제 시 게스트 화면
-<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/a7a805bc-ec55-4606-8f69-7069d9e03230 width="350px" height="350px">
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/a7a805bc-ec55-4606-8f69-7069d9e03230 width="400px" height="350px">
