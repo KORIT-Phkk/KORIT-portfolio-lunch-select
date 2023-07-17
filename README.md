@@ -24,6 +24,9 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 
 
 ## 메뉴 구조도
+* 회원가입 페이지
+<img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/5601554a-b4c3-475c-896c-2bbca47d3157 >
+
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/121993171/de5b8b65-3f5b-408c-ac35-92c9644e49b4 width="1000px" height="400px">
 
 
