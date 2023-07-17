@@ -35,15 +35,15 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 
 * 회원가입
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/67246f38-870d-4901-9913-192b1947c84c width="200px" height="350px">
-<br>
+<br/>
 
 * 로그인
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/6f8b437d-89d4-4306-927a-4b6b29fb3555 width="200px" height="350px">
-<br>
+<br/>
 
 * 로그아웃
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/07f35821-5e69-4d27-bd42-0f49579eb1da width="200px" height="350px">
-<br>
+<br/>
 
 * 마이페이지 - 사진변경
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/de8d165b-829b-4cce-baef-38e7919ae92a width="200px" height="350px">
