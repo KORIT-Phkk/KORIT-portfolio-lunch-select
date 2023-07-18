@@ -67,10 +67,10 @@ JMC(점심메뉴추천)는 그러한 결정을 손쉽게 해줄 수 있으며, �
 #### 로그인 한 유저 - 룰렛 다시 돌리기 / 홈으로 돌아가기 버튼
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/8f2d65d8-f352-4d34-b60a-161ed63078a5 width="200px" height="350px">   
 
-#### 초대받은 유저(로그인X) - 룰렛
+#### (왼)로그인 한 유저의 초대 링크/ (오)초대받은 유저(로그인X)
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/721bae43-1b0b-4c52-8e2f-ee13a3516699 width="400px" height="350px">
 <br/>
 
 
-#### 로그인 한 유저가 방 삭제 시 초대받은 유저(로그인X) 화면
+#### (왼)로그인 한 유저가 방 삭제/ (오)초대받은 유저(로그인X) 화면
 <img src=https://github.com/KORIT-Phkk/KORIT-portfolio-lunch-select/assets/92001504/a7a805bc-ec55-4606-8f69-7069d9e03230 width="400px" height="350px">
